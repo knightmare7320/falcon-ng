@@ -1,0 +1,44 @@
+services:
+   mysqldb:
+      image: mysql:latest
+      volumes:
+         - ./mysql/mysql-dump:/docker-entrypoint-initdb.d
+      ports:
+         - "3306:3306"
+      # environment:
+      #   - MYSQL_ROOT_PASSWORD=
+      #   - MYSQL_USER=
+      #   - MYSQL_PASSWORD=
+      env_file:
+         - secrets/mysql.env
+      command: --default-authentication-plugin=mysql_native_password
+      restart: always
+
+   server:
+      build: ./server
+      # volumes:
+      #    - ./server/src:/app
+      # environment:
+      #    - DB_USER=
+      #    - DB_PASS=
+      env_file:
+         - secrets/server.env
+      depends_on:
+         - mysqldb
+
+   # frontend:
+
+   npm:
+      build: 
+         context: ./dockerfiles
+         dockerfile: npm.dockerfile
+      volumes:
+         - ./src:/var/www/html
+
+   ng:
+      build: 
+         context: ./dockerfiles
+         dockerfile: ng.dockerfile
+      volumes:
+         - ./src:/var/www/html
+      
