@@ -17,6 +17,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 //connect to db
 console.log(process.env.DB_USER)
+console.log(process.env.DB_PASS)
+
 const pool = mysql.createPool({
    host: 'mysqldb',
    user: process.env.DB_USER,
@@ -31,12 +33,13 @@ const pool = mysql.createPool({
    keepAliveInitialDelay: 0
 });
 pool.query(
-   'SELECT * FROM equipment.bts_types',
+   'call get_site("CH03XC254")',
    function(err, results) {
       if (err) console.error(err);
      console.log(results);
    }
  );
+
 // const client = mysqlx.getClient(
 //    { user: 'falcon_owner', password: 'fiore0', host: 'mysqldb', port: 33060 },
 //    { pooling: { enabled: true, maxIdleTime: 30000, maxSize: 25, queueTimeout: 10000 } }

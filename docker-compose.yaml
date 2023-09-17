@@ -1,4 +1,5 @@
 services:
+
    mysqldb:
       image: mysql:latest
       volumes:
@@ -16,8 +17,9 @@ services:
 
    server:
       build: ./server
-      # volumes:
-      #    - ./server/src:/app
+      volumes:
+         - ./server/src:/app
+         - /app/node_modules
       # environment:
       #    - DB_USER=
       #    - DB_PASS=

@@ -6,7 +6,6 @@
   },
   "private": true,
   "dependencies": {
-    "nodemon": "*",
     "bcrypt": "*",
     "body-parser": "*",
     "compression": "*",
