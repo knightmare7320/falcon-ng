@@ -23,6 +23,8 @@ services:
       # environment:
       #    - DB_USER=
       #    - DB_PASSWORD=
+      ports:
+         - "80:80"
       env_file:
          - secrets/server.env
       depends_on:

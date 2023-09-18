@@ -7,10 +7,9 @@ router.get("/", (req, res, next) => {
    });
 });
 
-router.get("/:cascade_code", (req, res, next) => {
-   res.status(200).json({
-      "site": req.params.cascade_code,
-   });
-});
+const SiteController = require("../controllers/site");
+
+router.get("/:cascade_code", SiteController.get);
+
 
 module.exports = router;

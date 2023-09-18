@@ -16,13 +16,10 @@ app.use(morgan('combined'));
 app.use(express.static(path.join(__dirname, "public")));
 
 //connect to db
-console.log(process.env.DB_USER)
-console.log(process.env.DB_PASS)
-
-const pool = mysql.createPool({
+const dbPool = mysql.createPool({
    host: 'mysqldb',
    user: process.env.DB_USER,
-   password: process.env.DB_PASS,
+   password: process.env.DB_PASSWORD,
    database: 'gui',
    waitForConnections: true,
    connectionLimit: 10,
@@ -32,30 +29,15 @@ const pool = mysql.createPool({
    enableKeepAlive: true,
    keepAliveInitialDelay: 0
 });
-pool.query(
-   'call get_site_info("CH03XC254")',
-   function(err, results) {
-      if (err) console.error(err);
-     console.log(results);
-   }
- );
+app.locals.db = dbPool;
 
-// const client = mysqlx.getClient(
-//    { user: 'falcon_owner', password: 'fiore0', host: 'mysqldb', port: 33060 },
-//    { pooling: { enabled: true, maxIdleTime: 30000, maxSize: 25, queueTimeout: 10000 } }
-// );
-// client.getSession()
-//    .then(session => {
-//       console.log(session.inspect())
-//       return session.close()
-//    })
-// dbPool.getConnection((err, conn) => {
-//    if (err) {
-//       console.log(err);
-//       // throw err; // not connected!
+// pool.query(
+//    'call get_site_info("CH03XC254")',
+//    function(err, results) {
+//       if (err) console.error(err);
+//      console.log(results);
 //    }
-//    app.locals.db = dbPool;
-// })
+//  );
 
 
 app.use("/api/site", siteRoutes);

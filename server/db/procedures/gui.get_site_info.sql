@@ -140,6 +140,7 @@ BEGIN
         , cd.carrier_designation_name 
         , c.carrier_type_id 
         , ct.carrier_type_name   
+        , ct.sort_key 
         , c.equipment_status_id 
         , es.equipment_status_name carrier_status_name
         , c.on_air_date 
