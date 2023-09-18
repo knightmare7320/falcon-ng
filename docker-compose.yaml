@@ -24,13 +24,21 @@ services:
       #    - DB_USER=
       #    - DB_PASSWORD=
       ports:
-         - "80:80"
+         - "81:80"
       env_file:
          - secrets/server.env
       depends_on:
          - mysqldb
 
-   # frontend:
+   angular:
+      build: ./angular
+      volumes: 
+         - ./angular/src:/app
+         - /app/node_modules
+      ports:
+         - "4200:4200"
+      depends_on:
+         - server
 
    npm:
       build: 
