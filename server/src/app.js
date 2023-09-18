@@ -6,16 +6,15 @@ const compression = require("compression");
 const mysql = require("mysql2");
 
 const siteRoutes = require("./routes/site");
+const sitesRoutes = require("./routes/sites");
+const regionsRoutes = require("./routes/regions");
+const l4MarketsRoutes = require("./routes/l4_markets");
+const l5MarketsRoutes = require("./routes/l5_markets");
+const orgClustersRoutes = require("./routes/org_clusters");
+const market99sRoutes = require("./routes/market99s");
+const mtasRoutes = require("./routes/mtas");
 
-
-app.use(express.json());
-app.use(compression());
-app.use(express.urlencoded({extended: false}));
-app.use(morgan('combined'));
-
-app.use(express.static(path.join(__dirname, "public")));
-
-//connect to db
+//connect to db and stuff the object into the app
 const dbPool = mysql.createPool({
    host: 'mysqldb',
    user: process.env.DB_USER,
@@ -31,17 +30,20 @@ const dbPool = mysql.createPool({
 });
 app.locals.db = dbPool;
 
-// pool.query(
-//    'call get_site_info("CH03XC254")',
-//    function(err, results) {
-//       if (err) console.error(err);
-//      console.log(results);
-//    }
-//  );
-
+app.use(express.json());
+app.use(compression());
+app.use(express.urlencoded({extended: false}));
+app.use(morgan('combined'));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/api/site", siteRoutes);
-
+app.use("/api/sites", sitesRoutes);
+app.use("/api/regions", regionsRoutes);
+app.use("/api/l4_markets", l4MarketsRoutes);
+app.use("/api/l5_markets", l5MarketsRoutes);
+app.use("/api/org_clusters", orgClustersRoutes);
+app.use("/api/market99s", market99sRoutes);
+app.use("/api/mtas", mtasRoutes);
 
 app.use((req, res,next) => {
    res.sendFile(path.join(__dirname, "public", "index.html"));

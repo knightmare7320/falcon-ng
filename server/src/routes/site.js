@@ -1,15 +1,11 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/", (req, res, next) => {
-   res.status(200).json({
-      "site": "hello world",
-   });
-});
+const controller = require("../controllers/site");
 
-const SiteController = require("../controllers/site");
-
-router.get("/:cascade_code", SiteController.get);
-
+router.get("/:cascade_code/carriers", controller.getCarriers);
+router.get("/:cascade_code/sectors", controller.getSectors);
+router.get("/:cascade_code/bts", controller.getBts);
+router.get("/:cascade_code", controller.get);
 
 module.exports = router;

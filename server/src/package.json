@@ -4,6 +4,7 @@
   "scripts": {
     "start": "nodemon server.js"
   },
+  "type": "commonjs",
   "private": true,
   "dependencies": {
     "bcrypt": "*",

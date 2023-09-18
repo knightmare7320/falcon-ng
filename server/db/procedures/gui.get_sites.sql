@@ -1,4 +1,4 @@
-CREATE PROCEDURE gui.get_sites(
+CREATE DEFINER=`root`@`%` PROCEDURE `gui`.`get_sites`(
    IN in_FILTER_ON   VARCHAR(50),
    IN in_FILTER_ID   INT,
    IN in_ORDER_BY    VARCHAR(50),
@@ -9,6 +9,9 @@ CREATE PROCEDURE gui.get_sites(
 BEGIN
    DECLARE total_records INT;
    DECLARE v_OFFSET INT;
+  
+   SET in_PAGE_NUMBER = IFNULL(in_PAGE_NUMBER, 1);
+   SET in_PAGE_SIZE   = IFNULL(in_PAGE_SIZE, 10);
   
    -- Calculate the offset
    SET v_OFFSET = (in_PAGE_NUMBER - 1) * in_PAGE_SIZE;
