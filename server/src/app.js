@@ -33,7 +33,7 @@ const pool = mysql.createPool({
    keepAliveInitialDelay: 0
 });
 pool.query(
-   'call get_site("CH03XC254")',
+   'call get_site_info("CH03XC254")',
    function(err, results) {
       if (err) console.error(err);
      console.log(results);
