@@ -16,7 +16,7 @@ services:
       restart: always
 
    server:
-      build: ./server
+      build: server
       volumes:
          - ./server/src:/app
          - /app/node_modules
@@ -24,33 +24,33 @@ services:
       #    - DB_USER=
       #    - DB_PASSWORD=
       ports:
-         - "81:80"
+         - "3000:80"
       env_file:
-         - secrets/server.env
+         - ./secrets/server.env
       depends_on:
          - mysqldb
 
    angular:
-      build: ./angular
+      build: angular
       volumes: 
-         - ./angular/src:/app
+         - ./angular:/app
          - /app/node_modules
       ports:
          - "4200:4200"
       depends_on:
          - server
 
-   npm:
-      build: 
-         context: ./dockerfiles
-         dockerfile: npm.dockerfile
-      volumes:
-         - ./src:/var/www/html
+  #  npm:
+  #     build: 
+  #        context: ./dockerfiles
+  #        dockerfile: npm.dockerfile
+  #     volumes:
+  #        - ./src:/var/www/html
 
-   ng:
-      build: 
-         context: ./dockerfiles
-         dockerfile: ng.dockerfile
-      volumes:
-         - ./src:/var/www/html
+  #  ng:
+  #     build: 
+  #        context: ./dockerfiles
+  #        dockerfile: ng.dockerfile
+  #     volumes:
+  #        - ./src:/var/www/html
       
