@@ -1,7 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { NotFoundComponent } from './shared/not-found/not-found.component';
+
+const routes: Routes = [
+   { path: "browse", title: "Falcon", loadChildren: () => import('./browse/browse.module') },
+   { path: ""             , redirectTo: '/browse', pathMatch: 'full' },
+   { path: '**'           , component: NotFoundComponent },
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
