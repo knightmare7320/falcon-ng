@@ -4,5 +4,6 @@ const router = express.Router();
 const controller = require("../controllers/regions");
 
 router.get("/", controller.get);
+router.get("/perf", controller.getPerf);
 
 module.exports = router;
