@@ -1,4 +1,8 @@
-CREATE DEFINER=`root`@`%` PROCEDURE `gui`.`get_site_carriers`(
+DROP PROCEDURE IF EXISTS gui.get_site_carriers;
+
+DELIMITER $$
+$$
+CREATE PROCEDURE gui.get_site_carriers(
    IN in_CASCADE_CODE VARCHAR(20)
 )
 BEGIN
@@ -29,3 +33,5 @@ BEGIN
    and    es.equipment_status_id    = c.equipment_status_id 
    and    b.cascade_code            = trim(upper(in_CASCADE_CODE));
 END
+$$
+DELIMITER ;

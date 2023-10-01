@@ -1,3 +1,7 @@
+DROP PROCEDURE IF EXISTS gui.get_site_info;
+
+DELIMITER $$
+$$
 CREATE PROCEDURE gui.get_site_info(
    IN in_CASCADE_CODE VARCHAR(20)
 )
@@ -160,3 +164,5 @@ BEGIN
    and    b.cascade_code            = in_CASCADE_CODE;
 
 END
+$$
+DELIMITER ;

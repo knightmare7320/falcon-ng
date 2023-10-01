@@ -1,4 +1,8 @@
-CREATE DEFINER=`root`@`%` PROCEDURE `gui`.`get_sites`(
+DROP PROCEDURE IF EXISTS gui.get_sites;
+
+DELIMITER $$
+$$
+CREATE PROCEDURE gui.get_sites(
    IN in_FILTER_ON   VARCHAR(50),
    IN in_FILTER_ID   INT,
    IN in_ORDER_BY    VARCHAR(50),
@@ -48,3 +52,5 @@ BEGIN
           , s.cascade_code ASC
    limit in_PAGE_SIZE offset v_OFFSET;
 END
+$$
+DELIMITER ;

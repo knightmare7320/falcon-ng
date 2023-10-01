@@ -1,4 +1,8 @@
-CREATE DEFINER=`root`@`%` PROCEDURE `gui`.`get_site_sectors`(
+DROP PROCEDURE IF EXISTS gui.get_site_sectors;
+
+DELIMITER $$
+$$
+CREATE PROCEDURE gui.get_site_sectors(
    IN in_CASCADE_CODE VARCHAR(20)
 )
 BEGIN
@@ -32,3 +36,5 @@ BEGIN
    and    ev.equipment_vendor_id      = a.equipment_vendor_id
    and    se.cascade_code             = upper(trim(in_CASCADE_CODE));
 END
+$$
+DELIMITER ;

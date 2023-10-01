@@ -1,4 +1,8 @@
-CREATE DEFINER=`root`@`%` PROCEDURE `gui`.`get_org_clusters`(
+DROP PROCEDURE IF EXISTS gui.get_org_clusters;
+
+DELIMITER $$
+$$
+CREATE PROCEDURE gui.get_org_clusters(
    IN in_L5_MARKET_ID INT
 )
 BEGIN
@@ -9,4 +13,6 @@ BEGIN
    from     locations.org_clusters 
    where    in_L5_MARKET_ID = -1 OR l5_market_id = in_L5_MARKET_ID
    order by org_cluster_name;
-end
+END
+$$
+DELIMITER ;

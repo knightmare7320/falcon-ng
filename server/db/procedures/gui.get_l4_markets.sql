@@ -1,3 +1,7 @@
+DROP PROCEDURE IF EXISTS gui.get_l4_markets;
+
+DELIMITER $$
+$$
 CREATE PROCEDURE gui.get_l4_markets(
    IN in_REGION_ID INT
 )
@@ -10,3 +14,5 @@ BEGIN
    where    in_REGION_ID = -1 OR region_id = in_REGION_ID
    order by l4_market_name;
 END
+$$
+DELIMITER ;

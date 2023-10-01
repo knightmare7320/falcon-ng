@@ -1,3 +1,7 @@
+DROP PROCEDURE IF EXISTS gui.get_l5_markets;
+
+DELIMITER $$
+$$
 CREATE PROCEDURE gui.get_l5_markets(
    IN in_L4_MARKET_ID INT
 )
@@ -10,3 +14,5 @@ BEGIN
    where    in_L4_MARKET_ID = -1 OR l4_market_id = in_L4_MARKET_ID
    order by l5_market_name;
 END
+$$
+DELIMITER ;
