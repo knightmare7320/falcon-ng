@@ -19,7 +19,7 @@ exports.get = (req, res, next) => {
 
 exports.getPerf = (req, res, next) => {
    const params = {
-      switch_id   : req.params.switch_id     ? +req.query.switch_id   : null,
+      switch_id   : req.params.switch_id     ? +req.params.switch_id   : null,
       equipment_vendor_id: req.query.equipment_vendor_id ? +req.query.equipment_vendor_id : null,
       filter_str  : req.query.filter_str,
       order_by    : req.query.order_by      ? req.query.order_by     : null,

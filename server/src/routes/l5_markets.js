@@ -3,7 +3,7 @@ const router = express.Router();
 
 const controller = require("../controllers/l5_markets");
 
+router.get("/perf/:l4_market_id", controller.getPerf);
 router.get("/:l4_market_id?", controller.get);
-router.get("/:l4_market_id/perf", controller.getPerf);
 
 module.exports = router;
