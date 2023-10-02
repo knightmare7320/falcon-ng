@@ -19,6 +19,33 @@ class orgClusters {
          }
       );      
    }
+
+   static getPerf(db, params, result) {
+      const sqlStr = 'CALL gui.get_org_clusters_perf(?, ?, ?, ?, ?, ?)';
+      const sqlParams = [
+         params.l5_market_id,
+         params.filter_str,
+         params.order_by,
+         params.order_dir,
+         params.page_number,
+         params.page_size,
+      ];
+      db.query(
+         sqlStr,
+         sqlParams,
+         function(err, results) {
+            if (err) {
+               console.error(err);
+               result(err, null);
+               return;
+            }
+            result(null, {
+               "total_records": results[0][0].total_records,
+               "rows": results[1]
+            });
+         }
+      );   
+   }
 }
 
 module.exports = orgClusters;

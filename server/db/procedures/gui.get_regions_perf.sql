@@ -37,8 +37,8 @@ BEGIN
    FROM     locations.regions 
    WHERE    lower(region_name) like CONCAT('%', in_FILTER_STR, '%')
 
-   ORDER BY case when in_ORDER_BY = 'region_name' and in_ORDER_DIR = 'asc'  then region_name end asc 
-          , case when in_ORDER_BY = 'region_name' and in_ORDER_DIR = 'desc' then region_name end desc
+   ORDER BY case when in_ORDER_BY = 'name' and in_ORDER_DIR = 'asc'  then region_name end asc 
+          , case when in_ORDER_BY = 'name' and in_ORDER_DIR = 'desc' then region_name end desc
           , region_name ASC
    LIMIT    in_PAGE_SIZE offset v_OFFSET;
 END 

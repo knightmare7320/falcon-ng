@@ -45,8 +45,8 @@ BEGIN
    WHERE    l5_market_id = in_L5_MARKET_ID
    AND      lower(org_cluster_name) like CONCAT('%', in_FILTER_STR, '%')
 
-   ORDER BY case when in_ORDER_BY = 'org_cluster_name' and in_ORDER_DIR = 'asc'  then org_cluster_name end asc 
-          , case when in_ORDER_BY = 'org_cluster_name' and in_ORDER_DIR = 'desc' then org_cluster_name end desc
+   ORDER BY case when in_ORDER_BY = 'name' and in_ORDER_DIR = 'asc'  then org_cluster_name end asc 
+          , case when in_ORDER_BY = 'name' and in_ORDER_DIR = 'desc' then org_cluster_name end desc
           , org_cluster_name ASC
    LIMIT    in_PAGE_SIZE offset v_OFFSET;
 END 

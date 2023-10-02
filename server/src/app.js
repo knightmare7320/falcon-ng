@@ -13,6 +13,8 @@ const l5MarketsRoutes = require("./routes/l5_markets");
 const orgClustersRoutes = require("./routes/org_clusters");
 const market99sRoutes = require("./routes/market99s");
 const mtasRoutes = require("./routes/mtas");
+const switchesRoutes = require("./routes/switches");
+const bscsRoutes = require("./routes/bscs");
 
 //connect to db and stuff the object into the app
 const dbPool = mysql.createPool({
@@ -44,6 +46,8 @@ app.use("/api/l5_markets", l5MarketsRoutes);
 app.use("/api/org_clusters", orgClustersRoutes);
 app.use("/api/market99s", market99sRoutes);
 app.use("/api/mtas", mtasRoutes);
+app.use("/api/switches", switchesRoutes);
+app.use("/api/bscs", bscsRoutes);
 
 app.use((req, res,next) => {
    res.sendFile(path.join(__dirname, "public", "index.html"));

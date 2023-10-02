@@ -42,8 +42,8 @@ BEGIN
    FROM     locations.mtas
    WHERE    lower(mta_name) like CONCAT('%', in_FILTER_STR, '%')
 
-   ORDER BY case when in_ORDER_BY = 'mta_name' and in_ORDER_DIR = 'asc'  then mta_name end asc 
-          , case when in_ORDER_BY = 'mta_name' and in_ORDER_DIR = 'desc' then mta_name end desc
+   ORDER BY case when in_ORDER_BY = 'name' and in_ORDER_DIR = 'asc'  then mta_name end asc 
+          , case when in_ORDER_BY = 'name' and in_ORDER_DIR = 'desc' then mta_name end desc
           , mta_name ASC
    LIMIT    in_PAGE_SIZE offset v_OFFSET;
 END 

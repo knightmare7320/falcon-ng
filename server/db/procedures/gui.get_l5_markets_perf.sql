@@ -40,8 +40,8 @@ BEGIN
    WHERE    l4_market_id = in_L4_MARKET_ID
    AND      lower(l5_market_name) like CONCAT('%', in_FILTER_STR, '%')
 
-   ORDER BY case when in_ORDER_BY = 'l5_market_name' and in_ORDER_DIR = 'asc'  then l5_market_name end asc 
-          , case when in_ORDER_BY = 'l5_market_name' and in_ORDER_DIR = 'desc' then l5_market_name end desc
+   ORDER BY case when in_ORDER_BY = 'name' and in_ORDER_DIR = 'asc'  then l5_market_name end asc 
+          , case when in_ORDER_BY = 'name' and in_ORDER_DIR = 'desc' then l5_market_name end desc
           , l5_market_name ASC
    LIMIT    in_PAGE_SIZE offset v_OFFSET;
 END 
