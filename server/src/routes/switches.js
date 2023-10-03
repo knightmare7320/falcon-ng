@@ -6,4 +6,4 @@ const controller = require("../controllers/switches");
 router.get("/perf", controller.getPerf);
 router.get("/", controller.get);
 
-module.exports = router;
+module.exports = router; 
