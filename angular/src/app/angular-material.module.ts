@@ -9,6 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
    exports: [
@@ -21,6 +23,8 @@ import { MatSortModule } from '@angular/material/sort';
       MatTableModule,
       MatPaginatorModule,
       MatSortModule,
+      MatTooltipModule,
+      MatGridListModule,
    ]
 })
 export class AngularMaterialModule {}

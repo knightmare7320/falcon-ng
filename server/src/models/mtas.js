@@ -19,7 +19,7 @@ class mtas {
    static getPerf(db, params, result) {
       const sqlStr = 'CALL gui.get_mtas_perf( ?, ?, ?, ?, ?)';
       const sqlParams = [
-         params.filter_str,
+         params.filter_string,
          params.order_by,
          params.order_dir,
          params.page_number,

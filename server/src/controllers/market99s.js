@@ -19,7 +19,7 @@ exports.get = (req, res, next) => {
 exports.getPerf = (req, res, next) => {
    const params = {
       region_id   : req.params.region_id    ? +req.params.region_id: null,
-      filter_str  : req.query.filter_str,
+      filter_string  : req.query.filter_string,
       order_by    : req.query.order_by      ? req.query.order_by     : null,
       order_dir   : req.query.order_dir     ? req.query.order_dir    : null,
       page_number : req.query.page_number   ? +req.query.page_number : null,

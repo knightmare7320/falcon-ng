@@ -24,7 +24,7 @@ class market99s {
       const sqlStr = 'CALL gui.get_market99s_perf(?, ?, ?, ?, ?, ?)';
       const sqlParams = [
          params.region_id,
-         params.filter_str,
+         params.filter_string,
          params.order_by,
          params.order_dir,
          params.page_number,

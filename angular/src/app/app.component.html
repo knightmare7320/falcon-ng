@@ -6,7 +6,7 @@
    </mat-drawer> -->
 
    <!-- <mat-drawer-content> -->
-      <router-outlet></router-outlet>
+      <router-outlet *ngIf="!loginVisible"></router-outlet>
 
       <!-- <app-login *ngIf="loginVisible"></app-login>
    </mat-drawer-content>

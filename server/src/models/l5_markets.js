@@ -24,7 +24,7 @@ class l5Markets {
       const sqlStr = 'CALL gui.get_l5_markets_perf(?, ?, ?, ?, ?, ?)';
       const sqlParams = [
          params.l4_market_id,
-         params.filter_str,
+         params.filter_string,
          params.order_by,
          params.order_dir,
          params.page_number,

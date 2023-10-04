@@ -25,7 +25,7 @@ class Switches {
       const sqlStr = 'CALL gui.get_switches_perf(?, ?, ?, ?, ?, ?)';
       const sqlParams = [
          params.equipment_vendor_id,
-         params.filter_str,
+         params.filter_string,
          params.order_by,
          params.order_dir,
          params.page_number,

@@ -27,7 +27,7 @@ class Bscs {
       const sqlParams = [
          params.switch_id,
          params.equipment_vendor_id,
-         params.filter_str,
+         params.filter_string,
          params.order_by,
          params.order_dir,
          params.page_number,

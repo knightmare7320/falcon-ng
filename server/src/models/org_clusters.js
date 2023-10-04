@@ -24,7 +24,7 @@ class orgClusters {
       const sqlStr = 'CALL gui.get_org_clusters_perf(?, ?, ?, ?, ?, ?)';
       const sqlParams = [
          params.l5_market_id,
-         params.filter_str,
+         params.filter_string,
          params.order_by,
          params.order_dir,
          params.page_number,

@@ -1,8 +1,8 @@
 import * as fromApp from '../../store/app.reducer';
-import * as fromNationalPage from '../national-page/store/national-page.reducer';
+import * as fromRegions from '../regions/store/regions.reducer';
 
 export interface State {
-   nationalPage: fromNationalPage.State;
+   regions: fromRegions.State;
    // oss: fromOss.State;
    // hosts: fromHosts.State;
 }
@@ -12,7 +12,7 @@ export interface FeatureState extends fromApp.AppState {
 }
 
 export const reducer = {
-   nationalPage: fromNationalPage.reducer,
+   regions: fromRegions.reducer,
    // oss: fromOss.reducer,
    // hosts: fromHosts.reducer,
 }

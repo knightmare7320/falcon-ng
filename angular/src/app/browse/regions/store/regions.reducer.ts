@@ -1,37 +1,31 @@
 import { createReducer, on } from "@ngrx/store";
 
-import { RegionPerf } from "./national-page.model";
+import { RegionPerf } from "./regions.model";
 import * as fromBrowse from "../../store/browse.reducer";
-import * as NationalPageActions from "./national-page.actions";
+import * as RegionsActions from "./regions.actions";
 
 export interface State {
    status: string,
    totalRows: number,
    regionPerf: RegionPerf[],
-   filterString: string,
    pageNumber: number,
-   orderBy: string,
-   orderDir: string,
 }
 
 const initialState: State = {
    status: 'ok',
    totalRows: 0,
    regionPerf: [],
-   filterString: '',
    pageNumber: 1,
-   orderBy: 'name',
-   orderDir: 'asc',
 }
 
 export interface FeatureState extends fromBrowse.FeatureState{
-   nationalPage: State;
+   regions: State;
 }
 
 export const reducer = createReducer(
    initialState,
    on(
-      NationalPageActions.fetchRegionPerf,
+      RegionsActions.fetchRegionPerf,
       (state: State) => {
          return {
             ...state,
@@ -40,7 +34,7 @@ export const reducer = createReducer(
       }
    ),
    on(
-      NationalPageActions.setRegionPerf,
+      RegionsActions.setRegionPerf,
       (state: State, {totalRows, rows }) => {
          return {
             ...state,
@@ -51,32 +45,11 @@ export const reducer = createReducer(
       }
    ),
    on(
-      NationalPageActions.setFilterString,
-      (state: State, { filterString }) => {
-         return {
-            ...state,
-            filterString,
-            status: 'loading',
-         };
-      }
-   ),
-   on(
-      NationalPageActions.setPageNumber,
+      RegionsActions.setPageNumber,
       (state: State, { pageNumber }) => {
          return {
             ...state,
             pageNumber,
-            status: 'loading',
-         };
-      }
-   ),
-   on(
-      NationalPageActions.setSort,
-      (state: State, { orderBy, orderDir }) => {
-         return {
-            ...state,
-            orderBy,
-            orderDir,
             status: 'loading',
          };
       }
