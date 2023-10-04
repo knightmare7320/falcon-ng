@@ -7,7 +7,7 @@
          <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Region</th>
             <td mat-cell *matCellDef="let element" [matTooltip]="element.region_name"> 
-               {{ element.region_name }}
+               <a routerLink="/browse/region/{{element.region_id}}">{{ element.region_name }}</a>
             </td>
          </ng-container>
 
