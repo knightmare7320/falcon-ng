@@ -6,28 +6,29 @@ import { Title } from '@angular/platform-browser';
 import { Sort } from "@angular/material/sort";
 import { MatPaginator, PageEvent } from "@angular/material/paginator";
 
-import * as fromPage from "./store/l4-markets.reducer";
-import * as PageActions from "./store/l4-markets.actions";
+import * as fromPage from "./store/l5-markets.reducer";
+import * as PageActions from "./store/l5-markets.actions";
 import * as GlobalActions from "../../store/global/global.actions";
 
-import { L4MarketPerf } from './store/l4-markets.model';
+import { L5MarketPerf } from './store/l5-markets.model';
 
 @Component({
-   selector: 'app-l4-markets',
-   templateUrl: './l4-markets.component.html',
-   styleUrls: ['./l4-markets.component.scss']
+   selector: 'app-l5-markets',
+   templateUrl: './l5-markets.component.html',
+   styleUrls: ['./l5-markets.component.scss']
 })
-export class L4MarketsComponent implements OnInit {
+export class L5MarketsComponent implements OnInit {
    private routeListener: Subscription | undefined;
    private storeListener: Subscription | undefined;
-   isLoading = false;
-   totalRowCount = 0;
+   is_loading = false;
+   total_row_count = 0;
    page_size = 10;
-   pageNumber = 1;
-   pageOptions = [10, 25, 50];
+   page_number = 1;
+   page_options = [10, 25, 50];
 
-   perfRows: L4MarketPerf[] = [];
-   regionName = "";
+   perf_rows: L5MarketPerf[] = [];
+   region_id = "";
+   l4_market_name = "";
    
    displayedColumns: string[] = [
       'name',
@@ -48,21 +49,22 @@ export class L4MarketsComponent implements OnInit {
    ngOnInit(): void {
       this.storeListener = this.store.subscribe(
          (state) => {
-            this.isLoading = (state.browse.regions.status === "loading");
-            this.regionName = state.browse.l4Markets.regionName;
-            this.totalRowCount = state.browse.l4Markets.totalRowCount;
-            this.perfRows = state.browse.l4Markets.perfRows;
-            this.page_size = state.global.page_size;
-            this.pageNumber = state.browse.l4Markets.pageNumber;
-            this.titleService.setTitle(`Falcon - ${this.regionName} Region`);
+            this.is_loading      = (state.browse.l5Markets.status === "loading");
+            this.region_id       = state.browse.l5Markets.region_id;
+            this.l4_market_name  = state.browse.l5Markets.l4_market_name;
+            this.total_row_count = state.browse.l5Markets.total_row_count;
+            this.perf_rows       = state.browse.l5Markets.perf_rows;
+            this.page_size       = state.global.page_size;
+            this.page_number     = state.browse.l5Markets.page_number;
+            this.titleService.setTitle(`Falcon - ${this.l4_market_name} L4 Market`);
          }
       );
 
       this.routeListener = this.route.paramMap.subscribe(
          (params: ParamMap) => {
-            const regionId = params.get("region_id");
-            if(regionId) {
-               this.store.dispatch(PageActions.fetchPerf({regionId}));
+            const l4_market_id = params.get('l4_market_id');
+            if(l4_market_id) {
+               this.store.dispatch(PageActions.fetchPerf({l4_market_id}));
             }
          }
       );
@@ -76,8 +78,8 @@ export class L4MarketsComponent implements OnInit {
    }
 
    onPageChanged(event: PageEvent) {
-      if (this.pageNumber !== event.pageIndex) {
-         this.store.dispatch(PageActions.setPageNumber({ pageNumber: event.pageIndex }));
+      if (this.page_number !== event.pageIndex) {
+         this.store.dispatch(PageActions.setPageNumber({ page_number: event.pageIndex }));
       }
       if (this.page_size !== event.pageSize) {
          this.store.dispatch(GlobalActions.setPageSize({ page_size: event.pageSize }));

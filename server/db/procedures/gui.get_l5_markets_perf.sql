@@ -22,14 +22,16 @@ BEGIN
    SET in_FILTER_STR = lower(coalesce(trim(in_FILTER_STR), ''));
 
 
-   SELECT   a.l4_market_name
+   SELECT   a.region_id
+          , a.l4_market_name
           , count(b.l5_market_id) total_records
    FROM     locations.l4_markets a 
             LEFT JOIN locations.l5_markets b 
                    ON a.l4_market_id = b.l4_market_id
    WHERE    a.l4_market_id = in_L4_MARKET_ID
    AND      lower(b.l5_market_name) like CONCAT('%', in_FILTER_STR, '%')
-   GROUP BY a.l4_market_name;
+   GROUP BY a.region_id
+          , a.l4_market_name;
      
    SELECT   l5_market_id
           , l5_market_name 

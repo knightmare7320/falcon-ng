@@ -8,7 +8,7 @@
          *ngIf="perfRows.length > 0">
          <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Region</th>
-            <td mat-cell *matCellDef="let element" [matTooltip]="element.region_name"> 
+            <td mat-cell *matCellDef="let element"> 
                <a routerLink="/browse/region/{{element.region_id}}">{{ element.region_name }}</a>
             </td>
          </ng-container>
@@ -54,10 +54,10 @@
                style="width: 100%; text-align:right;"
                [length]="totalRowCount" 
                [pageIndex]="pageNumber - 1" 
-               [pageSize]="pageSize" 
+               [pageSize]="page_size" 
                [pageSizeOptions]="pageOptions"
                (page)="onPageChanged($event)" 
-               *ngIf="totalRowCount > pageSize"
+               *ngIf="totalRowCount > page_size"
             ></mat-paginator>
          </mat-grid-tile>
       </mat-grid-list>

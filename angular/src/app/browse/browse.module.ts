@@ -14,13 +14,16 @@ import { RegionsEffects } from './regions/store/regions.effects';
 import { BrowseComponent } from './browse.component';
 import { RegionsComponent } from './regions/regions.component';
 import { L4MarketsComponent } from './l4-markets/l4-markets.component';
+import { L5MarketsComponent } from './l5-markets/l5-markets.component';
 import { L4MarketsEffects } from './l4-markets/store/l4-markets.effects';
+import { L5MarketsEffects } from './l5-markets/store/l5-markets.effects';
 
 @NgModule({
    declarations: [
       BrowseComponent,
       RegionsComponent,
       L4MarketsComponent,
+      L5MarketsComponent,
    ],
    imports: [
       CommonModule,
@@ -32,6 +35,7 @@ import { L4MarketsEffects } from './l4-markets/store/l4-markets.effects';
       EffectsModule.forFeature([
          RegionsEffects,
          L4MarketsEffects,
+         L5MarketsEffects,
       ])
    ]
 })

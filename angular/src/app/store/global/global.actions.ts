@@ -1,17 +1,16 @@
 import { createAction, props } from "@ngrx/store";
 
-
 export const setPageSize = createAction(
    '[global] Set Page Size',
-   props<{ pageSize: number }>(),
+   props<{ page_size: number }>(),
 );
 
 export const setFilterString = createAction(
    '[global] Set Filter String',
-   props<{ filterString: string }>(),
+   props<{ filter_string: string }>(),
 );
 
 export const setSort = createAction(
-   '[orch] Set Hosts Sort',
-   props<{ orderBy: string, orderDir: string }>(),
+   '[global] Set Sort',
+   props<{ order_by: string, order_dir: string }>(),
 );

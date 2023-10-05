@@ -4,17 +4,17 @@ import * as fromApp from "../app.reducer";
 import * as GlobalActions from "./global.actions";
 
 export interface State {
-   pageSize: number;
-   filterString: string;
-   orderBy: string;
-   orderDir: string;
+   page_size: number;
+   filter_string: string;
+   order_by: string;
+   order_dir: string;
 }
 
 const initialState: State = {
-   pageSize: 10, //localStorage.getItem('pageSize') ? +localStorage.getItem('pageSize') : 10,
-   filterString: '',
-   orderBy: 'name',
-   orderDir: 'asc',
+   page_size: 10, //localStorage.getItem('pageSize') ? +localStorage.getItem('pageSize') : 10,
+   filter_string: '',
+   order_by: 'name',
+   order_dir: 'asc',
 }
 
 export interface FeatureState extends fromApp.AppState {
@@ -25,30 +25,30 @@ export const reducer = createReducer(
    initialState,
    on(
       GlobalActions.setPageSize,
-      (state: State, { pageSize }) => {
-         localStorage.setItem('pageSize', pageSize.toString());
+      (state: State, { page_size }) => {
+         // localStorage.setItem('page_size', page_size.toString());
          return {
             ...state,
-            pageSize,
+            page_size,
          };
       }
    ),
    on(
       GlobalActions.setFilterString,
-      (state: State, { filterString }) => {
+      (state: State, { filter_string }) => {
          return {
             ...state,
-            filterString,
+            filter_string,
          };
       }
    ),
    on(
       GlobalActions.setSort,
-      (state: State, { orderBy, orderDir }) => {
+      (state: State, { order_by, order_dir }) => {
          return {
             ...state,
-            orderBy,
-            orderDir,
+            order_by,
+            order_dir,
             status: 'loading',
          };
       }

@@ -20,7 +20,7 @@ export class RegionsComponent {
    isLoading = false;
    totalRowCount = 0;
    perfRows: RegionPerf[] = [];
-   pageSize = 10;
+   page_size = 10;
    pageNumber = 1;
    pageOptions = [10, 25, 50];
 
@@ -44,7 +44,7 @@ export class RegionsComponent {
             this.isLoading = (state.browse.regions.status === "loading");
             this.totalRowCount = state.browse.regions.totalRowCount;
             this.perfRows = state.browse.regions.perfRows;
-            this.pageSize = state.global.pageSize;
+            this.page_size = state.global.page_size;
             this.pageNumber = state.browse.regions.pageNumber;
         }
       );
@@ -62,12 +62,12 @@ export class RegionsComponent {
       if (this.pageNumber !== event.pageIndex) {
          this.store.dispatch(PageActions.setPageNumber({ pageNumber: event.pageIndex }));
       }
-      if (this.pageSize !== event.pageSize) {
-         this.store.dispatch(GlobalActions.setPageSize({ pageSize: event.pageSize }));
+      if (this.page_size !== event.pageSize) {
+         this.store.dispatch(GlobalActions.setPageSize({ page_size: event.pageSize }));
       }
    }
 
    onSortChanged(event: Sort) {
-      this.store.dispatch(GlobalActions.setSort({ orderBy: event.active, orderDir: event.direction }));
+      this.store.dispatch(GlobalActions.setSort({ order_by: event.active, order_dir: event.direction }));
    }
 }

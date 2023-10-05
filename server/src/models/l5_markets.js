@@ -40,6 +40,7 @@ class l5Markets {
                return;
             }
             result(null, {
+               "region_id": results[0][0].region_id,
                "l4_market_name": results[0][0].l4_market_name,
                "total_records": results[0][0].total_records,
                "rows": results[1]

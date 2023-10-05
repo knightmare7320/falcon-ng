@@ -30,7 +30,7 @@ export class L4MarketsEffects {
             this.store //.select('orchestration', 'hosts')
          ),
          switchMap(([action, state]) => {
-            return this.service.getPerf(state.browse.l4Markets.regionId, state.browse.l4Markets.pageNumber, state.global.pageSize, state.global.orderBy, state.global.orderDir, state.global.filterString);
+            return this.service.getPerf(state.browse.l4Markets.regionId, state.browse.l4Markets.pageNumber, state.global.page_size, state.global.order_by, state.global.order_dir, state.global.filter_string);
          }),
          map((response: { region_name: string, total_rows: number, rows: L4MarketPerf[] }) => {
             return PageActions.setPerf({
