@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
-import { RegionPerf } from './regions.model';
+import { L4MarketPerf } from './l4-markets.model';
 
-const API_URL = environment.apiUrl + '/regions';
+const API_URL = environment.apiUrl + '/l4_markets';
 
 @Injectable({ providedIn: 'root' })
-export class RegionsService {
+export class L4MarketsService {
    constructor(
       private httpClient: HttpClient
    ) {}
 
-   getPerf(page_number = 1, page_size= 10, order_by = 'name', order_dir = 'asc', filter_string='') {
+   getPerf(region_id: string, page_number = 1, page_size= 10, order_by = 'name', order_dir = 'asc', filter_string='') {
       const params = {
          page_number,
          page_size,
@@ -21,8 +21,8 @@ export class RegionsService {
          filter_string,
       }
       return this.httpClient
-         .get<{total_rows: number, rows: RegionPerf[]}>(
-            `${API_URL}/perf`, 
+         .get<{region_name: string, total_rows: number, rows: L4MarketPerf[]}>(
+            `${API_URL}/perf/${region_id}`, 
             { params },
          );
    }

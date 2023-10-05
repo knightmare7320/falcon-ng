@@ -7,8 +7,8 @@ import { RegionsComponent } from "./regions/regions.component";
 import { L4MarketsComponent } from "./l4-markets/l4-markets.component";
 
 const routes: Routes = [
-   { path: "", component: RegionsComponent },
-   { path: "region/:region_id", component: L4MarketsComponent },
+   { path: ""                 , component: RegionsComponent  , title: 'Falcon - National'},
+   { path: "region/:region_id", component: L4MarketsComponent, title: 'Falcon - Region' },
 ]
 
 @NgModule({

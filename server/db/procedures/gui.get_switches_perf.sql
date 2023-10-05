@@ -25,7 +25,7 @@ BEGIN
 
    SELECT   count(*) total_records
    FROM     equipment.switches
-   WHERE    in_EQUIPMENT_VENDOR_ID = -1 OR equipment_vendor_id  = in_EQUIPMENT_VENDOR_ID
+   WHERE    (in_EQUIPMENT_VENDOR_ID = -1 OR equipment_vendor_id  = in_EQUIPMENT_VENDOR_ID)
    AND      lower(switch_name) like CONCAT('%', in_FILTER_STR, '%');
   
    
@@ -42,7 +42,7 @@ BEGIN
    FROM     equipment.switches sw
           , equipment.equipment_vendors v
    WHERE    sw.equipment_vendor_id = v.equipment_vendor_id
-   AND      in_EQUIPMENT_VENDOR_ID = -1 OR v.equipment_vendor_id  = in_EQUIPMENT_VENDOR_ID
+   AND      (in_EQUIPMENT_VENDOR_ID = -1 OR v.equipment_vendor_id  = in_EQUIPMENT_VENDOR_ID)
    AND      lower(sw.switch_name) like CONCAT('%', in_FILTER_STR, '%')
 
    ORDER BY case when in_ORDER_BY = 'name' and in_ORDER_DIR = 'asc'  then switch_name end asc 

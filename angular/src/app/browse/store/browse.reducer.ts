@@ -1,10 +1,12 @@
 import * as fromApp from '../../store/app.reducer';
 import * as fromRegions from '../regions/store/regions.reducer';
+import * as fromL4Markets from '../l4-markets/store/l4-markets.reducer';
 
 export interface State {
    regions: fromRegions.State;
-   // oss: fromOss.State;
-   // hosts: fromHosts.State;
+   l4Markets: fromL4Markets.State;
+   l5Markets: null,
+   engineeringClusters: null,
 }
 
 export interface FeatureState extends fromApp.AppState {
@@ -13,6 +15,5 @@ export interface FeatureState extends fromApp.AppState {
 
 export const reducer = {
    regions: fromRegions.reducer,
-   // oss: fromOss.reducer,
-   // hosts: fromHosts.reducer,
+   l4Markets: fromL4Markets.reducer,
 }

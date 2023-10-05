@@ -1,9 +1,11 @@
+<h2>National</h2>
+
 <mat-card>
    <app-spinner *ngIf="isLoading" dotSize="40px"></app-spinner>
 
    <mat-card-content>
-      <table mat-table matSort class="mat-elevation-z8" [dataSource]="regionPerf" (matSortChange)="onSortChanged($event)"
-         *ngIf="regionPerf.length > 0">
+      <table mat-table matSort class="mat-elevation-z8" [dataSource]="perfRows" (matSortChange)="onSortChanged($event)"
+         *ngIf="perfRows.length > 0">
          <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Region</th>
             <td mat-cell *matCellDef="let element" [matTooltip]="element.region_name"> 
@@ -40,7 +42,7 @@
          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
 
-      <p *ngIf="regionPerf.length === 0">No Regions.</p>
+      <p *ngIf="perfRows.length === 0">No Regions.</p>
 
 
 
@@ -50,12 +52,12 @@
          <mat-grid-tile>
             <mat-paginator 
                style="width: 100%; text-align:right;"
-               [length]="totalRows" 
+               [length]="totalRowCount" 
                [pageIndex]="pageNumber - 1" 
                [pageSize]="pageSize" 
                [pageSizeOptions]="pageOptions"
                (page)="onPageChanged($event)" 
-               *ngIf="totalRows > pageSize"
+               *ngIf="totalRowCount > pageSize"
             ></mat-paginator>
          </mat-grid-tile>
       </mat-grid-list>

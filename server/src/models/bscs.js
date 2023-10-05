@@ -44,6 +44,7 @@ class Bscs {
                return;
             }
             result(null, {
+               "switch_name": results[0][0].switch_name,
                "total_records": results[0][0].total_records,
                "rows": results[1]
             });

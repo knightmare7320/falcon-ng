@@ -25,12 +25,15 @@ BEGIN
    SET in_FILTER_STR = lower(coalesce(trim(in_FILTER_STR), ''));  
 
 
-   SELECT   count(*) total_records
-   FROM     equipment.bscs
-   WHERE    in_SWITCH_ID = -1 OR switch_id = in_SWITCH_ID
-   AND      in_EQUIPMENT_VENDOR_ID = -1 OR equipment_vendor_id  = in_EQUIPMENT_VENDOR_ID
-   AND      lower(bsc_name) like CONCAT('%', in_FILTER_STR, '%');
-  
+   SELECT   a.switch_name
+          , count(b.bsc_id) total_records
+   FROM     locations.switches a 
+            LEFT JOIN locations.bscs b 
+                   ON a.switch_id = b.switch_id
+   WHERE    (in_SWITCH_ID = -1 OR a.switch_id = in_SWITCH_ID)
+   AND      lower(b.org_cluster_name) like CONCAT('%', in_FILTER_STR, '%')
+   AND      (in_EQUIPMENT_VENDOR_ID = -1 OR b.equipment_vendor_id  = in_EQUIPMENT_VENDOR_ID)
+   GROUP BY a.switch_name;  
    
    SELECT   b.switch_id
           , b.bsc_id
@@ -46,8 +49,8 @@ BEGIN
    FROM     equipment.bscs b
           , equipment.equipment_vendors v
    WHERE    b.equipment_vendor_id = v.equipment_vendor_id
-   AND      in_SWITCH_ID = -1           OR b.switch_id            = in_SWITCH_ID
-   AND      in_EQUIPMENT_VENDOR_ID = -1 OR v.equipment_vendor_id  = in_EQUIPMENT_VENDOR_ID
+   AND      (in_SWITCH_ID = -1           OR b.switch_id            = in_SWITCH_ID)
+   AND      (in_EQUIPMENT_VENDOR_ID = -1 OR v.equipment_vendor_id  = in_EQUIPMENT_VENDOR_ID)
    AND      lower(b.bsc_name) like CONCAT('%', in_FILTER_STR, '%')
 
    ORDER BY case when in_ORDER_BY = 'name' and in_ORDER_DIR = 'asc'  then bsc_name end asc 

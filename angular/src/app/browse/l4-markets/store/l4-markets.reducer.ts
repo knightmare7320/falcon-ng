@@ -1,44 +1,50 @@
 import { createReducer, on } from "@ngrx/store";
 
-import { RegionPerf } from "./regions.model";
+import { L4MarketPerf } from "./l4-markets.model";
 import * as fromReducer from "../../store/browse.reducer";
-import * as fromActions from "./regions.actions";
+import * as fromActions from "./l4-markets.actions";
 
 export interface State {
    status: string,
+   regionId: string,
+   regionName: string,
    totalRowCount: number,
-   perfRows: RegionPerf[],
+   perfRows: L4MarketPerf[],
    pageNumber: number,
 }
 
 const initialState: State = {
    status: 'ok',
+   regionId: '',
+   regionName: '',
    totalRowCount: 0,
    perfRows: [],
    pageNumber: 1,
 }
 
 export interface FeatureState extends fromReducer.FeatureState{
-   regions: State;
+   l4Markets: State;
 }
 
 export const reducer = createReducer(
    initialState,
    on(
       fromActions.fetchPerf,
-      (state: State) => {
+      (state: State, {regionId}) => {
          return {
             ...state,
+            regionId, 
             status: 'loading',
          }
       }
    ),
    on(
       fromActions.setPerf,
-      (state: State, {totalRows, rows }) => {
+      (state: State, {regionName, totalRows, rows }) => {
          return {
             ...state,
             status: 'ok',
+            regionName,
             totalRowCount: totalRows,
             perfRows: [...rows],
          }

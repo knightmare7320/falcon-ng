@@ -1,1 +1,68 @@
+<h2>{{regionName}} Region</h2>
+
 <a routerLink="/browse">&lt; back</a>
+
+<mat-card>
+   <app-spinner *ngIf="isLoading" dotSize="40px"></app-spinner>
+
+   <mat-card-content>
+      <table mat-table matSort class="mat-elevation-z8" [dataSource]="perfRows" (matSortChange)="onSortChanged($event)"
+         *ngIf="perfRows.length > 0">
+         <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Region</th>
+            <td mat-cell *matCellDef="let element" [matTooltip]="element.l4_market_name"> 
+               <a routerLink="/browse/l4Market/{{element.l4_market_id}}">{{ element.l4_market_name }}</a>
+            </td>
+         </ng-container>
+
+         <ng-container matColumnDef="setup_attempts">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Setup Attempts</th>
+            <td mat-cell *matCellDef="let element">{{ element.setup_attempts }}</td>
+         </ng-container>
+         <ng-container matColumnDef="equipment_blocks">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Equipment Blocks</th>
+            <td mat-cell *matCellDef="let element">{{ element.equipment_blocks }}</td>
+         </ng-container>
+         <ng-container matColumnDef="access_failures">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Access Failures</th>
+            <td mat-cell *matCellDef="let element">{{ element.access_failures }}</td>
+         </ng-container>
+         <ng-container matColumnDef="successful_calls">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Successful Calls</th>
+            <td mat-cell *matCellDef="let element">{{ element.successful_calls }}</td>
+         </ng-container>
+         <ng-container matColumnDef="primary_drops">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Primary Drops</th>
+            <td mat-cell *matCellDef="let element">{{ element.primary_drops }}</td>
+         </ng-container>
+         <ng-container matColumnDef="primary_erlangs">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Primary Erlangs</th>
+            <td mat-cell *matCellDef="let element">{{ element.primary_erlangs }}</td>
+         </ng-container>
+
+         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <p *ngIf="perfRows.length === 0">No Regions.</p>
+
+
+
+      <mat-grid-list cols="2" rowHeight="50">
+         <mat-grid-tile>
+         </mat-grid-tile>
+         <mat-grid-tile>
+            <mat-paginator 
+               style="width: 100%; text-align:right;"
+               [length]="totalRowCount" 
+               [pageIndex]="pageNumber - 1" 
+               [pageSize]="pageSize" 
+               [pageSizeOptions]="pageOptions"
+               (page)="onPageChanged($event)" 
+               *ngIf="totalRowCount > pageSize"
+            ></mat-paginator>
+         </mat-grid-tile>
+      </mat-grid-list>
+
+   </mat-card-content>
+</mat-card>

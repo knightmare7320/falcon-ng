@@ -1,20 +1,19 @@
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
-import { map, tap, switchMap, withLatestFrom } from "rxjs";
+import { map, switchMap, withLatestFrom } from "rxjs";
 import { Injectable } from "@angular/core";
-import { Router } from '@angular/router';
 
-import { RegionsService } from "./regions.service";
-import * as fromPage from "./regions.reducer";
-import * as PageActions from "./regions.actions";
+import { L4MarketsService } from "./l4-markets.service";
+import * as fromPage from "./l4-markets.reducer";
+import * as PageActions from "./l4-markets.actions";
 import * as GlobalActions from "../../../store/global/global.actions";
-import { RegionPerf } from "./regions.model";
+import { L4MarketPerf } from "./l4-markets.model";
 
 @Injectable()
-export class RegionsEffects {
+export class L4MarketsEffects {
    constructor(
       private actions$: Actions,
-      private service: RegionsService,
+      private service: L4MarketsService,
       private store: Store<fromPage.FeatureState>,
    ) { }
 
@@ -31,10 +30,11 @@ export class RegionsEffects {
             this.store //.select('orchestration', 'hosts')
          ),
          switchMap(([action, state]) => {
-            return this.service.getPerf(state.browse.regions.pageNumber, state.global.pageSize, state.global.orderBy, state.global.orderDir, state.global.filterString);
+            return this.service.getPerf(state.browse.l4Markets.regionId, state.browse.l4Markets.pageNumber, state.global.pageSize, state.global.orderBy, state.global.orderDir, state.global.filterString);
          }),
-         map((response: { total_rows: number, rows: RegionPerf[] }) => {
+         map((response: { region_name: string, total_rows: number, rows: L4MarketPerf[] }) => {
             return PageActions.setPerf({
+               regionName: response.region_name,
                totalRows: response.total_rows,
                rows: response.rows,
             });

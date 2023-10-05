@@ -18,8 +18,8 @@ import { RegionPerf } from './store/regions.model';
 export class RegionsComponent {
    private subscription: Subscription | undefined;
    isLoading = false;
-   totalRows = 0;
-   regionPerf: RegionPerf[] = [];
+   totalRowCount = 0;
+   perfRows: RegionPerf[] = [];
    pageSize = 10;
    pageNumber = 1;
    pageOptions = [10, 25, 50];
@@ -42,13 +42,13 @@ export class RegionsComponent {
       this.subscription = this.store.subscribe(
          (state) => {
             this.isLoading = (state.browse.regions.status === "loading");
-            this.totalRows = state.browse.regions.totalRows;
-            this.regionPerf = state.browse.regions.regionPerf;
+            this.totalRowCount = state.browse.regions.totalRowCount;
+            this.perfRows = state.browse.regions.perfRows;
             this.pageSize = state.global.pageSize;
             this.pageNumber = state.browse.regions.pageNumber;
         }
       );
-      this.store.dispatch(PageActions.fetchRegionPerf());
+      this.store.dispatch(PageActions.fetchPerf());
    }
 
    ngOnDestroy(): void {

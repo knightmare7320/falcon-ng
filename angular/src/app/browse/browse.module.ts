@@ -14,6 +14,7 @@ import { RegionsEffects } from './regions/store/regions.effects';
 import { BrowseComponent } from './browse.component';
 import { RegionsComponent } from './regions/regions.component';
 import { L4MarketsComponent } from './l4-markets/l4-markets.component';
+import { L4MarketsEffects } from './l4-markets/store/l4-markets.effects';
 
 @NgModule({
    declarations: [
@@ -30,6 +31,7 @@ import { L4MarketsComponent } from './l4-markets/l4-markets.component';
       StoreModule.forFeature('browse', browseReducer),
       EffectsModule.forFeature([
          RegionsEffects,
+         L4MarketsEffects,
       ])
    ]
 })

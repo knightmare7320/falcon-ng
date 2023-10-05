@@ -40,6 +40,7 @@ class market99s {
                return;
             }
             result(null, {
+               "region_name": results[0][0].region_name,
                "total_records": results[0][0].total_records,
                "rows": results[1]
             });
