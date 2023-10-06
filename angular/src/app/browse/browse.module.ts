@@ -11,7 +11,6 @@ import { BrowseRoutingModule } from './browse-routing.module';
 import { reducer as browseReducer } from './store/browse.reducer';
 import { RegionsEffects } from './regions/store/regions.effects';
 
-import { BrowseComponent } from './browse.component';
 import { RegionsComponent } from './regions/regions.component';
 import { L4MarketsComponent } from './l4-markets/l4-markets.component';
 import { L5MarketsComponent } from './l5-markets/l5-markets.component';
@@ -20,7 +19,6 @@ import { L5MarketsEffects } from './l5-markets/store/l5-markets.effects';
 
 @NgModule({
    declarations: [
-      BrowseComponent,
       RegionsComponent,
       L4MarketsComponent,
       L5MarketsComponent,

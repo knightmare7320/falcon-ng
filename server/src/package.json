@@ -7,12 +7,10 @@
   "type": "commonjs",
   "private": true,
   "dependencies": {
-    "bcrypt": "*",
     "body-parser": "*",
     "compression": "*",
     "cors": "*",
     "express": "*",
-    "jsonwebtoken": "*",
     "morgan": "*",
     "mysql2": "^3.6.1"
   },

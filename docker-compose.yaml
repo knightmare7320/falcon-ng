@@ -7,7 +7,6 @@ services:
       ports:
          - "3306:3306"
       # environment:
-      #   - MYSQL_ROOT_PASSWORD=
       #   - MYSQL_USER=
       #   - MYSQL_PASSWORD=
       env_file:
@@ -20,13 +19,22 @@ services:
       volumes:
          - ./server/src:/app
          - /app/node_modules
-      # environment:
-      #    - DB_USER=
-      #    - DB_PASSWORD=
+      environment:
+         AUTH_SERVICE_SERVICE_HOST: auth-api
       ports:
          - "3000:80"
       env_file:
-         - ./secrets/server.env
+         - ./secrets/mysql.env
+      depends_on:
+         - mysqldb
+         - auth-api
+
+   auth-api:
+      build: auth-api
+      ports:
+         - "8000:80"
+      env_file:
+         - ./secrets/mysql.env
       depends_on:
          - mysqldb
 
