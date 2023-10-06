@@ -1,18 +1,22 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const jwt = require("jsonwebtoken");
 
 const app = express();
 const jsonParser = bodyParser.json();
 
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 
 app.get("/verify-token/:token", (req, res) => {
    const token = req.params.token;
 
-   // TODO: actual token verification
-   if (token === 'abc') {
-      return res.status(200).json({ message: "ok", uid: "1"});
-   }
-   res.status(401).json({ message: "Invalid token." });
+   jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
+      if (err) {
+         res.status(401).json({ message: "Invalid token." });
+      }
+      return res.status(200).json({ message: "Success", uid: decoded.uid});
+   });
 });
 
 app.post('/login/:username', jsonParser, (req, res) => {
@@ -20,19 +24,30 @@ app.post('/login/:username', jsonParser, (req, res) => {
    const password = req.body.password;
    
    // TODO: maybe lookup actual username and password from db/somewhere
+   //       but not really important for this
    if (username === "fscran" && password === "fscRANper321!") {
-      // TODO: generate a real jwt
-      return res.status(200).json({ message: "ok", token: token });
+      jwt.sign(
+         { uid: 1 }, process.env.JWT_SECRET, { expiresIn: '1h' }, 
+         (err, token) => {
+            if (err) {
+               console.err(`Login error - ${username}`);
+               return res.status(500).json({ message: "Login error."});           
+            }
+            console.log(`Login success - ${username}`);
+            return res.status(200).json({ message: "Success", token: token });
+         }
+      );
+   } else {
+      console.log(`Invalid login - ${username}`);
+      return res.status(401).json({ message: "Invalid login."}); 
    }
-   res.status(401).json({ message: "Invalid login."});
 });
 
-app.post('/logout/:username', (req, res) => {
+app.get('/logout/:username', (req, res) => {
    const username = req.params.username;
    // TODO: record logout in db/logs
-   return res.status(200).json({ message: "ok"});
+   return res.status(200).json({ message: "Success"});
 });
 
 
-// TODO: internal ssl
 app.listen(80);

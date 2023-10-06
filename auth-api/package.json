@@ -4,12 +4,16 @@
    "description": "",
    "main": "index.js",
    "scripts": {
-      "start": "node auth-app.js"
+      "start": "nodemon auth-app.js"
    },
    "author": "Brian Knight",
    "private": true,
    "dependencies": {
       "body-parser": "^1.20.2",
-      "express": "^4.18.2"
+      "express": "^4.18.2",
+      "jsonwebtoken": "^9.0.2"
+   },
+   "devDependencies": {
+      "nodemon": "^3.0.1"
    }
 }

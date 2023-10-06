@@ -32,11 +32,15 @@ services:
    auth-api:
       build: auth-api
       ports:
-         - "8000:80"
+         - "80:80"
+      volumes:
+         - ./auth-api:/app
+         - /app/node_modules
+      # environment:
+      #    - JWT_SECRET=
       env_file:
          - ./secrets/mysql.env
-      depends_on:
-         - mysqldb
+         - ./secrets/auth.env
 
    angular:
       build: angular
