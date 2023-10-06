@@ -27,14 +27,16 @@ BEGIN
    );
 
 
-   SELECT   a.l5_market_name
-          , count(b.org_cluster_id) total_records
+   SELECT   a.l4_market_id
+          , a.l5_market_name
+          , count(b.org_cluster_id) total_row_count
    FROM     locations.l5_markets a 
             LEFT JOIN locations.org_clusters b 
                    ON a.l5_market_id = b.l5_market_id
    WHERE    a.l5_market_id = in_L5_MARKET_ID
    AND      lower(b.org_cluster_name) like CONCAT('%', in_FILTER_STR, '%')
-   GROUP BY a.l5_market_name;
+   GROUP BY a.l4_market_id
+          , a.l5_market_name;
    
    SELECT   org_cluster_id
           , org_cluster_name 

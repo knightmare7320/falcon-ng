@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { L5MarketPerf } from "./l5-markets.model";
+import { L5MarketPerf } from "./l5-market.model";
 
 
 export const fetchPerf = createAction(

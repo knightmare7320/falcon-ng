@@ -21,7 +21,7 @@ BEGIN
    SET in_FILTER_STR = lower(coalesce(trim(in_FILTER_STR), ''));
 
 
-   SELECT   count(*) total_records
+   SELECT   count(*) total_row_count
    FROM     locations.regions
    WHERE    lower(region_name) like CONCAT('%', in_FILTER_STR, '%');
   

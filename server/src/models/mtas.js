@@ -35,7 +35,7 @@ class mtas {
                return;
             }
             result(null, {
-               "total_records": results[0][0].total_records,
+               "total_row_count": results[0][0].total_row_count,
                "rows": results[1]
             });
          }

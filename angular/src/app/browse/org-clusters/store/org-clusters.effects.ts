@@ -3,17 +3,17 @@ import { Store } from "@ngrx/store";
 import { map, switchMap, withLatestFrom } from "rxjs";
 import { Injectable } from "@angular/core";
 
-import { L5MarketsService } from "./l5-markets.service";
-import * as fromPage from "./l5-markets.reducer";
-import * as PageActions from "./l5-markets.actions";
+import { OrgClustersService } from "./org-clusters.service";
+import * as fromPage from "./org-clusters.reducer";
+import * as PageActions from "./org-clusters.actions";
 import * as GlobalActions from "../../../store/global/global.actions";
-import { L5MarketPerf } from "./l5-market.model";
+import { OrgClusterPerf } from "./org-cluster.model";
 
 @Injectable()
-export class L5MarketsEffects {
+export class OrgClustersEffects {
    constructor(
       private actions$: Actions,
-      private service: L5MarketsService,
+      private service: OrgClustersService,
       private store: Store<fromPage.FeatureState>,
    ) { }
 
@@ -30,12 +30,12 @@ export class L5MarketsEffects {
             this.store //.select('orchestration', 'hosts')
          ),
          switchMap(([action, state]) => {
-            return this.service.getPerf(state.browse.l5Markets.l4_market_id, state.browse.l5Markets.page_number, state.global.page_size, state.global.order_by, state.global.order_dir, state.global.filter_string);
+            return this.service.getPerf(state.browse.orgClusters.l5_market_id, state.browse.orgClusters.page_number, state.global.page_size, state.global.order_by, state.global.order_dir, state.global.filter_string);
          }),
-         map((response: { region_id:string, l4_market_name: string, total_row_count: number, rows: L5MarketPerf[] }) => {
+         map((response: { l4_market_id:string, l5_market_name: string, total_row_count: number, rows: OrgClusterPerf[] }) => {
             return PageActions.setPerf({
-               region_id: response.region_id,
-               l4_market_name: response.l4_market_name,
+               l4_market_id: response.l4_market_id,
+               l5_market_name: response.l5_market_name,
                total_row_count: response.total_row_count,
                rows: response.rows,
             });

@@ -26,7 +26,7 @@ BEGIN
    );
 
 
-   SELECT   count(*) total_records
+   SELECT   count(*) total_row_count
    FROM     locations.mtas
    WHERE    lower(mta_name) like CONCAT('%', in_FILTER_STR, '%');
   

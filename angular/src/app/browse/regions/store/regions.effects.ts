@@ -31,11 +31,11 @@ export class RegionsEffects {
             this.store //.select('orchestration', 'hosts')
          ),
          switchMap(([action, state]) => {
-            return this.service.getPerf(state.browse.regions.pageNumber, state.global.page_size, state.global.order_by, state.global.order_dir, state.global.filter_string);
+            return this.service.getPerf(state.browse.regions.page_number, state.global.page_size, state.global.order_by, state.global.order_dir, state.global.filter_string);
          }),
-         map((response: { total_rows: number, rows: RegionPerf[] }) => {
+         map((response: { total_row_count: number, rows: RegionPerf[] }) => {
             return PageActions.setPerf({
-               totalRows: response.total_rows,
+               total_row_count: response.total_row_count,
                rows: response.rows,
             });
          }),

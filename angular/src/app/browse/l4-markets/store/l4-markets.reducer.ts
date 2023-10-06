@@ -1,25 +1,25 @@
 import { createReducer, on } from "@ngrx/store";
 
-import { L4MarketPerf } from "./l4-markets.model";
+import { L4MarketPerf } from "./l4-market.model";
 import * as fromReducer from "../../store/browse.reducer";
 import * as fromActions from "./l4-markets.actions";
 
 export interface State {
    status: string,
-   regionId: string,
-   regionName: string,
-   totalRowCount: number,
-   perfRows: L4MarketPerf[],
-   pageNumber: number,
+   region_id: string,
+   region_name: string,
+   total_row_count: number,
+   perf_rows: L4MarketPerf[],
+   page_number: number,
 }
 
 const initialState: State = {
    status: 'ok',
-   regionId: '',
-   regionName: '',
-   totalRowCount: 0,
-   perfRows: [],
-   pageNumber: 1,
+   region_id: '',
+   region_name: '',
+   total_row_count: 0,
+   perf_rows: [],
+   page_number: 1,
 }
 
 export interface FeatureState extends fromReducer.FeatureState{
@@ -30,32 +30,32 @@ export const reducer = createReducer(
    initialState,
    on(
       fromActions.fetchPerf,
-      (state: State, {regionId}) => {
+      (state: State, {region_id}) => {
          return {
             ...state,
-            regionId, 
+            region_id, 
             status: 'loading',
          }
       }
    ),
    on(
       fromActions.setPerf,
-      (state: State, {regionName, totalRows, rows }) => {
+      (state: State, {region_name, total_row_count, rows }) => {
          return {
             ...state,
             status: 'ok',
-            regionName,
-            totalRowCount: totalRows,
-            perfRows: [...rows],
+            region_name,
+            total_row_count,
+            perf_rows: [...rows],
          }
       }
    ),
    on(
       fromActions.setPageNumber,
-      (state: State, { pageNumber }) => {
+      (state: State, { page_number }) => {
          return {
             ...state,
-            pageNumber,
+            page_number,
             status: 'loading',
          };
       }

@@ -8,10 +8,10 @@ export const fetchPerf = createAction(
 
 export const setPerf = createAction(
    "[regions] Set Perf",
-   props<{ totalRows: number, rows: RegionPerf[] }> (),
+   props<{ total_row_count: number, rows: RegionPerf[] }> (),
 );
 
 export const setPageNumber = createAction(
    '[regions] Set Page Number',
-   props<{ pageNumber: number }>(),
+   props<{ page_number: number }>(),
 );

@@ -28,7 +28,7 @@ BEGIN
 
 
    SELECT   a.region_name
-          , count(b.market99_id) total_records
+          , count(b.market99_id) total_row_count
    FROM     locations.regions a 
             LEFT JOIN locations.market99s b 
                    ON a.region_id = b.region_id

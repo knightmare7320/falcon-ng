@@ -19,8 +19,8 @@ const bscsRoutes = require("./routes/bscs");
 //connect to db and stuff the object into the app
 const dbPool = mysql.createPool({
    host: 'mysqldb',
-   user: process.env.MYSQL_USER,
-   password: process.env.MYSQL_PASSWORD,
+   user: 'root',
+   password: process.env.MYSQL_ROOT_PASSWORD,
    database: 'gui',
    waitForConnections: true,
    connectionLimit: 10,

@@ -10,7 +10,7 @@ import * as fromPage from "./store/l5-markets.reducer";
 import * as PageActions from "./store/l5-markets.actions";
 import * as GlobalActions from "../../store/global/global.actions";
 
-import { L5MarketPerf } from './store/l5-markets.model';
+import { L5MarketPerf } from './store/l5-market.model';
 
 @Component({
    selector: 'app-l5-markets',
@@ -30,7 +30,7 @@ export class L5MarketsComponent implements OnInit {
    region_id = "";
    l4_market_name = "";
    
-   displayedColumns: string[] = [
+   displayed_columns: string[] = [
       'name',
       'setup_attempts',
       'equipment_blocks',
@@ -56,7 +56,7 @@ export class L5MarketsComponent implements OnInit {
             this.perf_rows       = state.browse.l5Markets.perf_rows;
             this.page_size       = state.global.page_size;
             this.page_number     = state.browse.l5Markets.page_number;
-            this.titleService.setTitle(`Falcon - ${this.l4_market_name} L4 Market`);
+            this.titleService.setTitle(`Falcon L4 Market - ${this.l4_market_name}`);
          }
       );
 
@@ -78,8 +78,8 @@ export class L5MarketsComponent implements OnInit {
    }
 
    onPageChanged(event: PageEvent) {
-      if (this.page_number !== event.pageIndex) {
-         this.store.dispatch(PageActions.setPageNumber({ page_number: event.pageIndex }));
+      if (this.page_number !== event.pageIndex + 1) {
+         this.store.dispatch(PageActions.setPageNumber({ page_number: event.pageIndex + 1}));
       }
       if (this.page_size !== event.pageSize) {
          this.store.dispatch(GlobalActions.setPageSize({ page_size: event.pageSize }));

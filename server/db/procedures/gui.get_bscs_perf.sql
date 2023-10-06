@@ -26,7 +26,7 @@ BEGIN
 
 
    SELECT   a.switch_name
-          , count(b.bsc_id) total_records
+          , count(b.bsc_id) total_row_count
    FROM     locations.switches a 
             LEFT JOIN locations.bscs b 
                    ON a.switch_id = b.switch_id

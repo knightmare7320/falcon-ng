@@ -1,7 +1,7 @@
 <mat-card>
-   <a routerLink="/browse">&lt; back</a>
-   <h2>L4 Markets for {{region_name}}</h2>
-   
+   <a routerLink="/browse/l4_market/{{l4_market_id}}">&lt; back</a>
+   <h2>Org Clusters for {{l5_market_name}}</h2>
+
    <mat-card-content>
       <app-spinner *ngIf="is_loading" dotSize="40px"></app-spinner>
 
@@ -10,7 +10,7 @@
          <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Region</th>
             <td mat-cell *matCellDef="let element"> 
-               <a routerLink="/browse/l4_market/{{element.l4_market_id}}">{{ element.l4_market_name }}</a>
+               <a routerLink="/browse/sites" [queryParams]="{org_cluster_id: element.org_cluster_id}">{{ element.org_cluster_name }}</a>
             </td>
          </ng-container>
 
@@ -43,7 +43,7 @@
          <tr mat-row *matRowDef="let row; columns: displayed_columns;"></tr>
       </table>
 
-      <p *ngIf="perf_rows.length === 0">No L4 Markets.</p>
+      <p *ngIf="perf_rows.length === 0">No Org Clusters.</p>
 
 
 

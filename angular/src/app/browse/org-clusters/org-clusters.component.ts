@@ -6,18 +6,18 @@ import { Title } from '@angular/platform-browser';
 import { Sort } from "@angular/material/sort";
 import { MatPaginator, PageEvent } from "@angular/material/paginator";
 
-import * as fromPage from "./store/l4-markets.reducer";
-import * as PageActions from "./store/l4-markets.actions";
+import * as fromPage from "./store/org-clusters.reducer";
+import * as PageActions from "./store/org-clusters.actions";
 import * as GlobalActions from "../../store/global/global.actions";
 
-import { L4MarketPerf } from './store/l4-market.model';
+import { OrgClusterPerf } from './store/org-cluster.model';
 
 @Component({
-   selector: 'app-l4-markets',
-   templateUrl: './l4-markets.component.html',
-   styleUrls: ['./l4-markets.component.scss']
+   selector: 'app-org-clusters',
+   templateUrl: './org-clusters.component.html',
+   styleUrls: ['./org-clusters.component.scss']
 })
-export class L4MarketsComponent implements OnInit {
+export class OrgClustersComponent implements OnInit {
    private routeListener: Subscription | undefined;
    private storeListener: Subscription | undefined;
    is_loading = false;
@@ -26,8 +26,9 @@ export class L4MarketsComponent implements OnInit {
    page_number = 1;
    page_options = [10, 25, 50];
 
-   perf_rows: L4MarketPerf[] = [];
-   region_name = "";
+   perf_rows: OrgClusterPerf[] = [];
+   l4_market_id = "";
+   l5_market_name = "";
    
    displayed_columns: string[] = [
       'name',
@@ -48,21 +49,22 @@ export class L4MarketsComponent implements OnInit {
    ngOnInit(): void {
       this.storeListener = this.store.subscribe(
          (state) => {
-            this.is_loading = (state.browse.regions.status === "loading");
-            this.region_name = state.browse.l4Markets.region_name;
-            this.total_row_count = state.browse.l4Markets.total_row_count;
-            this.perf_rows = state.browse.l4Markets.perf_rows;
-            this.page_size = state.global.page_size;
-            this.page_number = state.browse.l4Markets.page_number;
-            this.titleService.setTitle(`Falcon Region - ${this.region_name}`);
+            this.is_loading      = (state.browse.orgClusters.status === "loading");
+            this.l4_market_id    = state.browse.orgClusters.l4_market_id;
+            this.l5_market_name  = state.browse.orgClusters.l5_market_name;
+            this.total_row_count = state.browse.orgClusters.total_row_count;
+            this.perf_rows       = state.browse.orgClusters.perf_rows;
+            this.page_size       = state.global.page_size;
+            this.page_number     = state.browse.orgClusters.page_number;
+            this.titleService.setTitle(`Falcon L5 Market: ${this.l5_market_name}`);
          }
       );
 
       this.routeListener = this.route.paramMap.subscribe(
          (params: ParamMap) => {
-            const region_id = params.get("region_id");
-            if(region_id) {
-               this.store.dispatch(PageActions.fetchPerf({region_id}));
+            const l5_market_id = params.get('l5_market_id');
+            if(l5_market_id) {
+               this.store.dispatch(PageActions.fetchPerf({l5_market_id}));
             }
          }
       );

@@ -1,17 +1,16 @@
-<h2>{{l4_market_name}} - Engineering Clusters</h2>
-
-<a routerLink="/browse/region/{{region_id}}">&lt; back</a>
-
 <mat-card>
-   <app-spinner *ngIf="is_loading" dotSize="40px"></app-spinner>
-
+   <a routerLink="/browse/region/{{region_id}}">&lt; back</a>
+   <h2>L5 Markets for {{l4_market_name}}</h2>
+  
    <mat-card-content>
+      <app-spinner *ngIf="is_loading" dotSize="40px"></app-spinner>
+
       <table mat-table matSort class="mat-elevation-z8" [dataSource]="perf_rows" (matSortChange)="onSortChanged($event)"
          *ngIf="perf_rows.length > 0">
          <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Region</th>
             <td mat-cell *matCellDef="let element"> 
-               <a routerLink="/browse/engineering_cluster/{{element.l5_market_id}}">{{ element.l5_market_name }}</a>
+               <a routerLink="/browse/l5_market/{{element.l5_market_id}}">{{ element.l5_market_name }}</a>
             </td>
          </ng-container>
 
@@ -40,11 +39,11 @@
             <td mat-cell *matCellDef="let element">{{ element.primary_erlangs }}</td>
          </ng-container>
 
-         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+         <tr mat-header-row *matHeaderRowDef="displayed_columns"></tr>
+         <tr mat-row *matRowDef="let row; columns: displayed_columns;"></tr>
       </table>
 
-      <p *ngIf="perf_rows.length === 0">No Regions.</p>
+      <p *ngIf="perf_rows.length === 0">No L5 Markets.</p>
 
 
 

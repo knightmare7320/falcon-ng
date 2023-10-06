@@ -21,7 +21,7 @@ BEGIN
    SET v_OFFSET = (in_PAGE_NUMBER - 1) * in_PAGE_SIZE;
  
    -- Get the total number of records
-   select   count(*) total_records
+   select   count(*) total_row_count
    from     locations.sites s
    where    (org_cluster_id = in_FILTER_ID AND in_FILTER_ON='org_cluster_id')
    OR       (l4_market_id   = in_FILTER_ID AND in_FILTER_ON='l4_market_id')

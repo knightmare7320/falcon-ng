@@ -7,7 +7,7 @@ import { L4MarketsService } from "./l4-markets.service";
 import * as fromPage from "./l4-markets.reducer";
 import * as PageActions from "./l4-markets.actions";
 import * as GlobalActions from "../../../store/global/global.actions";
-import { L4MarketPerf } from "./l4-markets.model";
+import { L4MarketPerf } from "./l4-market.model";
 
 @Injectable()
 export class L4MarketsEffects {
@@ -30,12 +30,12 @@ export class L4MarketsEffects {
             this.store //.select('orchestration', 'hosts')
          ),
          switchMap(([action, state]) => {
-            return this.service.getPerf(state.browse.l4Markets.regionId, state.browse.l4Markets.pageNumber, state.global.page_size, state.global.order_by, state.global.order_dir, state.global.filter_string);
+            return this.service.getPerf(state.browse.l4Markets.region_id, state.browse.l4Markets.page_number, state.global.page_size, state.global.order_by, state.global.order_dir, state.global.filter_string);
          }),
-         map((response: { region_name: string, total_rows: number, rows: L4MarketPerf[] }) => {
+         map((response: { region_name: string, total_row_count: number, rows: L4MarketPerf[] }) => {
             return PageActions.setPerf({
-               regionName: response.region_name,
-               totalRows: response.total_rows,
+               region_name: response.region_name,
+               total_row_count: response.total_row_count,
                rows: response.rows,
             });
          }),

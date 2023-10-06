@@ -17,14 +17,14 @@ import { RegionPerf } from './store/regions.model';
 })
 export class RegionsComponent {
    private subscription: Subscription | undefined;
-   isLoading = false;
-   totalRowCount = 0;
-   perfRows: RegionPerf[] = [];
+   is_loading = false;
+   total_row_count = 0;
+   perf_rows: RegionPerf[] = [];
    page_size = 10;
-   pageNumber = 1;
-   pageOptions = [10, 25, 50];
+   page_number = 1;
+   page_options = [10, 25, 50];
 
-   displayedColumns: string[] = [
+   displayed_columns: string[] = [
       'name',
       'setup_attempts',
       'equipment_blocks',
@@ -41,11 +41,11 @@ export class RegionsComponent {
    ngOnInit(): void {
       this.subscription = this.store.subscribe(
          (state) => {
-            this.isLoading = (state.browse.regions.status === "loading");
-            this.totalRowCount = state.browse.regions.totalRowCount;
-            this.perfRows = state.browse.regions.perfRows;
+            this.is_loading = (state.browse.regions.status === "loading");
+            this.total_row_count = state.browse.regions.total_row_count;
+            this.perf_rows = state.browse.regions.perf_rows;
             this.page_size = state.global.page_size;
-            this.pageNumber = state.browse.regions.pageNumber;
+            this.page_number = state.browse.regions.page_number;
         }
       );
       this.store.dispatch(PageActions.fetchPerf());
@@ -59,8 +59,8 @@ export class RegionsComponent {
 
 
    onPageChanged(event: PageEvent) {
-      if (this.pageNumber !== event.pageIndex) {
-         this.store.dispatch(PageActions.setPageNumber({ pageNumber: event.pageIndex }));
+      if (this.page_number !== event.pageIndex + 1) {
+         this.store.dispatch(PageActions.setPageNumber({ page_number: event.pageIndex + 1}));
       }
       if (this.page_size !== event.pageSize) {
          this.store.dispatch(GlobalActions.setPageSize({ page_size: event.pageSize }));

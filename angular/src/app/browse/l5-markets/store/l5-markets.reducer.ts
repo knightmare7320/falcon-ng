@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 
-import { L5MarketPerf } from "./l5-markets.model";
+import { L5MarketPerf } from "./l5-market.model";
 import * as fromReducer from "../../store/browse.reducer";
 import * as fromActions from "./l5-markets.actions";
 

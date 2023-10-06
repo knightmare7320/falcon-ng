@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
-import { L4MarketPerf } from './l4-market.model';
+import { OrgClusterPerf } from './org-cluster.model';
 
-const API_URL = environment.apiUrl + '/l4_markets';
+const API_URL = environment.apiUrl + '/org_clusters';
 
 @Injectable({ providedIn: 'root' })
-export class L4MarketsService {
+export class OrgClustersService {
    constructor(
       private httpClient: HttpClient
    ) {}
 
-   getPerf(region_id: string, page_number = 1, page_size= 10, order_by = 'name', order_dir = 'asc', filter_string='') {
+   getPerf(l5_market_id: string, page_number = 1, page_size= 10, order_by = 'name', order_dir = 'asc', filter_string='') {
       const params = {
          page_number,
          page_size,
@@ -21,8 +21,8 @@ export class L4MarketsService {
          filter_string,
       }
       return this.httpClient
-         .get<{region_name: string, total_row_count: number, rows: L4MarketPerf[]}>(
-            `${API_URL}/perf/${region_id}`, 
+         .get<{l4_market_id: string, l5_market_name: string, total_row_count: number, rows: OrgClusterPerf[]}>(
+            `${API_URL}/perf/${l5_market_id}`, 
             { params },
          );
    }

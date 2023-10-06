@@ -23,7 +23,7 @@ BEGIN
    SET in_FILTER_STR = lower(coalesce(trim(in_FILTER_STR), ''));  
 
 
-   SELECT   count(*) total_records
+   SELECT   count(*) total_row_count
    FROM     equipment.switches
    WHERE    (in_EQUIPMENT_VENDOR_ID = -1 OR equipment_vendor_id  = in_EQUIPMENT_VENDOR_ID)
    AND      lower(switch_name) like CONCAT('%', in_FILTER_STR, '%');

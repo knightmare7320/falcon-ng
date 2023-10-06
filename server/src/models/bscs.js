@@ -45,7 +45,7 @@ class Bscs {
             }
             result(null, {
                "switch_name": results[0][0].switch_name,
-               "total_records": results[0][0].total_records,
+               "total_row_count": results[0][0].total_row_count,
                "rows": results[1]
             });
          }

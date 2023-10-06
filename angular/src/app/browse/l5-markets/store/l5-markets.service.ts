@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
-import { L5MarketPerf } from './l5-markets.model';
+import { L5MarketPerf } from './l5-market.model';
 
 const API_URL = environment.apiUrl + '/l5_markets';
 
@@ -21,7 +21,7 @@ export class L5MarketsService {
          filter_string,
       }
       return this.httpClient
-         .get<{region_id: string, l4_market_name: string, total_rows: number, rows: L5MarketPerf[]}>(
+         .get<{region_id: string, l4_market_name: string, total_row_count: number, rows: L5MarketPerf[]}>(
             `${API_URL}/perf/${l4_market_id}`, 
             { params },
          );
