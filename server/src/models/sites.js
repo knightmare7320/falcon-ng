@@ -1,14 +1,17 @@
 class Sites {
-   static get(db, params, result) {
+   static getPerf(db, params, result) {
       const sqlStr = 'CALL gui.get_sites(?, ?, ?, ?, ?, ?, ?)';
-      const sqlParams = [ params.filter_on,
-         params.filter_id,
+      const sqlParams = [ 
+         params.group_type,
+         params.group_id,
+         params.filter_string,
          params.order_by,
          params.order_dir,
          params.page_number,
          params.page_size,
-         'site',
       ];
+      console.log(sqlStr);
+      console.log(sqlParams);
       db.query(
          sqlStr,
          sqlParams,
@@ -19,7 +22,7 @@ class Sites {
                return;
             }
             result(null, {
-               "total_records": results[0][0].total_records,
+               "total_row_count": results[0][0].total_row_count,
                "rows": results[1]
             });
          }

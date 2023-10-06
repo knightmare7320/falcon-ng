@@ -8,7 +8,7 @@
       <table mat-table matSort class="mat-elevation-z8" [dataSource]="perf_rows" (matSortChange)="onSortChanged($event)"
          *ngIf="perf_rows.length > 0">
          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Region</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>L4 Market</th>
             <td mat-cell *matCellDef="let element"> 
                <a routerLink="/browse/l4_market/{{element.l4_market_id}}">{{ element.l4_market_name }}</a>
             </td>

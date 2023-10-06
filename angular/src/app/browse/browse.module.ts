@@ -15,9 +15,11 @@ import { RegionsComponent } from './regions/regions.component';
 import { L4MarketsComponent } from './l4-markets/l4-markets.component';
 import { L5MarketsComponent } from './l5-markets/l5-markets.component';
 import { OrgClustersComponent } from './org-clusters/org-clusters.component';
+import { SitesComponent } from './sites/sites.component';
 import { L4MarketsEffects } from './l4-markets/store/l4-markets.effects';
 import { L5MarketsEffects } from './l5-markets/store/l5-markets.effects';
 import { OrgClustersEffects } from './org-clusters/store/org-clusters.effects';
+import { SitesEffects } from './sites/store/sites.effects';
 
 @NgModule({
    declarations: [
@@ -25,6 +27,7 @@ import { OrgClustersEffects } from './org-clusters/store/org-clusters.effects';
       L4MarketsComponent,
       L5MarketsComponent,
       OrgClustersComponent,
+      SitesComponent,
    ],
    imports: [
       CommonModule,
@@ -38,6 +41,7 @@ import { OrgClustersEffects } from './org-clusters/store/org-clusters.effects';
          L4MarketsEffects,
          L5MarketsEffects,
          OrgClustersEffects,
+         SitesEffects,
       ])
    ]
 })

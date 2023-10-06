@@ -5,6 +5,7 @@ $$
 CREATE PROCEDURE gui.get_sites(
    IN in_FILTER_ON   VARCHAR(50),
    IN in_FILTER_ID   INT,
+   IN in_FILTER_STR  VARCHAR(50),
    IN in_ORDER_BY    VARCHAR(50),
    IN in_ORDER_DIR   VARCHAR(10),
    IN in_PAGE_NUMBER INT,
