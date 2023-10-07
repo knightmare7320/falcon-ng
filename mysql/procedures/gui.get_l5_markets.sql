@@ -1,22 +1,18 @@
-DROP PROCEDURE IF EXISTS gui.get_switches;
+DROP PROCEDURE IF EXISTS gui.get_l5_markets;
 
 DELIMITER $$
 $$
-CREATE PROCEDURE gui.get_switches(
-   IN in_EQUIPMENT_VENDOR_ID INT
+CREATE PROCEDURE gui.get_l5_markets(
+   IN in_L4_MARKET_ID INT
 )
 BEGIN
-   SET in_EQUIPMENT_VENDOR_ID = IFNULL(in_EQUIPMENT_VENDOR_ID, -1);
+   SET in_L4_MARKET_ID = IFNULL(in_L4_MARKET_ID, -1);
 
-   select   sw.switch_id
-          , sw.switch_name 
-          , v.equipment_vendor_id
-          , v.equipment_vendor_name
-   from     equipment.switches sw
-          , equipment.equipment_vendors v
-   WHERE    sw.equipment_vendor_id = v.equipment_vendor_id
-   AND      in_EQUIPMENT_VENDOR_ID = -1 OR v.equipment_vendor_id  = in_EQUIPMENT_VENDOR_ID
-   order by switch_name;
+   select   l5_market_id
+          , l5_market_name 
+   from     locations.l5_markets 
+   where    in_L4_MARKET_ID = -1 OR l4_market_id = in_L4_MARKET_ID
+   order by l5_market_name;
 END
 $$
 DELIMITER ;
