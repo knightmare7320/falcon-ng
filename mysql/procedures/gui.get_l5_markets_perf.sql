@@ -2,7 +2,7 @@ DROP PROCEDURE IF EXISTS gui.get_l5_markets_perf;
 
 DELIMITER $$
 $$
-CREATE DEFINER=`root`@`%` PROCEDURE `gui`.`get_l5_markets_perf`(
+CREATE PROCEDURE gui.get_l5_markets_perf (
    IN in_L4_MARKET_ID INT,
    IN in_FILTER_STR   VARCHAR(50),
    IN in_ORDER_BY     VARCHAR(50),
@@ -22,16 +22,20 @@ BEGIN
    SET in_FILTER_STR = lower(coalesce(trim(in_FILTER_STR), ''));
 
 
-   SELECT   a.region_id
-          , a.l4_market_name
-          , count(b.l5_market_id) total_record_count
-   FROM     locations.l4_markets a 
-            LEFT JOIN locations.l5_markets b 
-                   ON a.l4_market_id = b.l4_market_id
-   WHERE    a.l4_market_id = in_L4_MARKET_ID
-   AND      lower(b.l5_market_name) like CONCAT('%', in_FILTER_STR, '%')
-   GROUP BY a.region_id
-          , a.l4_market_name;
+   SELECT   r.region_id           parent_id
+          , r.region_name         parent_name
+          , l4.l4_market_id       group_id
+          , l4.l4_market_name     group_name
+          , count(l5.l5_market_id) total_record_count
+   FROM     locations.regions r 
+            join      locations.l4_markets l4 ON l4.region_id    = r.region_id
+            LEFT JOIN locations.l5_markets l5 ON l5.l4_market_id = l4.l4_market_id
+   WHERE    l4.l4_market_id = in_L4_MARKET_ID
+   AND      lower(l5.l5_market_name) like CONCAT('%', in_FILTER_STR, '%')
+   GROUP BY r.region_id
+          , r.region_name
+          , l4.l4_market_id
+          , l4.l4_market_name;
      
    SELECT   l5_market_id
           , l5_market_name 

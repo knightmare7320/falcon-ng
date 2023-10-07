@@ -21,7 +21,7 @@ export class OrgClustersService {
          filter_string,
       }
       return this.httpClient
-         .get<{l4_market_id: string, l5_market_name: string, total_row_count: number, rows: OrgClusterPerf[]}>(
+         .get<{parent_id: string, parent_name: string, group_id: string, group_name: string, total_row_count: number, rows: OrgClusterPerf[]}>(
             `${API_URL}/perf/${l5_market_id}`, 
             { params },
          );

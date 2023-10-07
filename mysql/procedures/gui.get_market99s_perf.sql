@@ -27,14 +27,15 @@ BEGIN
    );
 
 
-   SELECT   a.region_name
+   SELECT   a.region_id   group_id
+          , a.region_name group_name
           , count(b.market99_id) total_row_count
    FROM     locations.regions a 
-            LEFT JOIN locations.market99s b 
-                   ON a.region_id = b.region_id
+            LEFT JOIN locations.market99s b ON a.region_id = b.region_id
    WHERE    a.REGION_ID = in_REGION_ID
    AND      lower(b.market99_name) like CONCAT('%', in_FILTER_STR, '%')
-   GROUP BY a.region_name;
+   GROUP BY a.region_id
+          , a.region_name;
    
    SELECT   market99_id
           , market99_name 

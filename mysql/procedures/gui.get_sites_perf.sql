@@ -54,6 +54,7 @@ BEGIN
   
    select   s.site_id
           , s.cascade_code  
+          , s.site_name
           , null setup_attempts
           , null equipment_blocks
           , null access_failures

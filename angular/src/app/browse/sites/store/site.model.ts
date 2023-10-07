@@ -1,6 +1,6 @@
 export interface SitePerf {
    site_id: string;
-   cascade_code_id: string;
+   cascade_code: string;
    site_name: string;
    setup_attempts: number;
    equipment_blocks: number;

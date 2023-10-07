@@ -6,8 +6,8 @@ import * as fromActions from "./l4-markets.actions";
 
 export interface State {
    status: string,
-   region_id: string,
-   region_name: string,
+   group_id: string,
+   group_name: string,
    total_row_count: number,
    perf_rows: L4MarketPerf[],
    page_number: number,
@@ -15,8 +15,8 @@ export interface State {
 
 const initialState: State = {
    status: 'ok',
-   region_id: '',
-   region_name: '',
+   group_id: '',
+   group_name: '',
    total_row_count: 0,
    perf_rows: [],
    page_number: 1,
@@ -33,18 +33,18 @@ export const reducer = createReducer(
       (state: State, {region_id}) => {
          return {
             ...state,
-            region_id, 
+            group_id: region_id, 
             status: 'loading',
          }
       }
    ),
    on(
       fromActions.setPerf,
-      (state: State, {region_name, total_row_count, rows }) => {
+      (state: State, {group_name, total_row_count, rows }) => {
          return {
             ...state,
             status: 'ok',
-            region_name,
+            group_name,
             total_row_count,
             perf_rows: [...rows],
          }

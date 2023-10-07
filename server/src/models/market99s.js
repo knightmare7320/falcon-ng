@@ -40,7 +40,8 @@ class market99s {
                return;
             }
             result(null, {
-               "region_name": results[0][0].region_name,
+               "group_id": results[0][0].group_id,
+               "group_name": results[0][0].group_name,
                "total_row_count": results[0][0].total_row_count,
                "rows": results[1]
             });

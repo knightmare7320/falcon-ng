@@ -21,7 +21,7 @@ export class RegionsService {
          filter_string,
       }
       return this.httpClient
-         .get<{total_row_count: number, rows: RegionPerf[]}>(
+         .get<{parent_id: string, parent_name: string, group_id: string, group_name: string, total_row_count: number, rows: RegionPerf[]}>(
             `${API_URL}/perf`, 
             { params },
          );

@@ -40,8 +40,10 @@ class orgClusters {
                return;
             }
             result(null, {
-               "l4_market_id": results[0][0].l4_market_id,
-               "l5_market_name": results[0][0].l5_market_name,
+               "parent_id": results[0][0].parent_id,
+               "parent_name": results[0][0].parent_name,
+               "group_id": results[0][0].group_id,
+               "group_name": results[0][0].group_name,
                "total_row_count": results[0][0].total_row_count,
                "rows": results[1]
             });

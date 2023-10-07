@@ -30,12 +30,14 @@ export class L5MarketsEffects {
             this.store //.select('orchestration', 'hosts')
          ),
          switchMap(([action, state]) => {
-            return this.service.getPerf(state.browse.l5Markets.l4_market_id, state.browse.l5Markets.page_number, state.global.page_size, state.global.order_by, state.global.order_dir, state.global.filter_string);
+            return this.service.getPerf(state.browse.l5Markets.group_id, state.browse.l5Markets.page_number, state.global.page_size, state.global.order_by, state.global.order_dir, state.global.filter_string);
          }),
-         map((response: { region_id:string, l4_market_name: string, total_row_count: number, rows: L5MarketPerf[] }) => {
+         map((response: { parent_id:string, parent_name: string, group_id: string, group_name: string, total_row_count: number, rows: L5MarketPerf[] }) => {
             return PageActions.setPerf({
-               region_id: response.region_id,
-               l4_market_name: response.l4_market_name,
+               parent_id: response.parent_id,
+               parent_name: response.parent_name,
+               group_id: response.group_id,
+               group_name: response.group_name,
                total_row_count: response.total_row_count,
                rows: response.rows,
             });

@@ -27,8 +27,10 @@ export class L5MarketsComponent implements OnInit {
    page_options = [10, 25, 50];
 
    perf_rows: L5MarketPerf[] = [];
-   region_id = "";
-   l4_market_name = "";
+   parent_id = "";
+   parent_name = "";
+   group_id = "";
+   group_name = "";
    
    displayed_columns: string[] = [
       'name',
@@ -50,13 +52,15 @@ export class L5MarketsComponent implements OnInit {
       this.storeListener = this.store.subscribe(
          (state) => {
             this.is_loading      = (state.browse.l5Markets.status === "loading");
-            this.region_id       = state.browse.l5Markets.region_id;
-            this.l4_market_name  = state.browse.l5Markets.l4_market_name;
+            this.parent_id       = state.browse.l5Markets.parent_id;
+            this.parent_name     = state.browse.l5Markets.parent_name;
+            this.group_id        = state.browse.l5Markets.group_id;
+            this.group_name      = state.browse.l5Markets.group_name;
             this.total_row_count = state.browse.l5Markets.total_row_count;
             this.perf_rows       = state.browse.l5Markets.perf_rows;
             this.page_size       = state.global.page_size;
             this.page_number     = state.browse.l5Markets.page_number;
-            this.titleService.setTitle(`Falcon L4 Market - ${this.l4_market_name}`);
+            this.titleService.setTitle(`Falcon L4 Market - ${this.group_name}`);
          }
       );
 

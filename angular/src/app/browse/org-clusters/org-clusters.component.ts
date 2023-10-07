@@ -27,8 +27,10 @@ export class OrgClustersComponent implements OnInit {
    page_options = [10, 25, 50];
 
    perf_rows: OrgClusterPerf[] = [];
-   l4_market_id = "";
-   l5_market_name = "";
+   parent_id = "";
+   parent_name = "";
+   group_id = "";
+   group_name = "";
    
    displayed_columns: string[] = [
       'name',
@@ -50,13 +52,15 @@ export class OrgClustersComponent implements OnInit {
       this.storeListener = this.store.subscribe(
          (state) => {
             this.is_loading      = (state.browse.orgClusters.status === "loading");
-            this.l4_market_id    = state.browse.orgClusters.l4_market_id;
-            this.l5_market_name  = state.browse.orgClusters.l5_market_name;
+            this.parent_id       = state.browse.orgClusters.parent_id;
+            this.parent_name     = state.browse.orgClusters.parent_name;
+            this.group_id        = state.browse.orgClusters.group_id;
+            this.group_name      = state.browse.orgClusters.group_name;
             this.total_row_count = state.browse.orgClusters.total_row_count;
             this.perf_rows       = state.browse.orgClusters.perf_rows;
             this.page_size       = state.global.page_size;
             this.page_number     = state.browse.orgClusters.page_number;
-            this.titleService.setTitle(`Falcon L5 Market: ${this.l5_market_name}`);
+            this.titleService.setTitle(`Falcon L5 Market: ${this.group_name}`);
          }
       );
 

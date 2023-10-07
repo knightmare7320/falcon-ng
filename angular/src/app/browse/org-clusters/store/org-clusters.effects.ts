@@ -30,12 +30,14 @@ export class OrgClustersEffects {
             this.store //.select('orchestration', 'hosts')
          ),
          switchMap(([action, state]) => {
-            return this.service.getPerf(state.browse.orgClusters.l5_market_id, state.browse.orgClusters.page_number, state.global.page_size, state.global.order_by, state.global.order_dir, state.global.filter_string);
+            return this.service.getPerf(state.browse.orgClusters.group_id, state.browse.orgClusters.page_number, state.global.page_size, state.global.order_by, state.global.order_dir, state.global.filter_string);
          }),
-         map((response: { l4_market_id:string, l5_market_name: string, total_row_count: number, rows: OrgClusterPerf[] }) => {
+         map((response: { parent_id:string, parent_name: string, group_id: string, group_name: string, total_row_count: number, rows: OrgClusterPerf[] }) => {
             return PageActions.setPerf({
-               l4_market_id: response.l4_market_id,
-               l5_market_name: response.l5_market_name,
+               parent_id: response.parent_id,
+               parent_name: response.parent_name,
+               group_id: response.group_id,
+               group_name: response.group_name,
                total_row_count: response.total_row_count,
                rows: response.rows,
             });

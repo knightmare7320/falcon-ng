@@ -27,16 +27,20 @@ BEGIN
    );
 
 
-   SELECT   a.l4_market_id
-          , a.l5_market_name
-          , count(b.org_cluster_id) total_row_count
-   FROM     locations.l5_markets a 
-            LEFT JOIN locations.org_clusters b 
-                   ON a.l5_market_id = b.l5_market_id
-   WHERE    a.l5_market_id = in_L5_MARKET_ID
-   AND      lower(b.org_cluster_name) like CONCAT('%', in_FILTER_STR, '%')
-   GROUP BY a.l4_market_id
-          , a.l5_market_name;
+   SELECT   l4.l4_market_id    parent_id
+          , l4.l4_market_name  parent_name
+          , l5.l5_market_id    group_id
+          , l5.l5_market_name  group_name
+          , count(l5.l5_market_id) total_record_count
+   FROM     locations.l4_markets l4
+            JOIN      locations.l5_markets   l5 ON l5.l4_market_id   = l4.l4_market_id
+            left join locations.org_clusters oc ON oc.l5_market_id = l5.l5_market_id
+   WHERE    l5.l5_market_id = in_L5_MARKET_ID
+   AND      lower(oc.org_cluster_name) like CONCAT('%', in_FILTER_STR, '%')
+   GROUP BY l4.l4_market_id
+          , l4.l4_market_name
+          , l5.l5_market_id
+          , l5.l5_market_name;               
    
    SELECT   org_cluster_id
           , org_cluster_name 

@@ -21,7 +21,7 @@ export class L4MarketsService {
          filter_string,
       }
       return this.httpClient
-         .get<{region_name: string, total_row_count: number, rows: L4MarketPerf[]}>(
+         .get<{parent_id: string, parent_name: string, group_id: string, group_name: string, total_row_count: number, rows: L4MarketPerf[]}>(
             `${API_URL}/perf/${region_id}`, 
             { params },
          );

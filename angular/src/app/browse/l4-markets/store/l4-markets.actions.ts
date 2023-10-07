@@ -9,7 +9,7 @@ export const fetchPerf = createAction(
 
 export const setPerf = createAction(
    "[l4 markets] Set Perf",
-   props<{ region_name: string, total_row_count: number, rows: L4MarketPerf[] }>(),
+   props<{ group_id: string, group_name: string, total_row_count: number, rows: L4MarketPerf[] }>(),
 );
 
 export const setPageNumber = createAction(

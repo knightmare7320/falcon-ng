@@ -60,7 +60,6 @@ export class SitesComponent implements OnInit {
             this.group_name      = state.browse.sites.group_name;
             this.group_type      = state.browse.sites.group_type;
             this.group_id        = state.browse.sites.group_id;
-            this.l5_market_name  = state.browse.orgClusters.l5_market_name;
             this.total_row_count = state.browse.sites.total_row_count;
             this.perf_rows       = state.browse.sites.perf_rows;
             this.page_size       = state.global.page_size;

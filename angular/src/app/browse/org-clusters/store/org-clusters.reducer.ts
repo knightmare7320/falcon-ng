@@ -6,9 +6,10 @@ import * as fromActions from "./org-clusters.actions";
 
 export interface State {
    status: string,
-   l4_market_id: string,
-   l5_market_id: string,
-   l5_market_name: string,
+   parent_id: string,
+   parent_name: string
+   group_id: string,
+   group_name: string,
    total_row_count: number,
    perf_rows: OrgClusterPerf[],
    page_number: number,
@@ -16,9 +17,10 @@ export interface State {
 
 const initialState: State = {
    status: 'ok',
-   l4_market_id: '',
-   l5_market_id: '',
-   l5_market_name: '',
+   parent_id: '',
+   parent_name: '',
+   group_id: '',
+   group_name: '',
    total_row_count: 0,
    perf_rows: [],
    page_number: 1,
@@ -35,19 +37,20 @@ export const reducer = createReducer(
       (state: State, {l5_market_id}) => {
          return {
             ...state,
-            l5_market_id, 
+            group_id: l5_market_id, 
             status: 'loading',
          }
       }
    ),
    on(
       fromActions.setPerf,
-      (state: State, {l4_market_id, l5_market_name, total_row_count, rows }) => {
+      (state: State, {parent_id, parent_name, group_name, total_row_count, rows }) => {
          return {
             ...state,
             status: 'ok',
-            l4_market_id,
-            l5_market_name,
+            parent_id,
+            parent_name,
+            group_name,
             total_row_count,
             perf_rows: [...rows],
          }

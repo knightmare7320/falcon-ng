@@ -9,7 +9,7 @@ export const fetchPerf = createAction(
 
 export const setPerf = createAction(
    "[org clusters] Set Perf",
-   props<{ l4_market_id: string, l5_market_name: string, total_row_count: number, rows: OrgClusterPerf[] }>(),
+   props<{ parent_id: string, parent_name: string, group_id: string, group_name: string, total_row_count: number, rows: OrgClusterPerf[] }>(),
 );
 
 export const setPageNumber = createAction(

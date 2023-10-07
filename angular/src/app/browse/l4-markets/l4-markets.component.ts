@@ -27,7 +27,8 @@ export class L4MarketsComponent implements OnInit {
    page_options = [10, 25, 50];
 
    perf_rows: L4MarketPerf[] = [];
-   region_name = "";
+   group_id = "";
+   group_name = "";
    
    displayed_columns: string[] = [
       'name',
@@ -48,13 +49,14 @@ export class L4MarketsComponent implements OnInit {
    ngOnInit(): void {
       this.storeListener = this.store.subscribe(
          (state) => {
-            this.is_loading = (state.browse.regions.status === "loading");
-            this.region_name = state.browse.l4Markets.region_name;
+            this.is_loading      = (state.browse.l4Markets.status === "loading");
+            this.group_id        = state.browse.l4Markets.group_id;
+            this.group_name      = state.browse.l4Markets.group_name;
             this.total_row_count = state.browse.l4Markets.total_row_count;
             this.perf_rows = state.browse.l4Markets.perf_rows;
             this.page_size = state.global.page_size;
             this.page_number = state.browse.l4Markets.page_number;
-            this.titleService.setTitle(`Falcon Region - ${this.region_name}`);
+            this.titleService.setTitle(`Falcon Region - ${this.group_name}`);
          }
       );
 

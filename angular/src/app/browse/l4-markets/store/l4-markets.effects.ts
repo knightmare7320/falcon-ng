@@ -30,11 +30,12 @@ export class L4MarketsEffects {
             this.store //.select('orchestration', 'hosts')
          ),
          switchMap(([action, state]) => {
-            return this.service.getPerf(state.browse.l4Markets.region_id, state.browse.l4Markets.page_number, state.global.page_size, state.global.order_by, state.global.order_dir, state.global.filter_string);
+            return this.service.getPerf(state.browse.l4Markets.group_id, state.browse.l4Markets.page_number, state.global.page_size, state.global.order_by, state.global.order_dir, state.global.filter_string);
          }),
-         map((response: { region_name: string, total_row_count: number, rows: L4MarketPerf[] }) => {
+         map((response: { group_id: string, group_name: string, total_row_count: number, rows: L4MarketPerf[] }) => {
             return PageActions.setPerf({
-               region_name: response.region_name,
+               group_id: response.group_id,
+               group_name: response.group_name,
                total_row_count: response.total_row_count,
                rows: response.rows,
             });
