@@ -9,7 +9,7 @@ export const fetchPerf = createAction(
 
 export const setPerf = createAction(
    "[sites] Set Perf",
-   props<{ total_row_count: number, rows: SitePerf[] }>(),
+   props<{ group_type: string, group_name: string, group_id: string, parent_id: string, parent_name: string, total_row_count: number, rows: SitePerf[] }>(),
 );
 
 export const setPageNumber = createAction(

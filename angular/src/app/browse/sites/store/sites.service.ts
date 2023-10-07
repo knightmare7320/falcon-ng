@@ -23,7 +23,7 @@ export class SitesService {
          filter_string,
       }
       return this.httpClient
-         .get<{l4_market_id: string, l5_market_name: string, total_row_count: number, rows: SitePerf[]}>(
+         .get<{group_type: string, group_id: string, group_name: string, parent_id: string, parent_name: string, total_row_count: number, rows: SitePerf[]}>(
             `${API_URL}/perf`, 
             { params },
          );

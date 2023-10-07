@@ -7,6 +7,7 @@ import * as fromActions from "./sites.actions";
 export interface State {
    status: string,
    parent_id: string,
+   parent_name: string,
    group_name: string,
    group_type: string,
    group_id: string,
@@ -18,6 +19,7 @@ export interface State {
 const initialState: State = {
    status: 'ok',
    parent_id: '',
+   parent_name: '',
    group_name: '',
    group_type: '',
    group_id: '',
@@ -45,10 +47,15 @@ export const reducer = createReducer(
    ),
    on(
       fromActions.setPerf,
-      (state: State, {total_row_count, rows }) => {
+      (state: State, {group_type, group_id, group_name, parent_id, parent_name, total_row_count, rows }) => {
          return {
             ...state,
             status: 'ok',
+            group_type,
+            group_id,
+            group_name,
+            parent_id,
+            parent_name,
             total_row_count,
             perf_rows: [...rows],
          }

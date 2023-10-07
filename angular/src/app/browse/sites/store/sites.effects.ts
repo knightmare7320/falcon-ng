@@ -32,8 +32,13 @@ export class SitesEffects {
          switchMap(([action, state]) => {
             return this.service.getPerf(state.browse.sites.group_type, state.browse.sites.group_id, state.browse.sites.page_number, state.global.page_size, state.global.order_by, state.global.order_dir, state.global.filter_string);
          }),
-         map((response: { total_row_count: number, rows: SitePerf[] }) => {
+         map((response: { group_type: string, group_id: string, group_name: string, parent_id: string, parent_name: string, total_row_count: number, rows: SitePerf[] }) => {
             return PageActions.setPerf({
+               group_type: response.group_type,
+               group_id: response.group_id,
+               group_name: response.group_name,
+               parent_id: response.parent_id,
+               parent_name: response.parent_name, 
                total_row_count: response.total_row_count,
                rows: response.rows,
             });

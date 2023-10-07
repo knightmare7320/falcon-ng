@@ -21,6 +21,7 @@ export class SitesComponent implements OnInit {
    private routeListener: Subscription | undefined;
    private storeListener: Subscription | undefined;
    parent_id = '';
+   parent_name = '';
    group_id = '';
    group_type = '';
    group_name = '';
@@ -55,6 +56,7 @@ export class SitesComponent implements OnInit {
          (state) => {
             this.is_loading      = (state.browse.sites.status === "loading");
             this.parent_id       = state.browse.sites.parent_id;
+            this.parent_name     = state.browse.sites.parent_name;
             this.group_name      = state.browse.sites.group_name;
             this.group_type      = state.browse.sites.group_type;
             this.group_id        = state.browse.sites.group_id;
