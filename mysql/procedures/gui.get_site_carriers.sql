@@ -16,7 +16,7 @@ BEGIN
         , ct.carrier_type_name   
         , cd.sort_key 
         , c.equipment_status_id 
-        , es.equipment_status_name carrier_status_name
+        , es.equipment_status_name
         , c.on_air_date 
         , c.created_by_name 
         , c.create_date 

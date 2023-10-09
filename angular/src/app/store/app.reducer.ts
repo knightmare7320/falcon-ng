@@ -4,13 +4,13 @@ import * as fromGlobal from "./global/global.reducer";
 import { Message } from './messages/message.model';
 
 export interface AppState {
+   global: fromGlobal.State;
    auth: fromAuth.State;
    messages: Message[];
-   global: fromGlobal.State;
 }
 
 export const reducers = {
+   global: fromGlobal.reducer,
    auth: fromAuth.reducer,
    messages: fromMessages.reducer,
-   global: fromGlobal.reducer,
 };

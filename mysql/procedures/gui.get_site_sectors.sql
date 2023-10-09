@@ -12,8 +12,8 @@ BEGIN
         , se.height_agl 
         , se.mechanical_tilt 
         , se.antenna_id 
-        , ev.equipment_vendor_name antenna_vendor_name
-        , ev.equipment_vendor_name antenna_vendor_name
+        , ev.equipment_vendor_id
+        , ev.equipment_vendor_name
         , a.antenna_name 
         , a.horizontal_bw
         , a.vertical_bw 
