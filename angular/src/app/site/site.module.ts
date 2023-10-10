@@ -8,14 +8,16 @@ import { AngularMaterialModule } from '../angular-material.module';
 import { SharedModule } from "../shared/shared.module";
 
 import { SiteRoutingModule } from './site-routing.module';
-// import { reducer } from './store/site.reducer';
-// import { SiteEffects } from './store/site.effects';
+import { reducer } from './store/site.reducer';
+import { SiteEffects } from './store/site.effects';
 
 import { SiteComponent } from './site.component';
+import { SiteInfoComponent } from './site-info/site-info.component';
 
 @NgModule({
    declarations: [
       SiteComponent,
+      SiteInfoComponent,
    ],
    imports: [
       CommonModule,
@@ -23,10 +25,10 @@ import { SiteComponent } from './site.component';
       AngularMaterialModule,
       RouterModule,
       SharedModule,
-      // StoreModule.forFeature('site', reducer),
-      // EffectsModule.forFeature([
-      //    SiteEffects,
-      // ])
+      StoreModule.forFeature('site', reducer),
+      EffectsModule.forFeature([
+         SiteEffects,
+      ]),
    ]
 })
 export default class BrowseModule{};

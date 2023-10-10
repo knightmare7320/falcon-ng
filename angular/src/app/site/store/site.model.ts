@@ -71,7 +71,7 @@ export interface Sector {
    mechanical_tilt: number, 
    antenna_id: number, 
    equipment_vendor_id: number,
-   equipment_vendor_name: string, 
+   antenna_vendor_name: string, 
    antenna_name: string,  
    horizontal_bw: number,
    vertical_bw: number, 
