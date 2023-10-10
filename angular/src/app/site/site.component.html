@@ -5,7 +5,11 @@
    <mat-card-content>
       Site:<br>
       <app-site-info [site]="site"></app-site-info>
-      
+
+      <div class="map-container">
+         <app-site-map [latitude]="site.latitude" [longitude]="site.longitude"></app-site-map>
+      </div>
+
       Equipment:
    </mat-card-content>
 </mat-card>

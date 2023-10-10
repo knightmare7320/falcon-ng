@@ -15,6 +15,7 @@ const market99sRoutes = require("./routes/market99s");
 const mtasRoutes = require("./routes/mtas");
 const switchesRoutes = require("./routes/switches");
 const bscsRoutes = require("./routes/bscs");
+const geoRoutes = require("./routes/geo");
 
 //connect to db and stuff the object into the app
 const dbPool = mysql.createPool({
@@ -55,6 +56,7 @@ app.use("/api/market99s", market99sRoutes);
 app.use("/api/mtas", mtasRoutes);
 app.use("/api/switches", switchesRoutes);
 app.use("/api/bscs", bscsRoutes);
+app.use("/api/geo", geoRoutes);
 
 app.use((req, res,next) => {
    res.sendFile(path.join(__dirname, "public", "index.html"));
