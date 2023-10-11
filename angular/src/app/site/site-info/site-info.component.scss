@@ -4,6 +4,15 @@ table {
 th {
    text-align: left;
    background-color: lightyellow;
+   vertical-align: text-top;
+}
+td {
+   padding-left: 10px;
+}
+td.cascade_code {
+   font-weight: bold; 
+   font-size:larger;
+   color: darkred;
 }
 td.by{
    font-size: smaller;

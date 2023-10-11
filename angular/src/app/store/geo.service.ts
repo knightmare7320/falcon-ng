@@ -1,0 +1,40 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { environment } from 'src/environments/environment';
+
+const API_URL = environment.apiUrl + '/geo';
+
+interface GeoSite {
+   cascade_code: string,
+   latitude: number,
+   longitude: number,
+}
+
+interface GeoSector{
+   cascade_code: string,
+   latitude: number,
+   longitude: number,
+   sector_number: number,
+   azimuth: number,
+   horizontal_bw: number,
+}
+
+@Injectable({ providedIn: 'root' })
+export class GeoService {
+   constructor(
+      private httpClient: HttpClient
+   ) {}
+
+   getSites(X: number, Y: number, Z: number) {
+      return this.httpClient.get<GeoSite>(
+         `${API_URL}/sites/${Z}/${X}/${Y}`
+      );
+   }
+
+   getSectors(X: number, Y: number, Z: number) {
+      return this.httpClient.get<GeoSector[]>(
+         `${API_URL}/sectors/${Z}/${X}/${Y}`
+      );
+   }
+}
