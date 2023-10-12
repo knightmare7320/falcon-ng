@@ -50,10 +50,9 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
    private initializeMap() {
       console.log('init', this.latitude, this.longitude);
       const baseMapURl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-      this.map = L.map('map-page', {dragging: false, zoomControl: false, scrollWheelZoom: false});
+      this.map = L.map('map-page');
       this.map.setView({lat: this.latitude, lng: this.longitude}, 17);
       L.tileLayer(baseMapURl).addTo(this.map);
       // this.sitesLayer.setMap(this.map, baseLayer, 8, 10);
-
    }
 }
