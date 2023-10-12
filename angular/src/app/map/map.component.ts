@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, Input } from "@angular/core";
-import { Router, ActivatedRoute, Params } from "@angular/router";
+import { ActivatedRoute, Params } from "@angular/router";
 import { Subscription } from "rxjs";
-import * as L from 'leaflet';
+import * as Leaflet from 'leaflet';
 // import { MapLayerSitesService } from '../../components/geo/maplayer-sites.service';
 
+Leaflet.Icon.Default.imagePath = 'assets/';
 @Component({
    selector: 'app-map',
    templateUrl: './map.component.html',
@@ -13,7 +14,8 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
    private routeListener: Subscription | undefined;
    @Input() latitude: number = 42.005450;
    @Input() longitude: number = -87.809870;
-   private map!: L.Map;
+   @Input() zoom: number = 17;
+   private map!: Leaflet.Map;
    
    constructor(
       private route: ActivatedRoute,
@@ -21,7 +23,8 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
    ) {}
 
    ngOnInit(): void {
-      this.routeListener = this.route.queryParams.subscribe(
+      this.routeListener = this.route.queryParams
+         .subscribe(
          (params: Params) => {
             const latitude = params["latitude"];
             const longitude = params["longitude"];
@@ -50,9 +53,13 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
    private initializeMap() {
       console.log('init', this.latitude, this.longitude);
       const baseMapURl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-      this.map = L.map('map-page');
-      this.map.setView({lat: this.latitude, lng: this.longitude}, 17);
-      L.tileLayer(baseMapURl).addTo(this.map);
+      this.map = Leaflet.map('map-page', {layers: [
+         Leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+         })
+       ]});
+      this.map.setView({lat: this.latitude, lng: this.longitude, }, 17);
+      Leaflet.tileLayer(baseMapURl).addTo(this.map);
       // this.sitesLayer.setMap(this.map, baseLayer, 8, 10);
    }
 }

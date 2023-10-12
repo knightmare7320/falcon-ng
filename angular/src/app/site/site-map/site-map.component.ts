@@ -1,7 +1,8 @@
 import { Component, OnChanges, AfterViewInit, Input, SimpleChanges } from "@angular/core";
-import * as L from 'leaflet';
+import * as Leaflet from 'leaflet';
 // import { MapLayerSitesService } from '../../components/geo/maplayer-sites.service';
 
+Leaflet.Icon.Default.imagePath = 'assets/';
 @Component({
    selector: 'app-site-map',
    templateUrl: './site-map.component.html',
@@ -10,7 +11,7 @@ import * as L from 'leaflet';
 export class SiteMapComponent implements OnChanges, AfterViewInit {
    @Input() latitude!: number;
    @Input() longitude!: number;
-   private map!: L.Map;
+   private map!: Leaflet.Map;
 
    constructor(
       // private sitesLayer: MapLayerSitesService,
@@ -28,8 +29,12 @@ export class SiteMapComponent implements OnChanges, AfterViewInit {
 
    private initializeMap() {
       const baseMapURl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-      this.map = L.map('map-site', {dragging: false, zoomControl: false, scrollWheelZoom: false});
-      L.tileLayer(baseMapURl).addTo(this.map);
+      this.map = Leaflet.map('map-site', {layers: [
+         Leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+         })
+       ],dragging: false, zoomControl: false, scrollWheelZoom: false});
+      Leaflet.tileLayer(baseMapURl).addTo(this.map);
       // this.sitesLayer.setMap(this.map, baseLayer, 8, 10);
    }
 }

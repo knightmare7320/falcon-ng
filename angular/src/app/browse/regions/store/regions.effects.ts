@@ -2,7 +2,6 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { map, tap, switchMap, withLatestFrom } from "rxjs";
 import { Injectable } from "@angular/core";
-import { Router } from '@angular/router';
 
 import { RegionsService } from "./regions.service";
 import * as fromPage from "./regions.reducer";
