@@ -7,7 +7,9 @@
       <app-site-info [site]="site"></app-site-info>
 
       <div class="map-container">
-         <app-site-map [latitude]="site.latitude" [longitude]="site.longitude"></app-site-map>
+         <a routerLink="/map" [queryParams]="{latitude: site.latitude, longitude: site.longitude}">
+            <app-site-map [latitude]="site.latitude" [longitude]="site.longitude"></app-site-map>
+         </a>
       </div>
 
       Equipment:

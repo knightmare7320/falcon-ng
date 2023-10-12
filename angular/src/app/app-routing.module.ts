@@ -6,6 +6,7 @@ import { NotFoundComponent } from './shared/not-found/not-found.component';
 const routes: Routes = [
    { path: "browse", title: "Falcon"       , loadChildren: () => import('./browse/browse.module') },
    { path: "site"  , title: "Falcon - Site", loadChildren: () => import('./site/site.module')},
+   { path: "map"   , title: "Falcon - Map" , loadChildren: () => import('./map/map.module')},
    { path: ""             , redirectTo: '/browse', pathMatch: 'full' },
    { path: '**'           , component: NotFoundComponent },
 ]
