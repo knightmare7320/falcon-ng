@@ -45,21 +45,13 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
       this.initializeMap();      
    }
 
-      // console.log('changes', this.latitude, this.longitude);
-      // if(this.map && this.latitude && this.longitude) {
-      //    this.map.setView({lat: this.latitude, lng: this.longitude}, 17);
-      // }
-
    private initializeMap() {
-      console.log('init', this.latitude, this.longitude);
-      const baseMapURl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-      this.map = Leaflet.map('map-page', {layers: [
-         Leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-         })
-       ]});
+      const baseMapURl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+      const baseMapAttribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+      this.map = Leaflet.map('map-page');
+      Leaflet.tileLayer(baseMapURl, {attribution: baseMapAttribution}).addTo(this.map);
       this.map.setView({lat: this.latitude, lng: this.longitude, }, 17);
-      Leaflet.tileLayer(baseMapURl).addTo(this.map);
+
       // this.sitesLayer.setMap(this.map, baseLayer, 8, 10);
    }
 }
