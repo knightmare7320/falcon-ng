@@ -36,7 +36,6 @@ exports.getSites = (req, res, next) => {
       min_longitude: xToLongitude(zoom, xTile),
       max_longitude: xToLongitude(zoom, xTile+1)
    };
-   console.log(params);
    model.getSites(
       req.app.locals.db,
       params,
@@ -60,7 +59,6 @@ exports.getSectors = (req, res, next) => {
       min_longitude: xToLongitude(zoom, xTile),
       max_longitude: xToLongitude(zoom, xTile+1)
    };
-   console.log(params);
    model.getSectors(
       req.app.locals.db,
       params,

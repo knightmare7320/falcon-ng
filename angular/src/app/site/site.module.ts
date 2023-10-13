@@ -14,6 +14,8 @@ import { SiteEffects } from './store/site.effects';
 import { SiteComponent } from './site.component';
 import { SiteInfoComponent } from './site-info/site-info.component';
 import { SiteMapComponent } from './site-map/site-map.component';
+import { MapLayerSitesService } from '../map/map-sites.service';
+import { MapLayerSectorsService } from '../map/map-sectors.sectice';
 
 @NgModule({
    declarations: [
@@ -31,6 +33,10 @@ import { SiteMapComponent } from './site-map/site-map.component';
       EffectsModule.forFeature([
          SiteEffects,
       ]),
+   ],
+   providers: [
+      MapLayerSitesService,
+      MapLayerSectorsService,
    ]
 })
 export default class BrowseModule{};

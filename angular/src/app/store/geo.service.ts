@@ -5,13 +5,13 @@ import { environment } from 'src/environments/environment';
 
 const API_URL = environment.apiUrl + '/geo';
 
-interface GeoSite {
+export interface GeoSite {
    cascade_code: string,
    latitude: number,
    longitude: number,
 }
 
-interface GeoSector{
+export interface GeoSector{
    cascade_code: string,
    latitude: number,
    longitude: number,
@@ -27,13 +27,13 @@ export class GeoService {
    ) {}
 
    getSites(X: number, Y: number, Z: number) {
-      return this.httpClient.get<GeoSite>(
+      return this.httpClient.get<{rows: GeoSite[]}>(
          `${API_URL}/sites/${Z}/${X}/${Y}`
       );
    }
 
    getSectors(X: number, Y: number, Z: number) {
-      return this.httpClient.get<GeoSector[]>(
+      return this.httpClient.get<{rows: GeoSector[]}>(
          `${API_URL}/sectors/${Z}/${X}/${Y}`
       );
    }

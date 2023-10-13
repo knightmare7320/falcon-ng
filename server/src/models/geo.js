@@ -7,7 +7,6 @@ class Geo {
          params.min_longitude,
          params.max_longitude,
       ];
-      console.log(sqlStr, sqlParams);
       db.query(
          sqlStr,
          sqlParams,
@@ -31,7 +30,6 @@ class Geo {
          params.min_longitude,
          params.max_longitude,
       ];
-      console.log(sqlStr, sqlParams);
       db.query(
          sqlStr,
          sqlParams,
