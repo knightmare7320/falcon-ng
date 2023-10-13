@@ -1,3 +1,5 @@
+// old code from previous attempt!  not used, just putting it here for ease of reference
+
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 

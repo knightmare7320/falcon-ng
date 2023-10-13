@@ -3,7 +3,6 @@ import { ActivatedRoute, Params } from "@angular/router";
 import { Subscription } from "rxjs";
 import * as Leaflet from 'leaflet';
 import { Coords } from "leaflet";
-// import { MapLayerSitesService } from '../../components/geo/maplayer-sites.service';
 
 Leaflet.Icon.Default.imagePath = 'assets/';
 @Component({
@@ -55,25 +54,33 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
 
       // this.sitesLayer.setMap(this.map, baseLayer, 8, 10);
       
-      this.map.addLayer( new DebugCoords() );
+      this.map.addLayer( new SiteLayer() );
      
    }
 }
 
 
-class DebugCoords extends Leaflet.GridLayer {
-   constructor() {
+
+// import { GeoService } from 'src/app/store/geo.service';
+import axios from 'axios';
+class SiteLayer extends Leaflet.GridLayer {
+   constructor(
+      // private geoService: GeoService,
+   ) {
       super()
    }
 
    override createTile(coords: Coords, done: Function): any {
       var tile = document.createElement('div');
-      tile.innerHTML = [coords.x, coords.y, coords.z].join(', ');
-      tile.style.outline = '1px solid red';
-      
-      setTimeout(function () {
+      // var tile = document.createElement('canvas');
+      // var ctx = tile.getContext('2d');
+
+      axios.get(`http://localhost:3000/api/geo/sites/${coords.z}/${coords.x}/${coords.y}`).then((response: any) => {
+         if(response.data.rows && response.data.rows.length > 0)  {
+            tile.style.outline = '1px solid red';
+         }
          done(null, tile);	// Syntax is 'done(error, tile)'
-     }, 500 + Math.random() * 1500);
+      });
 
       return tile;
    }
