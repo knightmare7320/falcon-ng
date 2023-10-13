@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, AfterViewInit, Input } from "@angular/cor
 import { ActivatedRoute, Params } from "@angular/router";
 import { Subscription } from "rxjs";
 import * as Leaflet from 'leaflet';
+import { Coords } from "leaflet";
 // import { MapLayerSitesService } from '../../components/geo/maplayer-sites.service';
 
 Leaflet.Icon.Default.imagePath = 'assets/';
@@ -31,7 +32,7 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
             if (Number(latitude) && Number(longitude)) {
                this.latitude = Number(latitude);
                this.longitude = Number(longitude);
-               this.map.panTo({lat: this.latitude, lng: this.longitude});
+               // this.map.panTo({lat: this.latitude, lng: this.longitude});
             }
          }
       );
@@ -53,5 +54,27 @@ export class MapComponent implements AfterViewInit, OnInit, OnDestroy {
       this.map.setView({lat: this.latitude, lng: this.longitude, }, 17);
 
       // this.sitesLayer.setMap(this.map, baseLayer, 8, 10);
+      
+      this.map.addLayer( new DebugCoords() );
+     
+   }
+}
+
+
+class DebugCoords extends Leaflet.GridLayer {
+   constructor() {
+      super()
+   }
+
+   override createTile(coords: Coords, done: Function): any {
+      var tile = document.createElement('div');
+      tile.innerHTML = [coords.x, coords.y, coords.z].join(', ');
+      tile.style.outline = '1px solid red';
+      
+      setTimeout(function () {
+         done(null, tile);	// Syntax is 'done(error, tile)'
+     }, 500 + Math.random() * 1500);
+
+      return tile;
    }
 }
