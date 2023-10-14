@@ -27,13 +27,13 @@ export class GeoService {
    ) {}
 
    getSites(X: number, Y: number, Z: number) {
-      return this.httpClient.get<{rows: GeoSite[]}>(
+      return this.httpClient.get<{X: number, Y: number, Z: number, rows?: GeoSite[]}>(
          `${API_URL}/sites/${Z}/${X}/${Y}`
       );
    }
 
    getSectors(X: number, Y: number, Z: number) {
-      return this.httpClient.get<{rows: GeoSector[]}>(
+      return this.httpClient.get<{X: number, Y: number, Z: number, rows?: GeoSector[]}>(
          `${API_URL}/sectors/${Z}/${X}/${Y}`
       );
    }

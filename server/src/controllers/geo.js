@@ -43,7 +43,7 @@ exports.getSites = (req, res, next) => {
          if (err)
             res.status(500).json({ message: err });
          else
-            res.status(200).json({ ...result });
+            res.status(200).json({ X: xTile, Y: yTile, Z: zoom, ...result });
       }
    );
 };
@@ -66,7 +66,7 @@ exports.getSectors = (req, res, next) => {
          if (err)
             res.status(500).json({ message: err });
          else
-            res.status(200).json({ ...result });
+            res.status(200).json({ X: xTile, Y: yTile, Z: zoom, ...result });
       }
    );
 };

@@ -39,7 +39,7 @@ export class MapLayerSitesService {
 
             if (z >= this.minZoom && z <= this.maxZoom) {
                this.geoService.getSites(x, y, z).subscribe(result => {
-                  if(result.rows && result.rows.length > 0) {
+                  if(result.rows && result.rows.length > 0 && result.Z === z) {
                      this.createTile(x, y, z);
                      this.processTileJson(x, y, z, result.rows);
                   }
@@ -80,7 +80,7 @@ export class MapLayerSitesService {
          json.map((site: GeoSite) => {
             const object = Leaflet.circleMarker(
                [site.latitude, site.longitude],
-               {radius: 5, weight: 1, color: 'white', fillOpacity: 1.0, fillColor: 'green'/*, title: site.cascade_code*/,
+               {radius: 4, weight: 1, color: 'white', fillOpacity: 1.0, fillColor: 'green'/*, title: site.cascade_code*/,
                   pane: this.paneName,
                }
             );

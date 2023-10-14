@@ -38,7 +38,7 @@ export class MapLayerSectorsService {
 
             if (z >= this.minZoom && z <= this.maxZoom) {
                this.geoService.getSectors(x, y, z).subscribe(result => {
-                  if(result.rows && result.rows.length > 0) {
+                  if(result.rows && result.rows.length > 0 && result.Z === z) {
                      this.createTile(x, y, z);
                      this.processTileJson(x, y, z, result.rows);
                   }
