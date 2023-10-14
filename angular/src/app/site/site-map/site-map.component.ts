@@ -2,7 +2,7 @@ import { Component, OnChanges, AfterViewInit, Input, SimpleChanges } from "@angu
 import * as Leaflet from 'leaflet';
 
 import { MapLayerSitesService } from '../../map/map-sites.service';
-import { MapLayerSectorsService } from "src/app/map/map-sectors.sectice";
+import { MapLayerSectorsService } from "src/app/map/map-sectors.service";
 
 Leaflet.Icon.Default.imagePath = 'assets/';
 @Component({

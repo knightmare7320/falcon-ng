@@ -80,7 +80,7 @@ export class MapLayerSitesService {
          json.map((site: GeoSite) => {
             const object = Leaflet.circleMarker(
                [site.latitude, site.longitude],
-               {radius: 4, weight: 1, color: 'white', fillOpacity: 1.0, fillColor: 'green'/*, title: site.cascade_code*/,
+               {radius: 5, weight: 1, color: 'white', fillOpacity: 1.0, fillColor: 'green'/*, title: site.cascade_code*/,
                   pane: this.paneName,
                }
             );

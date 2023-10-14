@@ -8,7 +8,7 @@ import { SharedModule } from "../shared/shared.module";
 import { MapRoutingModule } from './map-routing.module';
 import { MapComponent } from './map.component';
 import { MapLayerSitesService } from './map-sites.service';
-import { MapLayerSectorsService } from './map-sectors.sectice';
+import { MapLayerSectorsService } from './map-sectors.service';
 
 @NgModule({
    declarations: [

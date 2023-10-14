@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import * as Leaflet from 'leaflet';
+import { LatLng } from 'leaflet';
 
 import { GeoService, GeoSector } from 'src/app/store/geo.service';
 
@@ -9,7 +10,7 @@ import { GeoService, GeoSector } from 'src/app/store/geo.service';
 export class MapLayerSectorsService {
    map!: Leaflet.Map;
    baseLayer!: Leaflet.Layer;
-   paneName = 'sitesPane';
+   paneName = 'sectorsPane';
 
    maxZoom = 18;
    minZoom = 11;
@@ -39,7 +40,7 @@ export class MapLayerSectorsService {
                this.geoService.getSectors(x, y, z).subscribe(result => {
                   if(result.rows && result.rows.length > 0) {
                      this.createTile(x, y, z);
-                     // this.processTileJson(x, y, z, result.rows);
+                     this.processTileJson(x, y, z, result.rows);
                   }
                });
             }
@@ -77,19 +78,20 @@ export class MapLayerSectorsService {
       if (tileIndex >= 0) {
          const objects: any[] = [];
          json.map((sector: GeoSector) => {
-            // const object = Leaflet.polygon(
-            //    this.getPoly(z, sector.latitude, sector.longitude, sector.azimuth, sector.horizontal_bw),
-            //    { pane: this.paneName,
-            //       color: '#666666',
-            //       weight: 1,
-            //       opacity: 0.8,
-            //       fillOpacity: 0.5,
-            //       fillColor: '#ffffff',
-            //       interactive: false,
-            //    }
-            // );
-            // object.addTo(this.map);
-            // objects.push(object);
+            const poly = this.getPoly(z, sector.latitude, sector.longitude, sector.azimuth, sector.horizontal_bw);
+            const object = Leaflet.polygon(
+               poly,
+               { pane: this.paneName,
+                  color: '#666666',
+                  weight: 1,
+                  opacity: 0.8,
+                  fillOpacity: 0.5,
+                  fillColor: '#ffffff',
+                  interactive: false,
+               }
+            );
+            object.addTo(this.map);
+            objects.push(object);
          });
             this.tileDataList[tileIndex].objects = objects;
       }
@@ -113,10 +115,10 @@ export class MapLayerSectorsService {
 
    /*--------------*/
 
-   getPoly(z: number, latitude: number, longitude: number, azimuth: number, beamwidth: number) {
+   getPoly(z: number, latitude: number, longitude: number, azimuth: number, beamwidth: number): LatLng[] {
       const numberOfDegrees = 10;
       const points = [];
-      points.push([latitude, longitude]);
+      points.push(Leaflet.latLng(latitude, longitude));
       for (let i = 0; i * numberOfDegrees <= beamwidth; i++) {
          points.push(
          this.plotPoint(
@@ -126,12 +128,12 @@ export class MapLayerSectorsService {
             this.getSize(z)),
          );
       }
-      points.push([latitude, longitude]);
+      points.push(Leaflet.latLng(latitude, longitude));
       return points;
    }
 
    /* CALCULATE A POINT AT A GIVEN BEARING AND DISTANCE */
-   plotPoint(latitude: number, longitude: number, azimuth: number, distance: number): [number, number] {
+   plotPoint(latitude: number, longitude: number, azimuth: number, distance: number): LatLng {
       const DEGREES_TO_RADIANS = Math.PI / 180.0;
       const EARTH_RADIUS = 6367447;
       const E = Math.E;
@@ -153,7 +155,7 @@ export class MapLayerSectorsService {
       const arcsin = Math.sin(vBearing) * Math.sin(psi) / Math.sin(phi);
       const outLong = (vLong + Math.asin(arcsin)) / DEGREES_TO_RADIANS;
 
-      return [outLat, outLong];
+      return Leaflet.latLng(outLat, outLong);
    }
 
    getSize(z: number): number {

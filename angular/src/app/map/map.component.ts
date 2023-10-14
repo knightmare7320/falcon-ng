@@ -4,7 +4,7 @@ import { Subscription } from "rxjs";
 import * as Leaflet from 'leaflet';
 // import { Coords } from "leaflet";
 import { MapLayerSitesService } from "./map-sites.service";
-import { MapLayerSectorsService } from "./map-sectors.sectice";
+import { MapLayerSectorsService } from "./map-sectors.service";
 
 Leaflet.Icon.Default.imagePath = 'assets/';
 @Component({
