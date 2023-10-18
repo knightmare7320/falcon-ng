@@ -14,6 +14,7 @@ export class MapLayerSectorsService {
 
    maxZoom = 18;
    minZoom = 11;
+   currentZoom = 17;
    tileDataList: {x: number, y: number, z: number, objects: any[]}[] = [];
 
    constructor(

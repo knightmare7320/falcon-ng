@@ -3,16 +3,16 @@ import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 import { ReactiveFormsModule } from '@angular/forms';
 
-// import { HeaderComponent } from './header/header.component';
-// import { SidebarComponent } from './sidebar/sidebar.component';
+import { HeaderComponent } from './header/header.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 import { AngularMaterialModule } from "../angular-material.module";
 import { NotFoundComponent } from './not-found/not-found.component';
 import { Spinner } from './spinner/spinner.component';
 
 @NgModule({
    declarations: [
-      // HeaderComponent,
-      // SidebarComponent,
+      HeaderComponent,
+      SidebarComponent,
       NotFoundComponent,
       Spinner,
    ],
@@ -23,8 +23,8 @@ import { Spinner } from './spinner/spinner.component';
       ReactiveFormsModule, 
    ],
    exports: [
-      // HeaderComponent,
-      // SidebarComponent,
+      HeaderComponent,
+      SidebarComponent,
       NotFoundComponent,
       Spinner,
    ]
