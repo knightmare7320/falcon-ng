@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
    styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+   drawerOpened = true;
+
+   tokenTimer: any;
    loginVisible = false;
+   loggedIn = false;
 }

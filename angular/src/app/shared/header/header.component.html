@@ -1,0 +1,26 @@
+<mat-toolbar color="white">
+   <span>
+      <button mat-icon-button (click)="onToggleSidebar()">
+         <mat-icon aria-hidden="false" aria-label="Menu" fontIcon="menu"></mat-icon>
+      </button>
+
+      <a routerLink="/">
+         <img src="../../../assets/falcon-icon.png" alt="Falcon Logo" class="logo">
+         <span style="font-size: 20pt; color: black; vertical-align: middle;"><b>Falcon</b></span>
+      </a>
+   </span>
+
+   <span class="spacer"></span>
+
+   <ul>
+      <li *ngIf="!isAuthenticated">
+         <a mat-button (click)="onLogin()" style="color:black">LOGIN</a>
+      </li>
+      <li *ngIf="isAuthenticated">
+         <a mat-button (click)="onLogout()" style="color:black">LOGOUT</a>
+      </li>
+   </ul>
+   <button mat-icon-button *ngIf="isAuthenticated">
+      <mat-icon aria-hidden="false" aria-label="More Menu" fontIcon="more_vert"></mat-icon>
+   </button>
+</mat-toolbar>
