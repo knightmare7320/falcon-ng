@@ -23,8 +23,9 @@ app.post('/login/:username', jsonParser, (req, res) => {
    const username = req.params.username;
    const password = req.body.password;
    
-   // TODO: maybe lookup actual username and password from db/somewhere
-   //       but not really important for this
+   // TODO: lookup actual username and password from db/somewhere
+   //       and obviously having the username/pw plaintext here is really bad
+   //       but this is just sample dev
    if (username === "fscran" && password === "fscRANper321!") {
       jwt.sign(
          { uid: 1 }, process.env.JWT_SECRET, { expiresIn: '1h' }, 
