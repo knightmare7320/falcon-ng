@@ -27,8 +27,8 @@ import { MapLayerSectorsService } from '../map/map-sectors.service';
       CommonModule,
       SiteRoutingModule,
       AngularMaterialModule,
-      RouterModule,
       SharedModule,
+      RouterModule,
       StoreModule.forFeature('site', reducer),
       EffectsModule.forFeature([
          SiteEffects,
