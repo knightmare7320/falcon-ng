@@ -1,57 +1,72 @@
 services:
 
-   mysqldb:
-      image: mysql:latest
-      volumes:
-         - ./mysql/mysql-dump:/docker-entrypoint-initdb.d
-      ports:
-         - "3306:3306"
-      # environment:
-      #   - MYSQL_ROOT_PASSWORD=
-      #   - MYSQL_USER=
-      #   - MYSQL_PASSWORD=
-      env_file:
-         - secrets/mysql.env
-      command: --default-authentication-plugin=mysql_native_password
-      #restart: always
+  mysqldb:
+    image: mysql:latest
+    volumes:
+      - ./mysql/mysql-dump:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    # environment:
+    #   - MYSQL_ROOT_PASSWORD=
+    #   - MYSQL_USER=
+    #   - MYSQL_PASSWORD=
+    env_file:
+      - secrets/mysql.env
+    command: --default-authentication-plugin=mysql_native_password
+    #restart: always
 
-   server:
-      build: server
-      volumes:
-         - ./server/src:/app
-         - /app/node_modules
-      environment:
-         AUTH_SERVICE_SERVICE_HOST: auth-api
-      ports:
-         - "3000:80"
-      env_file:
-         - ./secrets/mysql.env
-      depends_on:
-         - mysqldb
-         - auth-api
+  server:
+    build: server
+    volumes:
+      - ./server/src:/app
+      - /app/node_modules
+    environment:
+      AUTH_SERVICE_SERVICE_HOST: auth-api
+    ports:
+      - "3000:80"
+    env_file:
+      - ./secrets/mysql.env
+    depends_on:
+      - mysqldb
+      - auth-api
 
-   auth-api:
-      build: auth-api
-      ports:
-         - "80:80"
-      volumes:
-         - ./auth-api:/app
-         - /app/node_modules
-      # environment:
-      #    - JWT_SECRET=
-      env_file:
-         - ./secrets/mysql.env
-         - ./secrets/auth.env
+  auth-api:
+    build: auth-api
+    ports:
+      - "80:80"
+    volumes:
+      - ./auth-api:/app
+      - /app/node_modules
+    # environment:
+    #   - JWT_SECRET=
+    env_file:
+      - ./secrets/mysql.env
+      - ./secrets/auth.env
 
-   angular:
-      build: angular
-      volumes: 
-         - ./angular:/app
-         - /app/node_modules
-      ports:
-         - "4200:4200"
-      depends_on:
-         - server
+  angular:
+    build: angular
+    volumes: 
+      - ./angular:/app
+      - /app/node_modules
+    ports:
+      - "4200:4200"
+    depends_on:
+      - server
+
+  react:
+    build: react
+    volumes:
+      - ./react:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    depends_on:
+      - server
+    # environment:
+    #   - 
+    # env_file:
+    #   - 
+
 
   #  npm:
   #     build: 
