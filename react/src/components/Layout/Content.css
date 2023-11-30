@@ -1,0 +1,11 @@
+.page-content {
+  position: fixed;
+  top: 40px;
+  width: 100%;
+  left: 5em;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: white;
+  z-index:1;
+}
