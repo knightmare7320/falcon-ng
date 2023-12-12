@@ -1,13 +1,7 @@
-import MenuBar from './components/Layout/MenuBar';
-import SideBar from './components/Layout/SideBar';
-import Content from './components/Layout/Content';
+import { RouterProvider } from "react-router-dom";
+
+import { appRouter } from "./App-router";
 
 export default function App() {
-  return (
-    <>
-      <MenuBar />
-      <SideBar />
-      <Content />
-    </>
-  )
+  return <RouterProvider router={appRouter} />;
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
-import "./SideBar.css";
+import classes from "./SideBar.module.css";
 
 // $(".menu-button").click(function(){
 //   $(".menu-bar").toggleClass( "open" );
@@ -9,38 +10,55 @@ import "./SideBar.css";
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
-  function handleToggleMenu() {
-    setIsOpen(prevValue => !prevValue);
-  }
   function handleShowMenu() {
     setIsOpen(true);
   }
   function handleHideMenu() {
     setIsOpen(false);
   }
-  let menuClass = "sidebar-menu-bar"
+  let menuClass = classes.sidebarMenuBar
   if (isOpen) {
-    menuClass += " open";
+    menuClass += " " + classes.open;
   }
 
   // TODO: highlight icon and text together
   return (
     <header>
       <nav onMouseEnter={handleShowMenu} onMouseLeave={handleHideMenu}>
-        <ul className="sidebar-menu">
-          <li title="list"><a href="#" className="list">browse</a></li>
-          <li title="maps"><a href="#" className="maps">maps</a></li>
-          <li title="reports"><a href="#" className="reports">reports</a></li>
-          <li title="search"><a href="#" className="search">search</a></li>
-          <li title="user"><a href="#" className="settings">user</a></li>
+        <ul className={classes.sidebarMenu}>
+          <li title="list">
+            <NavLink to="browse" className={classes.list}>browse</NavLink>
+          </li>
+          <li title="maps">
+            <NavLink to="maps" className={classes.maps}>maps</NavLink>
+          </li>
+          <li title="reports">
+            <NavLink to="reports" className={classes.reports}>reports</NavLink>
+          </li>
+          <li title="search">
+            <NavLink to="search" className={classes.search}>search</NavLink>
+          </li>
+          <li title="user">
+            <NavLink to="settings" className={classes.settings}>user</NavLink>
+          </li>
         </ul>
         
         <ul className={menuClass}>
-          <li><a href="#">Browse</a></li>
-          <li><a href="#">Maps</a></li>
-          <li><a href="#">Reports</a></li>
-          <li><a href="#">Search</a></li>
-          <li><a href="#">Settings</a></li>
+          <li>
+            <NavLink to="browse">Browse</NavLink>
+          </li>
+          <li>
+            <NavLink to="maps">Maps</NavLink>
+          </li>
+          <li>
+            <NavLink to="reports">Reports</NavLink>
+          </li>
+          <li>
+            <NavLink to="search">Search</NavLink>
+          </li>
+          <li>
+            <NavLink to="settings">Settings</NavLink>
+          </li>
         </ul>
       </nav>
     </header>

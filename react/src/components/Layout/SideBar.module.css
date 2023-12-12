@@ -1,5 +1,5 @@
 @import url("//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css");
-.sidebar-menu, .sidebar-menu-bar {
+.sidebarMenu, .sidebarMenuBar {
     position: fixed;
     top: 40px;
     left: 0;
@@ -12,7 +12,7 @@
     overflow:hidden;
     box-shadow: 2px 0 18px rgba(0, 0, 0, 0.26);
 }
-.sidebar-menu li a{
+.sidebarMenu li a{
   display: block;
   text-indent: -500em;
   height: 5em;
@@ -24,7 +24,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   transition: background 0.1s ease-in-out;
 }
-.sidebar-menu li a:before {
+.sidebarMenu li a:before {
   font-family: FontAwesome;
   text-indent: 0em;
   position: absolute;
@@ -34,45 +34,45 @@
   height: 100%;
   font-size: 1.4em;
 }
-.sidebar-menu li a.search:before {
+.sidebarMenu li a.search:before {
   content: "\f002";
 }
-.sidebar-menu li a.archive:before {
+.sidebarMenu li a.archive:before {
   content: "\f187";
 }
-.sidebar-menu li a.maps:before {
+.sidebarMenu li a.maps:before {
   content: "\f279";
 }
-.sidebar-menu li a.reports:before {
+.sidebarMenu li a.reports:before {
   content: "\f201";
 }
-.sidebar-menu li a.pencil:before {
+.sidebarMenu li a.pencil:before {
   content: "\f040";
 }
-.sidebar-menu li a.contact:before {
+.sidebarMenu li a.contact:before {
   content: "\f003";
 }
-.sidebar-menu li a.user:before {
+.sidebarMenu li a.user:before {
   content: "\f007";
 }
-.sidebar-menu li a.list:before {
+.sidebarMenu li a.list:before {
   content: "\f03a";
 }
-.sidebar-menu li a.home:before {
+.sidebarMenu li a.home:before {
   content: "\f039";
 }
-.sidebar-menu li a.settings:before {
+.sidebarMenu li a.settings:before {
   content: "\f4fe";
 }
-.sidebar-menu-bar li a:hover,
-.sidebar-menu li a:hover
+.sidebarMenuBar li a:hover,
+.sidebarMenu li a:hover
 /* ,
-.sidebar-menu li:first-child a  */
+.sidebarMenu li:first-child a  */
 {
   background: #267fdd;
   color: #fff;
 }
-.sidebar-menu-bar{
+.sidebarMenuBar{
     overflow:hidden;
     left:5em;
     z-index:5;
@@ -80,7 +80,7 @@
     height:0;
     transition: all 0.1s ease-in-out;
 }
-.sidebar-menu-bar li a{
+.sidebarMenuBar li a{
   display: block;
   height: 5em;
   line-height:5em;
@@ -116,18 +116,18 @@
     .container{
         margin-top:100px;
     }
-    .sidebar-menu{
+    .sidebarMenu{
         height:5em;
         width:100%;
     }
-    .sidebar-menu li{
+    .sidebarMenu li{
         display:inline-block;
         float:left;
     }
-    .sidebar-menu-bar li a{
+    .sidebarMenuBar li a{
         width:100%;
     }
-    .sidebar-menu-bar{
+    .sidebarMenuBar{
         width:100%;
         left:0;
         height:0;
@@ -141,13 +141,13 @@
 }  
 }
 @media screen and (max-height: 34em){
-  .sidebar-menu li,
-  .sidebar-menu-bar {
+  .sidebarMenu li,
+  .sidebarMenuBar {
     font-size:70%;
   }
 }
 @media screen and (max-height: 34em) and (max-width: 500px){
-  .sidebar-menu{
+  .sidebarMenu{
         height:3.5em;
     }
 }

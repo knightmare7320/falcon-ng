@@ -1,5 +1,7 @@
-import "./Content.css";
+import { ReactNode } from "react";
 
-export default function Content() {
-  return <div className="page-content">HI</div>;
+import classes from "./Content.module.css";
+
+export default function Content({children}: {children: ReactNode}) {
+  return <div className={classes.pageContent}>{children}</div>;
 }
