@@ -30,7 +30,7 @@ export default function Header() {
             <NavLink to="browse" className={classes.list}>browse</NavLink>
           </li>
           <li title="maps">
-            <NavLink to="maps" className={classes.maps}>maps</NavLink>
+            <NavLink to="map" className={classes.maps}>maps</NavLink>
           </li>
           <li title="reports">
             <NavLink to="reports" className={classes.reports}>reports</NavLink>
@@ -48,7 +48,7 @@ export default function Header() {
             <NavLink to="browse">Browse</NavLink>
           </li>
           <li>
-            <NavLink to="maps">Maps</NavLink>
+            <NavLink to="map">Maps</NavLink>
           </li>
           <li>
             <NavLink to="reports">Reports</NavLink>
