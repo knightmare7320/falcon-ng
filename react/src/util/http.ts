@@ -1,0 +1,165 @@
+import { QueryClient } from "@tanstack/react-query";
+
+export const queryClient = new QueryClient();
+
+interface browseType {
+  signal: AbortSignal,
+  page_number?: number,
+  page_size?: number,
+  order_by?: string,
+  order_dir?: string,
+  filter_string?: string,
+}
+
+export async function fetchPerfRegions({ 
+  signal, 
+  page_number = 1, 
+  page_size= 10, 
+  order_by = 'name', 
+  order_dir = 'asc', 
+  filter_string=''
+}: browseType) {
+  console.log('fetching');
+
+  // const url = `${process.env.API_URL}/regions/perf`;
+  const url = `http://localhost:3000/api/regions/perf?`;
+  console.log('FETCHING', url);
+  const params = {
+    page_number: page_number.toString(),
+    page_size: page_size.toString(),
+    order_by,
+    order_dir,
+    filter_string,
+  };
+
+  const controller = new AbortController();
+  const fetchTimeout = setTimeout(() => controller.abort(), 2000);
+
+  const response = await fetch(
+    url + new URLSearchParams(params), 
+    // { signal }
+    { signal: controller.signal }
+  );
+  clearTimeout(fetchTimeout);
+
+  if (!response.ok) {
+    const info = await response.json();
+    const error = new Error(info?.message || 'There has been an error.');
+    throw error;
+  }
+
+  return await response.json();
+}
+
+// export async function fetchEvents({ signal, searchTerm, max }) {
+//   console.log(searchTerm);
+//   let url = 'http://localhost:3000/events';
+
+//   if (searchTerm && max) {
+//     url += '?search=' + searchTerm + '&max' + max;
+//   }  else if (searchTerm) {
+//     url += '?search=' + searchTerm;
+//   } else if (max) {
+//     url += '?max=' + max;
+//   }
+
+//   const response = await fetch(url, { signal: signal });
+
+//   if (!response.ok) {
+//     const error = new Error('An error occurred while fetching the events');
+//     error.code = response.status;
+//     error.info = await response.json();
+//     throw error;
+//   }
+
+//   const { events } = await response.json();
+
+//   return events;
+// }
+
+
+// export async function createNewEvent(eventData) {
+//   const response = await fetch(`http://localhost:3000/events`, {
+//     method: 'POST',
+//     body: JSON.stringify(eventData),
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//   });
+
+//   if (!response.ok) {
+//     const error = new Error('An error occurred while creating the event');
+//     error.code = response.status;
+//     error.info = await response.json();
+//     throw error;
+//   }
+
+//   const { event } = await response.json();
+
+//   return event;
+// }
+
+// export async function fetchSelectableImages({ signal }) {
+//   const response = await fetch(`http://localhost:3000/events/images`, { signal });
+
+//   if (!response.ok) {
+//     const error = new Error('An error occurred while fetching the images');
+//     error.code = response.status;
+//     error.info = await response.json();
+//     throw error;
+//   }
+
+//   const { images } = await response.json();
+
+//   return images;
+// }
+
+// export async function fetchEvent({ id, signal }) {
+//   const response = await fetch(`http://localhost:3000/events/${id}`, { signal });
+
+//   if (!response.ok) {
+//     const error = new Error('An error occurred while fetching the event');
+//     error.code = response.status;
+//     error.info = await response.json();
+//     throw error;
+//   }
+
+//   const { event } = await response.json();
+
+//   return event;
+// }
+
+
+// export async function deleteEvent({ id }) {
+//   const response = await fetch(`http://localhost:3000/events/${id}`, {
+//     method: 'DELETE',
+//   });
+
+//   if (!response.ok) {
+//     const error = new Error('An error occurred while deleting the event');
+//     error.code = response.status;
+//     error.info = await response.json();
+//     throw error;
+//   }
+
+//   return response.json();
+// }
+
+// export async function updateEvent({ id, event }) {
+//   const response = await fetch(`http://localhost:3000/events/${id}`, {
+//     method: 'PUT',
+//     body: JSON.stringify({ event }),
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//   });
+
+//   if (!response.ok) {
+//     const error = new Error('An error occurred while updating the event');
+//     error.code = response.status;
+//     error.info = await response.json();
+//     throw error;
+//   }
+
+//   return response.json();
+// }

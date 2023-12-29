@@ -1,13 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+type uiType = {
+  notifications: Array<{
+    type: string, 
+    message: string
+  }>,
+  pageSize: number,
+}
+
+const initialState: uiType = {
   notifications: [],
   pageSize: 10,
 }
 
 const uiSlice = createSlice({
   name: "ui",
-  initialState: initialState,
+  initialState,
   reducers: {
     showNotification(state, action) {
       state.notifications.push({
@@ -15,8 +23,11 @@ const uiSlice = createSlice({
         message: action.payload.message,
       });
     },
+    clearNotifications(state) {
+      state.notifications = [];
+    },
     setPageSize(state, action) {
-      state.pageSize = action.payload,
+      state.pageSize = action.payload;
     },
   }
 });
