@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { queryClient, fetchPerfRegions } from "../util/http";
 
 import LoadingSpinner from "../components/ui/LoadingSpinner";
+import RegionTable from "../components/RegionTable";
 
 export default function BrowsePage() {
   const { data, isPending, isError, error } = useQuery({
@@ -11,21 +12,17 @@ export default function BrowsePage() {
 
   let content;
 
-  if (isPending) {
-    content = <LoadingSpinner />;
-  }
+  // TODO: push the error into a notification instead
   if (isError) {
-    content = <p>error</p>;
+    content = <p>ERROR - {error.message}</p>;
   }
 
   if (data && data.rows) {
-    console.log(data);
     content = <>
       <h1>Browse</h1>
-      <table>
+      <RegionTable data={data}/>
 
-      {data.rows.map(item => <tr><td>{item.region_name}</td></tr>)}
-      </table>
+      {isPending && <LoadingSpinner />}
     </>;
   }
 

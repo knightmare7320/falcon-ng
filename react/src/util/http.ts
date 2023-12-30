@@ -2,7 +2,7 @@ import { QueryClient } from "@tanstack/react-query";
 
 export const queryClient = new QueryClient();
 
-interface browseType {
+type tableRequestType = {
   signal: AbortSignal,
   page_number?: number,
   page_size?: number,
@@ -11,6 +11,17 @@ interface browseType {
   filter_string?: string,
 }
 
+type kpiRowType = {
+  setup_attempts: number;
+  access_failures: number,
+  equipment_blocks: number,
+  successful_calls: number,
+  primary_drops: number,
+  primary_erlangs: number,
+}
+
+export type regionKpiRowType = kpiRowType & {region_name: string, region_id: number}
+
 export async function fetchPerfRegions({ 
   signal, 
   page_number = 1, 
@@ -18,12 +29,10 @@ export async function fetchPerfRegions({
   order_by = 'name', 
   order_dir = 'asc', 
   filter_string=''
-}: browseType) {
-  console.log('fetching');
+}: tableRequestType): Promise<{rows: regionKpiRowType[]}> {
 
   // const url = `${process.env.API_URL}/regions/perf`;
   const url = `http://localhost:3000/api/regions/perf?`;
-  console.log('FETCHING', url);
   const params = {
     page_number: page_number.toString(),
     page_size: page_size.toString(),
@@ -32,15 +41,10 @@ export async function fetchPerfRegions({
     filter_string,
   };
 
-  const controller = new AbortController();
-  const fetchTimeout = setTimeout(() => controller.abort(), 2000);
-
   const response = await fetch(
     url + new URLSearchParams(params), 
-    // { signal }
-    { signal: controller.signal }
+    { signal }
   );
-  clearTimeout(fetchTimeout);
 
   if (!response.ok) {
     const info = await response.json();
