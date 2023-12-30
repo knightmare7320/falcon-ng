@@ -34,39 +34,39 @@ export default function Header() {
     <header>
       <nav onMouseEnter={handleShowMenu} onMouseLeave={handleHideMenu}>
         <ul className={classes.sidebarMenu}>
-          <li title="list">
+          <li title="Browse the network">
             <NavLink 
               to="browse" 
               onMouseEnter={()=>handleHover("browse")} 
-              className={`${classes.list} ${hoverButton === 'browse' && classes.sidebarMenubar__Hover}`}
+              className={`${classes.list} ${hoverButton === 'browse' && classes.sidebarMenubar__hover}`}
             >browse</NavLink>
           </li>
-          <li title="maps">
+          <li title="Maps">
             <NavLink 
               to="map" 
               onMouseEnter={()=>handleHover("maps")} 
-              className={`${classes.maps} ${hoverButton === 'maps' && classes.sidebarMenubar__Hover}`}
+              className={`${classes.maps} ${hoverButton === 'maps' && classes.sidebarMenubar__hover}`}
             >maps</NavLink>
           </li>
-          <li title="reports">
+          <li title="Reports">
             <NavLink 
               to="reports" 
               onMouseEnter={()=>handleHover("reports")} 
-              className={`${classes.reports} ${hoverButton === 'reports' && classes.sidebarMenubar__Hover}`}
+              className={`${classes.reports} ${hoverButton === 'reports' && classes.sidebarMenubar__hover}`}
             >reports</NavLink>
           </li>
-          <li title="search">
+          <li title="Search network elements">
             <NavLink 
               to="search" 
               onMouseEnter={()=>handleHover("search")} 
-              className={`${classes.search} ${hoverButton === 'search' && classes.sidebarMenubar__Hover}`}
+              className={`${classes.search} ${hoverButton === 'search' && classes.sidebarMenubar__hover}`}
             >search</NavLink>
           </li>
-          <li title="user">
+          <li title="User Settings">
             <NavLink 
               to="settings" 
               onMouseEnter={()=>handleHover("settings")} 
-              className={`${classes.settings} ${hoverButton === 'settings' && classes.sidebarMenubar__Hover}`}
+              className={`${classes.settings} ${hoverButton === 'settings' && classes.sidebarMenubar__hover}`}
             >user</NavLink>
           </li>
         </ul>
@@ -76,35 +76,35 @@ export default function Header() {
             <NavLink 
               to="browse" 
               onMouseEnter={()=>handleHover("browse")} 
-              className={`${hoverButton === 'browse' && classes.sidebarMenubar__Hover}`}
+              className={`${hoverButton === 'browse' && classes.sidebarMenubar__hover}`}
             >Browse</NavLink>
           </li>
           <li>
             <NavLink 
               to="map" 
               onMouseEnter={()=>handleHover("maps")}
-              className={`${hoverButton === 'maps' && classes.sidebarMenubar__Hover}`}
+              className={`${hoverButton === 'maps' && classes.sidebarMenubar__hover}`}
             >Maps</NavLink>
           </li>
           <li>
             <NavLink 
               to="reports" 
               onMouseEnter={()=>handleHover("reports")}
-              className={`${hoverButton === 'reports' && classes.sidebarMenubar__Hover}`}
+              className={`${hoverButton === 'reports' && classes.sidebarMenubar__hover}`}
             >Reports</NavLink>
           </li>
           <li>
             <NavLink 
               to="search" 
               onMouseEnter={()=>handleHover("search")}
-              className={`${hoverButton === 'search' && classes.sidebarMenubar__Hover}`}
+              className={`${hoverButton === 'search' && classes.sidebarMenubar__hover}`}
             >Search</NavLink>
           </li>
           <li>
             <NavLink 
               to="settings" 
               onMouseEnter={()=>handleHover("settings")}
-              className={`${hoverButton === 'settings' && classes.sidebarMenubar__Hover}`}
+              className={`${hoverButton === 'settings' && classes.sidebarMenubar__hover}`}
             >Settings</NavLink>
           </li>
         </ul>

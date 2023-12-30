@@ -72,7 +72,7 @@
   color: #fff;
 } */
 
-.sidebarMenubar__Hover {
+.sidebarMenubar__hover {
   background: #267fdd;
   color: #fff !important;
 }
@@ -114,7 +114,7 @@
 }
 
 .open{
-    width:10em;
+    width:8em;
     height:100%;
 }
 

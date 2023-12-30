@@ -6,11 +6,15 @@ type uiType = {
     message: string
   }>,
   pageSize: number,
+  sortBy: string,
+  sortDir: string,
 }
 
 const initialState: uiType = {
   notifications: [],
   pageSize: 10,
+  sortBy: 'name',
+  sortDir: 'ASC',
 }
 
 const uiSlice = createSlice({
@@ -28,6 +32,10 @@ const uiSlice = createSlice({
     },
     setPageSize(state, action) {
       state.pageSize = action.payload;
+    },
+    setSort(state, action) {
+      state.sortBy = action.payload.sortBy;
+      state.sortDir = action.payload.sortDir;
     },
   }
 });

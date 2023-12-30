@@ -2,8 +2,12 @@ import { QueryClient } from "@tanstack/react-query";
 
 export const queryClient = new QueryClient();
 
+const API_URL = 'http://localhost:3000/api';
+
 type tableRequestType = {
   signal: AbortSignal,
+  type: string,
+  id?: number,
   page_number?: number,
   page_size?: number,
   order_by?: string,
@@ -11,7 +15,9 @@ type tableRequestType = {
   filter_string?: string,
 }
 
-type kpiRowType = {
+export type kpiRowType = {
+  id: number,
+  name: string,
   setup_attempts: number;
   access_failures: number,
   equipment_blocks: number,
@@ -20,19 +26,33 @@ type kpiRowType = {
   primary_erlangs: number,
 }
 
-export type regionKpiRowType = kpiRowType & {region_name: string, region_id: number}
+export type kpiTableType = {
+  id?: number,
+  name?: string,
+  parent_id?: number,
+  parent_name?: string,
+  row_count: number,
+  rows: kpiRowType[],
+}
 
-export async function fetchPerfRegions({ 
+export async function fetchBrowsePerfData({ 
   signal, 
+  id,
+  type,
   page_number = 1, 
   page_size= 10, 
   order_by = 'name', 
   order_dir = 'asc', 
   filter_string=''
-}: tableRequestType): Promise<{rows: regionKpiRowType[]}> {
+}: tableRequestType): Promise<kpiTableType> {
 
   // const url = `${process.env.API_URL}/regions/perf`;
-  const url = `http://localhost:3000/api/regions/perf?`;
+  let url = API_URL;
+  if (type === "national") {
+    url += '/regions/perf';
+  } else if (type === "region") {
+    url += '/l4_markets/perf/' + id;
+  }
   const params = {
     page_number: page_number.toString(),
     page_size: page_size.toString(),
@@ -42,7 +62,7 @@ export async function fetchPerfRegions({
   };
 
   const response = await fetch(
-    url + new URLSearchParams(params), 
+    url + '?' + new URLSearchParams(params), 
     { signal }
   );
 
@@ -54,6 +74,8 @@ export async function fetchPerfRegions({
 
   return await response.json();
 }
+
+
 
 // export async function fetchEvents({ signal, searchTerm, max }) {
 //   console.log(searchTerm);

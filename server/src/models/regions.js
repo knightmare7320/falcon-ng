@@ -25,7 +25,7 @@ class Regions {
          params.page_number,
          params.page_size,
       ];
-      console.log(sqlStr, sqlParams);
+      // console.log(sqlStr, sqlParams);
       db.query(
          sqlStr,
          sqlParams,
@@ -36,8 +36,8 @@ class Regions {
                return;
             }
             result(null, {
-               "total_row_count": results[0][0].total_row_count,
-               "rows": results[1]
+               "row_count": results[0][0].total_row_count,
+               "rows": results[1].map(({region_id, region_name, ...row}) => {return {id: region_id, name: region_name, ...row}})
             });
          }
       );      

@@ -4,7 +4,6 @@ import RootLayout from "./components/layout/AppLayout";
 import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import BrowsePage from "./pages/BrowsePage";
-import BrowseRegionPage from "./pages/BrowseRegionPage.tsx";
 import LoginPage from "./pages/LoginPage";
 import MapPage from "./pages/MapPage.tsx";
 import {action as logoutAction} from "./pages/LogoutPage";
@@ -29,11 +28,28 @@ export const AppRouter = createBrowserRouter([
         children: [
           {
             path: "",
-            element: <BrowsePage />,
-          }, {
+            element: <BrowsePage type="national" />,
+          }, 
+          {
             path: "region/:id",
-            element: <BrowseRegionPage />,
-          }
+            element: <BrowsePage type="region" />,
+          },
+          {
+            path: "l4_market/:id",
+            element: <BrowsePage type="l4_market" />,
+          },
+          {
+            path: "l5_market/:id",
+            element: <BrowsePage type="l5_market" />,
+          },
+          {
+            path: "cluster/:id",
+            element: <BrowsePage type="cluster" />,
+          },
+          {
+            path: "market99/:id",
+            element: <BrowsePage type="market99" />,
+          },
         ]
       },
       { 

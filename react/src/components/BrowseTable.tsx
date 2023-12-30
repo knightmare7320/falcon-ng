@@ -1,7 +1,7 @@
-import { regionKpiRowType } from "../util/http";
-import RegionRow from "./RegionRow";
+import { kpiTableType } from "../util/http";
+import BrowseRow from "./BrowseRow";
 
-export default function RegionTable({data}: {data: {rows: regionKpiRowType[]}}) {
+export default function BrowseTable({type, data}: {type:string, data: kpiTableType}) {
   return (
     <table className="browseTable">
       <thead>
@@ -17,7 +17,7 @@ export default function RegionTable({data}: {data: {rows: regionKpiRowType[]}}) 
       </thead>
       <tbody>
         {data.rows.map(row => 
-          <RegionRow row={row} />
+          <BrowseRow key={row.id.toString()} type={type} row={row} />
         )}
       </tbody>
     </table>
