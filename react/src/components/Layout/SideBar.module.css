@@ -63,14 +63,21 @@
 .sidebarMenu li a.settings:before {
   content: "\f4fe";
 }
-.sidebarMenuBar li a:hover,
+
+
+/* .sidebarMenuBar li a:hover,
 .sidebarMenu li a:hover
-/* ,
-.sidebarMenu li:first-child a  */
 {
   background: #267fdd;
   color: #fff;
+} */
+
+.sidebarMenubar__Hover {
+  background: #267fdd;
+  color: #fff !important;
 }
+
+
 .sidebarMenuBar{
     overflow:hidden;
     left:5em;
