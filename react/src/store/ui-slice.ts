@@ -14,7 +14,7 @@ type uiType = {
 const initialState: uiType = {
   notifications: [],
   pageSize: 10,
-  pageSizes: [5, 10, 50],
+  pageSizes: [7, 15, 30],
   sortBy: 'name',
   sortDir: 'ASC',
 }

@@ -26,7 +26,7 @@ BEGIN
           , r.region_name         parent_name
           , l4.l4_market_id       group_id
           , l4.l4_market_name     group_name
-          , count(l5.l5_market_id) total_record_count
+          , count(l5.l5_market_id) total_row_count
    FROM     locations.regions r 
             join      locations.l4_markets l4 ON l4.region_id    = r.region_id
             LEFT JOIN locations.l5_markets l5 ON l5.l4_market_id = l4.l4_market_id

@@ -39,6 +39,7 @@ class l5Markets {
           result(err, null);
           return;
         }
+        console.log(results[0][0])
         result(null, {
           "parent_id": results[0][0].parent_id,
           "parent_name": results[0][0].parent_name,

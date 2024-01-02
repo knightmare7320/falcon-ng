@@ -31,7 +31,7 @@ BEGIN
           , l4.l4_market_name  parent_name
           , l5.l5_market_id    group_id
           , l5.l5_market_name  group_name
-          , count(l5.l5_market_id) total_record_count
+          , count(l5.l5_market_id) total_row_count
    FROM     locations.l4_markets l4
             JOIN      locations.l5_markets   l5 ON l5.l4_market_id   = l4.l4_market_id
             left join locations.org_clusters oc ON oc.l5_market_id = l5.l5_market_id
