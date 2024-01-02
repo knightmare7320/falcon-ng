@@ -43,16 +43,6 @@ services:
       - ./secrets/mysql.env
       - ./secrets/auth.env
 
-  angular:
-    build: angular
-    volumes: 
-      - ./angular:/app
-      - /app/node_modules
-    ports:
-      - "4200:4200"
-    depends_on:
-      - server
-
   react:
     build: react
     volumes:
@@ -68,6 +58,16 @@ services:
     #   - 
 
 
+  # angular:
+  #   build: angular
+  #   volumes: 
+  #     - ./angular:/app
+  #     - /app/node_modules
+  #   ports:
+  #     - "4200:4200"
+  #   depends_on:
+  #     - server
+  #
   #  npm:
   #     build: 
   #        context: ./dockerfiles

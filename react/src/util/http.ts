@@ -18,6 +18,7 @@ type tableRequestType = {
 export type kpiRowType = {
   id: number,
   name: string,
+  description?: string,
   setup_attempts: number;
   access_failures: number,
   equipment_blocks: number,
@@ -49,11 +50,17 @@ export async function fetchBrowsePerfData({
   // const url = `${process.env.API_URL}/regions/perf`;
   let url = API_URL;
   if (type === "national") {
-    url += '/regions/perf';
+    url += '/regions/perf?';
   } else if (type === "region") {
-    url += '/l4_markets/perf/' + id;
+    url += '/l4_markets/perf/' + id + '?';
+  } else if (type === "l4_market") {
+    url += '/l5_markets/perf/' + id + '?';
+  } else if (type === "l5_market") {
+    url += '/clusters/perf/' + id + '?';
+  } else if (type === "cluster") {
+    url += '/sites/perf/?type=org_cluster_id&id=' + id + '&';
   }
-  const params = {
+  let params = {
     page_number: page_number.toString(),
     page_size: page_size.toString(),
     order_by,
@@ -62,7 +69,7 @@ export async function fetchBrowsePerfData({
   };
 
   const response = await fetch(
-    url + '?' + new URLSearchParams(params), 
+    url + new URLSearchParams(params), 
     { signal }
   );
 

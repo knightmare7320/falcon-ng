@@ -30,11 +30,18 @@ table.browseTable th {
   border-left: 1px solid lightgray;
   border-right: 1px solid lightgray;
   padding: 0.5em 1em;
+  text-align: right;
+}
+table.browseTable th:first-child {
+  text-align:left;
 }
 table.browseTable td {
   border-left: 1px solid lightgray;
   border-right: 1px solid lightgray;
   padding: 0.5em 1em;
+}
+table.browseTable td:first-child {
+  white-space: nowrap;
 }
 table.browseTable td.left {
   text-align:left;

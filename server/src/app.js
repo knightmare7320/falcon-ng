@@ -51,7 +51,7 @@ app.use("/api/sites", sitesRoutes);
 app.use("/api/regions", regionsRoutes);
 app.use("/api/l4_markets", l4MarketsRoutes);
 app.use("/api/l5_markets", l5MarketsRoutes);
-app.use("/api/org_clusters", orgClustersRoutes);
+app.use("/api/clusters", orgClustersRoutes);
 app.use("/api/market99s", market99sRoutes);
 app.use("/api/mtas", mtasRoutes);
 app.use("/api/switches", switchesRoutes);

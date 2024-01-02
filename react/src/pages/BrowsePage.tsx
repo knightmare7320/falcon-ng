@@ -10,6 +10,12 @@ function getTitle(type: string, data: kpiTableType): string {
     return "National Performance";
   } else if (type === "region") {
     return data.name + " Region Performance";
+  } else if (type === "l4_market") {
+    return data.name + " L4 Market Performance";
+  } else if (type === "l5_market") {
+    return data.name + " L5 Market Performance";
+  } else if (type === "cluster") {
+    return data.name + " Cluster Performance";
   }
   return '';
 }
@@ -29,6 +35,15 @@ export default function BrowsePage({type}: {type: string}) {
   } else if (type === "region") {
     queryKey = ["region", id.toString()]; // TODO: include queryparams
     queryFn = ({signal}: {signal: AbortSignal}) => fetchBrowsePerfData({signal, id, type:'region'});
+  } else if (type === "l4_market") {
+    queryKey = ["l4_market", id.toString()]; // TODO: include queryparams
+    queryFn = ({signal}: {signal: AbortSignal}) => fetchBrowsePerfData({signal, id, type:'l4_market'});
+  } else if (type === "l5_market") {
+    queryKey = ["l5_market", id.toString()]; // TODO: include queryparams
+    queryFn = ({signal}: {signal: AbortSignal}) => fetchBrowsePerfData({signal, id, type:'l5_market'});
+  } else if (type === "cluster") {
+    queryKey = ["cluster", id.toString()]; // TODO: include queryparams
+    queryFn = ({signal}: {signal: AbortSignal}) => fetchBrowsePerfData({signal, id, type:'cluster'});
   }
 
   const { data, isPending, isError, error } = useQuery({queryKey, queryFn});
