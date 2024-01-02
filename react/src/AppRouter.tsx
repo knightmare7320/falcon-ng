@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import RootLayout from "./components/layout/AppLayout";
+import RootLayout from "./components/layout/RootLayout.tsx";
 import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import BrowsePage from "./pages/BrowsePage";
@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage";
 import MapPage from "./pages/MapPage.tsx";
 import {action as logoutAction} from "./pages/LogoutPage";
 import { checkAuthLoader, tokenLoader } from './util/auth.ts';
+import SitePage from "./pages/SitePage";
 
 export const AppRouter = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ export const AppRouter = createBrowserRouter([
             element: <BrowsePage type="market99" />,
           },
         ]
+      },
+      {
+        path: "site/:cascade_code",
+        element: <SitePage />,
       },
       { 
         path: "map",

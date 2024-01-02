@@ -1,5 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet";
+
 import { fetchBrowsePerfData, kpiTableType } from "../util/http";
 
 import LoadingSpinner from "../components/ui/LoadingSpinner";
@@ -7,15 +9,15 @@ import BrowseTable from "../components/BrowseTable";
 
 function getTitle(type: string, data: kpiTableType): string {
   if (type === "national") {
-    return "National Performance";
+    return "National";
   } else if (type === "region") {
-    return data.name + " Region Performance";
+    return data.name + " Region";
   } else if (type === "l4_market") {
-    return data.name + " L4 Market Performance";
+    return data.name + " L4 Market";
   } else if (type === "l5_market") {
-    return data.name + " L5 Market Performance";
+    return data.name + " L5 Market";
   } else if (type === "cluster") {
-    return data.name + " Cluster Performance";
+    return data.name + " Cluster";
   }
   return '';
 }
@@ -57,7 +59,11 @@ export default function BrowsePage({type}: {type: string}) {
 
   if (data && data.rows) {
     content = <>
-      <h1>{getTitle(type, data)}</h1>
+      <Helmet>
+        <title>Falcon - {getTitle(type, data)}</title>
+      </Helmet>
+
+      <h1>{getTitle(type, data)} Performance</h1>
       <BrowseTable type={type} data={data}/>
 
       {isPending && <LoadingSpinner />}
