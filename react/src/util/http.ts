@@ -2,7 +2,7 @@ import { QueryClient } from "@tanstack/react-query";
 
 export const queryClient = new QueryClient();
 
-const API_URL = 'http://localhost:3000/api';
+const API_URL = import.meta.env.VITE_REACT_APP_API_URL;
 
 type tableRequestType = {
   signal: AbortSignal,
@@ -35,6 +35,7 @@ export type kpiTableType = {
   row_count: number,
   rows: kpiRowType[],
 }
+
 
 export async function fetchBrowsePerfData({ 
   signal, 

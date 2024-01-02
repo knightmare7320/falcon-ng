@@ -1,8 +1,8 @@
 // import { useSelector, useDispatch } from 'react-redux';
 import { Outlet } from "react-router-dom";
 
-import MenuBar from "../ui/MenuBar";
-import SideBar from "../ui/SideBar";
+import MenuBar from "./MenuBar";
+import SideBar from "./SideBar";
 import Content from "./Content";
 
 export default function RootLayout() {

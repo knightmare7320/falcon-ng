@@ -52,8 +52,8 @@ services:
       - "5173:5173"
     depends_on:
       - server
-    # environment:
-    #   - 
+    environment:
+      VITE_REACT_APP_API_URL: http://localhost:3000/api
     # env_file:
     #   - 
 

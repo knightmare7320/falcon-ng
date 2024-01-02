@@ -2,10 +2,10 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet";
 
-import { fetchBrowsePerfData, kpiTableType } from "../util/http";
+import { fetchBrowsePerfData, kpiTableType } from "../../util/http";
 
-import LoadingSpinner from "../components/ui/LoadingSpinner";
-import BrowseTable from "../components/BrowseTable";
+import LoadingSpinner from "../../components/ui/LoadingSpinner";
+import BrowseTable from "./BrowseTable";
 
 function getTitle(type: string, data: kpiTableType): string {
   if (type === "national") {

@@ -1,4 +1,4 @@
-import { kpiTableType } from "../util/http";
+import { kpiTableType } from "../../util/http";
 import BrowseRow from "./BrowseRow";
 
 function getColumnName(type: string): string {

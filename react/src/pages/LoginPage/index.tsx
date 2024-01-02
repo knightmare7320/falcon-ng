@@ -1,6 +1,6 @@
 import { redirect, json } from "react-router-dom";
 
-import LoginForm from "../components/LoginForm";
+import LoginForm from "./LoginForm";
 
 export async function action({ request }) {
   const searchParams = new URL(request.url).searchParams;

@@ -5,7 +5,7 @@ import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import BrowsePage from "./pages/BrowsePage";
 import LoginPage from "./pages/LoginPage";
-import MapPage from "./pages/MapPage.tsx";
+import MapPage from "./pages/MapPage";
 import {action as logoutAction} from "./pages/LogoutPage";
 import { checkAuthLoader, tokenLoader } from './util/auth.ts';
 import SitePage from "./pages/SitePage";
