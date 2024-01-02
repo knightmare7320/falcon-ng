@@ -48,7 +48,6 @@ export async function fetchBrowsePerfData({
   filter_string=''
 }: tableRequestType): Promise<kpiTableType> {
 
-  // const url = `${process.env.API_URL}/regions/perf`;
   let url = API_URL;
   if (type === "national") {
     url += '/regions/perf?';

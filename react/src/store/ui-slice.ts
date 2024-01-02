@@ -6,6 +6,7 @@ type uiType = {
     message: string
   }>,
   pageSize: number,
+  pageSizes: Array<number>,
   sortBy: string,
   sortDir: string,
 }
@@ -13,6 +14,7 @@ type uiType = {
 const initialState: uiType = {
   notifications: [],
   pageSize: 10,
+  pageSizes: [5, 10, 50],
   sortBy: 'name',
   sortDir: 'ASC',
 }
