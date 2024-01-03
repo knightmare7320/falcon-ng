@@ -5,9 +5,9 @@ export const queryClient = new QueryClient();
 const API_URL = import.meta.env.VITE_REACT_APP_API_URL;
 
 type tableRequestType = {
-  signal: AbortSignal,
+  // signal: AbortSignal,
   type: string,
-  id?: number,
+  id?: number | null,
   page_number?: number,
   page_size?: number,
   order_by?: string,
@@ -28,7 +28,7 @@ export type kpiRowType = {
 }
 
 export type kpiTableType = {
-  id?: number,
+  id?: number | null,
   name?: string,
   parent_id?: number,
   parent_name?: string,
@@ -38,8 +38,8 @@ export type kpiTableType = {
 
 
 export async function fetchBrowsePerfData({ 
-  signal, 
-  id,
+  // signal, 
+  id = null,
   type,
   page_number = 1, 
   page_size= 10, 
@@ -70,7 +70,7 @@ export async function fetchBrowsePerfData({
 
   const response = await fetch(
     url + new URLSearchParams(params), 
-    { signal }
+    // { signal }
   );
 
   if (!response.ok) {

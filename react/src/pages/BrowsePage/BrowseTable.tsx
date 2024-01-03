@@ -1,22 +1,8 @@
-import { kpiTableType } from "../../util/http";
+import { kpiRowType } from "../../util/http";
+import { getColumnName } from "./lookups";
 import BrowseRow from "./BrowseRow";
 
-function getColumnName(type: string): string {
-  if (type === 'national') {
-    return 'Region';
-  } else if (type === 'region') {
-    return 'L4 Market';
-  } else if (type === 'l4_market') {
-    return 'L5 Market';
-  } else if (type === 'l5_market') {
-    return 'Cluster';
-  } else if (type === 'cluster') {
-    return 'Cascade';
-  }
-  return '';
-}
-
-export default function BrowseTable({type, data}: {type:string, data: kpiTableType}) {
+export default function BrowseTable({type, rows}: {type:string, rows: kpiRowType[]}) {
   return (
     <table className="browseTable">
       <thead>
@@ -31,7 +17,7 @@ export default function BrowseTable({type, data}: {type:string, data: kpiTableTy
         </tr>
       </thead>
       <tbody>
-        {data.rows.map(row => 
+        {rows.map(row => 
           <BrowseRow key={row.id.toString()} type={type} row={row} />
         )}
       </tbody>

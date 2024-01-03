@@ -12,11 +12,7 @@ export default function PageNumber(
     handlePageChange: ChangeEventHandler
   }
 ) {
-  if (rowCount <= pageSize) {
-    return <></>;
-  }
-
-  let numPages = Math.ceil(rowCount / pageSize);
+  let numPages = Math.ceil(rowCount / pageSize) || 1;
 
   return <>
     <label htmlFor="pageNumber">
@@ -27,6 +23,7 @@ export default function PageNumber(
       value={pageNumber} 
       onChange={handlePageChange}
       id="pageNumber"
+      disabled={rowCount <= pageSize}
     >
       {Array(numPages).fill(1).map((_, idx) => 
         <option 

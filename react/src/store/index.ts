@@ -1,11 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import uiSlice from './ui-slice.ts';
+import uiReducer from './uiSlice.ts';
+import browseReducer from './browseSlice.ts';
+import browseListener from './browseListener.ts';
 
 const store = configureStore({
   reducer: {
-    ui: uiSlice.reducer,
+    ui: uiReducer,
+    browse: browseReducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(browseListener.middleware),
 });
 
 export default store;

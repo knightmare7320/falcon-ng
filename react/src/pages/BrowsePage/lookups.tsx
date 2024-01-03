@@ -23,6 +23,20 @@ export function getTitle(type: string, name: string) {
   return '';
 }
 
+export function getColumnName(type: string): string {
+  if (type === 'national') {
+    return 'Region';
+  } else if (type === 'region') {
+    return 'L4 Market';
+  } else if (type === 'l4_market') {
+    return 'L5 Market';
+  } else if (type === 'l5_market') {
+    return 'Cluster';
+  } else if (type === 'cluster') {
+    return 'Cascade';
+  }
+  return '';
+}
 
 export function getQuery(
   type: string, 
@@ -133,6 +147,10 @@ export function getQuery(
       }
 
   }
+  return {
+    queryKey: [],
+    queryFn: () => {},
+  };
 }
 
 
