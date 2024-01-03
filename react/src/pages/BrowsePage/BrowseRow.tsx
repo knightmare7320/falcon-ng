@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { kpiRowType } from "../../util/http"
+import { kpiRowType } from "../../util/browse.model"
 import { ReactElement } from "react";
 
 function getLink(type: string, id: number, name: string, description?: string): ReactElement {

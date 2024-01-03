@@ -1,13 +1,13 @@
 import { createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
 import type { TypedStartListening } from '@reduxjs/toolkit'
 
-import store from ".";
+import {RootState, AppDispatch} from ".";
 import { browseActions } from "./browseSlice";
-import { fetchBrowsePerfData } from "../util/http";
+import { fetchBrowsePerfData } from "../util/browse.service";
 
 const browseListener = createListenerMiddleware();
 
-type typeListener = TypedStartListening<typeof store.getState, typeof store.dispatch>;
+type typeListener = TypedStartListening<RootState, AppDispatch>;
 const browseStartListening = browseListener.startListening as typeListener;
 
 browseStartListening({
@@ -18,7 +18,7 @@ browseStartListening({
     browseActions.setPageSize,
     browseActions.setOrderBy,
   ),
-  effect: async (action, listenerApi) => {
+  effect: async (_, listenerApi) => {
     const state = listenerApi.getState().browse;
     if (state.status === 'loading') return;
 
@@ -26,7 +26,7 @@ browseStartListening({
 
     if (state.status === 'init' || 
         state.type !== originalState.type ||
-        (state.id | -1) !== (originalState.id | -1) || 
+        (state.id && originalState.id || state.id != originalState.id) || 
         state.page_number !== originalState.page_number || 
         state.page_size !== originalState.page_size || 
         state.order_by !== originalState.order_by || 

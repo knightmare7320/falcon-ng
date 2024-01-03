@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { kpiRowType, kpiTableType } from "../util/http";
+import { kpiRowType, kpiTableType } from "../util/browse.model";
 
-export interface browseType {
+export type browseType = {
   status: string,
   type: string,
   id: string | number | null,
@@ -32,6 +32,7 @@ const INITIAL_STATE: browseType = {
   page_sizes: [7, 15, 30],
   filter_string: '',
 }
+
 
 const browseSlice = createSlice({
   name: 'browse',

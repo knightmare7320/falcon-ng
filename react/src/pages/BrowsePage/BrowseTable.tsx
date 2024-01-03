@@ -1,4 +1,4 @@
-import { kpiRowType } from "../../util/http";
+import { kpiRowType } from "../../util/browse.model";
 import { getColumnName } from "./lookups";
 import BrowseRow from "./BrowseRow";
 
