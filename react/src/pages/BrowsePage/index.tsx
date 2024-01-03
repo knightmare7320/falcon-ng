@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Helmet } from "react-helmet";
 
 import { browseActions } from "../../store/browseSlice";
-import store from "../../store";
+import { RootState } from "../../store";
 
 import LoadingSpinner from "../../components/ui/LoadingSpinner";
 import BrowseTable from "./BrowseTable";
@@ -23,8 +23,8 @@ export default function BrowsePage({type}: {type: string}) {
   
 
   const dispatch = useDispatch();
-  const browseState = useSelector((state: typeof store.getState) => state.browse);
-  if(browseState.status === 'init' || type !== browseState.type || (id | -1) !== (browseState.id | -1)) {
+  const browseState = useSelector((state: RootState) => state.browse);
+  if(browseState.status === 'init' || type !== browseState.type || id !== browseState.id) {
     dispatch(browseActions.setPageType({type, id}));
   }
 

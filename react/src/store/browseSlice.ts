@@ -4,7 +4,7 @@ import { kpiRowType, kpiTableType } from "../util/browse.model";
 export type browseType = {
   status: string,
   type: string,
-  id: string | number | null,
+  id: string | number,
   name: string,
   row_count: number,
   rows: Array<kpiRowType>,
@@ -20,7 +20,7 @@ export type browseType = {
 const INITIAL_STATE: browseType = {
   status: 'init',
   type: 'national',
-  id: null,
+  id: '',
   name: '',
   row_count: 0,
   rows: [],
@@ -44,7 +44,7 @@ const browseSlice = createSlice({
     setError(state:browseType) {
       state.status = 'error';
     },
-    setPageType(state:browseType, action:PayloadAction<{type: string, id: string | number | null}>) {
+    setPageType(state:browseType, action:PayloadAction<{type: string, id: string | number}>) {
       if (state.type !== action.payload.type) {
         state.page_number = 1;
       }
@@ -68,7 +68,7 @@ const browseSlice = createSlice({
       state.status = 'ok';
       state.row_count = action.payload.row_count;
       state.rows = action.payload.rows;
-      state.id = action.payload.id || null;
+      state.id = action.payload.id || '';
       state.name = action.payload.name || '';
       state.page_count = Math.ceil(action.payload.row_count / state.page_size) | 1;
     },
