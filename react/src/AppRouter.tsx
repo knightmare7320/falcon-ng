@@ -4,7 +4,7 @@ import RootLayout from "./components/layout/RootLayout.tsx";
 import ErrorPage from "./pages/ErrorPage";
 import HomePage from "./pages/HomePage";
 import BrowsePage from "./pages/BrowsePage";
-import LoginPage from "./pages/LoginPage";
+import LoginPage, {action as authAction} from "./pages/LoginPage";
 import MapPage from "./pages/MapPage";
 import {action as logoutAction} from "./pages/LogoutPage";
 import { /*checkAuthLoader,*/ tokenLoader } from './util/auth.ts';
@@ -14,7 +14,7 @@ export const AppRouter = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
-    errorElement: <ErrorPage />,
+    // errorElement: <ErrorPage />,
     loader: tokenLoader,
     children: [
       {
@@ -65,6 +65,7 @@ export const AppRouter = createBrowserRouter([
       {
         path: "login",
         element: <LoginPage />,
+        action: authAction,
       },
       {
         path: "logout",

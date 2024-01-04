@@ -16,7 +16,7 @@ import { getTitle } from "./lookups";
 
 export default function BrowsePage({type}: {type: string}) {
   const params = useParams();
-  let id: number = -1;
+  let id: string|number = '';
   if (params.id) {
     id = parseInt(params.id); 
   }

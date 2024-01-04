@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type uiType = {
   notifications: Array<{
@@ -15,7 +15,7 @@ const uiSlice = createSlice({
   name: "ui",
   initialState,
   reducers: {
-    showNotification(state, action) {
+    showNotification(state, action:PayloadAction<{type:string, message:string}>) {
       state.notifications.push({
         type: action.payload.type,
         message: action.payload.message,

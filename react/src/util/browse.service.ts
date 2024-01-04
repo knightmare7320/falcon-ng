@@ -15,7 +15,7 @@ export async function fetchBrowsePerfData({
 
   let url = API_URL;
   if (type === "national") {
-    url += '/regions/perf?';
+    url += '/regions/pexrf?';
   } else if (type === "region") {
     url += '/l4_markets/perf/' + id + '?';
   } else if (type === "l4_market") {
@@ -33,10 +33,7 @@ export async function fetchBrowsePerfData({
     filter_string,
   };
 
-  const response = await fetch(
-    url + new URLSearchParams(params), 
-    // { signal }
-  );
+  const response = await fetch(url + new URLSearchParams(params));
 
   if (!response.ok) {
     const info = await response.json();

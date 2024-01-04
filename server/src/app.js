@@ -58,8 +58,11 @@ app.use("/api/switches", switchesRoutes);
 app.use("/api/bscs", bscsRoutes);
 app.use("/api/geo", geoRoutes);
 
-app.use((req, res,next) => {
-   res.sendFile(path.join(__dirname, "public", "index.html"));
+// app.use((req, res,next) => {
+//    res.sendFile(path.join(__dirname, "public", "index.html"));
+// });
+app.get('*', function(req, res){
+  res.status(404).json({message: 'Server Error - 404'});
 });
 
 module.exports = app;

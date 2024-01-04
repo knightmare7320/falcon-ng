@@ -4,6 +4,7 @@ import type { TypedStartListening } from '@reduxjs/toolkit'
 import {RootState, AppDispatch} from ".";
 import { browseActions } from "./browseSlice";
 import { fetchBrowsePerfData } from "../util/browse.service";
+import { uiActions } from "./uiSlice";
 
 const browseListener = createListenerMiddleware();
 
@@ -19,6 +20,8 @@ browseStartListening({
     browseActions.setOrderBy,
   ),
   effect: async (_, listenerApi) => {
+    listenerApi.cancelActiveListeners();
+
     const state = listenerApi.getState().browse;
     if (state.status === 'loading') return;
 
@@ -33,16 +36,26 @@ browseStartListening({
         state.order_dir !== originalState.order_dir
     ) {
       listenerApi.dispatch(browseActions.setLoading());
-      const response = await fetchBrowsePerfData({ 
-        type: state.type,
-        id: state.id,
-        page_number: state.page_number, 
-        page_size: state.page_size, 
-        order_by: state.order_by, 
-        order_dir: state.order_dir, 
-        filter_string: state.filter_string,
-      });
-      listenerApi.dispatch(browseActions.setData(response));
+      let response;
+      try {
+        response = await fetchBrowsePerfData({ 
+          type: state.type,
+          id: state.id,
+          page_number: state.page_number, 
+          page_size: state.page_size, 
+          order_by: state.order_by, 
+          order_dir: state.order_dir, 
+          filter_string: state.filter_string,
+        });
+      } catch(error) {
+        let message = 'Unknown Error';
+        if (error instanceof Error) message = error.message;
+        listenerApi.dispatch(uiActions.showNotification({type: 'error', message}));
+        listenerApi.dispatch(browseActions.setError());
+      }
+      if (response) {
+        listenerApi.dispatch(browseActions.setData(response));
+      }
     }
   },
 });

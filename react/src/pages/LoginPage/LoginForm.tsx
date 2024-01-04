@@ -13,7 +13,7 @@ export default function LoginForm() {
     <Form method="post" className={classes.form}>
       <h1>Log in</h1>
 
-      {data && data.errors && (
+      {data?.errors && (
         <ul>
           {Object.values(data.errors).map((err) => (
             <li key={err}>{err}</li>
