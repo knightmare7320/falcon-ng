@@ -2,9 +2,9 @@ import { createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
 import type { TypedStartListening } from '@reduxjs/toolkit'
 
 import {RootState, AppDispatch} from ".";
-import { browseActions } from "./browseSlice";
+import { browseActions } from "./browse.slice";
 import { fetchBrowsePerfData } from "../util/browse.service";
-import { uiActions } from "./uiSlice";
+import { uiActions } from "./ui.slice";
 
 const browseListener = createListenerMiddleware();
 
@@ -20,8 +20,6 @@ browseStartListening({
     browseActions.setOrderBy,
   ),
   effect: async (_, listenerApi) => {
-    listenerApi.cancelActiveListeners();
-
     const state = listenerApi.getState().browse;
     if (state.status === 'loading') return;
 

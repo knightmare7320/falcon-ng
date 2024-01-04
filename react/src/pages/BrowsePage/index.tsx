@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Helmet } from "react-helmet";
 
-import { browseActions } from "../../store/browseSlice";
+import { browseActions } from "../../store/browse.slice";
 import { RootState } from "../../store";
 
 import LoadingSpinner from "../../components/ui/LoadingSpinner";

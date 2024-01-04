@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import uiReducer from './uiSlice.ts';
-import browseReducer from './browseSlice.ts';
-import browseListener from './browseListener.ts';
-import siteReducer from './siteSlice.ts';
+import uiReducer from './ui.slice.ts';
+import browseReducer from './browse.slice.ts';
+import browseEffects from './browse.effects.ts';
+import siteReducer from './site.slice.ts';
+import siteEffects from './site.effects.ts';
 
 const store = configureStore({
   reducer: {
@@ -11,7 +12,10 @@ const store = configureStore({
     browse: browseReducer,
     site: siteReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(browseListener.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(
+    browseEffects.middleware,
+    siteEffects.middleware,
+  ),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

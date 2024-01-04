@@ -28,9 +28,16 @@ const siteSlice = createSlice({
     setLoading(state:SiteState) {
       state.status = 'loading';
     },
+    setError(state:SiteState) {
+      state.status = 'error';
+    },
     setCascade(state:SiteState, action:PayloadAction<string>) {
       state.cascade_code = action.payload;
-    }
+    },
+    setSiteData(state:SiteState, action: PayloadAction<Site>) {
+      state.site = action.payload;
+      state.status = 'ok';
+    },
   },
 });
 
