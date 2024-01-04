@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { Site, Bts, Sector, Carrier } from "../util/site.model"
 
-export type siteType = {
+export type SiteState = {
   status: string,
   cascade_code: string,
   load_count: number,
@@ -25,7 +25,12 @@ const siteSlice = createSlice({
   name: 'site',
   initialState: INITIAL_STATE,
   reducers: {
-
+    setLoading(state:SiteState) {
+      state.status = 'loading';
+    },
+    setCascade(state:SiteState, action:PayloadAction<string>) {
+      state.cascade_code = action.payload;
+    }
   },
 });
 

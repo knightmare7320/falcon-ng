@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Helmet } from "react-helmet";
@@ -24,10 +24,11 @@ export default function BrowsePage({type}: {type: string}) {
 
   const dispatch = useDispatch();
   const browseState = useSelector((state: RootState) => state.browse);
-  if(browseState.status === 'init' || type !== browseState.type || id !== browseState.id) {
-    dispatch(browseActions.setPageType({type, id}));
-  }
-
+  useEffect(() => {
+    if(browseState.status === 'init' || type !== browseState.type || id !== browseState.id) {
+      dispatch(browseActions.setPageType({type, id}));
+    }
+  });
 
   function handlePageChange(event: ChangeEvent<HTMLSelectElement>) {
     dispatch(browseActions.setPageNumber(parseInt(event.target.value)));
