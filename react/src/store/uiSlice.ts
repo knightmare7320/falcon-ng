@@ -1,28 +1,41 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type uiType = {
-  notifications: Array<{
-    type: string, 
-    message: string
-  }>,
+type MessageType = {
+  type: string, 
+  message: string,
+  timestamp: Date,
+}
+type UiType = {
+  messages: MessageType[],
 }
 
-const initialState: uiType = {
-  notifications: [],
+const initialState: UiType = {
+  messages: [],
 }
 
 const uiSlice = createSlice({
   name: "ui",
   initialState,
   reducers: {
-    showNotification(state, action:PayloadAction<{type:string, message:string}>) {
-      state.notifications.push({
-        type: action.payload.type,
-        message: action.payload.message,
-      });
+    showMessage(state, action:PayloadAction<{type:string, message:string}>) {
+      // remove any existing messages with the same text
+      const newMessages = state.messages.filter(
+        (value: MessageType) => value.type !== action.payload.type && value.message !== action.payload.message 
+      );
+
+       // add this new message to the front with a new timestamp
+       const newMessage: MessageType = {
+          type: action.payload.type,
+          message: action.payload.message,
+          timestamp: new Date(),
+       };
+       newMessages.unshift(newMessage);
+
+       // this will have the affect of no duplicated messages but the most current timestamp being used
+       state.messages = newMessages;
     },
-    clearNotifications(state) {
-      state.notifications = [];
+    clearMessages(state) {
+      state.messages = [];
     },
   }
 });

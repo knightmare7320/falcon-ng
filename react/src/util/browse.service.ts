@@ -15,7 +15,7 @@ export async function fetchBrowsePerfData({
 
   let url = API_URL;
   if (type === "national") {
-    url += '/regions/pexrf?';
+    url += '/regions/perf?';
   } else if (type === "region") {
     url += '/l4_markets/perf/' + id + '?';
   } else if (type === "l4_market") {

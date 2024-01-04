@@ -50,7 +50,7 @@ browseStartListening({
       } catch(error) {
         let message = 'Unknown Error';
         if (error instanceof Error) message = error.message;
-        listenerApi.dispatch(uiActions.showNotification({type: 'error', message}));
+        listenerApi.dispatch(uiActions.showMessage({type: 'error', message}));
         listenerApi.dispatch(browseActions.setError());
       }
       if (response) {

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { kpiRowType, kpiTableType } from "../util/browse.model";
 
-export type browseType = {
+export type BrowseType = {
   status: string,
   type: string,
   id: string | number,
@@ -17,7 +17,7 @@ export type browseType = {
   filter_string: string,
 }
 
-const INITIAL_STATE: browseType = {
+const INITIAL_STATE: BrowseType = {
   status: 'init',
   type: 'national',
   id: '',
@@ -38,33 +38,33 @@ const browseSlice = createSlice({
   name: 'browse',
   initialState: INITIAL_STATE,
   reducers: {
-    setLoading(state:browseType) {
+    setLoading(state:BrowseType) {
       state.status = 'loading';
     },
-    setError(state:browseType) {
+    setError(state:BrowseType) {
       state.status = 'error';
     },
-    setPageType(state:browseType, action:PayloadAction<{type: string, id: string | number}>) {
+    setPageType(state:BrowseType, action:PayloadAction<{type: string, id: string | number}>) {
       if (state.type !== action.payload.type) {
         state.page_number = 1;
       }
       state.type = action.payload.type;
       state.id = action.payload.id;
     },
-    setPageNumber(state:browseType, action:PayloadAction<number>) {
+    setPageNumber(state:BrowseType, action:PayloadAction<number>) {
       state.page_number = action.payload;
     },
-    setPageSize(state:browseType, action:PayloadAction<number>) {
+    setPageSize(state:BrowseType, action:PayloadAction<number>) {
       state.page_size = action.payload;
     },
-    setOrderBy(state:browseType, action:PayloadAction<{order_by: string, order_dir: string}>) {
+    setOrderBy(state:BrowseType, action:PayloadAction<{order_by: string, order_dir: string}>) {
       state.order_by = action.payload.order_by;
       state.order_dir = action.payload.order_dir;
     },
-    setFilterString(state:browseType, action:PayloadAction<string>) {
+    setFilterString(state:BrowseType, action:PayloadAction<string>) {
       state.filter_string = action.payload;
     },
-    setData(state:browseType, action:PayloadAction<kpiTableType>) {
+    setData(state:BrowseType, action:PayloadAction<kpiTableType>) {
       state.status = 'ok';
       state.row_count = action.payload.row_count;
       state.rows = action.payload.rows;
