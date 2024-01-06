@@ -1,7 +1,8 @@
-import { MapContainer, TileLayer, Popup, Marker } from "react-leaflet";
+import { MapContainer, TileLayer, Popup, Marker, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css"
 
 import styles from "./MapPage.module.css";
+import SiteLayer from "./SiteLayer";
 
 export default function MapPage() {
   return (
@@ -15,6 +16,9 @@ export default function MapPage() {
           A pretty CSS3 popup. <br /> Easily customizable.
         </Popup>
       </Marker>
+
+      <SiteLayer />
+      
     </MapContainer>
   ); 
 }
