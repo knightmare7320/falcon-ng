@@ -27,7 +27,7 @@ function MyMap() {
 
 export default function MapPage() {
   return (
-    <MapContainer className={ styles['leaflet-container'] } center={[41.993250, -87.800073]} zoom={17} scrollWheelZoom={true}>
+    <MapContainer className={ styles['leaflet-container'] } center={[41.993250, -87.800073]} zoom={15} scrollWheelZoom={true}>
       <MyMap />
 
       <TileLayer

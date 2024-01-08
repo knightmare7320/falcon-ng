@@ -1,6 +1,0 @@
-{
-  "devDependencies": {
-    "@types/react-helmet": "^6.1.11",
-    "@types/react-redux": "^7.1.33"
-  }
-}
