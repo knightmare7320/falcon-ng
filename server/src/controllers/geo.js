@@ -25,6 +25,8 @@ const yToLatitude = (zoom, yTile) => {
    return latitude_degrees;
 }
 
+const geoSites = 
+
 exports.getSites = (req, res, next) => {
    const xTile = +req.params.X;
    const yTile = +req.params.Y;

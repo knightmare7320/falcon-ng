@@ -2,7 +2,6 @@ import L, { Coords, DoneCallback, GridLayer} from "leaflet";
 import { createLayerComponent  } from "@react-leaflet/core";
 
 
-
 class SiteLayer extends GridLayer {
 
   initialize(url, options) {
@@ -29,11 +28,18 @@ class SiteLayer extends GridLayer {
         if(json.rows.length > 0) {
           console.log(json)
         }
-        var markers = json.rows.map(function(row){
-          return L.marker({lat: row.latitude, lng: row.longitude});
+        var markers = json.rows.map(function(site){
+          const object = L.circleMarker(
+            [site.latitude, site.longitude],
+            {radius: 4, weight: 1, color: 'white', fillOpacity: 1.0, fillColor: 'green'/*, title: site.cascade_code*/,
+          });
+          // object.on('click', () => this.router.navigate(['site', site.cascade_code]));
+          object.bindTooltip(site.cascade_code).openTooltip();
+          return object;
         });
         var group = L.layerGroup(markers);
         this._markerStore[key] = group;
+        group.addTo(this._map);
 
         done();
       });
@@ -41,6 +47,7 @@ class SiteLayer extends GridLayer {
     return tile;
   }
 
+  
   _removeTile(key: string) {
     console.log('remove', key);
     delete this._markerStore[key];
