@@ -5,16 +5,20 @@ import browseReducer from './browse.slice.ts';
 import browseEffects from './browse.effects.ts';
 import siteReducer from './site.slice.ts';
 import siteEffects from './site.effects.ts';
+import mapsReducer from './maps.slice.ts';
+import mapsEffects from './maps.effects.ts';
 
 const store = configureStore({
   reducer: {
     ui: uiReducer,
     browse: browseReducer,
     site: siteReducer,
+    maps: mapsReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(
     browseEffects.middleware,
     siteEffects.middleware,
+    mapsEffects.middleware,
   ),
 });
 

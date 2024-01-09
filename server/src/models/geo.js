@@ -16,9 +16,7 @@ class Geo {
                result(err, null);
                return;
             }
-            result(null, {
-               "rows": results[0]
-            });
+            result(null, results[0]);
          }
       );      
    }
@@ -39,9 +37,7 @@ class Geo {
                result(err, null);
                return;
             }
-            result(null, {
-               "rows": results[0]
-            });
+            result(null, results[0]);
          }
       );      
    }
