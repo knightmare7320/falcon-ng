@@ -4,7 +4,7 @@ import type { Action, TypedStartListening } from '@reduxjs/toolkit';
 import { RootState, AppDispatch } from ".";
 import { uiActions } from "./ui.slice";
 import { mapsActions } from "./maps.slice";
-import { fetchGeoSiteBounds } from "../util/map.service";
+import { fetchGeoSiteBounds, fetchGeoSectorBounds } from "../util/map.service";
 
 type typeListener = TypedStartListening<RootState, AppDispatch>;
 
@@ -52,7 +52,27 @@ mapStartListening({
       return;
     }
 
-    listenerApi.dispatch(mapsActions.setSites({bounds, rows: response}));
+    listenerApi.dispatch(mapsActions.setSites({bounds, sites: response}));
+  },
+});
+
+mapStartListening({
+  actionCreator: mapsActions.setMapBounds,
+  effect: async (action:Action, listenerApi) => {
+    const bounds = action.payload;
+
+    let response;
+    try {
+      response = await fetchGeoSectorBounds(bounds);
+    } catch(error) {
+      let message = 'Unknown Error';
+      if (error instanceof Error) message = error.message;
+      listenerApi.dispatch(uiActions.showMessage({type: 'error', message}));
+      // listenerApi.dispatch(siteActions.setError());
+      return;
+    }
+
+    listenerApi.dispatch(mapsActions.setSectors({bounds, sectors: response}));
   },
 });
 

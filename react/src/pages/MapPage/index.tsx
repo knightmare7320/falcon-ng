@@ -1,19 +1,33 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useMap, MapContainer, TileLayer } from "react-leaflet";
+import { useMap, useMapEvent, MapContainer, TileLayer } from "react-leaflet";
+import { useDispatch } from "react-redux";
 import "leaflet/dist/leaflet.css"
 
 import styles from "./MapPage.module.css";
+import { mapsActions } from "../../store/maps.slice";
 import SiteLayer from "./SiteLayer";
+import SectorLayer from "./SectorLayer";
 
 // https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=<YOUR_API_KEY>&units=metric
 
 
 function MyMap({latitude, longitude}: {latitude:number, longitude:number}) {
+  const dispatch = useDispatch();
   const map = useMap();
   if (latitude && longitude) {
     map.setView({lat: parseFloat(latitude), lng: parseFloat(longitude)});
   }
+
+
+  useMapEvent('moveend', () => {
+    const zoom = map.getZoom();
+    const ne = map.getBounds().getNorthEast();
+    const sw = map.getBounds().getSouthWest();
+    dispatch(mapsActions.setMapBounds({minLng: sw.lng, maxLng: ne.lng, minLat: sw.lat, maxLat: ne.lat}));
+  }
+  );
+
   return null;
 }
 
@@ -41,6 +55,7 @@ export default function MapPage() {
         />
 
         <MyMap latitude={parseFloat(latitude)} longitude={parseFloat(longitude)}/>
+        <SectorLayer />
         <SiteLayer />
       </MapContainer>
     }

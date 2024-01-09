@@ -36,7 +36,6 @@ exports.getSites = (req, res) => {
     min_longitude: xToLongitude(zoom, xTile),
     max_longitude: xToLongitude(zoom, xTile+1)
   };
-  console.log(params);
   model.getSites(
     req.app.locals.db,
     params,
@@ -51,10 +50,10 @@ exports.getSites = (req, res) => {
 
 exports.getSitesBounds = (req, res) => {
   const params = {
-    min_latitude: +req.params.minY,
-    max_latitude: +req.params.maxY,
-    min_longitude: +req.params.minX,
-    max_longitude: +req.params.maxX,
+    min_latitude: +req.query.minLat,
+    max_latitude: +req.query.maxLat,
+    min_longitude: +req.query.minLng,
+    max_longitude: +req.query.maxLng,
   };
   model.getSites(
     req.app.locals.db,
@@ -94,10 +93,10 @@ exports.getSectors = (req, res) => {
 
 exports.getSectorsBounds = (req, res) => {
   const params = {
-    min_latitude: +req.params.minY,
-    max_latitude: +req.params.maxY,
-    min_longitude: +req.params.minX,
-    max_longitude: +req.params.maxX,
+    min_latitude: +req.query.minLat,
+    max_latitude: +req.query.maxLat,
+    min_longitude: +req.query.minLng,
+    max_longitude: +req.query.maxLng,
   };
   model.getSectors(
     req.app.locals.db,

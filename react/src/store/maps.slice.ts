@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { GeoSite } from "../util/map.model";
+import { GeoSite, GeoSector } from "../util/map.model";
 
 
-export type MapsBounds = {minX:number, maxX: number, minY:number, maxY:number};
+export type MapsBounds = {minLat:number, maxLat: number, minLng:number, maxLng:number};
 
 export type MapsState = {
   // siteTiles: { 
@@ -10,12 +10,14 @@ export type MapsState = {
   // },
   mapBounds:MapsBounds|undefined,
   sites:GeoSite[],
+  sectors:GeoSector[],
 };
 
 const INITIAL_STATE = {
   // siteTiles: {},
   mapBounds: undefined,
   sites: [],
+  sectors: [],
 };
 
 
@@ -26,19 +28,33 @@ const mapsSlice = createSlice({
     setMapBounds(state:MapsState, action:PayloadAction<MapsBounds>) {
       state.mapBounds = action.payload; 
     },
-    setSites(state:MapsState, action:PayloadAction<{bounds:MapsBounds, rows: GeoSite[]}>) {
+    setSites(state:MapsState, action:PayloadAction<{bounds:MapsBounds, sites: GeoSite[]}>) {
       // probably need to keep the bounds for this response to check if they have changed
       if (!state.mapBounds || 
-          state.mapBounds.minX === action.payload.bounds.minX &&
-          state.mapBounds.maxX === action.payload.bounds.maxX &&
-          state.mapBounds.minY === action.payload.bounds.minY &&
-          state.mapBounds.maxY === action.payload.bounds.maxY
+          state.mapBounds.minLat === action.payload.bounds.minLat &&
+          state.mapBounds.maxLat === action.payload.bounds.maxLat &&
+          state.mapBounds.minLng === action.payload.bounds.minLng &&
+          state.mapBounds.maxLng === action.payload.bounds.maxLng
       ) {
-        state.sites = action.payload.rows;
+        state.sites = action.payload.sites;
       }
     },
     clearSites(state:MapsState) {
       state.sites = []
+    },
+    setSectors(state:MapsState, action:PayloadAction<{bounds:MapsBounds, sectors: GeoSector[]}>) {
+      // probably need to keep the bounds for this response to check if they have changed
+      if (!state.mapBounds || 
+          state.mapBounds.minLat === action.payload.bounds.minLat &&
+          state.mapBounds.maxLat === action.payload.bounds.maxLat &&
+          state.mapBounds.minLng === action.payload.bounds.minLng &&
+          state.mapBounds.maxLng === action.payload.bounds.maxLng
+      ) {
+        state.sectors = action.payload.sectors;
+      }
+    },
+    clearSectors(state:MapsState) {
+      state.sectors = []
     },
     // fetchSiteTile(state:MapState, action:PayloadAction<{key:string, coords:{x:number, y:number, z:number}}>) {
     //   state.load_count++;

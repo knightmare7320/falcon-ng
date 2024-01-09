@@ -1,31 +1,12 @@
-import { useMap, useMapEvents, LayerGroup, CircleMarker, Tooltip } from "react-leaflet";
-import { useSelector, useDispatch } from "react-redux";
+import { LayerGroup, CircleMarker, Tooltip } from "react-leaflet";
+import { useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 
 import { RootState } from "../../store";
-import { mapsActions } from "../../store/maps.slice";
-
-const MAX_ZOOM = 8;
 
 export default function SiteLayer() {
-  const dispatch = useDispatch();
-  const map = useMap();
   const navigate = useNavigate();
 
-  function loadSites() {
-    const zoom = map.getZoom();
-    if (zoom >= MAX_ZOOM) {
-      const ne = map.getBounds().getNorthEast();
-      const sw = map.getBounds().getSouthWest();
-      dispatch(mapsActions.setMapBounds({minX: sw.lng, maxX: ne.lng, minY: sw.lat, maxY: ne.lat}));
-    } else {
-      dispatch(mapsActions.clearSites());
-    }
-  }
-
-  useMapEvents({
-    moveend: () => loadSites(),
-  });
 
   const sites = useSelector((state: RootState) => state.maps.sites);
 
