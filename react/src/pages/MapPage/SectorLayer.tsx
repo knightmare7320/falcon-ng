@@ -1,34 +1,27 @@
+import { useSelector } from "react-redux";
 import { useMap, LayerGroup, Polygon } from "react-leaflet";
 import L, {LatLng} from "leaflet";
-import { useSelector } from "react-redux";
 
 import { RootState } from "../../store";
 
-
 export default function SectorLayer() {
   const map = useMap();
-
   const zoom = map.getZoom();
-
   const sectors = useSelector((state: RootState) => state.maps.sectors);
 
   return <LayerGroup>{
     sectors.map(sector => {
       const poly = getPoly(zoom, sector.latitude, sector.longitude, sector.azimuth, sector.horizontal_bw);
-      // const object = L.polygon(
-      //   poly,
-      //   { pane: this.paneName,
-      //     color: '#666666',
-      //     weight: 1,
-      //     opacity: 0.8,
-      //     fillOpacity: 0.5,
-      //     fillColor: '#ffffff',
-      //     interactive: false,
-      //   }
-      // );
-      console.log(poly);
-
-      return <Polygon key={sector.cascade_code + '-' + sector.sector_number} positions={poly} weight={1} color={'#666666'} opacity={0.6} fillOpacity={0.5} fillColor={'#ffffff'} interactive={false} />
+      return <Polygon 
+        key={sector.cascade_code + '-' + sector.sector_number} 
+        positions={poly} 
+        weight={1} 
+        color={'#666666'} 
+        opacity={0.6} 
+        fillOpacity={0.5} 
+        fillColor={'#ffffff'} 
+        interactive={false} 
+      />
     })
   }
   </LayerGroup>;

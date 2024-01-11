@@ -7,7 +7,6 @@ import { RootState } from "../../store";
 export default function SiteLayer() {
   const navigate = useNavigate();
 
-
   const sites = useSelector((state: RootState) => state.maps.sites);
 
   return <LayerGroup>{

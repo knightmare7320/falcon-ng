@@ -22,7 +22,7 @@ export default function SitePage() {
     if (siteState.status === 'init' || siteState.cascade_code !== cascadeCode) {
       dispatch(siteActions.setCascade(cascadeCode));
     }
-  });
+  }, [cascadeCode]);
 
   return <>
     <Helmet>

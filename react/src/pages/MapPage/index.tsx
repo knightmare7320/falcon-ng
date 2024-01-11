@@ -4,7 +4,7 @@ import { useMap, useMapEvent, MapContainer, TileLayer } from "react-leaflet";
 import { useDispatch } from "react-redux";
 import "leaflet/dist/leaflet.css"
 
-import styles from "./MapPage.module.css";
+import styles from "./index.module.css";
 import { mapsActions } from "../../store/maps.slice";
 import SiteLayer from "./SiteLayer";
 import SectorLayer from "./SectorLayer";
@@ -15,18 +15,19 @@ import SectorLayer from "./SectorLayer";
 function MyMap({latitude, longitude}: {latitude:number, longitude:number}) {
   const dispatch = useDispatch();
   const map = useMap();
-  if (latitude && longitude) {
-    map.setView({lat: parseFloat(latitude), lng: parseFloat(longitude)});
-  }
 
-
-  useMapEvent('moveend', () => {
-    const zoom = map.getZoom();
+  useEffect(() => {
+    map.setView({lat: latitude, lng: longitude});
     const ne = map.getBounds().getNorthEast();
     const sw = map.getBounds().getSouthWest();
     dispatch(mapsActions.setMapBounds({minLng: sw.lng, maxLng: ne.lng, minLat: sw.lat, maxLat: ne.lat}));
-  }
-  );
+  }, [latitude, longitude])
+
+  useMapEvent('moveend', () => {
+    const ne = map.getBounds().getNorthEast();
+    const sw = map.getBounds().getSouthWest();
+    dispatch(mapsActions.setMapBounds({minLng: sw.lng, maxLng: ne.lng, minLat: sw.lat, maxLat: ne.lat}));
+  });
 
   return null;
 }

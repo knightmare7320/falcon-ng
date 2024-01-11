@@ -1,14 +1,24 @@
-import { MapContainer, TileLayer, useMap } from "react-leaflet";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css"
 
 import styles from "./InsetMap.module.css";
 import SiteLayer from "../MapPage/SiteLayer";
-
+import { mapsActions } from "../../store/maps.slice";
+import SectorLayer from "../MapPage/SectorLayer";
 
 function MyMap({latitude, longitude}: {latitude:number, longitude:number}) {
   const map = useMap();
-  map.setView([latitude, longitude]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    map.setView({lat: latitude, lng: longitude});
+    const ne = map.getBounds().getNorthEast();
+    const sw = map.getBounds().getSouthWest();
+    dispatch(mapsActions.setMapBounds({minLng: sw.lng, maxLng: ne.lng, minLat: sw.lat, maxLat: ne.lat}));
+  }, [latitude, longitude])
   return null;
 }
 
@@ -24,6 +34,7 @@ export default function InsetMap({latitude, longitude}: {latitude:number, longit
           <MyMap latitude={latitude} longitude={longitude} />
 
           <SiteLayer />
+          <SectorLayer />
           
         </MapContainer>
       </Link>
