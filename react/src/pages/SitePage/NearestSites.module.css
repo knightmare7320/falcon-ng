@@ -1,0 +1,16 @@
+.title {
+  color: darkgoldenrod;
+  margin-bottom: 0.5rem;
+  text-decoration: underline;
+}
+
+.list {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+.list li a {
+  color: darkgoldenrod;
+  text-transform: capitalize;
+}

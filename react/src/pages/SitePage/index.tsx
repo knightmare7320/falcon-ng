@@ -1,14 +1,16 @@
 import { Helmet } from 'react-helmet';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { siteActions } from '../../store/site.slice';
 import { RootState } from '../../store';
-import LoadingSpinner from '../../components/ui/LoadingSpinner';
 
+import styles from "./index.module.css";
+import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import InsetMap from './InsetMap';
 import SiteDetails from './SiteDetails';
+import NearestSites from './NearestSites';
 
 
 export default function SitePage() {
@@ -31,8 +33,14 @@ export default function SitePage() {
 
     {siteState.status === 'loading' && <LoadingSpinner />}
 
-    <InsetMap latitude={siteState.site.latitude} longitude={siteState.site.longitude} />
-
-    <SiteDetails site={siteState.site} />
+    <div className={styles.siteDetailBox}>
+      <div className={styles.siteDetailColumn}>
+        <SiteDetails site={siteState.site} />
+      </div>
+      <div className={styles.siteDetailColumn}>
+        <InsetMap latitude={siteState.site.latitude} longitude={siteState.site.longitude} />
+        <NearestSites data={siteState.nearest} />
+      </div>
+    </div>
   </>;
 }

@@ -16,8 +16,8 @@ export type MapsState = {
 const INITIAL_STATE = {
   // siteTiles: {},
   mapBounds: undefined,
-  sites: [],
-  sectors: [],
+  sites: [] as GeoSite[],
+  sectors: [] as GeoSector[],
 };
 
 

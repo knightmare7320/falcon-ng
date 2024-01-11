@@ -37,7 +37,7 @@ export type Site = {
   create_date: string,
   modified_by_name: string,
   modified_date: string,
-}
+};
 
 export type Bts = {
   bts_id: number,
@@ -61,7 +61,7 @@ export type Bts = {
   create_date: string,
   modified_by_name: string,
   modified_date: string,
-}
+};
 
 export type Sector = {
   sector_id: number,
@@ -85,7 +85,7 @@ export type Sector = {
   create_date: string,  
   modified_by_name: string,  
   modified_date: string,  
-}
+};
 
 export type Carrier = {   
   carrier_id: number, 
@@ -104,4 +104,15 @@ export type Carrier = {
   create_date: string,  
   modified_by_name: string,  
   modified_date: string,  
-}
+};
+
+export type Nearest = {
+  cascade_code: string,
+  site_name?: string,
+  address1?: string,
+  city?: string,
+  state?: string,
+  distance_mi: number,
+  bearing?: string,
+  azimith?: number,
+};

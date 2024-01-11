@@ -58,6 +58,21 @@ class Site {
          }
       );
    }
+
+   static getNearest(db, params, result) {
+      db.query(
+         'call get_nearest_sites(?)',
+         [params.cascade_code],
+         function(err, results) {
+            if (err) {
+               console.error(err);
+               result(err, null);
+               return;
+            }
+            result(null, results[0]);
+         }
+      );
+   }
 }
 
 module.exports = Site;

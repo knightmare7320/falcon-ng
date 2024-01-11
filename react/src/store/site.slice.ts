@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { Site, Bts, Sector, Carrier } from "../util/site.model"
+import { Site, Bts, Sector, Carrier, Nearest } from "../util/site.model"
 
 export type SiteState = {
   status: string,
@@ -9,6 +9,7 @@ export type SiteState = {
   bts: Bts[],
   sectors: Sector[],
   carriers: Carrier[],
+  nearest: Nearest[],
 }
 
 const INITIAL_STATE = {
@@ -19,6 +20,7 @@ const INITIAL_STATE = {
   bts: [] as Bts[],
   sectors: [] as Sector[],
   carriers: [] as Carrier[],
+  nearest: [] as Nearest[],
 }
 
 const siteSlice = createSlice({
@@ -38,6 +40,9 @@ const siteSlice = createSlice({
       state.site = action.payload;
       state.status = 'ok';
     },
+    setNearest(state:SiteState, action: PayloadAction<Nearest[]>) {
+      state.nearest = action.payload;
+    }
   },
 });
 

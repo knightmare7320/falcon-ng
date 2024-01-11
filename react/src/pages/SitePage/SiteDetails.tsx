@@ -25,7 +25,6 @@ export default function SiteDetails({site}:{site:Site}) {
           <td>
             <address>
               { site.address1 } <br/>
-              { site.address2 } <br/>
               { site.city }, { site.state }  { site.zip_code }
             </address>
           </td>
@@ -36,15 +35,15 @@ export default function SiteDetails({site}:{site:Site}) {
         </tr>
         <tr>
           <th>Latitude:</th>
-          <td>{ site?.latitude }</td>
+          <td>{ site?.latitude }&deg; N</td>
         </tr>
         <tr>
           <th>Longitude:</th>
-          <td>{ site?.longitude }</td>
+          <td>{ site?.longitude }&deg; E</td>
         </tr>
         <tr>
-          <th>Elevation (ft):</th>
-          <td>{ site?.elevation_feet }</td>
+          <th>Elevation:</th>
+          <td>{ site?.elevation_feet } ft</td>
         </tr>
         <tr>
           <th>Structure Type:</th>

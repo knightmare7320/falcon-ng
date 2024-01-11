@@ -8,6 +8,10 @@ CREATE PROCEDURE gui.get_nearest_sites(
 BEGIN
    
    SELECT   s2.cascade_code
+          , s2.site_name
+          , s2.address1
+          , s2.city
+          , s2.state
           , round(
                st_distance_sphere(s1.geo_point, s2.geo_point) * 0.000621371
                , 2

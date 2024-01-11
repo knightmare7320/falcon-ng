@@ -27,7 +27,7 @@ exports.getBts = (req, res, next) => {
          if (err)
             res.status(500).json({ message: err });
          else
-            res.status(200).json({ ...result });
+            res.status(200).json(result);
       }
    );
 };
@@ -43,7 +43,7 @@ exports.getSectors = (req, res, next) => {
          if (err)
             res.status(500).json({ message: err });
          else
-            res.status(200).json({ ...result });
+            res.status(200).json(result);
       }
    );
 };
@@ -59,7 +59,23 @@ exports.getCarriers = (req, res, next) => {
          if (err)
             res.status(500).json({ message: err });
          else
-            res.status(200).json({ ...result });
+            res.status(200).json(result);
+      }
+   );
+};
+
+exports.getNearest = (req, res) => {
+   const params = {
+      cascade_code: req.params.cascade_code,
+   };
+   model.getNearest(
+      req.app.locals.db,
+      params,
+      (err, result) => {
+         if (err)
+            res.status(500).json({ message: err });
+         else
+            res.status(200).json( result );
       }
    );
 };

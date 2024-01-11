@@ -23,7 +23,7 @@ const INITIAL_STATE: BrowseState = {
   id: '',
   name: '',
   row_count: 0,
-  rows: [],
+  rows: [] as kpiRowType[],
   page_number: 1,
   page_count: 0,
   page_size: 7,
