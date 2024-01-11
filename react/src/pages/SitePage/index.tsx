@@ -31,6 +31,7 @@ export default function SitePage() {
       <title>Falcon - {cascadeCode} </title>
     </Helmet>
 
+    <h2>Cascade: {cascadeCode}</h2>
     {siteState.status === 'loading' && <LoadingSpinner />}
 
     <div className={styles.siteDetailBox}>

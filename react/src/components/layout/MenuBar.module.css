@@ -2,13 +2,39 @@
   position: fixed;
   top: 0;
   left: 0;
-  height: 40px;
+  height: 50px;
   width: 100%;
   list-style-type: none;
   margin: 0;
-  padding: 0;
-  background: #fff5e6;
+  padding: 0 1.5em;
+  background: darkslateblue;
   z-index:11;  
   overflow:hidden;
   box-shadow: 2px 0 18px rgba(0, 0, 0, 0.26);
+  color: white;
+}
+
+.title {
+  padding-top: 7.5px;
+  display: inline-block;
+}
+.title img {
+  height: 35px;
+  padding-right: 0.5rem;
+}
+.title p {
+  margin: 0;
+  font-size: x-large;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.menu {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: right;
 }

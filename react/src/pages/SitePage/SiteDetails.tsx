@@ -9,10 +9,6 @@ export default function SiteDetails({site}:{site:Site}) {
     <table className={styles.siteTable}>
       <tbody>
         <tr>
-          <th>Cascade:</th>
-          <td className={styles.cascadeCode}>{ site.cascade_code }</td>
-        </tr>
-        <tr>
           <th>Site Name:</th>
           <td>{ site.site_name }</td>
         </tr>
