@@ -4,7 +4,6 @@
   left: 0;
   height: 50px;
   width: 100%;
-  list-style-type: none;
   margin: 0;
   padding: 0 1.5em;
   background: darkslateblue;
@@ -14,27 +13,42 @@
   color: white;
 }
 
-.title {
+.title__icon {
   padding-top: 7.5px;
   display: inline-block;
 }
-.title img {
+.title__icon img {
   height: 35px;
   padding-right: 0.5rem;
-}
-.title p {
-  margin: 0;
-  font-size: x-large;
-  font-weight: bold;
-  text-transform: uppercase;
   display: inline-block;
+  vertical-align: 00%;
+}
+
+.title__text {
+  margin: 0;
+  font-family: Salsa, Serif;
+  font-size: xx-large;
+  font-weight: bold;
+  display: inline-block;
+  padding-top: 2px;
   vertical-align: top;
 }
 
 .menu {
   display: inline-block;
+  width: calc(100% - 190px);
+  text-align: right;
+  vertical-align: 50%;
+}
+.menu ul {
+  list-style-type: none;
   margin: 0;
   padding: 0;
-  list-style: none;
-  text-align: right;
+}
+.menu a {
+  color: white;
+  font-weight: bold;
+}
+.menu a:hover {
+  color: lightblue;
 }

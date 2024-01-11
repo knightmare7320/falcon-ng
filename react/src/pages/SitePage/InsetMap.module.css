@@ -1,6 +1,6 @@
 .leaflet-container {
   height: 170px;
-  width: 80%;
+  width: 90%;
   border: 1px solid blue;
   cursor: pointer;
 }

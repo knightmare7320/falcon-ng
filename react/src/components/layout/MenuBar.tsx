@@ -7,16 +7,22 @@ export default function MenuBar() {
     <header>
       <div className={classes.menuBar}>
 
-        <div className={classes.title}>
+        <div className={classes.title__icon}>
           <Link to="/">
             <img src="/K-favicon.webp" title="Falcon"></img>
           </Link>
-          <p>Falcon</p>
         </div>
-
-        <ul className={classes.menu}>
-          <li><Link to="/login">Login</Link></li>
-        </ul>
+        <div className={classes.title__text}>
+          Falcon
+        </div>
+        
+        <div className={classes.menu}>
+          <ul className={classes.menu__list}>
+            <li className={classes.menu__listitem}>
+              <Link to="/login" className={classes.menu__link}>Login</Link>
+            </li>
+          </ul>
+        </div>
       </div>
     </header>
   );
