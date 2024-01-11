@@ -1,31 +1,31 @@
-import { ChangeEventHandler } from "react";
+import { ChangeEvent } from "react";
 
 export default function PageSize(
   { pageSize, 
     pageSizes, 
-    handlePageSizeChange
+    onPageSizeChange
   }: {
-    pageSize: number, 
-    pageSizes: Array<number>, 
-    handlePageSizeChange: ChangeEventHandler
+    pageSize:number, 
+    pageSizes:Array<number>, 
+    onPageSizeChange:Function,
   }
 ) {
+
+  function handlePageChange(newPageSize:number) {
+    onPageSizeChange(newPageSize);
+  }
+
   return <>
     <label htmlFor="pageSize">
       Page Size: 
     </label>
 
-    <select 
-      id="pageSize"
-      value={pageSize} 
-      onChange={handlePageSizeChange}
-    >
       {pageSizes.map(val => 
-        <option 
+        <button
           key={val} 
-          value={val}
-        >{val}</option>
+          disabled={val === pageSize}
+          onClick={() => handlePageChange(val)}
+        >{val}</button>
       )}
-    </select>
   </>;
 }
