@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import "./PageNumber.css";
 
 export default function PageSize(
   { pageSize, 
@@ -16,16 +16,19 @@ export default function PageSize(
   }
 
   return <>
-    <label htmlFor="pageSize">
+    <label>
       Page Size: 
     </label>
 
+    <div className="pageControls__btn-group">
       {pageSizes.map(val => 
         <button
-          key={val} 
-          disabled={val === pageSize}
-          onClick={() => handlePageChange(val)}
+        key={val} 
+        disabled={val === pageSize}
+        onClick={() => handlePageChange(val)}
+        className={val === pageSize ? 'selected' : undefined}
         >{val}</button>
       )}
+    </div>
   </>;
 }

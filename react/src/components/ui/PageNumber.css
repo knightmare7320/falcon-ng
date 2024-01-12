@@ -19,6 +19,10 @@
   color: white; 
 }
 
+.pageControls__btn-group button.spacer:disabled {
+  padding: 10px 5px;
+}
+
 .pageControls__btn-group button:disabled {
   background-color: #dddddd; 
   border: 1px solid darkblue; 

@@ -3,10 +3,11 @@ import { faAnglesLeft, faAngleLeft, faAngleRight, faAnglesRight } from '@fortawe
 
 import "./PageNumber.css"
 
+
 export default function PageNumber(
   { pageNumber, 
     pageCount,
-    onPageChange
+    onPageChange:gotoPage
   }: {
     pageNumber: number, 
     pageCount: number,
@@ -14,66 +15,73 @@ export default function PageNumber(
   }
 ) {
 
-  function handlePageChange(newPageNumber:number) {
-    onPageChange(newPageNumber);
+  const FirstButton = () => <button disabled={pageNumber === 1} onClick={() => gotoPage(1)}>
+    <FontAwesomeIcon icon={faAnglesLeft} />
+  </button>;
+  
+  const BackButton = () => <button disabled={pageNumber === 1} onClick={() => gotoPage(pageNumber - 1)}>
+    <FontAwesomeIcon icon={faAngleLeft} />
+  </button>;
+  
+  const NextButton = () => <button disabled={pageNumber === pageCount} onClick={() => gotoPage(pageNumber + 1)}> 
+    <FontAwesomeIcon icon={faAngleRight} />
+  </button>;
+  
+  const LastButton = () => <button disabled={pageNumber === pageCount} onClick={() => gotoPage(pageCount)}>
+    <FontAwesomeIcon icon={faAnglesRight} />
+  </button>;
+
+  const SpacerButton = () => <button disabled className="spacer">...</button>;
+
+  function NumberButton({pageIdx}: {pageIdx:number}) {
+    return <button
+      disabled={pageIdx === pageNumber}
+      onClick={() => gotoPage(pageIdx)}
+      className={pageIdx === pageNumber ? 'selected' : undefined}
+    >{pageIdx}</button>;
+  }
+  
+  function NumberButtons() {
+    let prevDots = false;
+    return Array(pageCount).fill(1).map(
+        (_, idx) => {
+          const pageIdx = idx + 1;
+
+          if ( (pageNumber < 3 && pageIdx <= 5) ||
+               (pageNumber > pageCount - 3) && (pageIdx > pageCount - 5) ||
+               (Math.abs(pageIdx - pageNumber) < 3)
+          ) {
+
+            prevDots = false;
+            return <NumberButton key={pageIdx} pageIdx={pageIdx} />;
+
+          } else {
+
+            if (prevDots) {
+              return;
+            } else {
+              prevDots = true;
+              return <SpacerButton key={pageIdx} />;
+            }
+
+          }
+        }
+      );
   }
 
-  let prevDots = false;
+  /*------*/
+
   return <>
     <label>
       Page Number: 
     </label>
 
     <div className="pageControls__btn-group">
-      <button 
-        disabled={pageNumber === 1}
-        onClick={() => handlePageChange(1)}
-      >
-        <FontAwesomeIcon icon={faAnglesLeft} />
-      </button>
-      <button 
-        disabled={pageNumber === 1}
-        onClick={() => handlePageChange(pageNumber - 1)}
-      >
-        <FontAwesomeIcon icon={faAngleLeft} />
-      </button>
-
-      {Array(pageCount).fill(1).map(
-        (_, idx) => {
-          if (Math.abs(idx + 1 - pageNumber) > 1) {
-            if (prevDots) {
-              return;
-            } else {
-              prevDots = true;
-              return <button key={idx} disabled>...</button>
-            }
-          } else {
-            prevDots = false;
-            return <button
-              key={idx} 
-              disabled={idx + 1 === pageNumber}
-              onClick={() => handlePageChange(idx + 1)}
-              className={idx + 1 === pageNumber ? 'selected' : undefined}
-            >
-              {idx + 1}
-            </button>;
-          }
-        }
-        )
-      }
-
-      <button 
-        disabled={pageNumber === pageCount}
-        onClick={() => handlePageChange(pageNumber + 1)}
-      > 
-        <FontAwesomeIcon icon={faAngleRight} />
-      </button>
-      <button 
-        disabled={pageNumber === pageCount}
-        onClick={() => handlePageChange(pageCount)}
-      >
-        <FontAwesomeIcon icon={faAnglesRight} />
-      </button>
+      <FirstButton />
+      <BackButton />
+      <NumberButtons />
+      <NextButton />
+      <LastButton />
     </div>
   </>;
 }
