@@ -8,9 +8,9 @@ export type BrowseState = {
   name: string,
   row_count: number,
   rows: Array<kpiRowType>,
+  page_size: number,
   page_number: number,
   page_count: number,
-  page_size: number,
   order_by: string,
   order_dir: string,
   page_sizes: Array<number>,
@@ -24,9 +24,9 @@ const INITIAL_STATE: BrowseState = {
   name: '',
   row_count: 0,
   rows: [] as kpiRowType[],
+  page_size: 7,
   page_number: 1,
   page_count: 0,
-  page_size: 7,
   order_by: 'name',
   order_dir: 'ASC',
   page_sizes: [7, 15, 30],
@@ -55,7 +55,15 @@ const browseSlice = createSlice({
       state.page_number = action.payload;
     },
     setPageSize(state:BrowseState, action:PayloadAction<number>) {
-      state.page_size = action.payload;
+      const page_size = action.payload;
+      const page_count = Math.ceil(state.row_count / page_size) | 1
+
+      state.page_size = page_size;
+      state.page_count = page_count;
+      // TODO: this just makes sure we have a valid page, but would rather recalculate to stay near the current data
+      if (state.page_number > page_count) {
+        state.page_number = page_count;
+      }
     },
     setOrderBy(state:BrowseState, action:PayloadAction<{order_by: string, order_dir: string}>) {
       state.order_by = action.payload.order_by;

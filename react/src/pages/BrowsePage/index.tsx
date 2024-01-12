@@ -47,7 +47,7 @@ export default function BrowsePage({type}: {type: string}) {
     <h1>{getTitle(type, browseState.name)} Performance</h1>
     <BrowseTable type={browseState.type} rows={browseState.rows} />
 
-    <PageNumber rowCount={browseState.row_count} pageNumber={browseState.page_number} pageSize={browseState.page_size} onPageChange={handlePageChange} />
+    <PageNumber pageCount={browseState.page_count} pageNumber={browseState.page_number} onPageChange={handlePageChange} />
     <PageSize pageSize={browseState.page_size} pageSizes={browseState.page_sizes} onPageSizeChange={handlePageSizeChange} />
 
     {browseState.status === 'loading' && <LoadingSpinner />}

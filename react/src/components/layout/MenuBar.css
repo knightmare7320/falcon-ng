@@ -13,18 +13,18 @@
   color: white;
 }
 
-.title__icon {
+.menuBar__icon {
   padding-top: 7.5px;
   display: inline-block;
 }
-.title__icon img {
+.menuBar__icon img {
   height: 35px;
   padding-right: 0.5rem;
   display: inline-block;
   vertical-align: 00%;
 }
 
-.title__text {
+.menuBar__title {
   margin: 0;
   font-family: Salsa, Serif;
   font-size: xx-large;
@@ -34,21 +34,21 @@
   vertical-align: top;
 }
 
-.menu {
+.menuBar__menu {
   display: inline-block;
   width: calc(100% - 190px);
   text-align: right;
   vertical-align: 50%;
 }
-.menu ul {
+.menuBar__menu ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
-.menu a {
+.menuBar__menu a {
   color: white;
   font-weight: bold;
 }
-.menu a:hover {
+.menuBar__menu a:hover {
   color: lightblue;
 }

@@ -14,6 +14,7 @@ export default function RootLayout() {
       <MenuBar />
       <SideBar />
         <Content>
+          {/* <Notifications /> */}
           <Outlet />
         </Content>
     </>

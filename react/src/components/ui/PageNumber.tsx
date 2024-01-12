@@ -1,63 +1,79 @@
-import { ChangeEvent } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAnglesLeft, faAngleLeft, faAngleRight, faAnglesRight } from '@fortawesome/free-solid-svg-icons'
 
+import "./PageNumber.css"
+
 export default function PageNumber(
-  { rowCount, 
-    pageNumber, 
-    pageSize, 
+  { pageNumber, 
+    pageCount,
     onPageChange
   }: {
-    rowCount: number, 
     pageNumber: number, 
-    pageSize: number, 
+    pageCount: number,
     onPageChange: Function,
   }
 ) {
-  let numPages = Math.ceil(rowCount / pageSize) || 1;
 
   function handlePageChange(newPageNumber:number) {
     onPageChange(newPageNumber);
   }
 
+  let prevDots = false;
   return <>
-    <label htmlFor="pageNumber">
+    <label>
       Page Number: 
     </label>
 
-    <button 
-      disabled={pageNumber === 1}
-      onClick={() => handlePageChange(1)}
-    >
-      <FontAwesomeIcon icon={faAnglesLeft} />
-    </button>
-    <button 
-      disabled={pageNumber === 1}
-      onClick={() => handlePageChange(pageNumber - 1)}
-    >
-      <FontAwesomeIcon icon={faAngleLeft} />
-    </button>
+    <div className="pageControls__btn-group">
+      <button 
+        disabled={pageNumber === 1}
+        onClick={() => handlePageChange(1)}
+      >
+        <FontAwesomeIcon icon={faAnglesLeft} />
+      </button>
+      <button 
+        disabled={pageNumber === 1}
+        onClick={() => handlePageChange(pageNumber - 1)}
+      >
+        <FontAwesomeIcon icon={faAngleLeft} />
+      </button>
 
-    {Array(numPages).fill(1).map((_, idx) => 
-      <button type="button"
-        key={idx} 
-        disabled={idx + 1 === pageNumber}
-        onClick={() => handlePageChange(idx + 1)}
-      >{idx + 1}</button>
-    )}
+      {Array(pageCount).fill(1).map(
+        (_, idx) => {
+          if (Math.abs(idx + 1 - pageNumber) > 1) {
+            if (prevDots) {
+              return;
+            } else {
+              prevDots = true;
+              return <button key={idx} disabled>...</button>
+            }
+          } else {
+            prevDots = false;
+            return <button
+              key={idx} 
+              disabled={idx + 1 === pageNumber}
+              onClick={() => handlePageChange(idx + 1)}
+              className={idx + 1 === pageNumber ? 'selected' : undefined}
+            >
+              {idx + 1}
+            </button>;
+          }
+        }
+        )
+      }
 
-    <button 
-      disabled={pageNumber === numPages}
-      onClick={() => handlePageChange(pageNumber + 1)}
-    > 
-      <FontAwesomeIcon icon={faAngleRight} />
-    </button>
-    <button 
-      disabled={pageNumber === numPages}
-      onClick={() => handlePageChange(numPages)}
-    >
-      <FontAwesomeIcon icon={faAnglesRight} />
-    </button>
-
+      <button 
+        disabled={pageNumber === pageCount}
+        onClick={() => handlePageChange(pageNumber + 1)}
+      > 
+        <FontAwesomeIcon icon={faAngleRight} />
+      </button>
+      <button 
+        disabled={pageNumber === pageCount}
+        onClick={() => handlePageChange(pageCount)}
+      >
+        <FontAwesomeIcon icon={faAnglesRight} />
+      </button>
+    </div>
   </>;
 }

@@ -3,9 +3,6 @@ import { NavLink } from "react-router-dom";
 
 import classes from "./SideBar.module.css";
 
-// $(".menu-button").click(function(){
-//   $(".menu-bar").toggleClass( "open" );
-//   })
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
