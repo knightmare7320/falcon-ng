@@ -11,6 +11,7 @@ import LocationTab from './LocationTab';
 import ParamsTab from './ParamsTab';
 import PerformanceTab from './PerformanceTab';
 import EquipmentTab from './EquipmentTab';
+import PicturesTab from './PicturesTab';
 
 
 export default function SitePage() {
@@ -40,6 +41,8 @@ export default function SitePage() {
     content = <PerformanceTab />;
   } else if (selectedTab === 'params') {
     content = <ParamsTab />;
+  } else if (selectedTab === 'pictures') {
+    content = <PicturesTab />;
   } else {
     content = <LocationTab site={siteState} />;
   }
@@ -59,19 +62,18 @@ export default function SitePage() {
       <input type="radio" id="equipment" name="siteTabs" value="equipment" className={styles.tab} checked={selectedTab==="equipment"}  onChange={handleTabChange} />
       <label htmlFor="equipment">Equipment</label>
 
+      <input type="radio" id="pictures" name="siteTabs" value="pictures" className={styles.tab} checked={selectedTab==="pictures"} onChange={handleTabChange} />
+      <label htmlFor="pictures">Pictures</label>
+
       <input type="radio" id="params" name="siteTabs" value="params" className={styles.tab} checked={selectedTab==="params"} onChange={handleTabChange} />
       <label htmlFor="params">Params</label>
 
       <input type="radio" id="performance" name="siteTabs" value="performance" className={styles.tab} checked={selectedTab==="performance"} onChange={handleTabChange} />
       <label htmlFor="performance">Performance</label>
 
-
       <div className={styles.tab__content}>
-
-       {content}
-
+        {content}
       </div>  
-
 
     </div>
   </>;

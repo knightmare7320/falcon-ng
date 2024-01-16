@@ -7,7 +7,7 @@ export default function MenuBar() {
     <header className="menuBar">
       <div className="menuBar__icon">
         <Link to="/">
-          <img src="/K-favicon.webp" title="Falcon"></img>
+          <img src="/K-favicon.webp" title="brian.k.knight@gmail.com"></img>
         </Link>
       </div>
       <div className="menuBar__title">
