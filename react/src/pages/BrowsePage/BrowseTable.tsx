@@ -2,6 +2,8 @@ import { kpiRowType } from "../../util/browse.model";
 import { getColumnName } from "./lookups";
 import BrowseRow from "./BrowseRow";
 
+import "./BrowseTable.css";
+
 export default function BrowseTable({type, rows}: {type:string, rows: kpiRowType[]}) {
   return (
     <table className="browseTable">

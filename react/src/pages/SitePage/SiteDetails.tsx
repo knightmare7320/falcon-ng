@@ -79,5 +79,8 @@ export default function SiteDetails({site}:{site:Site}) {
         </tr>
       </tbody>
     </table>
+    <div style={{textAlign: 'right'}}>
+      <button className="link">edit site</button>
+    </div>
   </>;
 }

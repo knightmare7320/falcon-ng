@@ -1,0 +1,33 @@
+table.browseTable {
+  border-collapse: collapse;
+  border-radius:6px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+table.browseTable th {
+  background-color: lightyellow;
+  border-bottom: 1px solid black;
+  border-left: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+  padding: 0.5em 1em;
+  text-align: right;
+}
+table.browseTable th:first-child {
+  text-align:left;
+}
+table.browseTable td {
+  border-left: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+  padding: 0.5em 1em;
+}
+table.browseTable td:first-child {
+  white-space: nowrap;
+}
+table.browseTable td.left {
+  text-align:left;
+}
+table.browseTable td.right {
+  text-align:right;
+}
+table.browseTable td.center {
+  text-align:center;
+}

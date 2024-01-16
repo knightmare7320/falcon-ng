@@ -20,39 +20,6 @@ body {
   box-sizing:border-box;
 }
 
-table.browseTable {
-  border-collapse: collapse;
-  border-radius:6px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-}
-table.browseTable th {
-  background-color: lightyellow;
-  border-bottom: 1px solid black;
-  border-left: 1px solid lightgray;
-  border-right: 1px solid lightgray;
-  padding: 0.5em 1em;
-  text-align: right;
-}
-table.browseTable th:first-child {
-  text-align:left;
-}
-table.browseTable td {
-  border-left: 1px solid lightgray;
-  border-right: 1px solid lightgray;
-  padding: 0.5em 1em;
-}
-table.browseTable td:first-child {
-  white-space: nowrap;
-}
-table.browseTable td.left {
-  text-align:left;
-}
-table.browseTable td.right {
-  text-align:right;
-}
-table.browseTable td.center {
-  text-align:center;
-}
 a {
   font-weight: 500;
   color: #646cff;
@@ -61,42 +28,16 @@ a {
 a:hover {
   color: #535bf2;
 }
-/* 
 
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+button.link {
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  color: #646cff;
+  text-decoration: none;
   cursor: pointer;
-  transition: border-color 0.25s;
 }
-button:hover {
-  border-color: #646cff;
+button.link:hover {
+  text-decoration: underline;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-} */
