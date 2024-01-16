@@ -7,9 +7,10 @@ import { siteActions } from '../../store/site.slice';
 import { RootState } from '../../store';
 import styles from "./index.module.css";
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
-import InsetMap from './InsetMap';
-import SiteDetails from './SiteDetails';
-import NearestSites from './NearestSites';
+import LocationTab from './LocationTab';
+import ParamsTab from './ParamsTab';
+import PerformanceTab from './PerformanceTab';
+import EquipmentTab from './EquipmentTab';
 
 
 export default function SitePage() {
@@ -27,8 +28,20 @@ export default function SitePage() {
     }
   }, [cascadeCode]);
 
-  function handleTabChange(event) {
-    console.log(event);
+  function handleTabChange(event: any) {
+    const tabName = event.currentTarget.value;
+    setSearchParams({tab: tabName});
+  }
+
+  let content;
+  if (selectedTab === 'equipment') {
+    content = <EquipmentTab />;
+  } else if (selectedTab === 'performance') {
+    content = <PerformanceTab />;
+  } else if (selectedTab === 'params') {
+    content = <ParamsTab />;
+  } else {
+    content = <LocationTab site={siteState} />;
   }
 
   return <>
@@ -39,34 +52,25 @@ export default function SitePage() {
     <h2>Site - <span>{cascadeCode}</span></h2>
     {siteState.status === 'loading' && <LoadingSpinner />}
 
-    <div className={styles.tabBar}>
-      <input type="radio" id="location" name="tabGroup" className={styles.tab} checked={selectedTab==="location"} onChange={handleTabChange}/>
+    <div className={styles.tab__container}>
+      <input type="radio" id="location" name="siteTabs" value="location" className={styles.tab} checked={selectedTab==="location"} onChange={handleTabChange} />
       <label htmlFor="location">Location</label>
 
-      <input type="radio" id="equipment" name="tabGroup" className={styles.tab} checked={selectedTab==="equipment"}  />
-      <label htmlFor="equipment">Medium</label>
+      <input type="radio" id="equipment" name="siteTabs" value="equipment" className={styles.tab} checked={selectedTab==="equipment"}  onChange={handleTabChange} />
+      <label htmlFor="equipment">Equipment</label>
 
-      <input type="radio" id="params" name="tabGroup" className={styles.tab} checked={selectedTab==="params"} />
+      <input type="radio" id="params" name="siteTabs" value="params" className={styles.tab} checked={selectedTab==="params"} onChange={handleTabChange} />
       <label htmlFor="params">Params</label>
 
-      <input type="radio" id="performance" name="tabGroup" className={styles.tab} checked={selectedTab==="performance"} />
+      <input type="radio" id="performance" name="siteTabs" value="performance" className={styles.tab} checked={selectedTab==="performance"} onChange={handleTabChange} />
       <label htmlFor="performance">Performance</label>
 
 
       <div className={styles.tab__content}>
 
-        <div className={styles.siteDetailBox}>
-          <div className={styles.siteDetailColumn}>
-            <SiteDetails site={siteState.site} />
-          </div>
-          <div className={styles.siteDetailColumn}>
-            <InsetMap latitude={siteState.site.latitude} longitude={siteState.site.longitude} />
-            <NearestSites data={siteState.nearest} />
-          </div>
-        </div>
+       {content}
 
       </div>  
-
 
 
     </div>

@@ -3,10 +3,11 @@
   top: 50px;
   width: calc(100% - 5em);
   left: 5em;
-  height: calc(100% - 50px);
+  height: calc(100vh - 50px);
   margin: 0;
   padding: 0;
   padding-left: 2em;
   background: white;
   z-index:1;
+  overflow-y: auto;
 }

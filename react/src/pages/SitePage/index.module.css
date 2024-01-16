@@ -23,7 +23,10 @@ h2 > span {
   color: darkred;
 }
 
-div.tabBar {
+
+
+
+div.tab__container {
   transition: 0.3s box-shadow ease;
   border-radius: 3px;
   max-width: 100%;
@@ -32,11 +35,16 @@ div.tabBar {
   position: relative;
   list-style: none;
   background-color: #fff;
-  margin: 40px 0;
+  margin: 10px 4em 40px 0;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   &:hover {
     box-shadow: 0 12px 23px rgba(0, 0, 0, 0.23), 0 10px 10px rgba(0, 0, 0, 0.19);
   }
+}
+
+div.tab__row {
+  display: flex;
+  flex-direction: row;
 }
 
 .tab {
@@ -55,6 +63,7 @@ div.tabBar {
   &:checked + label {
     background-color: #fff;
     box-shadow: 0 -1px 0 #fff inset;
+    border-top: 2px solid darkblue;
     cursor: default;
     font-weight: bold;
     &:hover {
@@ -84,9 +93,11 @@ div.tabBar {
     }
   }
   &__content {
-    padding: 10px 25px;
-    background-color: transparent;
+    display: block;
     width: 100%;
+
+    padding: 10px 25px;
+    background-color: black;
     left: 0;
     border-radius: 3px;
 
