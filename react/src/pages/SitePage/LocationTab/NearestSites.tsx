@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Nearest } from "../../util/site.model";
+import { Nearest } from "../../../util/site.model";
 
 import styles from "./NearestSites.module.css";
 

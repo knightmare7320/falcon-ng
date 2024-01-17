@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,58 +9,59 @@ import { faTowerCell } from '@fortawesome/free-solid-svg-icons'
 import { siteActions } from '../../store/site.slice';
 import { RootState } from '../../store';
 import styles from "./index.module.css";
+
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
+import Tab from '../../components/ui/Tab';
 import LocationTab from './LocationTab';
 import ParamsTab from './ParamsTab';
 import PerformanceTab from './PerformanceTab';
 import EquipmentTab from './EquipmentTab';
 import PicturesTab from './PicturesTab';
 
-function Tab({title, tabName, selectedTab, onChange:handleTabChange}: {title:string, tabName:string, selectedTab:string, onChange:Function}) {
-  return <>
-    <input 
-      type="radio" 
-      id={tabName} 
-      name="siteTabs" 
-      value={tabName} 
-      className="tab" 
-      checked={selectedTab===tabName} 
-      onChange={() => handleTabChange(tabName)} 
-    />
-    <label htmlFor={tabName}>{title}</label>
-  </>;
-}
 
 export default function SitePage() {
   const params = useParams();
-  let [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const siteState = useSelector((state: RootState) => state.site);
 
+  
   const cascadeCode = params.cascade_code || '';
-  const selectedTab = searchParams.get('tab') || 'location';
-
   useEffect(() => {
     if (siteState.status === 'init' || siteState.cascade_code !== cascadeCode) {
       dispatch(siteActions.setCascade(cascadeCode));
     }
   }, [cascadeCode]);
 
-  function handleTabChange(tab:string) {
-    setSearchParams({tab});
+  
+  let [searchParams, setSearchParams] = useSearchParams();
+  const selectedTab = searchParams.get('tab') || 'location';
+  let tabContent = <></>;
+  switch(selectedTab) {
+    case 'location':
+      tabContent = <LocationTab site={siteState} />;
+      break;
+    case 'equipment': 
+    tabContent = <EquipmentTab />;
+      break;
+    case 'performance':
+      tabContent = <PerformanceTab />;
+      break;
+    case 'params':
+      tabContent = <ParamsTab />;
+      break
+    case 'pictures':
+      tabContent = <PicturesTab />;
   }
 
-  let content;
-  if (selectedTab === 'equipment') {
-    content = <EquipmentTab />;
-  } else if (selectedTab === 'performance') {
-    content = <PerformanceTab />;
-  } else if (selectedTab === 'params') {
-    content = <ParamsTab />;
-  } else if (selectedTab === 'pictures') {
-    content = <PicturesTab />;
-  } else {
-    content = <LocationTab site={siteState} />;
+
+  function handleTabChange(tabName:string) {
+    if (tabName === 'location') {
+      navigate('.')
+    } else {
+      setSearchParams({tab: tabName});
+    }
   }
 
   return <>
@@ -83,7 +84,7 @@ export default function SitePage() {
       <Tab title="Performance" tabName="performance" selectedTab={selectedTab} onChange={handleTabChange} />
 
       <div className="tab__content">
-        {content}
+        {tabContent}
       </div>  
 
     </div>
