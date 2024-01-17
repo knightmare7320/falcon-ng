@@ -13,4 +13,6 @@
 .list li a {
   color: darkgoldenrod;
   text-transform: capitalize;
+  font-size: 11pt;
+  font-weight: normal;
 }

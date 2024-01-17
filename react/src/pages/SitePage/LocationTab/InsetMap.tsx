@@ -5,9 +5,9 @@ import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css"
 
 import styles from "./InsetMap.module.css";
-import SiteLayer from "../MapPage/SiteLayer";
-import { mapsActions } from "../../store/maps.slice";
-import SectorLayer from "../MapPage/SectorLayer";
+import SiteLayer from "../../MapPage/SiteLayer";
+import { mapsActions } from "../../../store/maps.slice";
+import SectorLayer from "../../MapPage/SectorLayer";
 
 function MyMap({latitude, longitude}: {latitude:number, longitude:number}) {
   const map = useMap();

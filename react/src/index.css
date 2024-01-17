@@ -1,7 +1,7 @@
 @import url("//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css");
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Roboto, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -21,14 +21,13 @@ body {
 }
 
 a {
-  font-weight: 500;
+  /* font-weight: 500; */
   color: #646cff;
   text-decoration: inherit;
+  &:hover{
+    color: #535bf2;
+  }
 }
-a:hover {
-  color: #535bf2;
-}
-
 
 button.link {
   background: none!important;
@@ -37,11 +36,11 @@ button.link {
   color: #646cff;
   text-decoration: none;
   cursor: pointer;
+  font-family:Roboto, Arial, sans-serif;
+  &:hover {
+    text-decoration: underline;
+  }
 }
-button.link:hover {
-  text-decoration: underline;
-}
-
 
 .tab-wrapper {
   transition: 0.3s box-shadow ease;
@@ -75,6 +74,7 @@ button.link:hover {
   &:checked + label {
     background-color: #fff;
     border-top: 2px solid darkblue;
+    font-weight: bold;
     box-shadow: 0 -1px 0 #fff inset;
     cursor: default;
     &:hover {
