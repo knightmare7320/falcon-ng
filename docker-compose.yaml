@@ -57,28 +57,9 @@ services:
     # env_file:
     #   - 
 
-
-  # angular:
-  #   build: angular
-  #   volumes: 
-  #     - ./angular:/app
-  #     - /app/node_modules
-  #   ports:
-  #     - "4200:4200"
-  #   depends_on:
-  #     - server
-  #
   #  npm:
   #     build: 
   #        context: ./dockerfiles
   #        dockerfile: npm.dockerfile
   #     volumes:
   #        - ./src:/var/www/html
-
-  #  ng:
-  #     build: 
-  #        context: ./dockerfiles
-  #        dockerfile: ng.dockerfile
-  #     volumes:
-  #        - ./src:/var/www/html
-      
