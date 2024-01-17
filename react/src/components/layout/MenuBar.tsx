@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+
 import "./MenuBar.css";
 
 export default function MenuBar() {
@@ -18,6 +21,14 @@ export default function MenuBar() {
         <ul>
           <li>
             <Link to="/login">Login</Link>
+          </li>
+          <li>
+            <form className="search-box">
+              <button>
+                <FontAwesomeIcon icon={faSearch} />
+              </button>
+              <input type="search" placeholder="Search..." />
+            </form>
           </li>
         </ul>
       </nav>

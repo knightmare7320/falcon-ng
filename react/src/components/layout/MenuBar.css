@@ -39,16 +39,59 @@
   width: calc(100% - 190px);
   text-align: right;
   vertical-align: 50%;
+  & ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  & li {
+    display: inline;
+    list-style-type: none;
+    &:nth-of-type(1) {
+      padding-right: 20px;
+    }
+  & a {
+    color: white;
+    font-weight: bold;
+    &:hover {
+      color: lightblue;
+    }
+  }
 }
-.menuBar__menu ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-.menuBar__menu a {
-  color: white;
-  font-weight: bold;
-}
-.menuBar__menu a:hover {
-  color: lightblue;
+
+
+.search-box {
+  display: inline-block;
+  width: 130px;
+  height: 23px;
+  background-color: white;
+  padding: 5px 10px;
+  box-shadow: 1px 1px 4px #555 inset;
+  border-radius: 20px;
+  border: 1px solid darkblue;
+  &:hover {
+    border: 1px solid #2d9fd9;
+  }
+  &:focus-within { 
+    outline: 1px solid #2d9fd9 
+  }
+  & input {
+    width: 100px;
+    border:none;
+    &:focus {
+      outline: none;
+    }
+  }
+  & button {
+    border-style: none;
+    font-size: 16px;
+    font-weight: bold;
+    outline: none;
+    cursor: pointer;
+    border-radius: 50%;
+    right: 0px;
+    color:black ;
+    background-color:transparent;
+    pointer-events: painted;    
+  }
 }
