@@ -3,6 +3,9 @@ import { useParams, useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTowerCell } from '@fortawesome/free-solid-svg-icons'
+
 import { siteActions } from '../../store/site.slice';
 import { RootState } from '../../store';
 import styles from "./index.module.css";
@@ -13,6 +16,20 @@ import PerformanceTab from './PerformanceTab';
 import EquipmentTab from './EquipmentTab';
 import PicturesTab from './PicturesTab';
 
+function Tab({title, tabName, selectedTab, onChange:handleTabChange}: {title:string, tabName:string, selectedTab:string, onChange:Function}) {
+  return <>
+    <input 
+      type="radio" 
+      id={tabName} 
+      name="siteTabs" 
+      value={tabName} 
+      className="tab" 
+      checked={selectedTab===tabName} 
+      onChange={() => handleTabChange(tabName)} 
+    />
+    <label htmlFor={tabName}>{title}</label>
+  </>;
+}
 
 export default function SitePage() {
   const params = useParams();
@@ -29,9 +46,8 @@ export default function SitePage() {
     }
   }, [cascadeCode]);
 
-  function handleTabChange(event: any) {
-    const tabName = event.currentTarget.value;
-    setSearchParams({tab: tabName});
+  function handleTabChange(tab:string) {
+    setSearchParams({tab});
   }
 
   let content;
@@ -52,26 +68,21 @@ export default function SitePage() {
       <title>Falcon - {cascadeCode} </title>
     </Helmet>
 
-    <h2>Site - <span>{cascadeCode}</span></h2>
+    <h2 className={styles.cascadeTitle}>
+      <FontAwesomeIcon icon={faTowerCell} />
+      <span>{cascadeCode}</span>
+    </h2>
+
     {siteState.status === 'loading' && <LoadingSpinner />}
 
-    <div className={styles.tab__container}>
-      <input type="radio" id="location" name="siteTabs" value="location" className={styles.tab} checked={selectedTab==="location"} onChange={handleTabChange} />
-      <label htmlFor="location">Location</label>
+    <div className="tab-wrapper">
+      <Tab title="Location"    tabName="location"    selectedTab={selectedTab} onChange={handleTabChange} />
+      <Tab title="Equipment"   tabName="equipment"   selectedTab={selectedTab} onChange={handleTabChange} />
+      <Tab title="Pictures"    tabName="pictures"    selectedTab={selectedTab} onChange={handleTabChange} />
+      <Tab title="Params"      tabName="params"      selectedTab={selectedTab} onChange={handleTabChange} />
+      <Tab title="Performance" tabName="performance" selectedTab={selectedTab} onChange={handleTabChange} />
 
-      <input type="radio" id="equipment" name="siteTabs" value="equipment" className={styles.tab} checked={selectedTab==="equipment"}  onChange={handleTabChange} />
-      <label htmlFor="equipment">Equipment</label>
-
-      <input type="radio" id="pictures" name="siteTabs" value="pictures" className={styles.tab} checked={selectedTab==="pictures"} onChange={handleTabChange} />
-      <label htmlFor="pictures">Pictures</label>
-
-      <input type="radio" id="params" name="siteTabs" value="params" className={styles.tab} checked={selectedTab==="params"} onChange={handleTabChange} />
-      <label htmlFor="params">Params</label>
-
-      <input type="radio" id="performance" name="siteTabs" value="performance" className={styles.tab} checked={selectedTab==="performance"} onChange={handleTabChange} />
-      <label htmlFor="performance">Performance</label>
-
-      <div className={styles.tab__content}>
+      <div className="tab__content">
         {content}
       </div>  
 

@@ -13,11 +13,11 @@
 
 body {
   margin: 0;
-  display: flex;
+  /* display: flex; */
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  box-sizing:border-box;
+  /* box-sizing:border-box; */
 }
 
 a {
@@ -40,4 +40,85 @@ button.link {
 }
 button.link:hover {
   text-decoration: underline;
+}
+
+
+.tab-wrapper {
+  transition: 0.3s box-shadow ease;
+  border-radius: 6px;
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  list-style: none;
+  background-color: #fff;
+  margin: 20px 0 40px 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  &:hover  {
+    box-shadow: 0 12px 23px rgba(0, 0, 0, 0.23), 0 10px 10px rgba(0, 0, 0, 0.19);
+  }
+}
+
+.tab {
+  display: none;
+  &:first-of-type:not(:last-of-type) + label {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  &:not(:first-of-type):not(:last-of-type) + label {
+    border-radius: 0;
+  }
+  &:last-of-type:not(:first-of-type) + label {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  &:checked + label {
+    background-color: #fff;
+    border-top: 2px solid darkblue;
+    box-shadow: 0 -1px 0 #fff inset;
+    cursor: default;
+    &:hover {
+      box-shadow: 0 -1px 0 #fff inset;
+      background-color: #fff;
+    }
+  }
+  + label {
+    box-shadow: 0 -1px 0 #eee inset;
+    border-radius: 6px 6px 0 0;
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+    color: #333;
+    flex-grow: 3;
+    text-align: center;
+    background-color: #f2f2f2;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    text-align: center;
+    transition: 0.3s background-color ease, 0.3s box-shadow ease;
+    height: 50px;
+    box-sizing: border-box;
+    padding: 15px;
+    &:hover {
+      background: #d8d8d8;
+      box-shadow: 0 1px 0 #f4f4f4 inset;
+    }
+  }
+}
+
+
+.tab__content {
+  padding: 10px 25px;
+  background-color: transparent;
+  width: 100%;
+  left: 0;
+  border-radius: 6px;
+  opacity: 1;
+  transition: 0.5s opacity ease-in, 0.8s transform ease;
+  position: relative;
+  top: 0;
+  z-index: 100;
+  text-shadow: 0 0 0;
 }
