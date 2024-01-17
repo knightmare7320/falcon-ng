@@ -1,3 +1,7 @@
+DROP PROCEDURE IF EXISTS gui.get_geo_sectors;
+
+DELIMITER $$
+$$
 CREATE PROCEDURE gui.get_geo_sectors(
    IN in_MIN_LATITUDE  FLOAT,
    IN in_MAX_LATITUDE  FLOAT,
@@ -26,3 +30,5 @@ BEGIN
    WHERE    st_contains(v_geo_boundary, s.geo_point)   
    ORDER BY s.cascade_code;
 END
+$$
+DELIMITER ;

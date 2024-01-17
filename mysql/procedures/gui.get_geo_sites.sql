@@ -1,3 +1,7 @@
+DROP PROCEDURE IF EXISTS gui.get_geo_sites;
+
+DELIMITER $$
+$$
 CREATE PROCEDURE gui.get_geo_sites(
    IN in_MIN_LATITUDE  FLOAT,
    IN in_MAX_LATITUDE  FLOAT,
@@ -21,3 +25,5 @@ BEGIN
    WHERE    st_contains(v_geo_boundary, geo_point) -- st_srid(point(longitude,latitude),4326)
    ORDER BY s.cascade_code;
 END
+$$
+DELIMITER ;
