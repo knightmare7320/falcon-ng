@@ -1,7 +1,7 @@
 @import url("//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css");
 
 :root {
-  font-family: Roboto, Arial, sans-serif;
+  font-family: Raleway, Roboto, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -18,6 +18,10 @@ body {
   min-width: 320px;
   min-height: 100vh;
   /* box-sizing:border-box; */
+}
+
+main.main-content {
+  margin: 0 2em;
 }
 
 a {
@@ -120,4 +124,36 @@ button.link {
   top: 0;
   z-index: 100;
   text-shadow: 0 0 0;
+}
+
+
+
+.site-table {
+  border-collapse: collapse;
+  & th {
+    text-align:left;
+    vertical-align: text-top;
+    background-color:lightyellow;
+    border-right: 1px solid gray;
+    border-left: 1px dotted lightgray;
+    border-top: 1px dotted lightgray;
+    border-bottom: 1px dotted lightgray;
+    padding: 0.1rem 1rem;
+  }
+  & td {
+    vertical-align: text-top;
+    padding: 0.1rem 1rem;
+    border-top: 1px dotted lightgray;
+    border-bottom: 1px dotted lightgray;
+    border-right: 1px dotted lightgray;
+
+  }
+  & tr.edits th {
+    font-size: smaller;
+  }
+  & tr.edits td {
+    color: gray;
+    font-style: italic;
+    font-size: smaller;
+  }
 }

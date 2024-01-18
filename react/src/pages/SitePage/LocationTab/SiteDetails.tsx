@@ -2,11 +2,9 @@ import { Link } from 'react-router-dom';
 
 import { Site } from '../../../util/site.model';
 
-import styles from './SiteDetails.module.css';
-
 export default function SiteDetails({site}:{site:Site}) {
   return <>
-    <table className={styles.siteTable}>
+    <table className="site-table">
       <tbody>
         {site.site_name &&
           <tr>
@@ -98,13 +96,13 @@ export default function SiteDetails({site}:{site:Site}) {
           </tr>
         }
         {(site.create_date || site.created_by_name) &&
-          <tr className={styles.edits}>
+          <tr className="edits">
             <th>Created by:</th>
             <td>{ site.created_by_name } on { site.create_date }</td>
           </tr>
         }
         {(site.modified_date || site.modified_by_name) &&
-          <tr className={styles.edits}>
+          <tr className="edits">
             <th>Modified by:</th>
             <td>{ site.modified_by_name } on { site.modified_date }</td>
           </tr>

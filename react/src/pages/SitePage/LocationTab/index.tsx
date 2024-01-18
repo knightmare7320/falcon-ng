@@ -9,16 +9,16 @@ import InsetMap from './InsetMap';
 import SiteDetails from './SiteDetails';
 import NearestSites from './NearestSites';
 
-export default function LocationTab({site}: {site:SiteState}) {
+export default function LocationTab({site, nearestSites}: {site:SiteState['site'], nearestSites:SiteState['nearest']}) {
   return <>
-    {site.site.latitude && site.site.longitude &&
+    {site.latitude && site.longitude &&
       <div className={styles.siteDetailBox}>
         <div className={styles.siteDetailColumn}>
-          <SiteDetails site={site.site} />
+          <SiteDetails site={site} />
         </div>
         <div className={styles.siteDetailColumn}>
-          <InsetMap latitude={site.site.latitude} longitude={site.site.longitude} />
-          <NearestSites data={site.nearest} />
+          <InsetMap latitude={site.latitude} longitude={site.longitude} />
+          <NearestSites data={nearestSites} />
         </div>
       </div>
     }

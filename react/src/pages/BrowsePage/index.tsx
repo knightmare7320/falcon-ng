@@ -44,12 +44,15 @@ export default function BrowsePage({type}: {type: string}) {
       <title>Falcon - {getTitle(browseState.type, browseState.name)}</title>
     </Helmet>
 
-    <h1>{getTitle(type, browseState.name)} Performance</h1>
-    <BrowseTable type={browseState.type} rows={browseState.rows} />
-
-    <PageNumber pageCount={browseState.page_count} pageNumber={browseState.page_number} onPageChange={handlePageChange} />
-    <PageSize pageSize={browseState.page_size} pageSizes={browseState.page_sizes} onPageSizeChange={handlePageSizeChange} />
-
     {browseState.status === 'loading' && <LoadingSpinner />}
+
+    <main className="main-content">
+      <h1>{getTitle(type, browseState.name)} Performance</h1>
+      <BrowseTable type={browseState.type} rows={browseState.rows} />
+
+      <PageNumber pageCount={browseState.page_count} pageNumber={browseState.page_number} onPageChange={handlePageChange} />
+      <PageSize pageSize={browseState.page_size} pageSizes={browseState.page_sizes} onPageSizeChange={handlePageSizeChange} />
+
+    </main>
   </>;
 }

@@ -35,6 +35,12 @@ const siteSlice = createSlice({
     },
     setCascade(state:SiteState, action:PayloadAction<string>) {
       state.cascade_code = action.payload;
+      // state.load_count ++;
+      // state.site = {} as Site;
+      // state.bts = [];
+      // state.sectors = [];
+      // state.carriers = [];
+      // state.nearest = [];
     },
     setSiteData(state:SiteState, action: PayloadAction<Site>) {
       state.site = action.payload;
@@ -42,7 +48,16 @@ const siteSlice = createSlice({
     },
     setNearest(state:SiteState, action: PayloadAction<Nearest[]>) {
       state.nearest = action.payload;
-    }
+    },
+    setBtsData(state:SiteState, action: PayloadAction<Bts[]>) {
+      state.bts = action.payload;
+    },
+    setSectorData(state:SiteState, action: PayloadAction<Sector[]>) {
+      state.sectors = action.payload;
+    },
+    setCarrierData(state:SiteState, action: PayloadAction<Carrier[]>) {
+      state.carriers = action.payload;
+    },
   },
 });
 

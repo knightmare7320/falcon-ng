@@ -40,10 +40,10 @@ export default function SitePage() {
   let tabContent = <></>;
   switch(selectedTab) {
     case 'location':
-      tabContent = <LocationTab site={siteState} />;
+      tabContent = <LocationTab site={siteState.site} nearestSites={siteState.nearest}/>;
       break;
     case 'equipment': 
-    tabContent = <EquipmentTab />;
+    tabContent = <EquipmentTab bts={siteState.bts} sectors={siteState.sectors} carriers={siteState.carriers}/>;
       break;
     case 'performance':
       tabContent = <PerformanceTab />;
@@ -69,24 +69,26 @@ export default function SitePage() {
       <title>Falcon - {cascadeCode} </title>
     </Helmet>
 
-    <h2 className={styles.cascadeTitle}>
-      <FontAwesomeIcon icon={faTowerCell} />
-      <span>{cascadeCode}</span>
-    </h2>
-
     {siteState.status === 'loading' && <LoadingSpinner />}
 
-    <div className="tab-wrapper">
-      <Tab title="Location"    tabName="location"    selectedTab={selectedTab} onChange={handleTabChange} />
-      <Tab title="Equipment"   tabName="equipment"   selectedTab={selectedTab} onChange={handleTabChange} />
-      <Tab title="Pictures"    tabName="pictures"    selectedTab={selectedTab} onChange={handleTabChange} />
-      <Tab title="Params"      tabName="params"      selectedTab={selectedTab} onChange={handleTabChange} />
-      <Tab title="Performance" tabName="performance" selectedTab={selectedTab} onChange={handleTabChange} />
+    <main className="main-content">
+      <h2 className={styles.cascadeTitle}>
+        <FontAwesomeIcon icon={faTowerCell} />
+        <span>{cascadeCode}</span>
+      </h2>
 
-      <div className="tab__content">
-        {tabContent}
-      </div>  
+      <div className="tab-wrapper">
+        <Tab title="Location"    tabName="location"    selectedTab={selectedTab} onChange={handleTabChange} />
+        <Tab title="Equipment"   tabName="equipment"   selectedTab={selectedTab} onChange={handleTabChange} />
+        <Tab title="Pictures"    tabName="pictures"    selectedTab={selectedTab} onChange={handleTabChange} />
+        <Tab title="Params"      tabName="params"      selectedTab={selectedTab} onChange={handleTabChange} />
+        <Tab title="Performance" tabName="performance" selectedTab={selectedTab} onChange={handleTabChange} />
 
-    </div>
+        <div className="tab__content">
+          {tabContent}
+        </div>  
+
+      </div>
+    </main>
   </>;
 }

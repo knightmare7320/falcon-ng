@@ -1,11 +1,10 @@
 .pageContent {
   position: fixed;
   left: 5em;
-  width: calc(100% - 9em);
+  width: calc(100% - 5em);
   top: 50px;
-  height: calc(100vh - 50px);
-  max-height: calc(100vh - 50px);
-  padding: 0 0 0 2em;
+  height: calc(100% - 50px);
+  padding: 0;
   background: white;
   z-index: 1;
   overflow-y: auto;

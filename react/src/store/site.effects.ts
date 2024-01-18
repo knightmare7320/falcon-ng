@@ -5,7 +5,7 @@ import {RootState, AppDispatch} from ".";
 import { uiActions } from "./ui.slice";
 
 import { siteActions } from "./site.slice";
-import { fetchSite, fetchNearest } from "../util/site.service";
+import { fetchSite, fetchNearest, fetchBts, fetchSectors, fetchCarriers } from "../util/site.service";
 
 const siteListener = createListenerMiddleware();
 
@@ -46,6 +46,60 @@ siteStartListening({
     }
     if (response) {
       listenerApi.dispatch(siteActions.setNearest(response));
+    }
+  },
+});
+
+siteStartListening({
+  actionCreator: siteActions.setCascade,
+  effect: async (action:Action, listenerApi) => {
+    let response;
+    try {
+      response = await fetchBts(action.payload);
+    } catch(error) {
+      let message = 'Unknown Error';
+      if (error instanceof Error) message = error.message;
+      listenerApi.dispatch(uiActions.showMessage({type: 'error', message}));
+      listenerApi.dispatch(siteActions.setError());
+    }
+    if (response) {
+      listenerApi.dispatch(siteActions.setBtsData(response));
+    }
+  },
+});
+
+siteStartListening({
+  actionCreator: siteActions.setCascade,
+  effect: async (action:Action, listenerApi) => {
+    let response;
+    try {
+      response = await fetchSectors(action.payload);
+    } catch(error) {
+      let message = 'Unknown Error';
+      if (error instanceof Error) message = error.message;
+      listenerApi.dispatch(uiActions.showMessage({type: 'error', message}));
+      listenerApi.dispatch(siteActions.setError());
+    }
+    if (response) {
+      listenerApi.dispatch(siteActions.setSectorData(response));
+    }
+  },
+});
+
+siteStartListening({
+  actionCreator: siteActions.setCascade,
+  effect: async (action:Action, listenerApi) => {
+    let response;
+    try {
+      response = await fetchCarriers(action.payload);
+    } catch(error) {
+      let message = 'Unknown Error';
+      if (error instanceof Error) message = error.message;
+      listenerApi.dispatch(uiActions.showMessage({type: 'error', message}));
+      listenerApi.dispatch(siteActions.setError());
+    }
+    if (response) {
+      listenerApi.dispatch(siteActions.setCarrierData(response));
     }
   },
 });

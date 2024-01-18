@@ -12,7 +12,7 @@ export default function NearestSites({data}: {data:Nearest[]}) {
         data.map(site => 
           <li key={site.cascade_code}>
             <Link to={`/site/${site.cascade_code}`} title={site.site_name}>
-              {site.cascade_code} - {site.address1}, {site.city} {site.state} ({site.distance_mi}mi {site.bearing})
+              <strong>{site.cascade_code}</strong> <span>({site.distance_mi}mi {site.bearing}) - {site.address1}, {site.city} {site.state} </span>
             </Link>
           </li>  
         )

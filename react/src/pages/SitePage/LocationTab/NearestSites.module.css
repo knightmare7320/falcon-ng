@@ -15,4 +15,7 @@
   text-transform: capitalize;
   font-size: 11pt;
   font-weight: normal;
+  & span {
+    font-size: 9pt;
+  }
 }

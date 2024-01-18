@@ -2,7 +2,7 @@
     position: fixed;
     top: 50px;
     left: 0;
-    height: 100%;
+    height: calc(100% - 50px);
     list-style-type: none;
     margin: 0;
     padding: 0;
