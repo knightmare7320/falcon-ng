@@ -1,4 +1,4 @@
-import { tableRequestType, kpiTableType } from "./browse.model";
+import { tableRequestType, kpiTableType, GroupType } from "./browse.model";
 
 const API_URL = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -11,7 +11,7 @@ export async function fetchBrowsePerfData({
   order_by = 'name', 
   order_dir = 'asc', 
   filter_string=''
-}: tableRequestType): Promise<kpiTableType> {
+}: tableRequestType):Promise<kpiTableType> {
 
   let url = API_URL;
   if (type === "national") {
@@ -35,6 +35,19 @@ export async function fetchBrowsePerfData({
 
   const response = await fetch(url + new URLSearchParams(params));
 
+  if (!response.ok) {
+    const info = await response.json();
+    const error = new Error(info?.message || 'There has been an error.');
+    throw error;
+  }
+
+  return await response.json();
+}
+
+export async function fetchGroup(type:string):Promise<GroupType[]> {
+  let url = API_URL + '/' + type;
+  const response = await fetch(url);
+  
   if (!response.ok) {
     const info = await response.json();
     const error = new Error(info?.message || 'There has been an error.');

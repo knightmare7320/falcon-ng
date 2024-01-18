@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import uiReducer from './ui.slice.ts';
+import uiEffects from './ui.effects.ts';
 import browseReducer from './browse.slice.ts';
 import browseEffects from './browse.effects.ts';
 import siteReducer from './site.slice.ts';
@@ -16,6 +17,7 @@ const store = configureStore({
     maps: mapsReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(
+    uiEffects.middleware,
     browseEffects.middleware,
     siteEffects.middleware,
     mapsEffects.middleware,
