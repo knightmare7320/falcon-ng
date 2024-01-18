@@ -9,9 +9,7 @@ class Regions {
                result(err, null);
                return;
             }
-            result(null, {
-               "rows": results[0]
-            });
+            result(null, results[0]);
          }
       );      
    }

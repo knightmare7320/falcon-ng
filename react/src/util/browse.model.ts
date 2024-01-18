@@ -30,3 +30,8 @@ export type kpiTableType = {
   rows: kpiRowType[],
 }
 
+export type GroupType = {
+  id: number,
+  name: string,
+  parent_id?: number,
+}

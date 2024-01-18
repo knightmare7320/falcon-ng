@@ -1,17 +1,27 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { GroupType } from "../util/browse.model";
 
 type Message = {
   type: string, 
   message: string,
   timestamp: Date,
-}
+};
+
 type UiState = {
-  messages: Message[],
-}
+  messages:Message[],
+  regions:GroupType[],
+  l4_markets:GroupType[],
+  l5_markets:GroupType[],
+  clusters:GroupType[],
+};
 
 const INITIAL_STATE: UiState = {
-  messages: [],
-}
+  messages: [] as Message[],
+  regions: [] as GroupType[],
+  l4_markets: [] as GroupType[],
+  l5_markets: [] as GroupType[],
+  clusters: [] as GroupType[],
+};
 
 const uiSlice = createSlice({
   name: "ui",
@@ -36,6 +46,22 @@ const uiSlice = createSlice({
     },
     clearMessages(state) {
       state.messages = [];
+    },
+    fetchRegions() {},
+    setRegions(state, action:PayloadAction<GroupType[]>) {
+      state.regions = action.payload;
+    },
+    fetchL4Markets() {},
+    setL4Markets(state, action:PayloadAction<GroupType[]>) {
+      state.l4_markets = action.payload;
+    },
+    fetchL5Markets() {},
+    setL5Markets(state, action:PayloadAction<GroupType[]>) {
+      state.l5_markets = action.payload;
+    },
+    fetchClusters() {},
+    setClusters(state, action:PayloadAction<GroupType[]>) {
+      state.clusters = action.payload;
     },
   }
 });
