@@ -1,9 +1,7 @@
 import { SiteState } from "../../../store/site.slice";
 import { Bts } from "../../../util/site.model";
 
-export default function BtsRows({bts}: {bts?:SiteState['bts']}) {
-  if (!bts) return <></>;
-
+export default function BtsRows({bts, sectors, carriers}: {bts:SiteState['bts'], sectors:SiteState['sectors'], carriers:SiteState['carriers']}) {
   return <>
     <tr>
       <th>Switch</th>

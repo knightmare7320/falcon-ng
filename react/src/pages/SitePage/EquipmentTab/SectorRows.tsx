@@ -1,7 +1,7 @@
 import { SiteState } from "../../../store/site.slice";
 import { Sector } from "../../../util/site.model";
 
-export default function SectorRows({sectors}: {sectors?:SiteState['sectors']}) {
+export default function SectorRows({bts, sectors, carriers}: {bts:SiteState['bts'], sectors:SiteState['sectors'], carriers:SiteState['carriers']}) {
   if (!sectors) return <></>;
 
   return <>

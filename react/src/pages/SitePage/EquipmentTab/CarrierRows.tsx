@@ -1,7 +1,7 @@
 import { SiteState } from "../../../store/site.slice";
 import { Carrier } from "../../../util/site.model";
 
-export default function CarrierRows({carriers}: {carriers?:SiteState['carriers']}) {
+export default function CarrierRows({bts, sectors, carriers}: {bts:SiteState['bts'], sectors:SiteState['sectors'], carriers:SiteState['carriers']}) {
   if (!carriers) return <></>;
 
   return <>
