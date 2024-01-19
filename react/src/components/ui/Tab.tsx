@@ -1,6 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
+import "./Tab.css";
+
 export default function Tab(
   {title, tabName, selectedTab, faIcon, onChange:handleTabChange}: 
   {title:string, tabName:string, selectedTab:string, faIcon?:IconDefinition, onChange:Function}) {
