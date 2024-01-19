@@ -91,6 +91,7 @@ export type Carrier = {
   carrier_id: number, 
   bts_id: number, 
   channel_id: number, 
+  channel_number: number,
   carrier_number: number, 
   carrier_designation_id: number, 
   carrier_designation_name: string,  

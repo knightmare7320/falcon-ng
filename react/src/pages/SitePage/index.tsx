@@ -43,7 +43,7 @@ export default function SitePage() {
       tabContent = <LocationTab site={siteState.site} nearestSites={siteState.nearest}/>;
       break;
     case 'equipment': 
-    tabContent = <EquipmentTab bts={siteState.bts} sectors={siteState.sectors} carriers={siteState.carriers}/>;
+    tabContent = <EquipmentTab btss={siteState.btss} sectors={siteState.sectors} carriers={siteState.carriers}/>;
       break;
     case 'performance':
       tabContent = <PerformanceTab />;

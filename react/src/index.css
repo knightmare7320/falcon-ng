@@ -130,6 +130,9 @@ button.link {
 
 .site-table {
   border-collapse: collapse;
+  &.equipment td {
+    text-align: center;
+  }
   & th {
     text-align:left;
     vertical-align: text-top;
@@ -139,6 +142,13 @@ button.link {
     border-top: 1px dotted lightgray;
     border-bottom: 1px dotted lightgray;
     padding: 0.1rem 1rem;
+    &.column-head {
+      background-color:#ffffb0;
+      font-weight: bold;
+      &.top {
+        border-top: 1px solid darkgray;
+      }
+    }
   }
   & td {
     vertical-align: text-top;
@@ -146,7 +156,13 @@ button.link {
     border-top: 1px dotted lightgray;
     border-bottom: 1px dotted lightgray;
     border-right: 1px dotted lightgray;
-
+    &.column-head {
+      background-color: #eeeeee;
+      font-weight: bold;
+      &.top {
+        border-top: 1px solid darkgray;
+      }
+    }
   }
   & tr.edits th {
     font-size: smaller;

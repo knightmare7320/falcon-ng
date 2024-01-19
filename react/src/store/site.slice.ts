@@ -6,7 +6,7 @@ export type SiteState = {
   cascade_code: string,
   load_count: number,
   site: Site,
-  bts: Bts[],
+  btss: Bts[],
   sectors: Sector[],
   carriers: Carrier[],
   nearest: Nearest[],
@@ -17,7 +17,7 @@ const INITIAL_STATE = {
   cascade_code: '',
   load_count: 0,
   site: {} as Site,
-  bts: [] as Bts[],
+  btss: [] as Bts[],
   sectors: [] as Sector[],
   carriers: [] as Carrier[],
   nearest: [] as Nearest[],
@@ -50,13 +50,16 @@ const siteSlice = createSlice({
       state.nearest = action.payload;
     },
     setBtsData(state:SiteState, action: PayloadAction<Bts[]>) {
-      state.bts = action.payload;
+      state.btss = action.payload.sort((a:Bts, b:Bts) => a.bts_number > b.bts_number ? 1 : 0);
     },
     setSectorData(state:SiteState, action: PayloadAction<Sector[]>) {
-      state.sectors = action.payload;
+      state.sectors = action.payload.sort((a:Sector, b:Sector) => a.sector_number > b.sector_number ? 1 : 0);;
     },
     setCarrierData(state:SiteState, action: PayloadAction<Carrier[]>) {
-      state.carriers = action.payload;
+      state.carriers = action.payload.sort(
+        (a:Carrier, b:Carrier) => 
+          a.bts_id > b.bts_id || a.carrier_number > b.carrier_number ? 1 : 0
+      );
     },
   },
 });

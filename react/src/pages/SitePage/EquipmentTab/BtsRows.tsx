@@ -1,39 +1,69 @@
 import { SiteState } from "../../../store/site.slice";
-import { Bts } from "../../../util/site.model";
 
-export default function BtsRows({bts, sectors, carriers}: {bts:SiteState['bts'], sectors:SiteState['sectors'], carriers:SiteState['carriers']}) {
+export default function BtsRows({btss, sectors, carriers}: {btss:SiteState['btss'], sectors:SiteState['sectors'], carriers:SiteState['carriers']}) {
+  const sectorCount = sectors.length;
+  let carrierCounts:Map<number, number> = new Map();
+  btss.map(bts => {
+    const carrierCount = carriers.filter(carrier => carrier.bts_id === bts.bts_id).length;
+    carrierCounts.set(bts.bts_id, carrierCount);
+  });
+
   return <>
     <tr>
-      <th>Switch</th>
-      { bts.map((item:Bts) => <td key={item.bts_id}>{item.switch_name}</td>) }
+      <th className="column-head top">Switch</th>
+      { btss.map(bts => 
+        <td className="column-head top" key={bts.bts_id} colSpan={sectorCount * (carrierCounts.get(bts.bts_id) || 1)}>
+          <strong>{bts.switch_name}</strong>
+        </td>
+      )}
     </tr>
     <tr>
-      <th>Switch CLLI Code</th>
-      { bts.map((item:Bts) => <td key={item.bts_id}>{item.clli_code}</td>) }
+      <th className="column-head">Switch CLLI Code</th>
+      { btss.map(bts => 
+        <td className="column-head" key={bts.bts_id} colSpan={sectorCount * (carrierCounts.get(bts.bts_id) || 1)}>
+          <strong>{bts.clli_code}</strong>
+        </td>
+      )}
     </tr>
     <tr>
-      <th>BSC</th>
-      { bts.map((item:Bts) => <td key={item.bts_id}>{item.bsc_name}</td>) }
+      <th className="column-head">BSC</th>
+      { btss.map(bts => 
+        <td className="column-head" key={bts.bts_id} colSpan={sectorCount * (carrierCounts.get(bts.bts_id) || 1)}>
+          <strong>{bts.bsc_name}</strong>
+        </td>
+      )}
     </tr>
     <tr>
-      <th>BTS</th>
-      { bts.map((item:Bts) => <td key={item.bts_id}>{item.bts_number}</td>) }
+      <th className="column-head">BTS</th>
+      { btss.map(bts => 
+        <td className="column-head" key={bts.bts_id} colSpan={sectorCount * (carrierCounts.get(bts.bts_id) || 1)}>
+          <strong>{bts.bts_number}</strong>
+        </td>
+      )}
     </tr>
     <tr>
       <th>Vendor</th>
-      { bts.map((item:Bts) => <td key={item.bts_id}>{item.equipment_vendor_name}</td>) }
+      { btss.map(bts => 
+        <td key={bts.bts_id} colSpan={sectorCount * (carrierCounts.get(bts.bts_id) || 1)}>{bts.equipment_vendor_name}</td>
+      )}
     </tr>
     <tr>
       <th>Bts Type</th>
-      { bts.map((item:Bts) => <td key={item.bts_id}>{item.bts_type_name}</td>) }
+      { btss.map(bts => 
+        <td key={bts.bts_id} colSpan={sectorCount * (carrierCounts.get(bts.bts_id) || 1)}>{bts.bts_type_name}</td>
+      )}
     </tr>
     <tr>
       <th>Status</th>
-      { bts.map((item:Bts) => <td key={item.bts_id}>{item.equipment_status_name}</td>) }
+      { btss.map(bts => 
+        <td key={bts.bts_id} colSpan={sectorCount * (carrierCounts.get(bts.bts_id) || 1)}>{bts.equipment_status_name}</td>
+      )}
     </tr>
     <tr>
       <th>On-Air Date</th>
-      { bts.map((item:Bts) => <td key={item.bts_id}>{item.on_air_date}</td>) }
+      { btss.map(bts => 
+        <td key={bts.bts_id} colSpan={sectorCount * (carrierCounts.get(bts.bts_id) || 1)}>{bts.on_air_date}</td>
+      )}
     </tr>
   </>;
 }

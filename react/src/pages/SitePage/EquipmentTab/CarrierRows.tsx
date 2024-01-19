@@ -1,29 +1,74 @@
 import { SiteState } from "../../../store/site.slice";
 import { Carrier } from "../../../util/site.model";
 
-export default function CarrierRows({bts, sectors, carriers}: {bts:SiteState['bts'], sectors:SiteState['sectors'], carriers:SiteState['carriers']}) {
+export default function CarrierRows({btss, sectors, carriers}: {btss:SiteState['btss'], sectors:SiteState['sectors'], carriers:SiteState['carriers']}) {
   if (!carriers) return <></>;
 
   return <>
     <tr>
-      <th>Carrier</th>
-      { carriers.map((item:Carrier) => <td key={item.carrier_id}>{item.carrier_designation_name}</td>) }
+      <th className="column-head top">Carrier</th>
+      {btss.map(
+        bts => sectors.map(
+          sector => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+            carrier =>
+              <td key={carrier.carrier_id} className="column-head top">
+                <strong>{carrier.carrier_designation_name}</strong>
+              </td>
+          )
+        )
+      )}
     </tr>
     <tr>
       <th>Channel</th>
-      { carriers.map((item:Carrier) => <td key={item.carrier_id}>{item.channel_id}</td>) }
+      {btss.map(
+        bts => sectors.map(
+          sector => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+            carrier =>           
+              <td key={carrier.carrier_id}>
+                {carrier.channel_number}
+              </td>
+          )
+        )
+      )}
     </tr>
     <tr>
       <th>Type</th>
-      { carriers.map((item:Carrier) => <td key={item.carrier_id}>{item.carrier_type_name}</td>) }
+      {btss.map(
+        bts => sectors.map(
+          sector => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+            carrier =>           
+              <td key={carrier.carrier_id}>
+                {carrier.carrier_type_name}
+              </td>
+          )
+        )
+      )}
     </tr>
     <tr>
       <th>Status</th>
-      { carriers.map((item:Carrier) => <td key={item.carrier_id}>{item.equipment_status_name}</td>) }
+      {btss.map(
+        bts => sectors.map(
+          sector => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+            carrier =>           
+              <td key={carrier.carrier_id}>
+                {carrier.equipment_status_name}
+              </td>
+          )
+        )
+      )}
     </tr>
     <tr>
       <th>On-Air Date</th>
-      { carriers.map((item:Carrier) => <td key={item.carrier_id}>{item.on_air_date}</td>) }
+      {btss.map(
+        bts => sectors.map(
+          sector => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+            carrier =>           
+              <td key={carrier.carrier_id}>
+                {carrier.on_air_date}
+              </td>
+          )
+        )
+      )}
     </tr>
   </>;
 }
