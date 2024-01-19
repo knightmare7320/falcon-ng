@@ -62,10 +62,10 @@
     }
     & .tab-label__icon {
       margin-right: 10px;
-      color: #666
+      color: #777
     }
     &:not(:last-of-type) {
-      margin-right: 1px;
+      margin-right: 2px;
     }
   }
   
