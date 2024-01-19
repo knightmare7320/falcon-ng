@@ -1,48 +1,44 @@
 .form {
-  max-width: 40rem;
+  max-width: 20rem;
   margin: 2rem auto;
+  padding: 1rem 5rem;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.15), 0 2px 2px rgba(0,0,0,0.15), 0 4px 4px rgba(0,0,0,0.15), 0 8px 8px rgba(0,0,0,0.15);
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  & label, input {
+    display: block;
+    width: 100%;
+  }
+  & input {
+    height: 34px;
+    width: 100%;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    border-top: none;
+    border-bottom: 1px solid #DDD;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.39), 0 -1px 1px #FFF, 0 1px 0 #FFF;
+  }
 }
 
-.form label,
-.form input,
-.form textarea {
-  display: block;
-  width: 100%;
-}
-
-.form input,
-.form textarea {
-  font: inherit;
-  padding: 0.25rem;
-}
 
 .actions {
   display: flex;
   gap: 1rem;
   justify-content: flex-end;
   align-items: center;
-}
-
-.actions button {
-  font: inherit;
-  cursor: pointer;
-  padding: 0.5rem 1.5rem;
-  border-radius: 4px;
-  background-color: var(--color-gray-300);
-  color: var(--color-gray-800);
-  border: none;
-}
-
-.actions a {
-  text-decoration: none;
-  background-color: transparent;
-  color: var(--color-gray-300);
-}
-
-.actions button:hover {
-  background-color: var(--color-primary-300);
-}
-
-.actions a:hover {
-  background-color: var(--color-gray-800);
+  & button {
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+    background-color: white;
+    color: var(--color-gray-800);
+    border: 1px solid darkgray;
+    &:hover {
+      background-color: #e6ffe6;
+      color: #003300;
+      border-color: #003300;
+    }
+  }
 }

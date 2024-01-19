@@ -1,4 +1,9 @@
-export default function Tab({title, tabName, selectedTab, onChange:handleTabChange}: {title:string, tabName:string, selectedTab:string, onChange:Function}) {
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+
+export default function Tab(
+  {title, tabName, selectedTab, faIcon, onChange:handleTabChange}: 
+  {title:string, tabName:string, selectedTab:string, faIcon?:IconDefinition, onChange:Function}) {
   return <>
     <input 
       type="radio" 
@@ -9,6 +14,15 @@ export default function Tab({title, tabName, selectedTab, onChange:handleTabChan
       checked={selectedTab===tabName} 
       onChange={() => handleTabChange(tabName)} 
     />
-    <label htmlFor={tabName}>{title}</label>
+    <label htmlFor={tabName} className="tab-label">
+      {
+        faIcon && 
+        <FontAwesomeIcon 
+          icon={faIcon} 
+          className="tab-label__icon" 
+        />
+      }
+      {title}
+    </label>
   </>;
 }

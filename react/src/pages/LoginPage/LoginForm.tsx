@@ -11,7 +11,6 @@ export default function LoginForm() {
   return (
     <>
     <Form method="post" className={classes.form}>
-      <h1>Log in</h1>
 
       {/* {data?.errors && (
         <ul>
@@ -24,11 +23,11 @@ export default function LoginForm() {
       {data && data.message && <p>{data.message}</p>} */}
 
       <p>
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email" className={classes.input}>Email</label>
         <input id="email" type="email" name="email" required />
       </p>
       <p>
-        <label htmlFor="image">Password</label>
+        <label htmlFor="image" className={classes.input}>Password</label>
         <input id="password" type="password" name="password" required />
       </p>
       <div className={classes.actions}>

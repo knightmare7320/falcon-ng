@@ -1,12 +1,11 @@
 import { SiteState } from "../../../store/site.slice";
-import { Carrier } from "../../../util/site.model";
 
 export default function CarrierRows({btss, sectors, carriers}: {btss:SiteState['btss'], sectors:SiteState['sectors'], carriers:SiteState['carriers']}) {
   if (!carriers) return <></>;
 
   return <>
     <tr>
-      <th className="column-head top">Carrier</th>
+      <th className="column-head top" style={{width:'140px'}}>Carrier</th>
       {btss.map(
         bts => sectors.map(
           sector => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(

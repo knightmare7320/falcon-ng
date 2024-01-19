@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTowerCell } from '@fortawesome/free-solid-svg-icons'
+import { faTowerCell, faLocationDot, faImage, faSliders, faRadio, faChartLine } from '@fortawesome/free-solid-svg-icons'
 
 import { siteActions } from '../../store/site.slice';
 import { RootState } from '../../store';
@@ -40,16 +40,16 @@ export default function SitePage() {
   let tabContent = <></>;
   switch(selectedTab) {
     case 'location':
-      tabContent = <LocationTab site={siteState.site} nearestSites={siteState.nearest}/>;
+      tabContent = <LocationTab site={siteState.site} nearestSites={siteState.nearest} />;
       break;
     case 'equipment': 
-    tabContent = <EquipmentTab btss={siteState.btss} sectors={siteState.sectors} carriers={siteState.carriers}/>;
+    tabContent = <EquipmentTab btss={siteState.btss} sectors={siteState.sectors} carriers={siteState.carriers} />;
       break;
     case 'performance':
-      tabContent = <PerformanceTab />;
+      tabContent = <PerformanceTab btss={siteState.btss} sectors={siteState.sectors} carriers={siteState.carriers} />;
       break;
     case 'params':
-      tabContent = <ParamsTab />;
+      tabContent = <ParamsTab btss={siteState.btss} sectors={siteState.sectors} carriers={siteState.carriers} />;
       break
     case 'pictures':
       tabContent = <PicturesTab />;
@@ -78,11 +78,11 @@ export default function SitePage() {
       </h2>
 
       <div className="tab-wrapper">
-        <Tab title="Location"    tabName="location"    selectedTab={selectedTab} onChange={handleTabChange} />
-        <Tab title="Equipment"   tabName="equipment"   selectedTab={selectedTab} onChange={handleTabChange} />
-        <Tab title="Pictures"    tabName="pictures"    selectedTab={selectedTab} onChange={handleTabChange} />
-        <Tab title="Params"      tabName="params"      selectedTab={selectedTab} onChange={handleTabChange} />
-        <Tab title="Performance" tabName="performance" selectedTab={selectedTab} onChange={handleTabChange} />
+        <Tab title="Location"    faIcon={faLocationDot} tabName="location"    selectedTab={selectedTab} onChange={handleTabChange} />
+        <Tab title="Equipment"   faIcon={faRadio}       tabName="equipment"   selectedTab={selectedTab} onChange={handleTabChange} />
+        <Tab title="Pictures"    faIcon={faImage}       tabName="pictures"    selectedTab={selectedTab} onChange={handleTabChange} />
+        <Tab title="Params"      faIcon={faSliders}     tabName="params"      selectedTab={selectedTab} onChange={handleTabChange} />
+        <Tab title="Performance" faIcon={faChartLine}   tabName="performance" selectedTab={selectedTab} onChange={handleTabChange} />
 
         <div className="tab__content">
           {tabContent}
