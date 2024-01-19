@@ -17,6 +17,7 @@ import ParamsTab from './ParamsTab';
 import PerformanceTab from './PerformanceTab';
 import EquipmentTab from './EquipmentTab';
 import PicturesTab from './PicturesTab';
+import Breadcrumbs from '../../components/ui/Breadcrumbs';
 
 
 export default function SitePage() {
@@ -70,6 +71,8 @@ export default function SitePage() {
     </Helmet>
 
     {siteState.status === 'loading' && <LoadingSpinner />}
+
+    <Breadcrumbs />
 
     <main className="main-content">
       <h2 className={styles.cascadeTitle}>

@@ -12,6 +12,7 @@ import PageNumber from "../../components/ui/PageNumber";
 import PageSize from "../../components/ui/PageSize";
 
 import { getTitle } from "./lookups";
+import Breadcrumbs from "../../components/ui/Breadcrumbs";
 
 
 export default function BrowsePage({type}: {type: string}) {
@@ -46,6 +47,8 @@ export default function BrowsePage({type}: {type: string}) {
 
     {browseState.status === 'loading' && <LoadingSpinner />}
 
+    <Breadcrumbs />
+    
     <main className="main-content">
       <h1>{getTitle(type, browseState.name)} Performance</h1>
       <BrowseTable type={browseState.type} rows={browseState.rows} />
