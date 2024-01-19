@@ -17,7 +17,7 @@ import Breadcrumbs from "../../components/ui/Breadcrumbs";
 
 export default function BrowsePage({type}: {type: string}) {
   const params = useParams();
-  let id: string|number = '';
+  let id:number|undefined;
   if (params.id) {
     id = parseInt(params.id); 
   }
@@ -39,7 +39,6 @@ export default function BrowsePage({type}: {type: string}) {
     dispatch(browseActions.setPageSize(pageSize));
   }
 
-
   return <>
     <Helmet>
       <title>Falcon - {getTitle(browseState.type, browseState.name)}</title>
@@ -47,7 +46,12 @@ export default function BrowsePage({type}: {type: string}) {
 
     {browseState.status === 'loading' && <LoadingSpinner />}
 
-    <Breadcrumbs />
+    <Breadcrumbs 
+      region_id={browseState.type === 'region' ? id : undefined}
+      l4_market_id={browseState.type === 'l4_market' ? id : undefined}
+      l5_market_id={browseState.type === 'l5_market' ? id : undefined}
+      cluster_id={browseState.type === 'cluster' ? id : undefined}
+    />
     
     <main className="main-content">
       <h1>{getTitle(type, browseState.name)} Performance</h1>

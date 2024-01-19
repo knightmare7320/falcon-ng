@@ -72,7 +72,13 @@ export default function SitePage() {
 
     {siteState.status === 'loading' && <LoadingSpinner />}
 
-    <Breadcrumbs />
+    <Breadcrumbs 
+      region_id={siteState.site.region_id} 
+      l4_market_id={siteState.site.l4_market_id}
+      l5_market_id={siteState.site.l5_market_id}
+      cluster_id={siteState.site.org_cluster_id}
+      cascade_code={siteState.site.cascade_code}
+    />
 
     <main className="main-content">
       <h2 className={styles.cascadeTitle}>
@@ -83,9 +89,9 @@ export default function SitePage() {
       <div className="tab-wrapper">
         <Tab title="Location"    faIcon={faLocationDot} tabName="location"    selectedTab={selectedTab} onChange={handleTabChange} />
         <Tab title="Equipment"   faIcon={faRadio}       tabName="equipment"   selectedTab={selectedTab} onChange={handleTabChange} />
-        <Tab title="Pictures"    faIcon={faImage}       tabName="pictures"    selectedTab={selectedTab} onChange={handleTabChange} />
-        <Tab title="Params"      faIcon={faSliders}     tabName="params"      selectedTab={selectedTab} onChange={handleTabChange} />
         <Tab title="Performance" faIcon={faChartLine}   tabName="performance" selectedTab={selectedTab} onChange={handleTabChange} />
+        <Tab title="Params"      faIcon={faSliders}     tabName="params"      selectedTab={selectedTab} onChange={handleTabChange} />
+        <Tab title="Pictures"    faIcon={faImage}       tabName="pictures"    selectedTab={selectedTab} onChange={handleTabChange} />
 
         <div className="tab__content">
           {tabContent}

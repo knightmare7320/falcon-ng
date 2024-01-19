@@ -19,7 +19,8 @@ export const AppRouter = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage />,
+        element: <BrowsePage type="national" />,
+        // element: <HomePage />,
         errorElement: <ErrorPage />,
       },
       { 

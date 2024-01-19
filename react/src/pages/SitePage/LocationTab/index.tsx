@@ -22,11 +22,5 @@ export default function LocationTab({site, nearestSites}: {site:SiteState['site'
         </div>
       </div>
     }
-    <div style={{paddingTop: '1rem', textAlign: 'center'}}>
-      <button className="link"> 
-        <FontAwesomeIcon icon={faPencil} /> 
-        edit site details
-      </button>
-    </div>
   </>;
 }

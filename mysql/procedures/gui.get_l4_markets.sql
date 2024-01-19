@@ -8,8 +8,9 @@ CREATE PROCEDURE gui.get_l4_markets(
 BEGIN
    SET in_REGION_ID = IFNULL(in_REGION_ID, -1);
 
-   select   l4_market_id
-          , l4_market_name 
+   select   l4_market_id   id 
+          , l4_market_name name
+          , region_id      parent_id
    from     locations.l4_markets 
    where    in_REGION_ID = -1 OR region_id = in_REGION_ID
    order by l4_market_name;
