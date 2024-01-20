@@ -12,26 +12,40 @@ class Sites {
     ];
     console.log(sqlStr);
     console.log(sqlParams);
-    db.query(
-      sqlStr,
-      sqlParams,
-      function(err, results) {
-        if (err) {
-          console.error(err);
-          result(err, null);
-          return;
+
+    try {
+      db.query(
+        sqlStr,
+        sqlParams,
+        function(err, results) {
+          if (err) {
+            console.error(err);
+            result(err, null);
+            return;
+          }
+          try {
+            result(null, {
+              "type": results[0][0].group_type,
+              "parent_id": results[0][0].parent_id,
+              "parent_name": results[0][0].parent_name,
+              "id": results[0][0].group_id,
+              "name": results[0][0].group_name,
+              "row_count": results[0][0].total_row_count,
+              "rows": results[1].map(({site_id, cascade_code, site_name, ...row}) => {return {id: site_id, name: cascade_code, description: site_name, ...row}})
+            });
+          } catch(err) {
+            console.log(results[0]);
+            console.error(err);
+            result(err, null);
+            return;
+          }
         }
-        result(null, {
-          "type": results[0][0].group_type,
-          "parent_id": results[0][0].parent_id,
-          "parent_name": results[0][0].parent_name,
-          "id": results[0][0].group_id,
-          "name": results[0][0].group_name,
-          "row_count": results[0][0].total_row_count,
-          "rows": results[1].map(({site_id, cascade_code, site_name, ...row}) => {return {id: site_id, name: cascade_code, description: site_name, ...row}})
-        });
-      }
-    );              
+      )
+    } catch (err) {
+      console.error(err)
+      result(err, null);
+      return;
+    }
   }
 }
 
