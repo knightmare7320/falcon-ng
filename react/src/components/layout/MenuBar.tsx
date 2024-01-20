@@ -27,7 +27,7 @@ export default function MenuBar() {
               <button>
                 <FontAwesomeIcon icon={faSearch} />
               </button>
-              <input type="search" placeholder="Search..." />
+              <input type="search" placeholder="Search..." autoComplete="off"/>
             </form>
           </li>
         </ul>

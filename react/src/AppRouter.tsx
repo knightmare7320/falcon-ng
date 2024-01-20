@@ -9,6 +9,9 @@ import { /*checkAuthLoader,*/ tokenLoader } from './util/auth.ts';
 const BrowsePage = loadable(() => import('./pages/BrowsePage'));
 const MapPage = loadable(() => import('./pages/MapPage'));
 const SitePage = loadable(() => import('./pages/SitePage'));
+import ReportsPage from './pages/ReportsPage/index.tsx';
+import SearchPage from './pages/SearchPage/index.tsx';
+import SettingsPage from './pages/SettingsPage/index.tsx';
 
 export const AppRouter = createBrowserRouter([
   {
@@ -61,6 +64,21 @@ export const AppRouter = createBrowserRouter([
       { 
         path: "map",
         element: <MapPage />,
+        // loader: checkAuthLoader,
+      },
+      { 
+        path: "search",
+        element: <SearchPage />,
+        // loader: checkAuthLoader,
+      },
+      { 
+        path: "reports",
+        element: <ReportsPage />,
+        // loader: checkAuthLoader,
+      },
+      { 
+        path: "settings",
+        element: <SettingsPage />,
         // loader: checkAuthLoader,
       },
       {
