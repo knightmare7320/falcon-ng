@@ -7,7 +7,7 @@ export default function CarrierParamRows({btss=[], sectors=[], carriers=[]}: {bt
       <th className="column-head top" style={{width:'140px'}}>Carrier</th>
       {btss.map(
         bts => sectors.map(
-          sector => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+          (_) => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
             carrier =>
               <td key={carrier.carrier_id} className="column-head top">
                 <strong>{carrier.carrier_designation_name}</strong>
@@ -20,7 +20,7 @@ export default function CarrierParamRows({btss=[], sectors=[], carriers=[]}: {bt
       <th>pn_offset</th>
       {btss.map(
         bts => sectors.map(
-          sector => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+          (_) => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
             carrier =>           
               <td key={carrier.carrier_id}>
                 &nbsp;
@@ -33,7 +33,7 @@ export default function CarrierParamRows({btss=[], sectors=[], carriers=[]}: {bt
       <th>tadd</th>
       {btss.map(
         bts => sectors.map(
-          sector => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+          (_) => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
             carrier =>           
               <td key={carrier.carrier_id}>
                 &nbsp;
@@ -46,7 +46,7 @@ export default function CarrierParamRows({btss=[], sectors=[], carriers=[]}: {bt
       <th>tdrop</th>
       {btss.map(
         bts => sectors.map(
-          sector => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+          (_) => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
             carrier =>           
               <td key={carrier.carrier_id}>
                 &nbsp;
@@ -59,7 +59,7 @@ export default function CarrierParamRows({btss=[], sectors=[], carriers=[]}: {bt
       <th>tcomp</th>
       {btss.map(
         bts => sectors.map(
-          sector => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+          (_) => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
             carrier =>           
               <td key={carrier.carrier_id}>
                 &nbsp;
@@ -72,7 +72,7 @@ export default function CarrierParamRows({btss=[], sectors=[], carriers=[]}: {bt
       <th>ttdrop</th>
       {btss.map(
         bts => sectors.map(
-          sector => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+          (_) => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
             carrier =>           
               <td key={carrier.carrier_id}>
                 &nbsp;
@@ -85,7 +85,7 @@ export default function CarrierParamRows({btss=[], sectors=[], carriers=[]}: {bt
       <th>pilot_power</th>
       {btss.map(
         bts => sectors.map(
-          sector => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+          (_) => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
             carrier =>           
               <td key={carrier.carrier_id}>
                 &nbsp;
@@ -98,7 +98,7 @@ export default function CarrierParamRows({btss=[], sectors=[], carriers=[]}: {bt
       <th>searchwin_a</th>
       {btss.map(
         bts => sectors.map(
-          sector => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+          (_) => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
             carrier =>           
               <td key={carrier.carrier_id}>
                 &nbsp;
@@ -111,7 +111,7 @@ export default function CarrierParamRows({btss=[], sectors=[], carriers=[]}: {bt
       <th>searchwin_n</th>
       {btss.map(
         bts => sectors.map(
-          sector => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+          (_) => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
             carrier =>           
               <td key={carrier.carrier_id}>
                 &nbsp;
@@ -124,7 +124,7 @@ export default function CarrierParamRows({btss=[], sectors=[], carriers=[]}: {bt
       <th>searchwin_r</th>
       {btss.map(
         bts => sectors.map(
-          sector => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+          (_) => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
             carrier =>           
               <td key={carrier.carrier_id}>
                 &nbsp;

@@ -4,7 +4,7 @@ const API_URL = import.meta.env.VITE_REACT_APP_API_URL;
 
 export async function fetchBrowsePerfData({ 
   // signal, 
-  id = null,
+  id = undefined,
   type,
   page_number = 1, 
   page_size= 10, 

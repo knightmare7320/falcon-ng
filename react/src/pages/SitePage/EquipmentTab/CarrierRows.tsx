@@ -8,7 +8,7 @@ export default function CarrierRows({btss, sectors, carriers}: {btss:SiteState['
       <th className="column-head top" style={{width:'140px'}}>Carrier</th>
       {btss.map(
         bts => sectors.map(
-          sector => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+          (_) => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
             carrier =>
               <td key={carrier.carrier_id} className="column-head top">
                 <strong>{carrier.carrier_designation_name}</strong>
@@ -21,7 +21,7 @@ export default function CarrierRows({btss, sectors, carriers}: {btss:SiteState['
       <th>Channel</th>
       {btss.map(
         bts => sectors.map(
-          sector => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+          (_) => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
             carrier =>           
               <td key={carrier.carrier_id}>
                 {carrier.channel_number}
@@ -34,7 +34,7 @@ export default function CarrierRows({btss, sectors, carriers}: {btss:SiteState['
       <th>Type</th>
       {btss.map(
         bts => sectors.map(
-          sector => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+          (_) => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
             carrier =>           
               <td key={carrier.carrier_id}>
                 {carrier.carrier_type_name}
@@ -47,7 +47,7 @@ export default function CarrierRows({btss, sectors, carriers}: {btss:SiteState['
       <th>Status</th>
       {btss.map(
         bts => sectors.map(
-          sector => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+          (_) => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
             carrier =>           
               <td key={carrier.carrier_id}>
                 {carrier.equipment_status_name}
@@ -60,7 +60,7 @@ export default function CarrierRows({btss, sectors, carriers}: {btss:SiteState['
       <th>On-Air Date</th>
       {btss.map(
         bts => sectors.map(
-          sector => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+          (_) => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
             carrier =>           
               <td key={carrier.carrier_id}>
                 {carrier.on_air_date}

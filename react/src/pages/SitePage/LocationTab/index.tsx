@@ -1,6 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencil } from "@fortawesome/free-solid-svg-icons";
-
 import styles from "./index.module.css";
 
 import { SiteState } from '../../../store/site.slice';

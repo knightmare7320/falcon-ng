@@ -1,7 +1,7 @@
 export type tableRequestType = {
   // signal: AbortSignal,
   type: string,
-  id?: string | number | null,
+  id?: number,
   page_number?: number,
   page_size?: number,
   order_by?: string,
@@ -10,7 +10,7 @@ export type tableRequestType = {
 }
 
 export type kpiRowType = {
-  id: string | number,
+  id: number,
   name: string,
   description?: string,
   setup_attempts: number;
@@ -22,7 +22,7 @@ export type kpiRowType = {
 }
 
 export type kpiTableType = {
-  id?: string | number | null,
+  id?: number,
   name?: string,
   parent_id?: number,
   parent_name?: string,
