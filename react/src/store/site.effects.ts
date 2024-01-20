@@ -1,5 +1,5 @@
 import { createListenerMiddleware } from "@reduxjs/toolkit";
-import type { Action, TypedStartListening } from '@reduxjs/toolkit'
+import type { PayloadAction, TypedStartListening } from '@reduxjs/toolkit'
 
 import {RootState, AppDispatch} from ".";
 import { uiActions } from "./ui.slice";
@@ -15,7 +15,7 @@ const siteStartListening = siteListener.startListening as typeListener;
 
 siteStartListening({
   actionCreator: siteActions.setCascade,
-  effect: async (action:Action, listenerApi) => {
+  effect: async (action:PayloadAction<string>, listenerApi) => {
     listenerApi.dispatch(siteActions.setLoading());
     let response;
     try {
@@ -34,7 +34,7 @@ siteStartListening({
 
 siteStartListening({
   actionCreator: siteActions.setCascade,
-  effect: async (action:Action, listenerApi) => {
+  effect: async (action:PayloadAction<string>, listenerApi) => {
     let response;
     try {
       response = await fetchNearest(action.payload);
@@ -52,7 +52,7 @@ siteStartListening({
 
 siteStartListening({
   actionCreator: siteActions.setCascade,
-  effect: async (action:Action, listenerApi) => {
+  effect: async (action:PayloadAction<string>, listenerApi) => {
     let response;
     try {
       response = await fetchBts(action.payload);
@@ -70,7 +70,7 @@ siteStartListening({
 
 siteStartListening({
   actionCreator: siteActions.setCascade,
-  effect: async (action:Action, listenerApi) => {
+  effect: async (action:PayloadAction<string>, listenerApi) => {
     let response;
     try {
       response = await fetchSectors(action.payload);
@@ -88,7 +88,7 @@ siteStartListening({
 
 siteStartListening({
   actionCreator: siteActions.setCascade,
-  effect: async (action:Action, listenerApi) => {
+  effect: async (action:PayloadAction<string>, listenerApi) => {
     let response;
     try {
       response = await fetchCarriers(action.payload);

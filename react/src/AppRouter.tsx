@@ -1,14 +1,14 @@
+import loadable from '@loadable/component';
 import { createBrowserRouter } from "react-router-dom";
 
 import RootLayout from "./components/layout/RootLayout.tsx";
 import ErrorPage from "./pages/ErrorPage";
-// import HomePage from "./pages/HomePage";
-import BrowsePage from "./pages/BrowsePage";
 import LoginPage, {action as authAction} from "./pages/LoginPage";
-import MapPage from "./pages/MapPage";
 import {action as logoutAction} from "./pages/LogoutPage";
 import { /*checkAuthLoader,*/ tokenLoader } from './util/auth.ts';
-import SitePage from "./pages/SitePage";
+const BrowsePage = loadable(() => import('./pages/BrowsePage'));
+const MapPage = loadable(() => import('./pages/MapPage'));
+const SitePage = loadable(() => import('./pages/SitePage'));
 
 export const AppRouter = createBrowserRouter([
   {

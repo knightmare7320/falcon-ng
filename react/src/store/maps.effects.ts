@@ -1,9 +1,9 @@
 import { createListenerMiddleware } from "@reduxjs/toolkit";
-import type { Action, TypedStartListening } from '@reduxjs/toolkit';
+import type { PayloadAction, TypedStartListening } from '@reduxjs/toolkit';
 
 import { RootState, AppDispatch } from ".";
 import { uiActions } from "./ui.slice";
-import { mapsActions } from "./maps.slice";
+import { MapsBounds, mapsActions } from "./maps.slice";
 import { fetchGeoSiteBounds, fetchGeoSectorBounds } from "../util/map.service";
 
 type typeListener = TypedStartListening<RootState, AppDispatch>;
@@ -38,7 +38,7 @@ const mapStartListening = mapListener.startListening as typeListener;
 
 mapStartListening({
   actionCreator: mapsActions.setMapBounds,
-  effect: async (action:Action, listenerApi) => {
+  effect: async (action:PayloadAction<MapsBounds>, listenerApi) => {
     const bounds = action.payload;
 
     let response;
@@ -58,7 +58,7 @@ mapStartListening({
 
 mapStartListening({
   actionCreator: mapsActions.setMapBounds,
-  effect: async (action:Action, listenerApi) => {
+  effect: async (action:PayloadAction<MapsBounds>, listenerApi) => {
     const bounds = action.payload;
 
     let response;

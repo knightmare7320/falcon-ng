@@ -6,7 +6,7 @@ import styles from "./NearestSites.module.css";
 export default function NearestSites({data}: {data:Nearest[]}) {
   return <>
     <h3 className={styles.title}>Nearest Sites</h3>
-    {data.length === 0 ?? <p>'None.'</p>}
+    {data.length === 0 && <p>'None.'</p>}
     <ol className={styles.list}>
       {
         data.map(site => 
