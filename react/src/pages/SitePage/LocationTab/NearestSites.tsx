@@ -3,7 +3,12 @@ import { Nearest } from "../../../util/site.model";
 
 import styles from "./NearestSites.module.css";
 
-export default function NearestSites({data}: {data:Nearest[]}) {
+type NearestSitesProps = {
+  data:Nearest[]
+};
+
+
+export default function NearestSites({data}:NearestSitesProps) {
   return <>
     <h3 className={styles.title}>Nearest Sites</h3>
     {data.length === 0 && <p>'None.'</p>}

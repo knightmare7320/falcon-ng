@@ -11,8 +11,13 @@ import SectorLayer from "./SectorLayer";
 
 // https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=<YOUR_API_KEY>&units=metric
 
+export type MapProps = {
+  latitude:number, 
+  longitude:number,
+};
 
-function MyMap({latitude, longitude}: {latitude:number, longitude:number}) {
+
+function MyMap({latitude, longitude}:MapProps) {
   const dispatch = useDispatch();
   const map = useMap();
 

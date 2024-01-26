@@ -1,16 +1,17 @@
-import { SiteState } from "../../../store/site.slice";
+import { EquipmentTabProps } from ".";
 
-export default function CarrierRows({btss, sectors, carriers}: {btss:SiteState['btss'], sectors:SiteState['sectors'], carriers:SiteState['carriers']}) {
+
+export default function CarrierRows({btss, sectors, carriers}:EquipmentTabProps) {
   if (!carriers) return <></>;
 
   return <>
     <tr>
-      <th className="column-head top" style={{width:'140px'}}>Carrier</th>
+      <th className="column-head" style={{width:'140px'}}>Carrier</th>
       {btss.map(
         bts => sectors.map(
           (_) => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
             carrier =>
-              <td key={carrier.carrier_id} className="column-head top">
+              <td key={carrier.carrier_id} className="column-head">
                 <strong>{carrier.carrier_designation_name}</strong>
               </td>
           )

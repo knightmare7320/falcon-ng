@@ -1,6 +1,7 @@
-import { SiteState } from "../../../store/site.slice";
+import { ParamsTabProps } from ".";
 
-export default function CarrierParamRows({btss=[], sectors=[], carriers=[]}: {btss:SiteState['btss'], sectors:SiteState['sectors'], carriers:SiteState['carriers']}) {
+
+export default function CarrierParamRows({btss=[], sectors=[], carriers=[]}:ParamsTabProps) {
   if (!carriers) return <></>;
   return <>
     <tr>

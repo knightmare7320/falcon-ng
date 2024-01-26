@@ -9,7 +9,10 @@ import SiteLayer from "../../MapPage/SiteLayer";
 import { mapsActions } from "../../../store/maps.slice";
 import SectorLayer from "../../MapPage/SectorLayer";
 
-function MyMap({latitude, longitude}: {latitude:number, longitude:number}) {
+import { MapProps } from "../../MapPage";
+
+
+function MyMap({latitude, longitude}:MapProps) {
   const map = useMap();
   const dispatch = useDispatch();
 
@@ -22,7 +25,8 @@ function MyMap({latitude, longitude}: {latitude:number, longitude:number}) {
   return null;
 }
 
-export default function InsetMap({latitude, longitude}: {latitude:number, longitude:number}) {
+
+export default function InsetMap({latitude, longitude}:MapProps) {
   return <>
     {latitude && longitude && 
       <Link to={`/map?latitude=${latitude}&longitude=${longitude}`}>

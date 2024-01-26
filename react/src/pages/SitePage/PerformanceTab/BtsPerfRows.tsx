@@ -1,6 +1,7 @@
-import { SiteState } from "../../../store/site.slice";
+import { PerformanceTabProps } from ".";
 
-export default function BtsPerfRows({btss = [], sectors, carriers}: {btss:SiteState['btss'], sectors:SiteState['sectors'], carriers:SiteState['carriers']}) {
+
+export default function BtsPerfRows({btss = [], sectors, carriers}:PerformanceTabProps) {
   const sectorCount = sectors?.length || 1;
   let carrierCounts:Map<number, number> = new Map();
   btss.map(bts => {

@@ -1,10 +1,16 @@
-import { SiteState } from '../../../store/site.slice';
-
 import BtsParamRows from "./BtsParamRows";
 import SectorParamRows from "./SectorParamRows";
 import CarrierParamRows from "./CarrierParamRows";
 
-export default function ParamsTab({btss, sectors, carriers}: {btss:SiteState['btss'], sectors: SiteState['sectors'], carriers: SiteState['carriers']}) {
+import { SiteState } from '../../../store/site.slice';
+export type ParamsTabProps = {
+  btss:SiteState['btss'], 
+  sectors:SiteState['sectors'], 
+  carriers:SiteState['carriers'],
+};
+
+
+export default function ParamsTab({btss, sectors, carriers}:ParamsTabProps) {
   return <>
     <table className="site-table equipment" style={{width: '100%'}}>
       <tbody>

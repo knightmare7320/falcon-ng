@@ -1,6 +1,7 @@
-import { SiteState } from "../../../store/site.slice";
+import { EquipmentTabProps } from ".";
 
-export default function SectorRows({btss, sectors, carriers}: {btss:SiteState['btss'], sectors:SiteState['sectors'], carriers:SiteState['carriers']}) {
+
+export default function SectorRows({btss, sectors, carriers}:EquipmentTabProps) {
   if (!sectors) return <></>;
 
   let carrierCounts:Map<number, number> = new Map();
@@ -12,11 +13,11 @@ export default function SectorRows({btss, sectors, carriers}: {btss:SiteState['b
 
   return <>
     <tr>
-      <th className="column-head top">Sector</th>
+      <th className="column-head">Sector</th>
       {btss.map(
         bts => sectors.map(
           sector => 
-            <td  className="column-head top" key={sector.sector_id} colSpan={carrierCounts.get(bts.bts_id) || 1}>
+            <td  className="column-head" key={sector.sector_id} colSpan={carrierCounts.get(bts.bts_id) || 1}>
               <strong>{sector.sector_number}</strong>
             </td> 
         )

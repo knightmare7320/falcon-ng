@@ -1,6 +1,7 @@
-import { SiteState } from "../../../store/site.slice";
+import { ParamsTabProps } from ".";
 
-export default function BtsParamRows({btss=[], sectors=[], carriers=[]}: {btss:SiteState['btss'], sectors:SiteState['sectors'], carriers:SiteState['carriers']}) {
+
+export default function BtsParamRows({btss=[], sectors=[], carriers=[]}:ParamsTabProps) {
   const sectorCount = sectors.length;
   let carrierCounts:Map<number, number> = new Map();
   btss.map(bts => {

@@ -1,6 +1,7 @@
-import { SiteState } from "../../../store/site.slice";
+import { PerformanceTabProps } from ".";
 
-export default function CarrierPerfRows({btss, sectors, carriers}: {btss:SiteState['btss'], sectors:SiteState['sectors'], carriers:SiteState['carriers']}) {
+
+export default function CarrierPerfRows({btss, sectors, carriers}:PerformanceTabProps) {
   if (!carriers) return <></>;
 
   return <>

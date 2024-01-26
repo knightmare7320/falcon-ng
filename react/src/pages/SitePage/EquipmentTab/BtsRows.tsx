@@ -1,6 +1,7 @@
-import { SiteState } from "../../../store/site.slice";
+import { EquipmentTabProps } from ".";
 
-export default function BtsRows({btss, sectors, carriers}: {btss:SiteState['btss'], sectors:SiteState['sectors'], carriers:SiteState['carriers']}) {
+
+export default function BtsRows({btss, sectors, carriers}:EquipmentTabProps) {
   const sectorCount = sectors.length;
   let carrierCounts:Map<number, number> = new Map();
   btss.map(bts => {
@@ -10,9 +11,9 @@ export default function BtsRows({btss, sectors, carriers}: {btss:SiteState['btss
 
   return <>
     <tr>
-      <th className="column-head top">Switch</th>
+      <th className="column-head">Switch</th>
       { btss.map(bts => 
-        <td className="column-head top" key={bts.bts_id} colSpan={sectorCount * (carrierCounts.get(bts.bts_id) || 1)}>
+        <td className="column-head" key={bts.bts_id} colSpan={sectorCount * (carrierCounts.get(bts.bts_id) || 1)}>
           <strong>{bts.switch_name}</strong>
         </td>
       )}

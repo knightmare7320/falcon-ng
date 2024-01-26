@@ -1,1 +1,2 @@
 docker exec  falcon-ng-mysqldb-1 sh -c 'exec mysqldump --all-databases --routines -uroot -p$MYSQL_ROOT_PASSWORD' > ./mysql/mysql-dump/falcon_db.sql
+docker exec -i falcon-ng-mysqldb-1 sh -c 'exec mysql -uroot -p$MYSQL_ROOT_PASSWORD' < ./mysql/mysql-dump/falcon_db.sql
