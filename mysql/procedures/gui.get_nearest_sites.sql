@@ -1,4 +1,4 @@
-DROP PROCEDURE IF EXISTS gui.get_bscs;
+DROP PROCEDURE IF EXISTS gui.get_nearest_sites;
 
 DELIMITER $$
 $$

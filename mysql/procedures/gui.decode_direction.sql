@@ -1,4 +1,4 @@
-DROP PROCEDURE IF EXISTS gui.get_azimuth;
+DROP PROCEDURE IF EXISTS gui.decode_direction;
 
 DELIMITER $$
 $$
