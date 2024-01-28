@@ -1,4 +1,8 @@
 import { Link } from "react-router-dom";
+import { /*useSelector,*/ useDispatch } from "react-redux";
+
+import { authActions } from "../../store/auth.slice";
+// import { RootState } from "../../store";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -6,6 +10,12 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import "./MenuBar.css";
 
 export default function MenuBar() {
+  const dispatch = useDispatch();
+
+  function handleLogin() {
+    dispatch(authActions.showLogin());
+  }
+
   return (
     <header className="menuBar">
       <div className="menuBar__icon">
@@ -20,7 +30,7 @@ export default function MenuBar() {
       <nav className="menuBar__menu">
         <ul>
           <li>
-            <Link to="/login">Login</Link>
+            <button className="loginButton" onClick={handleLogin}>Login</button>
           </li>
           <li>
             <form className="search-box">

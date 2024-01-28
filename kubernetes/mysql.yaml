@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mysql
+  template: 
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: knightmare7320/falcon-mysqldb
+          env:
+            - name: STORY_FOLDER
+              #value: story
+              valueFrom:
+                configMapKeyRef: 
+                  name: data-store-env
+                  key: folder
+          volumeMounts: 
+            - mountPath: /app/mysqldb
+              name: mysql-volume
+      volumes:
+        - name: mysql-volume
+          persistentVolumeClaim: 
+            claimName: mysql-pvc
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /data
+    type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+spec:
+  volumeName: mysql-pv
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard
+  resources:
+    requests:
+      storage: 1Gi

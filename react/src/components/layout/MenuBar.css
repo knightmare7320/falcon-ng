@@ -51,9 +51,14 @@
       padding-right: 20px;
     }
   }
-  & a {
+  & .loginButton {
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
     color: white;
     font-weight: bold;
+    font-size: 12pt;
+    font-family: Roboto, sans-serif;
     &:hover {
       color: lightblue;
     }

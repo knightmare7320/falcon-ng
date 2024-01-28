@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 
+import authReducer from './auth.slice.ts';
 import uiReducer from './ui.slice.ts';
 import uiEffects from './ui.effects.ts';
 import browseReducer from './browse.slice.ts';
@@ -11,6 +12,7 @@ import mapsEffects from './maps.effects.ts';
 
 const store = configureStore({
   reducer: {
+    auth: authReducer,
     ui: uiReducer,
     browse: browseReducer,
     site: siteReducer,

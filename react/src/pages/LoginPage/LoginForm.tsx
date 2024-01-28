@@ -1,12 +1,20 @@
 import { Form, /*useActionData,*/ useNavigation } from "react-router-dom";
+import { /*useSelector,*/ useDispatch } from "react-redux";
+
+import { authActions } from "../../store/auth.slice";
 
 import classes from "./LoginForm.module.css";
 
 export default function LoginForm() {
   // const data = useActionData();
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   
   const isSubmitting = navigation.state === 'submitting';
+
+  function handleCancelLogin() {
+    dispatch(authActions.cancelLogin());
+  }
 
   return (
     <>
@@ -31,9 +39,15 @@ export default function LoginForm() {
         <input id="password" type="password" name="password" required />
       </p>
       <div className={classes.actions}>
+
+        <button type="button" disabled={isSubmitting} onClick={handleCancelLogin}>
+          Cancel
+        </button>
+
         <button type="submit" disabled={isSubmitting}>
           {isSubmitting ? 'Logging in...' : 'Login'}
         </button>
+
       </div>
     </Form>
   </>
