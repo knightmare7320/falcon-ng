@@ -4,7 +4,7 @@
    "description": "",
    "main": "index.js",
    "scripts": {
-      "start": "nodemon auth-app.js"
+      "start": "nodemon app.js"
    },
    "author": "Brian Knight",
    "private": true,
