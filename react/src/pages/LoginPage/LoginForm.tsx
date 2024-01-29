@@ -1,24 +1,25 @@
-import { ReactEventHandler, useRef } from "react";
-import { Form, /*useActionData,*/ useNavigation } from "react-router-dom";
-import { /*useSelector,*/ useDispatch } from "react-redux";
+import { useRef } from "react";
+import { Form } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 import { authActions } from "../../store/auth.slice";
+import { RootState } from '../../store';
 
 import classes from "./LoginForm.module.css";
 
 export default function LoginForm() {
-  // const data = useActionData();
-  const email = useRef();
-  const password = useRef();
-
-  const navigation = useNavigation();
   const dispatch = useDispatch();
-  
-  const isSubmitting = navigation.state === 'submitting';
+  const authState = useSelector((state:RootState) => state.auth);
+ 
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
+  
   function handleSubmit(event:React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    console.log(email.current.value, password.current.value);
+    const email = emailRef.current?.value || '';
+    const password = passwordRef.current?.value || '';
+    dispatch(authActions.tryLogin({email, password}));
   }
 
   function handleCancel() {
@@ -26,25 +27,15 @@ export default function LoginForm() {
   }
 
   return <>
-    <Form method="post" className={classes.form} onSubmit={handleSubmit}>
-
-      {/* {data?.errors && (
-        <ul>
-          {Object.values(data.errors).map((err) => (
-            <li key={err}>{err}</li>
-          ))}
-        </ul>
-      )}
-
-      {data && data.message && <p>{data.message}</p>} */}
-
+    <Form method="post" className={classes.form} onSubmit={handleSubmit} >
       <p>
         <label htmlFor="email" className={classes.input}>Email</label>
         <input 
           id="email" 
           type="email" 
           name="email" 
-          ref={email} 
+          ref={emailRef} 
+          disabled={authState.status==='submitting'} 
           required 
         />
       </p>
@@ -54,19 +45,26 @@ export default function LoginForm() {
           id="password" 
           type="password" 
           name="password" 
-          ref={password} 
+          ref={passwordRef}  
+          disabled={authState.status==='submitting'} 
           required 
         />
       </p>
+      
+      {authState.message && 
+        <p className={classes.err}>
+          {authState.message}
+        </p>
+      }
 
-      <div className={classes.actions}>
-        <button type="button" className="flat" disabled={isSubmitting} onClick={handleCancel}>
+      <p className={classes.actions}>
+        <button type="button" className="flat" disabled={authState.status==='submitting'} onClick={handleCancel}>
           Cancel
         </button>
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? 'Logging in...' : 'Login'}
+        <button type="submit" disabled={authState.status==='submitting'}>
+          {authState.status==='submitting' ? 'Logging in...' : 'Login'}
         </button>
-      </div>
+      </p>
     </Form>
   </>;
 }

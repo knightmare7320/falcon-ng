@@ -5,7 +5,7 @@ import RootLayout from "./components/layout/RootLayout.tsx";
 import ErrorPage from "./pages/ErrorPage";
 import LoginPage, {action as authAction} from "./pages/LoginPage";
 import {action as logoutAction} from "./pages/LogoutPage";
-import { /*checkAuthLoader,*/ tokenLoader } from './util/auth.ts';
+import { /*checkAuthLoader,*/ tokenLoader } from './util/auth.service.ts';
 const BrowsePage = loadable(() => import('./pages/BrowsePage'));
 const MapPage = loadable(() => import('./pages/MapPage'));
 const SitePage = loadable(() => import('./pages/SitePage'));
