@@ -25,7 +25,11 @@ export default function Breadcrumbs({region_id, l4_market_id, l5_market_id, clus
   if (cluster_id) {
     const item = uiState.clusters.find(cluster => cluster_id === cluster.id);
     if (item) {
-      content.unshift(<> <FontAwesomeIcon icon={faCaretRight} /> <Link to={`/browse/cluster/${cluster_id}`} key={"breadcrumb-0"}>{item.name}</Link></>);
+      if (cascade_code) {
+        content.unshift(<> <FontAwesomeIcon icon={faCaretRight} /> <Link to={`/browse/cluster/${cluster_id}`} key={"breadcrumb-0"}>{item.name}</Link></>);
+      } else {
+        content.unshift(<> <FontAwesomeIcon icon={faCaretRight} /> {item.name} </>);
+      }
       l5_market_id = l5_market_id || item.parent_id;
     }
   }
@@ -33,7 +37,11 @@ export default function Breadcrumbs({region_id, l4_market_id, l5_market_id, clus
   if (l5_market_id) {
     const item = uiState.l5_markets.find(l5_market => l5_market_id === l5_market.id);
     if (item) {
-      content.unshift(<> <FontAwesomeIcon icon={faCaretRight} /> <Link to={`/browse/l5_market/${l5_market_id}`} key={"breadcrumb-1"}>{item.name}</Link></>);
+      if (cluster_id) {
+        content.unshift(<> <FontAwesomeIcon icon={faCaretRight} /> <Link to={`/browse/l5_market/${l5_market_id}`} key={"breadcrumb-1"}>{item.name}</Link></>);
+      } else {
+        content.unshift(<> <FontAwesomeIcon icon={faCaretRight} /> {item.name} </>);
+      }
       l4_market_id = l4_market_id || item.parent_id;
     }
   }
@@ -41,7 +49,11 @@ export default function Breadcrumbs({region_id, l4_market_id, l5_market_id, clus
   if (l4_market_id) {
     const item = uiState.l4_markets.find(l4_market => l4_market_id === l4_market.id);
     if (item) {
-      content.unshift(<> <FontAwesomeIcon icon={faCaretRight} /> <Link to={`/browse/l4_market/${l4_market_id}`} key={"breadcrumb-2"}>{item.name}</Link></>);
+      if (l5_market_id) {
+        content.unshift(<> <FontAwesomeIcon icon={faCaretRight} /> <Link to={`/browse/l4_market/${l4_market_id}`} key={"breadcrumb-2"}>{item.name}</Link></>);
+      } else {
+        content.unshift(<> <FontAwesomeIcon icon={faCaretRight} /> {item.name} </>);
+      }
       region_id = region_id || item.parent_id;
     }
   }
@@ -49,11 +61,19 @@ export default function Breadcrumbs({region_id, l4_market_id, l5_market_id, clus
   if (region_id) {
     const item = uiState.regions.find(region => region_id === region.id);
     if (item) {
-      content.unshift(<> <FontAwesomeIcon icon={faCaretRight} /> <Link to={`/browse/region/${region_id}`} key={"breadcrumb-3"}>{item.name}</Link></>);
+      if (l4_market_id) {
+        content.unshift(<> <FontAwesomeIcon icon={faCaretRight} /> <Link to={`/browse/region/${region_id}`} key={"breadcrumb-3"}>{item.name}</Link></>);
+      } else {
+        content.unshift(<> <FontAwesomeIcon icon={faCaretRight} /> {item.name} </>);
+      }
     }
   }
   
-  content.unshift(<Link to="/browse" key={"breadcrumb-4"}><FontAwesomeIcon icon={faHome} /></Link>);
+  if (region_id) {
+    content.unshift(<Link to="/browse" key={"breadcrumb-4"}><FontAwesomeIcon icon={faHome} /></Link>);
+  } else {
+    content.unshift(<FontAwesomeIcon icon={faHome} />);
+  }
 
   return <div className={styles.breadcrumbs}>
     { content }

@@ -1,5 +1,21 @@
 {
+  "name": "falcon-server",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "nodemon src/server.js"
+  },
+  "type": "commonjs",
+  "private": true,
   "dependencies": {
-    "body-parser": "^1.20.2"
+    "body-parser": "*",
+    "compression": "*",
+    "cors": "*",
+    "express": "*",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "*",
+    "mysql2": "^3.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "*"
   }
 }

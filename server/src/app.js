@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const compression = require("compression");
 const mysql = require("mysql2");
 
+const authRoutes = require("./routes/auth");
 const siteRoutes = require("./routes/site");
 const sitesRoutes = require("./routes/sites");
 const regionsRoutes = require("./routes/regions");
@@ -46,6 +47,7 @@ app.use((req, res, next) => {
    next();
 }); 
 
+app.use("/api/auth", authRoutes);
 app.use("/api/site", siteRoutes);
 app.use("/api/sites", sitesRoutes);
 app.use("/api/regions", regionsRoutes);

@@ -2,11 +2,11 @@ import { redirect } from 'react-router-dom';
 
 import { AuthResponse } from './auth.model';
 
-const API_URL = import.meta.env.VITE_REACT_APP_API_URL;
+const API_URL = import.meta.env.VITE_REACT_APP_API_URL + '/auth';
 
 
 
-export async function fetchLogin(email:string, password:string):Promise<AuthResponse> {
+export async function fetchLogin(username:string, password:string):Promise<AuthResponse> {
   let url = API_URL + '/login';
 
   const response = await fetch(
@@ -15,15 +15,15 @@ export async function fetchLogin(email:string, password:string):Promise<AuthResp
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({email, password})
+      body: JSON.stringify({username, password})
     },
   );
   
-  if (response.status === 401) {
-    //specifically pick up login error to drop in the form
-    const info = await response.json();
-    return { message: info?.message || 'Error' };
-  }
+  // if (response.status === 401) {
+  //   //specifically pick up login error to drop in the form
+  //   const info = await response.json();
+  //   return { message: info?.message || 'Error' };
+  // }
 
   if (!response.ok) {
     const info = await response.json();
@@ -31,7 +31,8 @@ export async function fetchLogin(email:string, password:string):Promise<AuthResp
     throw error;
   }
 
-  return await response.json();}
+  return await response.json();
+}
 
 
 

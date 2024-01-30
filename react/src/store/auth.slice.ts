@@ -5,8 +5,9 @@ type AuthState = {
   status: string,
   message?: string,
   user_id: string,
-  user_name?: string,
+  full_name?: string,
   token?: string,
+  token_expiration?: Date,
 };
 
 const INITIAL_STATE: AuthState = {
@@ -25,13 +26,15 @@ const authSlice = createSlice({
     cancelLogin(state) {
       state.show_login = false;
     },
-    tryLogin(state, action:PayloadAction<{email:string, password:string}>) {
+    tryLogin(state, action:PayloadAction<{username:string, password:string}>) {
       state.status = 'submitting';
       state.message = '';
     },
-    loginSuccess(state, action:PayloadAction<{user_id:string, user_name:string}>) {
+    loginSuccess(state, action:PayloadAction<{user_id:string, full_name:string, token:string}>) {
+      state.status = 'none';
       state.user_id = action.payload.user_id;
-      state.user_name = action.payload.user_name;
+      state.full_name = action.payload.full_name;
+      state.token = action.payload.token;
       state.show_login = false;
     },
     loginFailure(state, action:PayloadAction<{message:string}>) {

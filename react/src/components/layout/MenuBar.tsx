@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { /*useSelector,*/ useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import { authActions } from "../../store/auth.slice";
-// import { RootState } from "../../store";
+import { RootState } from "../../store";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -11,9 +11,14 @@ import "./MenuBar.css";
 
 export default function MenuBar() {
   const dispatch = useDispatch();
+  const authState = useSelector((state:RootState) => state.auth);
 
   function handleLogin() {
     dispatch(authActions.showLogin());
+  }
+
+  function handleLogout() {
+    dispatch(authActions.setLogout());
   }
 
   return (
@@ -30,7 +35,10 @@ export default function MenuBar() {
       <nav className="menuBar__menu">
         <ul>
           <li>
-            <button className="loginButton" onClick={handleLogin}>Login</button>
+            { !authState.token ? 
+              <button className="loginButton" onClick={handleLogin}>Login</button> :
+              <button className="loginButton" onClick={handleLogout} title={`Logged in as ${authState.full_name}`}>Logout</button>
+            }
           </li>
           <li>
             <form className="search-box">

@@ -1,5 +1,4 @@
 services:
-
   mysqldb:
     image: mysql:latest
     volumes:
@@ -17,30 +16,15 @@ services:
   server:
     build: server
     volumes:
-      - ./server/src:/app
       - falcon-server-node_modules:/app/node_modules
-    environment:
-      AUTH_SERVICE_SERVICE_HOST: auth-api
+      - ./server/src:/app
     ports:
       - "3000:80"
     env_file:
       - ./secrets/mysql.env
+      - ./secrets/auth.env
     depends_on:
       - mysqldb
-      - auth-api
-
-  auth-api:
-    build: auth-api
-    ports:
-      - "88:80"
-    volumes:
-      - ./auth-api:/app
-      - falcon-auth-node_modules:/app/node_modules
-    # environment:
-    #   - JWT_SECRET=
-    env_file:
-      - ./secrets/mysql.env
-      - ./secrets/auth.env
 
   react:
     build: react
@@ -53,8 +37,6 @@ services:
       - server
     environment:
       VITE_REACT_APP_API_URL: http://localhost:3000/api
-    # env_file:
-    #   - 
 
   # nginx:
   #   build: nginx

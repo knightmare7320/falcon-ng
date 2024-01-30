@@ -13,18 +13,16 @@ const authStartListening = authListener.startListening as typeListener;
 authStartListening({
   actionCreator: authActions.tryLogin,
   effect: async (action, listenerApi) => {
-    console.log(action.payload.email, action.payload.password);
     let response;
     try {
-      response = await fetchLogin(action.payload.email, action.payload.password);
+      response = await fetchLogin(action.payload.username, action.payload.password);
     } catch(error) {
       let message = 'Unknown Error';
       if (error instanceof Error) message = error.message;
-      // listenerApi.dispatch(uiActions.showMessage({type: 'error', message}));
-      // listenerApi.dispatch(browseActions.setError());
+      listenerApi.dispatch(authActions.loginFailure({message}));
     }
     if (response) {
-      // listenerApi.dispatch(authActions.loginSuccess(response));
+      listenerApi.dispatch(authActions.loginSuccess({user_id: response.user_id, full_name: response.full_name, token: response.token}));
     }
   },
 });
