@@ -26,10 +26,12 @@ const authSlice = createSlice({
     cancelLogin(state) {
       state.show_login = false;
     },
+    // @ts-ignore
     tryLogin(state, action:PayloadAction<{username:string, password:string}>) {
       state.status = 'submitting';
       state.message = '';
     },
+    tryLoadLocal() {},
     loginSuccess(state, action:PayloadAction<{user_id:string, full_name:string, token:string}>) {
       state.status = 'none';
       state.user_id = action.payload.user_id;

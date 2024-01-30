@@ -84,11 +84,9 @@ export const AppRouter = createBrowserRouter([
       {
         path: "login",
         element: <LoginPage />,
-        action: authAction,
       },
       {
         path: "logout",
-        action: logoutAction,
       }
     ],
   }
