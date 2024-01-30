@@ -18,12 +18,6 @@ export async function fetchLogin(username:string, password:string):Promise<AuthR
       body: JSON.stringify({username, password})
     },
   );
-  
-  // if (response.status === 401) {
-  //   //specifically pick up login error to drop in the form
-  //   const info = await response.json();
-  //   return { message: info?.message || 'Error' };
-  // }
 
   if (!response.ok) {
     const info = await response.json();
