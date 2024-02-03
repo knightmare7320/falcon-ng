@@ -35,7 +35,7 @@ export default function MenuBar() {
       <nav className="menuBar__menu">
         <ul>
           <li>
-            { !authState.token ? 
+            { authState.status !== 'ok' ? 
               <button className="loginButton" onClick={handleLogin}>Login</button> :
               <button className="loginButton" onClick={handleLogout} title={`Logged in as ${authState.full_name}`}>Logout</button>
             }

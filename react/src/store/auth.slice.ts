@@ -6,8 +6,6 @@ type AuthState = {
   message?: string,
   user_id: string,
   full_name?: string,
-  token?: string,
-  token_expiration?: Date,
 };
 
 const INITIAL_STATE: AuthState = {
@@ -32,11 +30,10 @@ const authSlice = createSlice({
       state.message = '';
     },
     tryLoadLocal() {},
-    loginSuccess(state, action:PayloadAction<{user_id:string, full_name:string, token:string}>) {
-      state.status = 'none';
+    loginSuccess(state, action:PayloadAction<{user_id:string, full_name:string}>) {
+      state.status = 'ok';
       state.user_id = action.payload.user_id;
       state.full_name = action.payload.full_name;
-      state.token = action.payload.token;
       state.show_login = false;
     },
     loginFailure(state, action:PayloadAction<{message:string}>) {
@@ -44,7 +41,9 @@ const authSlice = createSlice({
       state.message = action.payload.message;
     },
     setLogout(state) {
-      state = INITIAL_STATE;
+      state.status = 'none';
+      state.user_id = '';
+      state.full_name = undefined;
     },
   }
 });

@@ -25,7 +25,8 @@ export default function SitePage() {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const siteState = useSelector((state: RootState) => state.site);
+  const siteState = useSelector((state:RootState) => state.site);
+  const authState = useSelector((state:RootState) => state.auth.status);
 
   
   const cascadeCode = params.cascade_code || '';
@@ -41,7 +42,7 @@ export default function SitePage() {
   let tabContent = <></>;
   switch(selectedTab) {
     case 'location':
-      tabContent = <LocationTab site={siteState.site} nearestSites={siteState.nearest} />;
+      tabContent = <LocationTab site={siteState.site} nearestSites={siteState.nearest} authState={authState} />;
       break;
     case 'equipment': 
     tabContent = <EquipmentTab btss={siteState.btss} sectors={siteState.sectors} carriers={siteState.carriers} />;

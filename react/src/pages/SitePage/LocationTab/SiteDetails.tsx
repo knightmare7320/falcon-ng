@@ -4,9 +4,10 @@ import { Site } from '../../../util/site.model';
 
 type SiteDetailsProps = {
   site:Site,
+  authState:string,
 };
 
-export default function SiteDetails({site}:SiteDetailsProps) {
+export default function SiteDetails({site, authState}:SiteDetailsProps) {
   return <>
     <table className="site-table">
       <tbody>
@@ -113,10 +114,12 @@ export default function SiteDetails({site}:SiteDetailsProps) {
         }
       </tbody>
     </table>
-    <div style={{textAlign: 'right'}}>
-      <button className="link"> 
-        edit site details
-      </button>
-    </div>
+    {authState === 'ok' &&
+      <div style={{textAlign: 'right'}}>
+        <button className="link"> 
+          edit site details
+        </button>
+      </div>
+    }
   </>;
 }

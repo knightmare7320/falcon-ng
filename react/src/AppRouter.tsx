@@ -3,9 +3,8 @@ import { createBrowserRouter } from "react-router-dom";
 
 import RootLayout from "./components/layout/RootLayout.tsx";
 import ErrorPage from "./pages/ErrorPage";
-import LoginPage, {action as authAction} from "./pages/LoginPage";
-import {action as logoutAction} from "./pages/LogoutPage";
-import { /*checkAuthLoader,*/ tokenLoader } from './util/auth.service.ts';
+import LoginPage from "./pages/LoginPage";
+// import { checkAuthLoader } from './util/auth.service.ts';
 const BrowsePage = loadable(() => import('./pages/BrowsePage'));
 const MapPage = loadable(() => import('./pages/MapPage'));
 const SitePage = loadable(() => import('./pages/SitePage'));
@@ -18,7 +17,6 @@ export const AppRouter = createBrowserRouter([
     path: "/",
     element: <RootLayout />,
     // errorElement: <ErrorPage />,
-    loader: tokenLoader,
     children: [
       {
         index: true,
@@ -28,8 +26,6 @@ export const AppRouter = createBrowserRouter([
       },
       { 
         path: "browse",
-        // element: <BrowsePage />,
-        // loader: checkAuthLoader,
         children: [
           {
             path: "",
@@ -64,17 +60,14 @@ export const AppRouter = createBrowserRouter([
       { 
         path: "map",
         element: <MapPage />,
-        // loader: checkAuthLoader,
       },
       { 
         path: "search",
         element: <SearchPage />,
-        // loader: checkAuthLoader,
       },
       { 
         path: "reports",
         element: <ReportsPage />,
-        // loader: checkAuthLoader,
       },
       { 
         path: "settings",
@@ -85,9 +78,6 @@ export const AppRouter = createBrowserRouter([
         path: "login",
         element: <LoginPage />,
       },
-      {
-        path: "logout",
-      }
     ],
   }
 ]);

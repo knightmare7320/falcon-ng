@@ -10,15 +10,16 @@ import NearestSites from './NearestSites';
 type LocationTabProps = {
   site:SiteState['site'], 
   nearestSites:SiteState['nearest'],
+  authState:string,
 };
 
 
-export default function LocationTab({site, nearestSites}:LocationTabProps) {
+export default function LocationTab({site, nearestSites, authState}:LocationTabProps) {
   return <>
     {site.latitude && site.longitude &&
       <div className={styles.siteDetailBox}>
         <div className={styles.siteDetailColumn}>
-          <SiteDetails site={site} />
+          <SiteDetails site={site} authState={authState} />
         </div>
         <div className={styles.siteDetailColumn}>
           <InsetMap latitude={site.latitude} longitude={site.longitude} />

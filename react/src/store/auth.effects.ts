@@ -10,6 +10,10 @@ const authListener = createListenerMiddleware();
 type typeListener = TypedStartListening<RootState, AppDispatch>;
 const authStartListening = authListener.startListening as typeListener;
 
+let loginTimer:ReturnType<typeof setTimeout>;
+const TIMEOUT_TIME = 60 * 60 * 1000;
+
+
 authStartListening({
   actionCreator: authActions.tryLogin,
   effect: async (action, listenerApi) => {
@@ -34,8 +38,13 @@ authStartListening({
         expiration.setHours(expiration.getHours() + 1);
         localStorage.setItem('expiration', expiration.toISOString());
 
-        listenerApi.dispatch(authActions.loginSuccess({user_id, full_name, token}));
-      // TODO: set timout
+        listenerApi.dispatch(authActions.loginSuccess({user_id, full_name}));
+
+        loginTimer = setTimeout(
+          () => {
+            listenerApi.dispatch(authActions.setLogout());
+          }, TIMEOUT_TIME
+        );
       }
     }
   }
@@ -54,8 +63,12 @@ authStartListening({
     const duration = expirationDate.getTime() - now.getTime();
     
     if (duration && user_id && full_name && token && duration > 0) {
-      listenerApi.dispatch(authActions.loginSuccess({user_id, full_name, token}));
-      // TODO: set timout
+      listenerApi.dispatch(authActions.loginSuccess({user_id, full_name}));
+      loginTimer = setTimeout(
+        () => {
+          listenerApi.dispatch(authActions.setLogout());
+        }, duration
+      );
     } else {
       localStorage.removeItem('user_id');
       localStorage.removeItem('full_name');
@@ -66,6 +79,15 @@ authStartListening({
 });
 
 // TODO: on logout cancel timeout
-
+authStartListening({
+  actionCreator: authActions.setLogout,
+  effect: () => {
+    clearTimeout(loginTimer);
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('full_name');
+    localStorage.removeItem('token');
+    localStorage.removeItem('expiration');
+  }
+});
 
 export default authListener;
