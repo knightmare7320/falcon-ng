@@ -45,3 +45,43 @@ button.link {
     text-decoration: underline;
   }
 }
+
+
+
+.modal {
+  background-color: #e4ddd4;
+  border-radius: 6px;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  padding: 0;
+  width: 80%;
+  max-width: 40rem;
+  animation: modal-in 0.2s ease-out forwards;
+  & header {
+    background-color: darkblue;
+    color: white;
+    font-weight: bold;
+    padding: 1rem 1.5rem;
+  }
+  & footer { 
+    border-top: 1px solid black;
+    padding: 1rem 1.5rem;
+    text-align: right;
+  }
+}
+
+.modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    /* transform: translateY(4rem); */
+  }
+
+  to {
+    opacity: 1;
+    /* transform: translateY(0); */
+  }
+}

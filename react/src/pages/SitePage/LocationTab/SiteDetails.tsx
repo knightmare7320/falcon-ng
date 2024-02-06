@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 
 import { Site } from '../../../util/site.model';
+import { useDispatch } from 'react-redux';
+import { siteActions } from '../../../store/site.slice';
 
 type SiteDetailsProps = {
   site:Site,
@@ -8,6 +10,12 @@ type SiteDetailsProps = {
 };
 
 export default function SiteDetails({site, authState}:SiteDetailsProps) {
+  const dispatch = useDispatch();
+  
+  function handleOpenEditSite() {
+    dispatch(siteActions.openEditSite());
+  }
+
   return <>
     <table className="site-table">
       <tbody>
@@ -116,7 +124,7 @@ export default function SiteDetails({site, authState}:SiteDetailsProps) {
     </table>
     {authState === 'ok' &&
       <div style={{textAlign: 'right'}}>
-        <button className="link"> 
+        <button className="link" onClick={handleOpenEditSite}> 
           edit site details
         </button>
       </div>

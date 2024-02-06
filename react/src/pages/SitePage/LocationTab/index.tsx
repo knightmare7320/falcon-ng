@@ -19,7 +19,7 @@ export default function LocationTab({site, nearestSites, authState}:LocationTabP
     {site.latitude && site.longitude &&
       <div className={styles.siteDetailBox}>
         <div className={styles.siteDetailColumn}>
-          <SiteDetails site={site} authState={authState} />
+          <SiteDetails site={site} authState={authState}/>
         </div>
         <div className={styles.siteDetailColumn}>
           <InsetMap latitude={site.latitude} longitude={site.longitude} />

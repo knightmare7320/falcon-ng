@@ -10,6 +10,7 @@ export type SiteState = {
   sectors: Sector[],
   carriers: Carrier[],
   nearest: Nearest[],
+  editSiteOpenFg: boolean,
 }
 
 const INITIAL_STATE = {
@@ -21,6 +22,7 @@ const INITIAL_STATE = {
   sectors: [] as Sector[],
   carriers: [] as Carrier[],
   nearest: [] as Nearest[],
+  editSiteOpenFg: false,
 }
 
 const siteSlice = createSlice({
@@ -64,6 +66,12 @@ const siteSlice = createSlice({
           a.bts_id > b.bts_id || a.carrier_designation_name > b.carrier_designation_name ? 1 : -1
       );
       state.carriers = sorted;
+    },
+    openEditSite(state:SiteState) {
+      state.editSiteOpenFg = true;
+    },
+    closeEditSite(state:SiteState) {
+      state.editSiteOpenFg = false;
     },
   },
 });

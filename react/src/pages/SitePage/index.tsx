@@ -18,7 +18,7 @@ import PerformanceTab from './PerformanceTab';
 import EquipmentTab from './EquipmentTab';
 import PicturesTab from './PicturesTab';
 import Breadcrumbs from '../../components/ui/Breadcrumbs';
-
+import EditSiteDialog from './EditSite';
 
 export default function SitePage() {
   const params = useParams();
@@ -99,6 +99,8 @@ export default function SitePage() {
         </div>  
 
       </div>
+
+      <EditSiteDialog openFg={siteState.editSiteOpenFg} />
     </main>
   </>;
 }
