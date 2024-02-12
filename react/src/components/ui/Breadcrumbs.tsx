@@ -19,7 +19,7 @@ export default function Breadcrumbs({region_id, l4_market_id, l5_market_id, clus
   let content = [];
   
   if (cascade_code) {
-    content.unshift(<><FontAwesomeIcon icon={faCaretRight}  key={"breadcrumb-x"}/> {cascade_code}</>);
+    content.unshift(<><FontAwesomeIcon icon={faCaretRight} key={"breadcrumb-x"} /> {cascade_code}</>);
   }
   
   if (cluster_id) {
