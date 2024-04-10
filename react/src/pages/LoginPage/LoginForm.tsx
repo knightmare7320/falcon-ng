@@ -38,6 +38,7 @@ export default function LoginForm() {
           type="email" 
           name="username" 
           ref={usernameRef} 
+          autoComplete="off"
           required 
         />
       </p>
@@ -48,6 +49,7 @@ export default function LoginForm() {
           type="password" 
           name="password" 
           ref={passwordRef}  
+          autoComplete="off"
           required 
         />
       </p>

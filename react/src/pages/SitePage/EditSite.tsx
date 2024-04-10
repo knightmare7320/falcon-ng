@@ -39,29 +39,66 @@ export default function EditSiteDialog({openFg}: {openFg:boolean}) {
             id="site_name" 
             name="site_name" 
           />
-<br/>
+          <br/>
   site_type_id: number,
   site_type_name: string,
   <br/>
-  address1: string,
-  <br/>
-  city: string,
-  <br/>
-  state: string,
-  <br/>
-  zip_code: string,
-  <br/>
-  county: string,
-  <br/>
 
-  latitude: number,
-  <br/>
+          <label htmlFor="address1">Address:</label>
+          <input 
+            id="address1" 
+            name="address1" 
+          />
+          <br/>
 
-  longitude: number, 
-  <br/>
+          <label htmlFor="city">City:</label>
+          <input 
+            id="city" 
+            name="city" 
+          />
+          <br/>
 
-  elevation_feet: number, 
-  <br/>
+          <label htmlFor="state">State:</label>
+          <input 
+            id="state" 
+            name="state" 
+          />
+          <br/>
+
+          <label htmlFor="zip_code">Zip:</label>
+          <input 
+            id="zip_code" 
+            name="zip_code" 
+          />
+          <br/>
+
+          <label htmlFor="county">County:</label>
+          <input 
+            id="county" 
+            name="county" 
+          />
+          <br/>
+
+          <label htmlFor="latitude">Latitude (&dev;N):</label>
+          <input 
+            id="latitude" 
+            name="latitude" 
+          />
+          <br/>
+
+          <label htmlFor="longitude">Longitude (&deg;E):</label>
+          <input 
+            id="longitude" 
+            name="longitude" 
+          />
+          <br/>
+
+          <label htmlFor="elevation_feet">Elevation (ft):</label>
+          <input 
+            id="elevation_feet" 
+            name="elevation_feet" 
+          />
+          <br/>
 
   structure_type_id: number,
   structure_type_name: string,

@@ -19,7 +19,7 @@ services:
       - falcon-server-node_modules:/app/node_modules
       - ./server/src:/app
     ports:
-      - "3000:80"
+      - "3000:3000"
     env_file:
       - ./secrets/mysql.env
       - ./secrets/auth.env
@@ -45,6 +45,27 @@ services:
   #   depends_on:
   #     - server
   #     - react
+
+  ## Nginx Proxy Manager - Reverse Proxy with LetsEncrypt
+  # npm:
+  #   <<: *common-keys-core # See EXTENSION FIELDS at the top
+  #   container_name: nginx-proxy-manager
+  #   # Use the fully qualified name to pull including the docker.io portion
+  #   image: 'docker.io/jc21/nginx-proxy-manager:latest'
+  #   networks:
+  #     - npm_proxy
+  #   ports:
+  #     - '80:80' # Public HTTP Port. Port Forwarding on Router is ON.
+  #     - '443:443' # Public HTTPS Port. Port Forwarding on Router is ON.
+  #     - '81:81' # Admin Web Port. Port Forwarding on Router is OFF. Internal Home Network Access only.
+  #   volumes:
+  #     - $DOCKERDIR/appdata/npm/config:/config 
+  #     - $DOCKERDIR/appdata/npm/letsencrypt:/etc/letsencrypt
+  #     - $DOCKERDIR/appdata/npm/data:/data
+  #   environment:
+  #     DB_SQLITE_FILE: "/config/database.sqlite"
+  #     DISABLE_IPV6: 'true'
+
 
 
 volumes:
