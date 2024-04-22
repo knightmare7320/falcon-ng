@@ -55,11 +55,13 @@ const browseSlice = createSlice({
     },
     setPageSize(state:BrowseState, action:PayloadAction<number>) {
       const page_size = action.payload;
-      const page_count = Math.ceil(state.row_count / page_size) | 1
+      const page_count = Math.ceil(state.row_count / page_size)
 
       state.page_size = page_size;
       state.page_count = page_count;
-      // TODO: this just makes sure we have a valid page, but would rather recalculate to stay near the current data
+      // TODO: this just makes sure we have a valid page, 
+      //       would rather recalculate to stay near the current data
+      //       calculated using previous and current page size
       if (state.page_number > page_count) {
         state.page_number = page_count;
       }
@@ -77,7 +79,7 @@ const browseSlice = createSlice({
       state.rows = action.payload.rows;
       state.id = action.payload.id || undefined;
       state.name = action.payload.name || '';
-      state.page_count = Math.ceil(action.payload.row_count / state.page_size) | 1;
+      state.page_count = Math.ceil(action.payload.row_count / state.page_size);
     },
   }
 });

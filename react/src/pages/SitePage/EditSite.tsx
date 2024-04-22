@@ -14,7 +14,7 @@ export default function EditSiteDialog({openFg}: {openFg:boolean}) {
     // cartCtx.clearCart();
   }
 
-  function handleSubmit(event) {
+  function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
     // const fd = new FormData(event.target);
@@ -40,6 +40,7 @@ export default function EditSiteDialog({openFg}: {openFg:boolean}) {
             name="site_name" 
           />
           <br/>
+          
   site_type_id: number,
   site_type_name: string,
   <br/>
@@ -83,6 +84,7 @@ export default function EditSiteDialog({openFg}: {openFg:boolean}) {
           <input 
             id="latitude" 
             name="latitude" 
+            required 
           />
           <br/>
 
@@ -90,6 +92,7 @@ export default function EditSiteDialog({openFg}: {openFg:boolean}) {
           <input 
             id="longitude" 
             name="longitude" 
+            required 
           />
           <br/>
 
