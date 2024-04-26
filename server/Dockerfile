@@ -1,6 +1,6 @@
 FROM node:current-alpine
 WORKDIR /app
-COPY package.json .
+COPY src/package.json .
 RUN npm install
 COPY src .
 EXPOSE 80

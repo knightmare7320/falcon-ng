@@ -2,7 +2,7 @@
   "name": "falcon-server",
   "version": "1.0.0",
   "scripts": {
-    "start": "nodemon src/server.js"
+    "start": "nodemon server.js"
   },
   "type": "commonjs",
   "private": true,
