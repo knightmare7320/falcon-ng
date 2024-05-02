@@ -1,6 +1,6 @@
 services:
   mysqldb:
-    image: mysql:latest
+    image: mysql:8.4.0
     volumes:
       - ./mysql/mysql-dump:/docker-entrypoint-initdb.d
       - falcon-mysqldb-data:/var/lib/mysql
@@ -10,24 +10,24 @@ services:
     #   - MYSQL_ROOT_PASSWORD=
     env_file:
       - secrets/mysql.env
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
+    command: --mysql-native-password=ON S
+    restart: unless-stopped
 
   cache:
-    image: redis:alpine
-    restart: always
+    image: redis:7.2.4-alpine
+    volumes: 
+      - falcon-redis-cache:/data
     ports:
       - '6379:6379'
-    env_file:
-      - ./secrets/cache.env
     # environment: 
     #   REDIS_HOST=cache
     #   REDIS_PORT=6379
     #   REDIS_PASSWORD=
+    env_file:
+      - ./secrets/cache.env
     command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81 
       #--requirepass ${REDIS_PASSWORD}
-    volumes: 
-      - falcon-redis-cache:/data
+    restart: unless-stopped
 
   server:
     build: server
@@ -43,6 +43,7 @@ services:
     depends_on:
       - mysqldb
       - cache
+    restart: unless-stopped
 
   react:
     build: react
