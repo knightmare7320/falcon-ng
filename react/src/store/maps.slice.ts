@@ -5,19 +5,23 @@ import { GeoSite, GeoSector } from "../util/map.model";
 export type MapsBounds = {minLat:number, maxLat: number, minLng:number, maxLng:number};
 
 export type MapsState = {
-  // siteTiles: { 
-  //   [key: string]: GeoSite[],
-  // },
   mapBounds:MapsBounds|undefined,
   sites:GeoSite[],
   sectors:GeoSector[],
+  siteTiles: { 
+    [key: string]: GeoSite[],
+  },
+  sectorTiles: {
+    [key: string]: GeoSector[],
+  },
 };
 
 const INITIAL_STATE = {
-  // siteTiles: {},
   mapBounds: undefined,
   sites: [] as GeoSite[],
   sectors: [] as GeoSector[],
+  siteTiles: {},
+  sectorTiles: {},
 };
 
 

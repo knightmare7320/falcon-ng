@@ -20,10 +20,10 @@ BEGIN
                      
    SELECT   s.cascade_code, 
             s.latitude,
-	         s.longitude,
-	         se.sector_number,
-	         se.azimuth,
-	         a.horizontal_bw
+	          s.longitude,
+	          se.sector_number,
+	          se.azimuth,
+	          a.horizontal_bw
    FROM     locations.sites s 
             JOIN equipment.sectors se ON s.cascade_code = se.cascade_code 
             JOIN equipment.antennas a ON a.antenna_id = se.antenna_id         

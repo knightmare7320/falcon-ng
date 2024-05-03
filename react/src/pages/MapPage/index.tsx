@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useMap, useMapEvent, MapContainer, TileLayer } from "react-leaflet";
+import { useMap, useMapEvent, MapContainer, WMSTileLayer, TileLayer } from "react-leaflet";
 import { useDispatch } from "react-redux";
 import "leaflet/dist/leaflet.css"
 
@@ -8,6 +8,7 @@ import styles from "./index.module.css";
 import { mapsActions } from "../../store/maps.slice";
 import SiteLayer from "./SiteLayer";
 import SectorLayer from "./SectorLayer";
+import TestLayer from "./TestLayer";
 
 // https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=<YOUR_API_KEY>&units=metric
 
@@ -60,9 +61,21 @@ export default function MapPage() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
+        <WMSTileLayer 
+          url="http://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r.cgi"
+          layers="nexrad-n0r-900913"
+          format="image/png"
+          opacity={0.5}
+          attribution="Weather data © 2012 IEM Nexrad"
+        />
+
+        {/* 
         <MyMap latitude={parseFloat(latitude)} longitude={parseFloat(longitude)}/>
         <SectorLayer />
-        <SiteLayer />
+        <SiteLayer /> 
+        */}
+
+        <TestLayer />
       </MapContainer>
     }
   </>; 
