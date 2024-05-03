@@ -2,8 +2,8 @@ import { GeoSite, GeoSector } from "./map.model";
 const API_URL = import.meta.env.VITE_REACT_APP_API_URL + '/geo';
 
 
-export async function fetchGeoSite(key:string, coords:{x:number, y:number, z:number}): Promise<{key:string, rows:GeoSite[]}> {
-  const response = await fetch(`${API_URL}/sites/${coords.z}/${coords.x}/${coords.y}`);
+export async function fetchGeoSiteTile({x, y, z}:{x:number, y:number, z:number}): Promise<{key:string, sites:GeoSite[]}> {
+  const response = await fetch(`${API_URL}/sites/${z}/${x}/${y}`);
 
   if (!response.ok) {
     const info = await response.json();
@@ -13,8 +13,8 @@ export async function fetchGeoSite(key:string, coords:{x:number, y:number, z:num
 
   const rows = await response.json();
   const json = {
-    key,
-    rows,
+    key: x+":"+y+":"+z,
+    sites: [...rows],
   };
 
   return json;

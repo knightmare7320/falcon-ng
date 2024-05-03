@@ -4,7 +4,7 @@ import type { PayloadAction, TypedStartListening } from '@reduxjs/toolkit';
 import { RootState, AppDispatch } from ".";
 import { uiActions } from "./ui.slice";
 import { MapsBounds, mapsActions } from "./maps.slice";
-import { fetchGeoSiteBounds, fetchGeoSectorBounds } from "../util/map.service";
+import { fetchGeoSiteTile, fetchGeoSiteBounds, fetchGeoSectorBounds } from "../util/map.service";
 
 type typeListener = TypedStartListening<RootState, AppDispatch>;
 
@@ -73,6 +73,28 @@ mapStartListening({
     }
 
     listenerApi.dispatch(mapsActions.setSectors({bounds, sectors: response}));
+  },
+});
+
+
+
+mapStartListening({
+  actionCreator: mapsActions.fetchSiteTile,
+  effect: async (action:PayloadAction<{x:number, y:number, z:number}>, listenerApi) => {
+    const {x, y, z} = action.payload;
+
+    let response;
+    try {
+      response = await fetchGeoSiteTile({x, y, z});
+    } catch(error) {
+      let message = 'Unknown Error';
+      if (error instanceof Error) message = error.message;
+      listenerApi.dispatch(uiActions.showMessage({type: 'error', message}));
+      // listenerApi.dispatch(siteActions.setError());
+      return;
+    }
+
+    listenerApi.dispatch(mapsActions.setSiteTile({key: x+":"+y+":"+z, sites: response.sites}));
   },
 });
 

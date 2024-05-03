@@ -46,6 +46,16 @@ const mapsSlice = createSlice({
     clearSites(state:MapsState) {
       state.sites = []
     },
+    fetchSiteTile(state:MapsState, action:PayloadAction<{x:number, y:number, z:number}>) {
+      // state.load_count++;
+      // the action is used by the map.effects, maybe could delete any already existing keys and mapmarkers here
+    },
+    setSiteTile(state:MapsState, action:PayloadAction<{key:string, sites: GeoSite[]}>) {
+      state.siteTiles[action.payload.key] = action.payload.sites;
+    },
+    clearSiteTile(state:MapsState, action:PayloadAction<{key:string}>) {
+      state.siteTiles[action.payload.key].length = 0;
+    },
     setSectors(state:MapsState, action:PayloadAction<{bounds:MapsBounds, sectors: GeoSector[]}>) {
       // probably need to keep the bounds for this response to check if they have changed
       if (!state.mapBounds || 
@@ -60,18 +70,16 @@ const mapsSlice = createSlice({
     clearSectors(state:MapsState) {
       state.sectors = []
     },
-    // fetchSiteTile(state:MapState, action:PayloadAction<{key:string, coords:{x:number, y:number, z:number}}>) {
-    //   state.load_count++;
-    //   // the action is used by the map.effects, maybe could delete any already existing keys and mapmarkers here
-    // },
-    // addSiteTile(state:MapState, action: PayloadAction<{key: string, tile: GeoSite[]}>) {
-    //   state.load_count--;
-    //   state.siteTiles[action.payload.key] = action.payload.tile;
-    // },
-    // removeSiteTile(state:MapState, action: PayloadAction<string>) {
-    //   const key = action.payload;
-    //   delete state.siteTiles[key];
-    // },
+    fetchSectorTile(state:MapsState, action:PayloadAction<{x:number, y:number, z:number}>) {
+      // state.load_count++;
+      // the action is used by the map.effects, maybe could delete any already existing keys and mapmarkers here
+    },
+    setSectorTile(state:MapsState, action:PayloadAction<{key:string, sectors: GeoSector[]}>) {
+      state.sectorTiles[action.payload.key] = action.payload.sectors;
+    },
+    clearSectorTile(state:MapsState, action:PayloadAction<{key:string}>) {
+      state.sectorTiles[action.payload.key].length = 0;
+    },
   },
 });
 

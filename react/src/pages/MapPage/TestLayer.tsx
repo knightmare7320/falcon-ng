@@ -1,4 +1,4 @@
-import { Coords, DoneCallback, GridLayer} from "leaflet";
+import { Coords, GridLayer} from "leaflet";
 import { createLayerComponent  } from "@react-leaflet/core";
 
 class TestLayer extends GridLayer {
