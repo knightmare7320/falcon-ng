@@ -54,7 +54,7 @@ export const AppRouter = createBrowserRouter([
         ]
       },
       {
-        path: "site/:cascade_code",
+        path: "site/:cascade_code/:tab_name?",
         element: <SitePage />,
       },
       { 

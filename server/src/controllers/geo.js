@@ -25,7 +25,7 @@ const yToLatitude = (zoom, yTile) => {
   return latitude_degrees;
 }
 
-exports.getSites = (req, res) => {
+exports.getSiteTiles = (req, res) => {
   const xTile = +req.params.X;
   const yTile = +req.params.Y;
   const zoom = +req.params.Z;
@@ -48,7 +48,7 @@ exports.getSites = (req, res) => {
   );
 };
 
-exports.getSitesBounds = (req, res) => {
+exports.getSiteBounds = (req, res) => {
   const params = {
     min_latitude: +req.query.minLat,
     max_latitude: +req.query.maxLat,
@@ -68,7 +68,7 @@ exports.getSitesBounds = (req, res) => {
 };
 
 
-exports.getSectors = (req, res) => {
+exports.getSectorTiles = (req, res) => {
   const xTile = +req.params.X;
   const yTile = +req.params.Y;
   const zoom = +req.params.Z;
@@ -85,13 +85,39 @@ exports.getSectors = (req, res) => {
     (err, result) => {
       if (err)
         res.status(500).json({ message: err });
-      else
-        res.status(200).json(result);
+      else {
+
+        // TODO: improve/optimize this mess
+        let out_array = [];
+        result.map(element => {
+          siteIdx = out_array.findIndex(out_element => element.cascade_code === out_element.cascade_code);
+          if (siteIdx >= 0) {
+            out_array[siteIdx].sectors.push({
+              sector_number: +element.sector_number,
+              azimuth: +element.azimuth,
+              horizontal_bw: + element.horizontal_bw,
+            })
+          } else {
+            out_array.push({
+              cascade_code: element.cascade_code,
+              latitude: +element.latitude,
+              longitude: +element.longitude,
+              sectors: [{
+                sector_number: +element.sector_number,
+                azimuth: +element.azimuth,
+                horizontal_bw: + element.horizontal_bw,
+              }]
+            })
+          }
+        });
+
+        res.status(200).json(out_array);
+      }
     }
   );
 };
 
-exports.getSectorsBounds = (req, res) => {
+exports.getSectorBounds = (req, res) => {
   const params = {
     min_latitude: +req.query.minLat,
     max_latitude: +req.query.maxLat,

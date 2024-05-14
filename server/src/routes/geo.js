@@ -3,9 +3,9 @@ const router = express.Router();
 
 const controller = require("../controllers/geo");
 
-router.get("/sitesTile/:Z/:X/:Y", controller.getSites);
-router.get("/sites", controller.getSitesBounds);
-router.get("/sectorsTile/:Z/:X/:Y", controller.getSectors);
-router.get("/sectors", controller.getSectorsBounds);
+router.get("/tile/sites/:Z/:X/:Y", controller.getSiteTiles);
+router.get("/bounds/sites", controller.getSiteBounds);
+router.get("/tile/sectors/:Z/:X/:Y", controller.getSectorTiles);
+router.get("/bounds/sectors", controller.getSectorBounds);
 
 module.exports = router;

@@ -66,14 +66,14 @@ export default function MapPage() {
           layers="nexrad-n0r-900913"
           format="image/png"
           opacity={0.5}
+          transparent={true}
           attribution="Weather data © 2012 IEM Nexrad"
         />
 
-        {/* 
         <MyMap latitude={parseFloat(latitude)} longitude={parseFloat(longitude)}/>
+
         <SectorLayer />
         <SiteLayer /> 
-        */}
 
         <TestLayer />
       </MapContainer>

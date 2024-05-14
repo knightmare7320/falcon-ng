@@ -36,16 +36,14 @@ export default function SitePage() {
     }
   }, [cascadeCode]);
 
-  
-  let [searchParams, setSearchParams] = useSearchParams();
-  const selectedTab = searchParams.get('tab') || 'location';
+  const selectedTab = params.tab_name || 'location';
   let tabContent = <></>;
   switch(selectedTab) {
     case 'location':
       tabContent = <LocationTab site={siteState.site} nearestSites={siteState.nearest} authState={authState} />;
       break;
     case 'equipment': 
-    tabContent = <EquipmentTab btss={siteState.btss} sectors={siteState.sectors} carriers={siteState.carriers} />;
+      tabContent = <EquipmentTab btss={siteState.btss} sectors={siteState.sectors} carriers={siteState.carriers} />;
       break;
     case 'performance':
       tabContent = <PerformanceTab btss={siteState.btss} sectors={siteState.sectors} carriers={siteState.carriers} />;
@@ -60,9 +58,9 @@ export default function SitePage() {
 
   function handleTabChange(tabName:string) {
     if (tabName === 'location') {
-      navigate('.')
+      navigate(`/site/${cascadeCode}`);
     } else {
-      setSearchParams({tab: tabName});
+      navigate(`/site/${cascadeCode}/${tabName}`);
     }
   }
 
