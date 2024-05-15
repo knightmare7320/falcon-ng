@@ -20,7 +20,7 @@ export async function fetchGeoSiteTile({x, y, z}:{x:number, y:number, z:number})
   return json;
 }
 
-export async function fetchGeoSectorTile({x, y, z}:{x:number, y:number, z:number}): Promise<{key:string, sites:GeoSite[]}> {
+export async function fetchGeoSectorTile({x, y, z}:{x:number, y:number, z:number}): Promise<{key:string, sectors:GeoSite[]}> {
   const response = await fetch(`${API_URL}/tile/sectors/${z}/${x}/${y}`);
 
   if (!response.ok) {
@@ -32,7 +32,7 @@ export async function fetchGeoSectorTile({x, y, z}:{x:number, y:number, z:number
   const rows = await response.json();
   const json = {
     key: x+":"+y+":"+z,
-    sites: [...rows],
+    sectors: [...rows],
   };
 
   return json;

@@ -12,7 +12,7 @@ export type MapsState = {
     [key: string]: GeoSite[],
   },
   sectorTiles: {
-    [key: string]: GeoSector[],
+    [key: string]: GeoSite[],
   },
 };
 
@@ -44,7 +44,7 @@ const mapsSlice = createSlice({
       }
     },
     clearSites(state:MapsState) {
-      state.sites = []
+      state.sites = [];
     },
     fetchSiteTile(state:MapsState, action:PayloadAction<{x:number, y:number, z:number}>) {
       // state.load_count++;
@@ -74,7 +74,7 @@ const mapsSlice = createSlice({
       // state.load_count++;
       // the action is used by the map.effects, maybe could delete any already existing keys and mapmarkers here
     },
-    setSectorTile(state:MapsState, action:PayloadAction<{key:string, sectors: GeoSector[]}>) {
+    setSectorTile(state:MapsState, action:PayloadAction<{key:string, sectors: GeoSite[]}>) {
       state.sectorTiles[action.payload.key] = action.payload.sectors;
     },
     clearSectorTile(state:MapsState, action:PayloadAction<{key:string}>) {
