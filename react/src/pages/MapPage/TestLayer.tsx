@@ -5,8 +5,9 @@ import { fetchGeoSiteTile } from "../../util/map.service";
 
 class SiteLayer extends GridLayer {
 
-  tileDataList = [];
-  
+  tileDataList: {[key: string]: any} = {};
+
+
   createTile(coords: Coords, done: DoneCallback): HTMLElement {
     // console.log('load', coords.x, coords.y, coords.z);
     var tile = document.createElement('div');
@@ -14,17 +15,21 @@ class SiteLayer extends GridLayer {
     fetchGeoSiteTile({...coords}).then(result => {
       const map = this._map;
 
-      result.sites.map(site => {
-        const siteMarker = new CircleMarker([site.latitude, site.longitude], {
-          radius:4,
-          color:'white', 
-          fillColor: 'green', 
-          weight: 1, 
-          fillOpacity: 0.9
-        }); 
-        siteMarker.addTo(map);
-      });
-
+      if (result.sites.length>0) {
+        const siteList = [];
+        result.sites.map(site => {
+          const siteMarker = new CircleMarker([site.latitude, site.longitude], {
+            radius:4,
+            color:'white', 
+            fillColor: 'green', 
+            weight: 1, 
+            fillOpacity: 0.9
+          }); 
+          siteMarker.addTo(map);
+          siteList.push(siteMarker);
+        });
+        this.tileDataList[`${coords.x}:${coords.y}:${coords.z}`] = siteList;
+      }
       done(undefined, tile);
     });
 
@@ -32,8 +37,16 @@ class SiteLayer extends GridLayer {
   }
 
   _removeTile(key) {
-    // console.log('unload', key);
+    if(key in this.tileDataList) {
+      this.tileDataList[key].map(item => {
+        item.remove();
+      });
+      this.tileDataList[key].length = 0;
+      delete this.tileDataList[key];
+    }
+    // console.log(this.tileDataList);
   }
+
 }
 
 const createSiteLayer = (props: any, context:any) => {
