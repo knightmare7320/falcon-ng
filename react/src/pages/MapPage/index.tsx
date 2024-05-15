@@ -22,21 +22,21 @@ function MyMap({latitude, longitude}:MapProps) {
   const dispatch = useDispatch();
   const map = useMap();
 
-  useEffect(() => {
-    map.setView({lat: latitude, lng: longitude});
-    const ne = map.getBounds().getNorthEast();
-    const sw = map.getBounds().getSouthWest();
-    dispatch(mapsActions.setMapBounds({minLng: sw.lng, maxLng: ne.lng, minLat: sw.lat, maxLat: ne.lat}));
-  }, [latitude, longitude])
+  // useEffect(() => {
+  //   map.setView({lat: latitude, lng: longitude});
+  //   const ne = map.getBounds().getNorthEast();
+  //   const sw = map.getBounds().getSouthWest();
+  //   dispatch(mapsActions.setMapBounds({minLng: sw.lng, maxLng: ne.lng, minLat: sw.lat, maxLat: ne.lat}));
+  // }, [latitude, longitude])
 
-  useMapEvent('moveend', () => {
-    const ne = map.getBounds().getNorthEast();
-    const sw = map.getBounds().getSouthWest();
-    dispatch(mapsActions.setMapBounds({minLng: sw.lng, maxLng: ne.lng, minLat: sw.lat, maxLat: ne.lat}));
+  // useMapEvent('moveend', () => {
+  //   const ne = map.getBounds().getNorthEast();
+  //   const sw = map.getBounds().getSouthWest();
+  //   dispatch(mapsActions.setMapBounds({minLng: sw.lng, maxLng: ne.lng, minLat: sw.lat, maxLat: ne.lat}));
 
-    // dispatch(mapsActions.fetchSiteTile({z:10, x:262, y:379}));
-    // dispatch(mapsActions.fetchSectorTile({z:10, x:262, y:379}));
-  });
+  //   // dispatch(mapsActions.fetchSiteTile({z:10, x:262, y:379}));
+  //   // dispatch(mapsActions.fetchSectorTile({z:10, x:262, y:379}));
+  // });
 
   return null;
 }
@@ -75,8 +75,8 @@ export default function MapPage() {
 
         <MyMap latitude={parseFloat(latitude)} longitude={parseFloat(longitude)}/>
 
-        <SectorLayer />
-        <SiteLayer /> 
+        {/* <SectorLayer />
+        <SiteLayer />  */}
 
         <TestLayer />
       </MapContainer>

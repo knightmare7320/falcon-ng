@@ -1,29 +1,49 @@
-import { Coords, GridLayer} from "leaflet";
+import { Coords, GridLayer, DoneCallback, CircleMarker} from "leaflet";
 import { createLayerComponent  } from "@react-leaflet/core";
 
+import { fetchGeoSiteTile } from "../../util/map.service";
 
-class TestLayer extends GridLayer {
-  createTile(coords: Coords): HTMLElement {
-    console.log('createTile', coords.x, coords.y, coords.z);
+class SiteLayer extends GridLayer {
+
+  tileDataList = [];
+  
+  createTile(coords: Coords, done: DoneCallback): HTMLElement {
+    // console.log('load', coords.x, coords.y, coords.z);
     var tile = document.createElement('div');
-    tile.innerHTML = [coords.x, coords.y, coords.z].join(', ');
-    tile.style.outline = '1px solid red';
+
+    fetchGeoSiteTile({...coords}).then(result => {
+      const map = this._map;
+
+      result.sites.map(site => {
+        const siteMarker = new CircleMarker([site.latitude, site.longitude], {
+          radius:4,
+          color:'white', 
+          fillColor: 'green', 
+          weight: 1, 
+          fillOpacity: 0.9
+        }); 
+        siteMarker.addTo(map);
+      });
+
+      done(undefined, tile);
+    });
+
     return tile;    
   }
 
   _removeTile(key) {
-    console.log('unload', key);
+    // console.log('unload', key);
   }
 }
 
-const createTestLayer = (props: any, context:any) => {
-  console.log('create');
-  const instance = new TestLayer("placeholder", {...props});
+const createSiteLayer = (props: any, context:any) => {
+  const instance = new SiteLayer("placeholder", {...props});
   return {instance, context};
 }
 
-const testLayer = createLayerComponent(createTestLayer);
-export default testLayer;
+const siteLayer = createLayerComponent(createSiteLayer);
+export default siteLayer;
+
 
 
 
