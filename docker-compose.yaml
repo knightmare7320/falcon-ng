@@ -10,7 +10,7 @@ services:
     #   - MYSQL_ROOT_PASSWORD=
     env_file:
       - secrets/mysql.env
-    command: --mysql-native-password=ON S
+    command: --mysql-native-password=ON
     # restart: unless-stopped
 
   cache:
