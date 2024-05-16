@@ -1,4 +1,4 @@
-FROM node:alpine3.19 AS build
+FROM node:current-alpine AS build
 # USER node
 WORKDIR /app
 COPY --chown=node:node package.json .
