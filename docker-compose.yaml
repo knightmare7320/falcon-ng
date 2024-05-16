@@ -11,7 +11,7 @@ services:
     env_file:
       - secrets/mysql.env
     command: --mysql-native-password=ON S
-    restart: unless-stopped
+    # restart: unless-stopped
 
   cache:
     image: redis:7.2.4-alpine
@@ -27,7 +27,7 @@ services:
       - ./secrets/cache.env
     command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81 
       #--requirepass ${REDIS_PASSWORD}
-    restart: unless-stopped
+    # restart: unless-stopped
 
   server:
     build: server

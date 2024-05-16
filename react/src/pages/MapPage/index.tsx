@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useMap, useMapEvent, MapContainer, WMSTileLayer, TileLayer } from "react-leaflet";
+import { useMap, useMapEvent, MapContainer, WMSTileLayer, TileLayer, GeoJSON } from "react-leaflet";
 import { useDispatch } from "react-redux";
 import "leaflet/dist/leaflet.css"
 
 import styles from "./index.module.css";
+import { MapLibreTileLayer } from "./MapLibreTileLayer";
 import { mapsActions } from "../../store/maps.slice";
 import SiteLayer from "./SiteLayer";
 import SectorLayer from "./SectorLayer";
@@ -64,21 +65,25 @@ export default function MapPage() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        <WMSTileLayer 
+        {/* <WMSTileLayer 
           url="http://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r.cgi"
           layers="nexrad-n0r-900913"
           format="image/png"
           opacity={0.5}
           transparent={true}
           attribution="Weather data © 2012 IEM Nexrad"
-        />
+        /> */}
 
-        <MyMap latitude={parseFloat(latitude)} longitude={parseFloat(longitude)}/>
+        <MapLibreTileLayer 
+          attribution="&copy; me"
+          url="http://localhost:3000/api/geo/json/sites/{z}/{x}/{y}"
+        />
+        {/* <MyMap latitude={parseFloat(latitude)} longitude={parseFloat(longitude)}/> */}
 
         {/* <SectorLayer />
         <SiteLayer />  */}
 
-        <TestLayer />
+        {/* <TestLayer /> */}
       </MapContainer>
     }
   </>; 
