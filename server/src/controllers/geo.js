@@ -135,3 +135,56 @@ exports.getSectorBounds = (req, res) => {
     }
   );
 };
+
+
+
+
+
+
+
+exports.getSiteJson = (req, res) => {
+  const xTile = +req.params.X;
+  const yTile = +req.params.Y;
+  const zoom = +req.params.Z;
+
+  const params = {
+    min_latitude: yToLatitude(zoom, yTile+1),
+    max_latitude: yToLatitude(zoom, yTile),
+    min_longitude: xToLongitude(zoom, xTile),
+    max_longitude: xToLongitude(zoom, xTile+1)
+  };
+  model.getSites(
+    req.app.locals.db,
+    params,
+    (err, result) => {
+      if (err)
+        res.status(500).json({ message: err });
+      else
+        res.status(200).json(formatSiteJson(result));
+    }
+  );
+};
+
+
+
+function formatSiteJson(sites) {
+  let json = {
+    "type": "FeatureCollection",
+    "features": [],
+  };
+
+  sites.map(site => {
+    json["features"].push({
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [+site.longitude, +site.latitude],
+      },
+      "properties": {
+        "cascade_code": site.cascade_code,
+      },
+    })
+  });
+
+  return json;
+}

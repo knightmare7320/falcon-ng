@@ -12,6 +12,8 @@ class SiteLayer extends GridLayer {
     // console.log('load', coords.x, coords.y, coords.z);
     var tile = document.createElement('div');
 
+    if (coords.z < 7) return tile;
+
     fetchGeoSiteTile({...coords}).then(result => {
       const map = this._map;
 
@@ -26,7 +28,7 @@ class SiteLayer extends GridLayer {
             fillOpacity: 0.9
           }); 
           siteMarker.addTo(map);
-          siteList.push(siteMarker);
+          siteList.push(siteMarker);1
         });
         this.tileDataList[`${coords.x}:${coords.y}:${coords.z}`] = siteList;
       }
@@ -37,9 +39,12 @@ class SiteLayer extends GridLayer {
   }
 
   _removeTile(key) {
+    const map = this._map;
+
     if(key in this.tileDataList) {
       this.tileDataList[key].map(item => {
         item.remove();
+        item.removeFrom(map);
       });
       this.tileDataList[key].length = 0;
       delete this.tileDataList[key];
@@ -56,45 +61,3 @@ const createSiteLayer = (props: any, context:any) => {
 
 const siteLayer = createLayerComponent(createSiteLayer);
 export default siteLayer;
-
-
-
-
-
-
-
-
-
-// import L, { Coords, DoneCallback, GridLayer, imageOverlay} from "leaflet";
-// import { createLayerComponent, LayerProps  } from "@react-leaflet/core";
-// import { ReactNode } from "react";
-
-// interface KittenProps extends LayerProps {
-//   userId: string,
-//   children?: ReactNode // PropsWithChildren is not exported by @react-leaflet/core
-// }
-
-// class Kitten extends L.TileLayer {
-//   getTileUrl(coords: L.Coords) {
-//     var i = Math.ceil( Math.random() * 4 );
-//     return "https://placekitten.com/256/256?image=" + i;
-//   }
-
-//   getAttribution() {
-//     return "<a href='https://placekitten.com/attribution.html'>PlaceKitten</a>"
-//   }
-// }
-
-// const createKittenLayer = (props: KittenProps, context:any) => {
-//   const instance = new Kitten("placeholder", {...props});
-//   return {instance, context};
-// }
-
-// const updateKittenLayer = (instance: any, props: KittenProps, prevProps: KittenProps) => {
-//   if (prevProps.userId !== props.userId) {
-//     if (instance.setUserId) instance.setUserId(props.userId)
-//   }
-// }
-
-// const KittenLayer = createLayerComponent(createKittenLayer, updateKittenLayer);
-// export default KittenLayer;
