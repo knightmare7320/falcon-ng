@@ -1,8 +1,7 @@
 services:
   mysqldb:
-    image: mysql:latest
+    build: mysql
     volumes:
-      - ./mysql/mysql-dump:/docker-entrypoint-initdb.d
       - falcon-mysqldb-data:/var/lib/mysql
     ports:
       - "3306:3306"
