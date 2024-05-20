@@ -30,6 +30,12 @@ exports.getSiteTiles = (req, res) => {
   const yTile = +req.params.Y;
   const zoom = +req.params.Z;
 
+  console.log('***getSiteTiles');
+  if (isNaN(xTile) || isNaN(yTile) || isNaN(zoom)) {
+    res.status(500).json({message: 'Invalid tile selection.'});
+    return;
+  }
+
   const params = {
     min_latitude: yToLatitude(zoom, yTile+1),
     max_latitude: yToLatitude(zoom, yTile),
@@ -55,14 +61,22 @@ exports.getSiteBounds = (req, res) => {
     min_longitude: +req.query.minLng,
     max_longitude: +req.query.maxLng,
   };
+
+  console.log('***getSiteBounds');
+
+  if (isNaN(min_latitude) || isNaN(max_latitude) || isNaN(min_longitude) || isNaN(max_longitude)) {
+    res.status(500).json({message: 'Invalid geo bounds.'});
+    return;
+  }
+
   model.getSites(
     req.app.locals.db,
     params,
     (err, result) => {
       if (err)
-          res.status(500).json({ message: err });
+        res.status(500).json({ message: err });
       else
-          res.status(200).json(result);
+        res.status(200).json(result);
     }
   );
 };
@@ -72,6 +86,11 @@ exports.getSectorTiles = (req, res) => {
   const xTile = +req.params.X;
   const yTile = +req.params.Y;
   const zoom = +req.params.Z;
+
+  if (isNaN(xTile) || isNaN(yTile) || isNaN(zoom)) {
+    res.status(500).json({message: 'Invalid tile selection.'});
+    return;
+  }
 
   const params = {
     min_latitude: yToLatitude(zoom, yTile+1),
@@ -86,7 +105,6 @@ exports.getSectorTiles = (req, res) => {
       if (err)
         res.status(500).json({ message: err });
       else {
-
         // TODO: improve/optimize this mess
         let out_array = [];
         result.map(element => {
@@ -124,6 +142,12 @@ exports.getSectorBounds = (req, res) => {
     min_longitude: +req.query.minLng,
     max_longitude: +req.query.maxLng,
   };
+
+  if (isNaN(min_latitude) || isNaN(max_latitude) || isNaN(min_longitude) || isNaN(max_longitude)) {
+    res.status(500).json({message: 'Invalid geo bounds.'});
+    return;
+  }
+
   model.getSectors(
     req.app.locals.db,
     params,
@@ -146,6 +170,12 @@ exports.getSiteJson = (req, res) => {
   const xTile = +req.params.X;
   const yTile = +req.params.Y;
   const zoom = +req.params.Z;
+
+  console.log('***getSiteTiles');
+  if (isNaN(xTile) || isNaN(yTile) || isNaN(zoom)) {
+    res.status(400).json({message: 'Invalid tile selection.'});
+    return;
+  }
 
   const params = {
     min_latitude: yToLatitude(zoom, yTile+1),

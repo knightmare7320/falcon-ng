@@ -1,7 +1,18 @@
 import { Coords, GridLayer, DoneCallback, CircleMarker} from "leaflet";
-import { createLayerComponent  } from "@react-leaflet/core";
+import { createLayerComponent, createTileLayerComponent, type LayerProps } from "@react-leaflet/core";
 
 import { fetchGeoSiteTile } from "../../util/map.service";
+import { createImmutableStateInvariantMiddleware } from "@reduxjs/toolkit";
+import L, { TileLayer } from "react-leaflet";
+
+
+export const SiteLayer2 = createTileLayerComponent (
+  L.TileLayer
+)
+
+
+
+
 
 class SiteLayer extends GridLayer {
 
