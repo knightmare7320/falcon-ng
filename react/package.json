@@ -14,7 +14,7 @@
     "@fortawesome/free-brands-svg-icons": "^6.5.2",
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
-    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@fortawesome/react-fontawesome": "^0.2.1",
     "@loadable/component": "^5.16.4",
     "@maplibre/maplibre-gl-leaflet": "^0.0.20",
     "@reduxjs/toolkit": "^2.2.5",
