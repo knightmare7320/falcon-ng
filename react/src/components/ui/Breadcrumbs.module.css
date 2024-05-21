@@ -9,4 +9,12 @@
   & svg:not(:first-child) {
     padding: 0 0.5rem;
   };
+  & ol {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;  
+  }
+  & li {
+    display: inline; 
+  }
 }

@@ -161,9 +161,9 @@ CREATE TABLE equipment.bts (
   equipment_sw_load_id int          NOT NULL,
   on_air_date          DATE         DEFAULT NULL,
   created_by_name      varchar(100) DEFAULT NULL,
-  create_date          DATE         NOT NULL,
+  create_date          DATETIME     NOT NULL,
   modified_by_name     varchar(100) DEFAULT NULL,
-  modified_date        DATE         DEFAULT NULL,
+  modified_date        DATETIME     DEFAULT NULL,
   PRIMARY KEY (bts_id),
   KEY bts_IX1 (cascade_code)
 ) AUTO_INCREMENT=80448;
@@ -179,9 +179,9 @@ CREATE TABLE equipment.carriers (
   equipment_status_id    int          NOT NULL,
   on_air_date            DATE         DEFAULT NULL,
   created_by_name        varchar(100) DEFAULT NULL,
-  create_date            DATE         NOT NULL,
+  create_date            DATETIME     NOT NULL,
   modified_by_name       varchar(100) DEFAULT NULL,
-  modified_date          DATE         DEFAULT NULL,
+  modified_date          DATETIME     DEFAULT NULL,
   PRIMARY KEY (carrier_id),
   KEY carriers_FK1 (bts_id),
   KEY carriers_FK2 (channel_id),
@@ -205,9 +205,9 @@ CREATE TABLE equipment.sectors (
   sector_coverage_type_id int           DEFAULT NULL,
   radius_meters           decimal(10,0) DEFAULT NULL,
   created_by_name         varchar(100)  DEFAULT NULL,
-  create_date             DATE          NOT NULL,
+  create_date             DATETIME      NOT NULL,
   modified_by_name        varchar(100)  DEFAULT NULL,
-  modified_date           DATE          DEFAULT NULL,
+  modified_date           DATETIME      DEFAULT NULL,
   PRIMARY KEY (sector_id),
   KEY sectors_IX1 (cascade_code)
 ) AUTO_INCREMENT=229229;

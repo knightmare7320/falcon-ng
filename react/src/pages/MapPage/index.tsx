@@ -1,15 +1,13 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useMap, useMapEvent, MapContainer, WMSTileLayer, TileLayer, GeoJSON } from "react-leaflet";
-// import { useDispatch } from "react-redux";
+import { useMap, useMapEvent, WMSTileLayer, MapContainer, TileLayer } from "react-leaflet";
+import { useDispatch } from "react-redux";
 import "leaflet/dist/leaflet.css"
 
 import styles from "./index.module.css";
-import { MapLibreTileLayer } from "./MapLibreTileLayer";
-// import { mapsActions } from "../../store/maps.slice";
-// import SiteLayer from "./SiteLayer";
-// import SectorLayer from "./SectorLayer";
-// import TestLayer from "./TestLayer";
+import { mapsActions } from "../../store/maps.slice";
+import SiteLayer from "./SiteLayer";
+import SectorLayer from "./SectorLayer";
 
 export type MapProps = {
   latitude:number, 
@@ -17,28 +15,28 @@ export type MapProps = {
 };
 
 
-// function MyMap({latitude, longitude}:MapProps) {
-//   const dispatch = useDispatch();
-//   const map = useMap();
+function MyMap({latitude, longitude}:MapProps) {
+  const dispatch = useDispatch();
+  const map = useMap();
 
-  // useEffect(() => {
-  //   map.setView({lat: latitude, lng: longitude});
-  //   const ne = map.getBounds().getNorthEast();
-  //   const sw = map.getBounds().getSouthWest();
-  //   dispatch(mapsActions.setMapBounds({minLng: sw.lng, maxLng: ne.lng, minLat: sw.lat, maxLat: ne.lat}));
-  // }, [latitude, longitude])
+  useEffect(() => {
+    map.setView({lat: latitude, lng: longitude});
+    const ne = map.getBounds().getNorthEast();
+    const sw = map.getBounds().getSouthWest();
+    dispatch(mapsActions.setMapBounds({minLng: sw.lng, maxLng: ne.lng, minLat: sw.lat, maxLat: ne.lat}));
+  }, [latitude, longitude])
 
-  // useMapEvent('moveend', () => {
-  //   const ne = map.getBounds().getNorthEast();
-  //   const sw = map.getBounds().getSouthWest();
-  //   dispatch(mapsActions.setMapBounds({minLng: sw.lng, maxLng: ne.lng, minLat: sw.lat, maxLat: ne.lat}));
+  useMapEvent('moveend', () => {
+    const ne = map.getBounds().getNorthEast();
+    const sw = map.getBounds().getSouthWest();
+    dispatch(mapsActions.setMapBounds({minLng: sw.lng, maxLng: ne.lng, minLat: sw.lat, maxLat: ne.lat}));
 
-  //   // dispatch(mapsActions.fetchSiteTile({z:10, x:262, y:379}));
-  //   // dispatch(mapsActions.fetchSectorTile({z:10, x:262, y:379}));
-  // });
+    // dispatch(mapsActions.fetchSiteTile({z:10, x:262, y:379}));
+    // dispatch(mapsActions.fetchSectorTile({z:10, x:262, y:379}));
+  });
 
-//   return null;
-// }
+  return null;
+}
 
 
 export default function MapPage() {
@@ -63,27 +61,19 @@ export default function MapPage() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-        {/* <WMSTileLayer 
+        <WMSTileLayer 
           url="http://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r.cgi"
           layers="nexrad-n0r-900913"
           format="image/png"
           opacity={0.3}
           transparent={true}
           attribution="Weather data © 2012 IEM Nexrad"
-        /> */}
-
-        <MapLibreTileLayer 
-          attribution="&copy; me"
-          tiles={["http://localhost:3000/api/geo/json/sites/{z}/{x}/{y}"]}
         />
 
+        <MyMap latitude={parseFloat(latitude)} longitude={parseFloat(longitude)}/>
+        <SectorLayer />
+        <SiteLayer /> 
 
-        {/* <MyMap latitude={parseFloat(latitude)} longitude={parseFloat(longitude)}/> */}
-
-        {/* <SectorLayer />
-        <SiteLayer />  */}
-
-        {/* <TestLayer /> */}
       </MapContainer>
     }
   </>; 

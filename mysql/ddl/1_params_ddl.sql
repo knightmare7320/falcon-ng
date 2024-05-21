@@ -15,7 +15,7 @@ CREATE TABLE params.sector_carrier_nbrlist (
   nbr_carrier_ref int         NOT NULL,
   nbr_type        char(1)     DEFAULT NULL,
   is41_fg         char(1)     DEFAULT NULL,
-  last_load_date  date        DEFAULT NULL,
+  last_load_date  datetime    DEFAULT NULL,
   PRIMARY KEY (src_switch_ref,src_bsc_ref,src_bts_ref,src_sector_ref,src_carrier_ref,nbr_priority),
   UNIQUE KEY sector_carrier_nbrlist_UQ1 (src_switch_ref,src_bsc_ref,src_bts_ref,src_sector_ref,src_carrier_ref,nbr_switch_ref,nbr_bsc_ref,nbr_bts_ref,nbr_sector_ref,nbr_carrier_ref)
 );
@@ -36,6 +36,6 @@ CREATE TABLE params.sector_carrier_params (
   searchwin_a    int         DEFAULT NULL,
   searchwin_n    int         DEFAULT NULL,
   searchwin_r    int         DEFAULT NULL,
-  last_load_date date        DEFAULT NULL,
+  last_load_date datetime    DEFAULT NULL,
   PRIMARY KEY (switch_ref,bsc_ref,bts_ref,sector_ref,carrier_ref)
 );

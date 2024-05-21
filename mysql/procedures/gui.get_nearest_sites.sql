@@ -16,7 +16,7 @@ BEGIN
                st_distance_sphere(s1.geo_point, s2.geo_point) * 0.000621371
                , 2
             ) distance_mi
-          , gui.get_direction(
+          , gui.decode_direction(
                gui.get_azimuth(s1.latitude, s1.longitude, s2.latitude, s2.longitude)
             ) bearing
    FROM     locations.sites s1

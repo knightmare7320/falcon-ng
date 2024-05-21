@@ -118,8 +118,8 @@ CREATE TABLE locations.sites (
   state              varchar(2)    DEFAULT NULL,
   zip_code           varchar(11)   DEFAULT NULL,
   county             varchar(25)   DEFAULT NULL,
-  latitude           decimal(10,6) DEFAULT NULL,
-  longitude          decimal(10,6) DEFAULT NULL,
+  latitude           decimal(10,6) NOT NULL,
+  longitude          decimal(10,6) NOT NULL,
   elevation_feet     decimal(10,1) DEFAULT NULL,
   structure_type_id  int           DEFAULT NULL,
   repair_priority_id int           DEFAULT NULL,
@@ -132,10 +132,14 @@ CREATE TABLE locations.sites (
   mta_id             int           DEFAULT NULL,
   bta_id             int           DEFAULT NULL,
   created_by_name    varchar(100)  DEFAULT NULL,
-  create_date        DATE          NOT NULL,
+  create_date        DATETIME      NOT NULL,
   modified_by_name   varchar(100)  DEFAULT NULL,
-  modified_date      DATE          DEFAULT NULL,
+  modified_date      DATETIME      DEFAULT NULL,
+  geo_point point NOT NULL /*!80003 SRID 4326 */,
   PRIMARY KEY (site_id),
   UNIQUE KEY sites_UQ1 (cascade_code),
-  KEY sites_latitude_IX1 (latitude,longitude)
+  KEY sites_latitude_IX1 (latitude,longitude),
+  SPATIAL KEY site_GX1 (geo_point)
 );
+CREATE TRIGGER locations.TRG_INS_sites BEFORE INSERT ON sites FOR EACH ROW SET NEW.geo_point = st_srid(point(NEW.longitude,NEW.latitude),4326);
+CREATE TRIGGER locations.TRG_UPD_sites BEFORE UPDATE ON sites FOR EACH ROW SET NEW.geo_point = st_srid(point(NEW.longitude,NEW.latitude),4326);

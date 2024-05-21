@@ -25,12 +25,65 @@ const yToLatitude = (zoom, yTile) => {
   return latitude_degrees;
 }
 
+exports.getSiteBounds = (req, res) => {
+  const params = {
+    min_latitude: +req.query.minLat,
+    max_latitude: +req.query.maxLat,
+    min_longitude: +req.query.minLng,
+    max_longitude: +req.query.maxLng,
+  };
+
+  console.log('***getSiteBounds');
+
+  if (isNaN(params.min_latitude) || isNaN(params.max_latitude) || isNaN(params.min_longitude) || isNaN(params.max_longitude)) {
+    res.status(500).json({message: 'Invalid geo bounds.'});
+    return;
+  }
+
+  model.getSites(
+    req.app.locals.db,
+    params,
+    (err, result) => {
+      if (err)
+        res.status(500).json({ message: err });
+      else
+        res.status(200).json(result);
+    }
+  );
+};
+
+exports.getSectorBounds = (req, res) => {
+  const params = {
+    min_latitude: +req.query.minLat,
+    max_latitude: +req.query.maxLat,
+    min_longitude: +req.query.minLng,
+    max_longitude: +req.query.maxLng,
+  };
+
+  if (isNaN(params.min_latitude) || isNaN(params.max_latitude) || isNaN(params.min_longitude) || isNaN(params.max_longitude)) {
+    res.status(500).json({message: 'Invalid geo bounds.'});
+    return;
+  }
+
+  model.getSectors(
+    req.app.locals.db,
+    params,
+    (err, result) => {
+      if (err)
+        res.status(500).json({ message: err });
+      else
+        res.status(200).json(result);
+    }
+  );
+};
+
+
+
 exports.getSiteTiles = (req, res) => {
   const xTile = +req.params.X;
   const yTile = +req.params.Y;
   const zoom = +req.params.Z;
 
-  console.log('***getSiteTiles');
   if (isNaN(xTile) || isNaN(yTile) || isNaN(zoom)) {
     res.status(500).json({message: 'Invalid tile selection.'});
     return;
@@ -53,34 +106,6 @@ exports.getSiteTiles = (req, res) => {
     }
   );
 };
-
-exports.getSiteBounds = (req, res) => {
-  const params = {
-    min_latitude: +req.query.minLat,
-    max_latitude: +req.query.maxLat,
-    min_longitude: +req.query.minLng,
-    max_longitude: +req.query.maxLng,
-  };
-
-  console.log('***getSiteBounds');
-
-  if (isNaN(min_latitude) || isNaN(max_latitude) || isNaN(min_longitude) || isNaN(max_longitude)) {
-    res.status(500).json({message: 'Invalid geo bounds.'});
-    return;
-  }
-
-  model.getSites(
-    req.app.locals.db,
-    params,
-    (err, result) => {
-      if (err)
-        res.status(500).json({ message: err });
-      else
-        res.status(200).json(result);
-    }
-  );
-};
-
 
 exports.getSectorTiles = (req, res) => {
   const xTile = +req.params.X;
@@ -135,35 +160,6 @@ exports.getSectorTiles = (req, res) => {
   );
 };
 
-exports.getSectorBounds = (req, res) => {
-  const params = {
-    min_latitude: +req.query.minLat,
-    max_latitude: +req.query.maxLat,
-    min_longitude: +req.query.minLng,
-    max_longitude: +req.query.maxLng,
-  };
-
-  if (isNaN(min_latitude) || isNaN(max_latitude) || isNaN(min_longitude) || isNaN(max_longitude)) {
-    res.status(500).json({message: 'Invalid geo bounds.'});
-    return;
-  }
-
-  model.getSectors(
-    req.app.locals.db,
-    params,
-    (err, result) => {
-      if (err)
-        res.status(500).json({ message: err });
-      else
-        res.status(200).json(result);
-    }
-  );
-};
-
-
-
-
-
 
 
 exports.getSiteJson = (req, res) => {
@@ -171,7 +167,6 @@ exports.getSiteJson = (req, res) => {
   const yTile = +req.params.Y;
   const zoom = +req.params.Z;
 
-  console.log('***getSiteTiles');
   if (isNaN(xTile) || isNaN(yTile) || isNaN(zoom)) {
     res.status(400).json({message: 'Invalid tile selection.'});
     return;
@@ -194,8 +189,6 @@ exports.getSiteJson = (req, res) => {
     }
   );
 };
-
-
 
 function formatSiteJson(sites) {
   let json = {
