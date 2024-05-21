@@ -30,9 +30,6 @@ function MyMap({latitude, longitude}:MapProps) {
     const ne = map.getBounds().getNorthEast();
     const sw = map.getBounds().getSouthWest();
     dispatch(mapsActions.setMapBounds({minLng: sw.lng, maxLng: ne.lng, minLat: sw.lat, maxLat: ne.lat}));
-
-    // dispatch(mapsActions.fetchSiteTile({z:10, x:262, y:379}));
-    // dispatch(mapsActions.fetchSectorTile({z:10, x:262, y:379}));
   });
 
   return null;

@@ -33,7 +33,7 @@ const mapsSlice = createSlice({
       state.mapBounds = action.payload; 
     },
     setSites(state:MapsState, action:PayloadAction<{bounds:MapsBounds, sites: GeoSite[]}>) {
-      // probably need to keep the bounds for this response to check if they have changed
+      // probably need to keep the bounds for this response to check if they are the current one we requested
       if (!state.mapBounds || 
           state.mapBounds.minLat === action.payload.bounds.minLat &&
           state.mapBounds.maxLat === action.payload.bounds.maxLat &&
