@@ -6,7 +6,8 @@ CREATE TABLE equipment.technologies (
   technology_name varchar(10) NOT NULL,
   sort_key        int         DEFAULT NULL,
   PRIMARY KEY (technology_id),
-  UNIQUE KEY technologies_UQ1 (technology_name);
+  UNIQUE KEY technologies_UQ1 (technology_name)
+);
 
 DROP TABLE IF EXISTS equipment.equipment_vendors;
 CREATE TABLE equipment.equipment_vendors (

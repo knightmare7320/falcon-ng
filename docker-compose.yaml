@@ -12,21 +12,21 @@ services:
     command: --mysql-native-password=ON
     # restart: unless-stopped
 
-  cache:
-    image: redis:alpine
-    volumes: 
-      - falcon-redis-cache:/data
-    ports:
-      - '6379:6379'
-    # environment: 
-    #   REDIS_HOST=cache
-    #   REDIS_PORT=6379
-    #   REDIS_PASSWORD=
-    env_file:
-      - ./secrets/cache.env
-    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81 
-      #--requirepass ${REDIS_PASSWORD}
-    # restart: unless-stopped
+  # cache:
+  #   image: redis:alpine
+  #   volumes: 
+  #     - falcon-redis-cache:/data
+  #   ports:
+  #     - '6379:6379'
+  #   # environment: 
+  #   #   REDIS_HOST=cache
+  #   #   REDIS_PORT=6379
+  #   #   REDIS_PASSWORD=
+  #   env_file:
+  #     - ./secrets/cache.env
+  #   command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81 
+  #     #--requirepass ${REDIS_PASSWORD}
+  #   # restart: unless-stopped
 
   server:
     build: server
@@ -41,7 +41,7 @@ services:
       # - ./secrets/cache.env
     depends_on:
       - mysqldb
-      - cache
+      # - cache
     restart: unless-stopped
 
   react:
@@ -91,4 +91,4 @@ volumes:
   falcon-server-node_modules:
   falcon-auth-node_modules:
   falcon-react-node_modules:
-  falcon-redis-cache:
+  # falcon-redis-cache:
