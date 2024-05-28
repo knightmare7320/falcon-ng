@@ -7,6 +7,7 @@ import { uiActions } from "../../store/ui.slice.js";
 
 export default function EditSiteDialog({openFg}: {openFg:boolean}) {  
   const dispatch = useDispatch();
+  const site = useSelector((state:RootState) => state.site.site);
   const uiState = useSelector((state:RootState) => state.ui);
 
   useEffect(() => {
@@ -27,9 +28,10 @@ export default function EditSiteDialog({openFg}: {openFg:boolean}) {
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-
-    // const fd = new FormData(event.target);
-    // const customerData = Object.fromEntries(fd.entries());
+console.log('test');
+    const fd = new FormData(event.target);
+    const data = Object.fromEntries(fd.entries());
+    console.log(data);
 
     // sendRequest(JSON.stringify({
     //   order: {
@@ -49,15 +51,19 @@ export default function EditSiteDialog({openFg}: {openFg:boolean}) {
           <input 
             id="site_name" 
             name="site_name" 
-            autoComplete="off"
+            defaultValue={site.site_name} 
+            autoFocus
           />
           <br/>
           
           <label htmlFor="site_type_id">Site Type:</label>
-          <select id="site_type_id">
-            <option></option>
-            { uiState.site_types.map(site_type => 
-              <option value={site_type.id}>{site_type.name}</option>
+          <select 
+            id="site_type_id" 
+            name="site_type_id" 
+            defaultValue={site.site_type_id}
+          >
+            { uiState.site_types.map(item => 
+              <option value={item.id} key={item.id}>{item.name}</option>
             )}
           </select>
           <br/>
@@ -66,6 +72,7 @@ export default function EditSiteDialog({openFg}: {openFg:boolean}) {
           <input 
             id="address1" 
             name="address1" 
+            defaultValue={site.address1}
           />
           <br/>
 
@@ -73,6 +80,7 @@ export default function EditSiteDialog({openFg}: {openFg:boolean}) {
           <input 
             id="city" 
             name="city" 
+            defaultValue={site.city}
           />
           <br/>
 
@@ -80,6 +88,7 @@ export default function EditSiteDialog({openFg}: {openFg:boolean}) {
           <input 
             id="state" 
             name="state" 
+            defaultValue={site.state}
           />
           <br/>
 
@@ -87,6 +96,7 @@ export default function EditSiteDialog({openFg}: {openFg:boolean}) {
           <input 
             id="zip_code" 
             name="zip_code" 
+            defaultValue={site.zip_code}
           />
           <br/>
 
@@ -94,6 +104,7 @@ export default function EditSiteDialog({openFg}: {openFg:boolean}) {
           <input 
             id="county" 
             name="county" 
+            defaultValue={site.county}
           />
           <br/>
 
@@ -101,7 +112,7 @@ export default function EditSiteDialog({openFg}: {openFg:boolean}) {
           <input 
             id="latitude" 
             name="latitude" 
-            required 
+            defaultValue={site.latitude}
           />
           <br/>
 
@@ -109,7 +120,7 @@ export default function EditSiteDialog({openFg}: {openFg:boolean}) {
           <input 
             id="longitude" 
             name="longitude" 
-            required 
+            defaultValue={site.longitude}
           />
           <br/>
 
@@ -117,50 +128,98 @@ export default function EditSiteDialog({openFg}: {openFg:boolean}) {
           <input 
             id="elevation_feet" 
             name="elevation_feet" 
+            defaultValue={site.elevation_feet}
           />
           <br/>
 
-  structure_type_id: number,
-  structure_type_name: string,
-  <br/>
+          <label htmlFor="structure_type_id">Structure Type:</label>
+          <select 
+            id="structure_type_id" 
+            name="structure_type_id" 
+            defaultValue={site.structure_type_id}
+          >
+            { uiState.structure_types.map(item => 
+              <option value={item.id} key={item.id}>{item.name}</option>
+            )}
+          </select>
+          <br/>
 
-  repair_priority_id: number,
-  repair_priority_name: string,
-  <br/>
+          <label htmlFor="repair_priority_id">Repair Priority:</label>
+          <select 
+            id="repair_priority_id" 
+            name="repair_priority_id" 
+            defaultValue={site.repair_priority_id}
+          >
+            { uiState.repair_priorities.map(item => 
+              <option value={item.id} key={item.id}>{item.name}</option>
+            )}
+          </select>
+          <br/>
 
-  timezone_id: number,
-  timezone_name: string,
-  <br/>
+          <label htmlFor="timezone_id">Timezone:</label>
+          <select 
+            id="timezone_id" 
+            name="timezone_id" 
+            defaultValue={site.timezone_id}
+          >
+            { uiState.timezones.map(item => 
+              <option value={item.id} key={item.id}>{item.name}</option>
+            )}
+          </select>
+          <br/>
 
-  region_id: number,
-  region_name: string,
-  <br/>
 
-  market99_id: number,
-  market99_name: string,
-  <br/>
 
-  l4_market_id: number,
-  l4_market_name: string,
-  <br/>
+          <label htmlFor="region_id">Region:</label>
+          <select 
+            id="region_id" 
+            name="region_id" 
+            defaultValue={site.region_id}
+          >
+            { uiState.regions.map(item => 
+              <option value={item.id} key={item.id}>{item.name}</option>
+            )}
+          </select>
+          <br/>
 
-  l5_market_id: number,
-  l5_market_name: string,
-  <br/>
+          <label htmlFor="l4_market_id">L4 Market:</label>
+          <select 
+            id="l4_market_id" 
+            name="l4_market_id" 
+            defaultValue={site.l4_market_id}
+          >
+            { uiState.l4_markets.map(item => 
+              <option value={item.id} key={item.id}>{item.name}</option>
+            )}
+          </select>
+          <br/>
 
-  org_cluster_id: number,
-  org_cluster_name: string,
-  <br/>
+          <label htmlFor="l5_market_id">L5 Market:</label>
+          <select 
+            id="l5_market_id" 
+            name="l5_market_id" 
+            defaultValue={site.l5_market_id}
+          >
+            { uiState.l5_markets.map(item => 
+              <option value={item.id} key={item.id}>{item.name}</option>
+            )}
+          </select>
+          <br/>
 
-  mta_id: number,
-  mta_name: string,
-  <br/>
+          <label htmlFor="org_cluster_id">Cluster:</label>
+          <select 
+            id="org_cluster_id" 
+            name="org_cluster_id" 
+            defaultValue={site.org_cluster_id}
+          >
+            { uiState.clusters.map(item => 
+              <option value={item.id} key={item.id}>{item.name}</option>
+            )}
+          </select>
+          <br/>
 
-  bta_id: number,
-  bta_name: string,
 </p>
   
-  modified_date: string,
 
         <footer className="modal-actions">  
           <button onClick={handleClose}> 

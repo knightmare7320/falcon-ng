@@ -59,6 +59,6 @@ services:
 volumes:
   falcon-mysqldb-data:
   falcon-server-node_modules:
-  falcon-auth-node_modules:
+  # falcon-auth-node_modules:
   falcon-react-node_modules:
-  falcon-redis-cache:
+  # falcon-redis-cache:
