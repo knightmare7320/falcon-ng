@@ -79,3 +79,48 @@ exports.getNearest = (req, res) => {
       }
    );
 };
+
+exports.getSiteTypes = (req, res) => {
+  model.getSiteTypes(
+     req.app.locals.db,
+     (err, result) => {
+        if (err)
+           res.status(500).json({ message: err });
+        else
+           res.status(200).json( result );
+     }
+  );
+};
+exports.getRepairPriorities = (req, res) => {
+  model.getRepairPriorities(
+     req.app.locals.db,
+     (err, result) => {
+        if (err)
+           res.status(500).json({ message: err });
+        else
+           res.status(200).json( result );
+     }
+  );
+};
+exports.getStructureTypes = (req, res) => {
+  model.getStructureTypes(
+     req.app.locals.db,
+     (err, result) => {
+        if (err)
+           res.status(500).json({ message: err });
+        else
+           res.status(200).json( result );
+     }
+  );
+};
+exports.getTimezones = (req, res) => {
+  model.getTimezones(
+     req.app.locals.db,
+     (err, result) => {
+        if (err)
+           res.status(500).json({ message: err });
+        else
+           res.status(200).json( result );
+     }
+  );
+};

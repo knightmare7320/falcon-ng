@@ -1,9 +1,20 @@
+import { useEffect } from "react";
 import Modal from "../../components/ui/Modal.js";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { siteActions } from '../../store/site.slice';
+import { RootState } from '../../store';
+import { uiActions } from "../../store/ui.slice.js";
 
 export default function EditSiteDialog({openFg}: {openFg:boolean}) {  
   const dispatch = useDispatch();
+  const uiState = useSelector((state:RootState) => state.ui);
+
+  useEffect(() => {
+    dispatch(uiActions.fetchSiteTypes());
+    dispatch(uiActions.fetchStructureTypes());
+    dispatch(uiActions.fetchRepairPriorities());
+    dispatch(uiActions.fetchTimezones());
+  }, []);
   
   function handleClose() {
     dispatch(siteActions.closeEditSite());
@@ -38,12 +49,18 @@ export default function EditSiteDialog({openFg}: {openFg:boolean}) {
           <input 
             id="site_name" 
             name="site_name" 
+            autoComplete="off"
           />
           <br/>
           
-  site_type_id: number,
-  site_type_name: string,
-  <br/>
+          <label htmlFor="site_type_id">Site Type:</label>
+          <select id="site_type_id">
+            <option></option>
+            { uiState.site_types.map(site_type => 
+              <option value={site_type.id}>{site_type.name}</option>
+            )}
+          </select>
+          <br/>
 
           <label htmlFor="address1">Address:</label>
           <input 
@@ -80,7 +97,7 @@ export default function EditSiteDialog({openFg}: {openFg:boolean}) {
           />
           <br/>
 
-          <label htmlFor="latitude">Latitude (&dev;N):</label>
+          <label htmlFor="latitude">Latitude (&deg;N):</label>
           <input 
             id="latitude" 
             name="latitude" 

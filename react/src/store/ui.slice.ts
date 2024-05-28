@@ -1,26 +1,29 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { GroupType } from "../util/browse.model";
-
-type Message = {
-  type: string, 
-  message: string,
-  timestamp: Date,
-};
+import { MessageType, LookupType } from "../util/ui.model";
 
 type UiState = {
-  messages:Message[],
+  messages:MessageType[],
   regions:GroupType[],
   l4_markets:GroupType[],
   l5_markets:GroupType[],
   clusters:GroupType[],
+  site_types:LookupType[],
+  structure_types:LookupType[],
+  repair_priorities:LookupType[],
+  timezones:LookupType[],
 };
 
 const INITIAL_STATE: UiState = {
-  messages: [] as Message[],
+  messages: [] as MessageType[],
   regions: [] as GroupType[],
   l4_markets: [] as GroupType[],
   l5_markets: [] as GroupType[],
   clusters: [] as GroupType[],
+  site_types: [] as LookupType[],
+  structure_types: [] as LookupType[],
+  repair_priorities: [] as LookupType[],
+  timezones: [] as LookupType[],
 };
 
 const uiSlice = createSlice({
@@ -30,11 +33,11 @@ const uiSlice = createSlice({
     showMessage(state, action:PayloadAction<{type:string, message:string}>) {
       // remove any existing messages with the same text
       const newMessages = state.messages.filter(
-        (value: Message) => value.type !== action.payload.type && value.message !== action.payload.message 
+        (value: MessageType) => value.type !== action.payload.type && value.message !== action.payload.message 
       );
 
        // add this new message to the front with a new timestamp
-       const newMessage: Message = {
+       const newMessage: MessageType = {
           type: action.payload.type,
           message: action.payload.message,
           timestamp: new Date(),
@@ -62,6 +65,21 @@ const uiSlice = createSlice({
     fetchClusters() {},
     setClusters(state, action:PayloadAction<GroupType[]>) {
       state.clusters = action.payload;
+    },    fetchSiteTypes() {},
+    setSiteTypes(state, action:PayloadAction<LookupType[]>) {
+      state.site_types = action.payload;
+    },
+    fetchStructureTypes() {},
+    setStructureTypes(state, action:PayloadAction<LookupType[]>) {
+      state.structure_types = action.payload;
+    },
+    fetchRepairPriorities() {},
+    setRepairPriorities(state, action:PayloadAction<LookupType[]>) {
+      state.repair_priorities = action.payload;
+    },
+    fetchTimezones() {},
+    setTimezonesTypes(state, action:PayloadAction<LookupType[]>) {
+      state.timezones = action.payload;
     },
   }
 });

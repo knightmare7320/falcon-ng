@@ -33,8 +33,6 @@ exports.getSiteBounds = (req, res) => {
     max_longitude: +req.query.maxLng,
   };
 
-  console.log('***getSiteBounds');
-
   if (isNaN(params.min_latitude) || isNaN(params.max_latitude) || isNaN(params.min_longitude) || isNaN(params.max_longitude)) {
     res.status(500).json({message: 'Invalid geo bounds.'});
     return;

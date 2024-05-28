@@ -1,4 +1,5 @@
 import { Site, Bts, Sector, Carrier, Nearest } from "./site.model";
+import { LookupType } from './ui.model.ts';
 const API_URL = import.meta.env.VITE_REACT_APP_API_URL + '/site';
 
 export async function fetchSite(cascade_code: string): Promise<Site> {
@@ -58,5 +59,44 @@ export async function fetchNearest(cascade_code: string): Promise<Nearest[]> {
     throw error;
   }
 
+  return await response.json();
+}
+
+
+
+export async function fetchSiteTypes(): Promise<LookupType[]> {
+  const response = await fetch(`${API_URL}/site_types`);
+  if (!response.ok) {
+    const info = await response.json();
+    const error = new Error(info?.message || 'There has been an error.');
+    throw error;
+  }
+  return await response.json();
+}
+export async function fetchStructureTypes(): Promise<LookupType[]> {
+  const response = await fetch(`${API_URL}/structure_types`);
+  if (!response.ok) {
+    const info = await response.json();
+    const error = new Error(info?.message || 'There has been an error.');
+    throw error;
+  }
+  return await response.json();
+}
+export async function fetchRepairPriorities(): Promise<LookupType[]> {
+  const response = await fetch(`${API_URL}/repair_priorities`);
+  if (!response.ok) {
+    const info = await response.json();
+    const error = new Error(info?.message || 'There has been an error.');
+    throw error;
+  }
+  return await response.json();
+}
+export async function fetchTimezones(): Promise<LookupType[]> {
+  const response = await fetch(`${API_URL}/timezones`);
+  if (!response.ok) {
+    const info = await response.json();
+    const error = new Error(info?.message || 'There has been an error.');
+    throw error;
+  }
   return await response.json();
 }
