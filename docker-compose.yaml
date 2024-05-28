@@ -10,21 +10,21 @@ services:
     env_file:
       - secrets/mysql.env
     command: --mysql-native-password=ON
-    # restart: unless-stopped
+    restart: unless-stopped
 
-  cache:
-    image: redis:alpine
-    volumes: 
-      - falcon-redis-cache:/data
-    ports:
-      - '6379:6379'
-    # environment: 
-    #   REDIS_HOST=cache
-    #   REDIS_PORT=6379
-    #   REDIS_PASSWORD=
-    env_file:
-      - ./secrets/cache.env
-    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81 
+  # cache:
+  #   image: redis:alpine
+  #   volumes: 
+  #     - falcon-redis-cache:/data
+  #   ports:
+  #     - '6379:6379'
+  #   # environment: 
+  #   #   REDIS_HOST=cache
+  #   #   REDIS_PORT=6379
+  #   #   REDIS_PASSWORD=
+  #   env_file:
+  #     - ./secrets/cache.env
+  #   command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81 
       #--requirepass ${REDIS_PASSWORD}
     # restart: unless-stopped
 
@@ -41,7 +41,7 @@ services:
       # - ./secrets/cache.env
     depends_on:
       - mysqldb
-      - cache
+      # - cache
     restart: unless-stopped
 
   react:
@@ -51,40 +51,10 @@ services:
       - falcon-react-node_modules:/app/node_modules
     ports:
       - "5173:5173"
-    #depends_on:
-      #- server
+    depends_on:
+      - server
     environment:
       VITE_REACT_APP_API_URL: http://localhost:3000/api
-
-  # nginx:
-  #   build: nginx
-  #   ports:
-  #     - "80:80"
-  #   depends_on:
-  #     - server
-  #     - react
-
-  ## Nginx Proxy Manager - Reverse Proxy with LetsEncrypt
-  # npm:
-  #   <<: *common-keys-core # See EXTENSION FIELDS at the top
-  #   container_name: nginx-proxy-manager
-  #   # Use the fully qualified name to pull including the docker.io portion
-  #   image: 'docker.io/jc21/nginx-proxy-manager:latest'
-  #   networks:
-  #     - npm_proxy
-  #   ports:
-  #     - '80:80' # Public HTTP Port. Port Forwarding on Router is ON.
-  #     - '443:443' # Public HTTPS Port. Port Forwarding on Router is ON.
-  #     - '81:81' # Admin Web Port. Port Forwarding on Router is OFF. Internal Home Network Access only.
-  #   volumes:
-  #     - $DOCKERDIR/appdata/npm/config:/config 
-  #     - $DOCKERDIR/appdata/npm/letsencrypt:/etc/letsencrypt
-  #     - $DOCKERDIR/appdata/npm/data:/data
-  #   environment:
-  #     DB_SQLITE_FILE: "/config/database.sqlite"
-  #     DISABLE_IPV6: 'true'
-
-
 
 volumes:
   falcon-mysqldb-data:
