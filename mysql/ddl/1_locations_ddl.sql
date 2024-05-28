@@ -7,7 +7,7 @@ CREATE TABLE locations.repair_priorities (
   sort_key             int         DEFAULT NULL,
   PRIMARY KEY (repair_priority_id),
   UNIQUE KEY repair_priorities_UQ1 (repair_priority_name)
-) AUTO_INCREMENT=6;
+);
 
 DROP TABLE IF EXISTS locations.site_types;
 CREATE TABLE locations.site_types (
@@ -16,7 +16,7 @@ CREATE TABLE locations.site_types (
   sort_key       int         DEFAULT NULL,
   PRIMARY KEY (site_type_id),
   UNIQUE KEY site_types_UQ1 (site_type_name)
-) AUTO_INCREMENT=9;
+);
 
 DROP TABLE IF EXISTS locations.structure_types;
 CREATE TABLE locations.structure_types (
@@ -25,7 +25,7 @@ CREATE TABLE locations.structure_types (
   sort_key            int         DEFAULT NULL,
   PRIMARY KEY (structure_type_id),
   UNIQUE KEY structure_types_UQ1 (structure_type_name)
-) AUTO_INCREMENT=16;
+);
 
 DROP TABLE IF EXISTS locations.timezones;
 CREATE TABLE locations.timezones (
@@ -34,7 +34,7 @@ CREATE TABLE locations.timezones (
   sort_key      int         DEFAULT NULL,
   PRIMARY KEY (timezone_id),
   UNIQUE KEY timezones_UQ1 (timezone_name)
-) AUTO_INCREMENT=9;
+);
 
 
 DROP TABLE IF EXISTS locations.regions;
@@ -43,7 +43,7 @@ CREATE TABLE locations.regions (
   region_name varchar(25) NOT NULL,
   PRIMARY KEY (region_id),
   UNIQUE KEY regions_UQ1 (region_name)
-) AUTO_INCREMENT=6;
+);
 
 
 DROP TABLE IF EXISTS locations.l4_markets;
@@ -55,7 +55,7 @@ CREATE TABLE locations.l4_markets (
   UNIQUE KEY l4_markets_UQ1 (l4_market_name),
   KEY l4_markets_FK (region_id),
   CONSTRAINT l4_markets_FK FOREIGN KEY (region_id) REFERENCES regions (region_id)
-) AUTO_INCREMENT=21;
+);
 
 DROP TABLE IF EXISTS locations.l5_markets;
 CREATE TABLE locations.l5_markets (
@@ -66,7 +66,7 @@ CREATE TABLE locations.l5_markets (
   UNIQUE KEY l5_markets_UQ1 (l5_market_name),
   KEY l5_markets_FK (l4_market_id),
   CONSTRAINT l5_markets_FK FOREIGN KEY (l4_market_id) REFERENCES l4_markets (l4_market_id)
-) AUTO_INCREMENT=72;
+);
 
 DROP TABLE IF EXISTS locations.org_clusters;
 CREATE TABLE locations.org_clusters (
@@ -75,7 +75,7 @@ CREATE TABLE locations.org_clusters (
   org_cluster_name varchar(50) NOT NULL,
   PRIMARY KEY (org_cluster_id),
   UNIQUE KEY org_clusters_UQ1 (l5_market_id,org_cluster_name)
-) AUTO_INCREMENT=893;
+);
 
 
 DROP TABLE IF EXISTS locations.market99s;
@@ -87,7 +87,7 @@ CREATE TABLE locations.market99s (
   UNIQUE KEY market99s_UQ1 (market99_name),
   KEY market99s_FK (region_id),
   CONSTRAINT market99s_FK FOREIGN KEY (region_id) REFERENCES regions (region_id)
-) AUTO_INCREMENT=6749;
+);
 
 
 DROP TABLE IF EXISTS locations.btas;
@@ -96,7 +96,7 @@ CREATE TABLE locations.btas (
   bta_name varchar(50) NOT NULL,
   PRIMARY KEY (bta_id),
   UNIQUE KEY btas_UQ1 (bta_name)
-) AUTO_INCREMENT=460;
+);
 
 DROP TABLE IF EXISTS locations.mtas;
 CREATE TABLE locations.mtas (
@@ -104,7 +104,7 @@ CREATE TABLE locations.mtas (
   mta_name varchar(50) NOT NULL,
   PRIMARY KEY (mta_id),
   UNIQUE KEY mtas_UQ1 (mta_name)
-) AUTO_INCREMENT=49;
+);
 
 DROP TABLE IF EXISTS locations.sites;
 CREATE TABLE locations.sites (

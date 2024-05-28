@@ -7,7 +7,7 @@ CREATE TABLE equipment.technologies (
   sort_key        int         DEFAULT NULL,
   PRIMARY KEY (technology_id),
   UNIQUE KEY technologies_UQ1 (technology_name)
-) AUTO_INCREMENT=9;
+);
 
 DROP TABLE IF EXISTS equipment.equipment_vendors;
 CREATE TABLE equipment.equipment_vendors (
@@ -17,7 +17,7 @@ CREATE TABLE equipment.equipment_vendors (
   bts_vendor_fg              char(1)     NOT NULL,
   PRIMARY KEY (equipment_vendor_id),
   UNIQUE KEY equipment_vendors_UQ1 (equipment_vendor_name)
-) AUTO_INCREMENT=37;
+);
 
 DROP TABLE IF EXISTS equipment.equipment_model_types;
 CREATE TABLE equipment.equipment_model_types (
@@ -25,7 +25,7 @@ CREATE TABLE equipment.equipment_model_types (
   equipment_model_type_name varchar(25) NOT NULL,
   PRIMARY KEY (equipment_model_type_id),
   UNIQUE KEY equipment_model_types_UQ1 (equipment_model_type_name)
-) AUTO_INCREMENT=2;
+);
 
 DROP TABLE IF EXISTS equipment.equipment_statuses;
 CREATE TABLE equipment.equipment_statuses (
@@ -34,7 +34,7 @@ CREATE TABLE equipment.equipment_statuses (
   sort_key              int         DEFAULT NULL,
   PRIMARY KEY (equipment_status_id),
   UNIQUE KEY equipment_statuses_UQ1 (equipment_status_name)
-) AUTO_INCREMENT=9;
+);
 
 DROP TABLE IF EXISTS equipment.sector_coverage_types;
 CREATE TABLE equipment.sector_coverage_types (
@@ -43,7 +43,7 @@ CREATE TABLE equipment.sector_coverage_types (
   sort_key                  int         DEFAULT NULL,
   PRIMARY KEY (sector_coverage_type_id),
   UNIQUE KEY sector_coverage_types_UQ1 (sector_coverage_type_name)
-) AUTO_INCREMENT=4;
+);
 
 DROP TABLE IF EXISTS equipment.bts_types;
 CREATE TABLE equipment.bts_types (
@@ -52,7 +52,7 @@ CREATE TABLE equipment.bts_types (
   sort_key      int         DEFAULT NULL,
   PRIMARY KEY (bts_type_id),
   UNIQUE KEY bts_types_UQ1 (bts_type_name)
-) AUTO_INCREMENT=5;
+);
 
 DROP TABLE IF EXISTS equipment.carrier_designations;
 CREATE TABLE equipment.carrier_designations (
@@ -61,7 +61,7 @@ CREATE TABLE equipment.carrier_designations (
   sort_key                 int           DEFAULT NULL,
   PRIMARY KEY (carrier_designation_id),
   UNIQUE KEY carrier_designations_UQ1 (carrier_designation_name)
-) AUTO_INCREMENT=21;
+);
 
 DROP TABLE IF EXISTS equipment.carrier_types;
 CREATE TABLE equipment.carrier_types (
@@ -70,7 +70,7 @@ CREATE TABLE equipment.carrier_types (
   sort_key          int         DEFAULT NULL,
   PRIMARY KEY (carrier_type_id),
   UNIQUE KEY carrier_types_UQ1 (carrier_type_name)
-) AUTO_INCREMENT=9;
+);
 
 DROP TABLE IF EXISTS equipment.channels;
 CREATE TABLE equipment.channels (
@@ -78,7 +78,7 @@ CREATE TABLE equipment.channels (
   channel_number int NOT NULL,
   PRIMARY KEY (channel_id),
   UNIQUE KEY channels_UQ1 (channel_number)
-) AUTO_INCREMENT=49;
+);
 
 
 DROP TABLE IF EXISTS equipment.equipment_models;
@@ -92,7 +92,7 @@ CREATE TABLE equipment.equipment_models (
   KEY equipment_models_FK2 (equipment_model_type_id),
   CONSTRAINT equipment_models_FK1 FOREIGN KEY (equipment_vendor_id)     REFERENCES equipment_vendors (equipment_vendor_id),
   CONSTRAINT equipment_models_FK2 FOREIGN KEY (equipment_model_type_id) REFERENCES equipment_model_types (equipment_model_type_id)
-) AUTO_INCREMENT=76;
+);
 
 DROP TABLE IF EXISTS equipment.equipment_sw_loads;
 CREATE TABLE equipment.equipment_sw_loads (
@@ -100,7 +100,7 @@ CREATE TABLE equipment.equipment_sw_loads (
   equipment_sw_load_name varchar(25) NOT NULL,
   PRIMARY KEY (equipment_sw_load_id),
   UNIQUE KEY equipment_sw_loads_UQ1 (equipment_sw_load_name)
-) AUTO_INCREMENT=99;
+);
 
 
 DROP TABLE IF EXISTS equipment.switches;
@@ -129,7 +129,7 @@ CREATE TABLE equipment.antennas (
   PRIMARY KEY (antenna_id),
   KEY antennas_FK (equipment_vendor_id),
   CONSTRAINT antennas_FK FOREIGN KEY (equipment_vendor_id) REFERENCES equipment.equipment_vendors (equipment_vendor_id)
-) AUTO_INCREMENT=1354;
+);
 
 DROP TABLE IF EXISTS equipment.bscs;
 CREATE TABLE equipment.bscs (
@@ -144,7 +144,7 @@ CREATE TABLE equipment.bscs (
   KEY bscs_FK2 (equipment_vendor_id),
   CONSTRAINT bscs_FK1 FOREIGN KEY (switch_id)           REFERENCES equipment.switches (switch_id),
   CONSTRAINT bscs_FK2 FOREIGN KEY (equipment_vendor_id) REFERENCES equipment.equipment_vendors (equipment_vendor_id)
-) AUTO_INCREMENT=329;
+);
 
 DROP TABLE IF EXISTS equipment.bts;
 CREATE TABLE equipment.bts (
@@ -166,7 +166,7 @@ CREATE TABLE equipment.bts (
   modified_date        DATETIME     DEFAULT NULL,
   PRIMARY KEY (bts_id),
   KEY bts_IX1 (cascade_code)
-) AUTO_INCREMENT=80448;
+);
 
 DROP TABLE IF EXISTS equipment.carriers;
 CREATE TABLE equipment.carriers (
@@ -191,7 +191,7 @@ CREATE TABLE equipment.carriers (
   CONSTRAINT carriers_FK2 FOREIGN KEY (channel_id)          REFERENCES channels (channel_id),
   CONSTRAINT carriers_FK3 FOREIGN KEY (carrier_type_id)     REFERENCES carrier_types (carrier_type_id),
   CONSTRAINT carriers_FK4 FOREIGN KEY (equipment_status_id) REFERENCES equipment_statuses (equipment_status_id)
-) AUTO_INCREMENT=1130153;
+);
 
 DROP TABLE IF EXISTS equipment.sectors;
 CREATE TABLE equipment.sectors (
@@ -210,4 +210,4 @@ CREATE TABLE equipment.sectors (
   modified_date           DATETIME      DEFAULT NULL,
   PRIMARY KEY (sector_id),
   KEY sectors_IX1 (cascade_code)
-) AUTO_INCREMENT=229229;
+);

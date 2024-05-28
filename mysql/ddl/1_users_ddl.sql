@@ -8,4 +8,4 @@ CREATE TABLE users.user_names (
   username   varchar(25) DEFAULT NULL,
   PRIMARY KEY (user_id),
   UNIQUE KEY users_UQ1 (username)
-) AUTO_INCREMENT=1358;
+);
