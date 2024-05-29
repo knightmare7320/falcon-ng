@@ -5,6 +5,8 @@ import { siteActions } from '../../store/site.slice';
 import { RootState } from '../../store';
 import { uiActions } from "../../store/ui.slice.js";
 
+import classes from "./EditSite.module.css";
+
 export default function EditSiteDialog({openFg}: {openFg:boolean}) {  
   const dispatch = useDispatch();
   const site = useSelector((state:RootState) => state.site.site);
@@ -43,18 +45,17 @@ console.log('test');
 
   return (
     <Modal open={openFg} onClose={handleClose}>
-      <form onSubmit={handleSubmit}>
         <header>Edit Site</header>
 
-        <p>
+        <form onSubmit={handleSubmit} className={classes.form}>
+          
           <label htmlFor="site_name">Site Name:</label>
           <input 
             id="site_name" 
             name="site_name" 
-            defaultValue={site.site_name} 
+            defaultValue={site.site_name}
             autoFocus
           />
-          <br/>
           
           <label htmlFor="site_type_id">Site Type:</label>
           <select 
@@ -66,7 +67,6 @@ console.log('test');
               <option value={item.id} key={item.id}>{item.name}</option>
             )}
           </select>
-          <br/>
 
           <label htmlFor="address1">Address:</label>
           <input 
@@ -74,7 +74,6 @@ console.log('test');
             name="address1" 
             defaultValue={site.address1}
           />
-          <br/>
 
           <label htmlFor="city">City:</label>
           <input 
@@ -82,7 +81,6 @@ console.log('test');
             name="city" 
             defaultValue={site.city}
           />
-          <br/>
 
           <label htmlFor="state">State:</label>
           <input 
@@ -90,7 +88,6 @@ console.log('test');
             name="state" 
             defaultValue={site.state}
           />
-          <br/>
 
           <label htmlFor="zip_code">Zip:</label>
           <input 
@@ -98,7 +95,6 @@ console.log('test');
             name="zip_code" 
             defaultValue={site.zip_code}
           />
-          <br/>
 
           <label htmlFor="county">County:</label>
           <input 
@@ -106,7 +102,6 @@ console.log('test');
             name="county" 
             defaultValue={site.county}
           />
-          <br/>
 
           <label htmlFor="latitude">Latitude (&deg;N):</label>
           <input 
@@ -114,7 +109,6 @@ console.log('test');
             name="latitude" 
             defaultValue={site.latitude}
           />
-          <br/>
 
           <label htmlFor="longitude">Longitude (&deg;E):</label>
           <input 
@@ -122,7 +116,6 @@ console.log('test');
             name="longitude" 
             defaultValue={site.longitude}
           />
-          <br/>
 
           <label htmlFor="elevation_feet">Elevation (ft):</label>
           <input 
@@ -130,7 +123,6 @@ console.log('test');
             name="elevation_feet" 
             defaultValue={site.elevation_feet}
           />
-          <br/>
 
           <label htmlFor="structure_type_id">Structure Type:</label>
           <select 
@@ -142,7 +134,6 @@ console.log('test');
               <option value={item.id} key={item.id}>{item.name}</option>
             )}
           </select>
-          <br/>
 
           <label htmlFor="repair_priority_id">Repair Priority:</label>
           <select 
@@ -154,7 +145,6 @@ console.log('test');
               <option value={item.id} key={item.id}>{item.name}</option>
             )}
           </select>
-          <br/>
 
           <label htmlFor="timezone_id">Timezone:</label>
           <select 
@@ -166,7 +156,6 @@ console.log('test');
               <option value={item.id} key={item.id}>{item.name}</option>
             )}
           </select>
-          <br/>
 
 
 
@@ -180,7 +169,6 @@ console.log('test');
               <option value={item.id} key={item.id}>{item.name}</option>
             )}
           </select>
-          <br/>
 
           <label htmlFor="l4_market_id">L4 Market:</label>
           <select 
@@ -192,7 +180,6 @@ console.log('test');
               <option value={item.id} key={item.id}>{item.name}</option>
             )}
           </select>
-          <br/>
 
           <label htmlFor="l5_market_id">L5 Market:</label>
           <select 
@@ -204,7 +191,6 @@ console.log('test');
               <option value={item.id} key={item.id}>{item.name}</option>
             )}
           </select>
-          <br/>
 
           <label htmlFor="org_cluster_id">Cluster:</label>
           <select 
@@ -216,9 +202,8 @@ console.log('test');
               <option value={item.id} key={item.id}>{item.name}</option>
             )}
           </select>
-          <br/>
 
-</p>
+</form>
   
 
         <footer className="modal-actions">  
@@ -229,7 +214,6 @@ console.log('test');
             Save
           </button>
         </footer>   
-      </form>
     </Modal>
   )
 }
