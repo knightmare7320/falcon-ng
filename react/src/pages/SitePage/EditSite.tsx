@@ -5,6 +5,9 @@ import { siteActions } from '../../store/site.slice';
 import { RootState } from '../../store';
 import { uiActions } from "../../store/ui.slice.js";
 
+import Input from "./Input";
+import Select from "./Select";
+
 import classes from "./EditSite.module.css";
 
 export default function EditSiteDialog({openFg}: {openFg:boolean}) {  
@@ -41,181 +44,118 @@ export default function EditSiteDialog({openFg}: {openFg:boolean}) {
       <header>Edit Site</header>
 
       <form onSubmit={handleSubmit} className={classes.form}>
-
-        <label htmlFor="site_name">Site Name:</label>
-        <input 
+        <Input 
+          label="Site Name" 
           id="site_name" 
-          name="site_name" 
           value={formValues.site_name}
           onChange={(event)=>setFormValues({...formValues, site_name: event.target.value})}
           autoFocus
         />
-        
-        <label htmlFor="site_type_id">Site Type:</label>
-        <select 
-          id="site_type_id" 
-          name="site_type_id" 
+        <Select
+          label="Site Type"
+          id="site_type_id"
           value={formValues.site_type_id}
+          items={uiState.site_types}
           onChange={(event)=>setFormValues({...formValues, site_type_id: +event.target.value})}
-        >
-          { uiState.site_types.map(item => 
-            <option value={item.id} key={item.id}>{item.name}</option>
-          )}
-        </select>
-
-        <label htmlFor="address1">Address:</label>
-        <input 
+        />
+        <Input 
+          label="Address" 
           id="address1" 
-          name="address1" 
           value={formValues.address1}
           onChange={(event)=>setFormValues({...formValues, address1: event.target.value})}
         />
-
-        <label htmlFor="city">City:</label>
-        <input 
+        <Input 
+          label="City" 
           id="city" 
-          name="city" 
           value={formValues.city}
           onChange={(event)=>setFormValues({...formValues, city: event.target.value})}
         />
-
-        <label htmlFor="state">State:</label>
-        <input 
+        <Input 
+          label="State" 
           id="state" 
-          name="state" 
           value={formValues.state}
           onChange={(event)=>setFormValues({...formValues, state: event.target.value})}
         />
-
-        <label htmlFor="zip_code">Zip:</label>
-        <input 
+        <Input 
+          label="Zip Code" 
           id="zip_code" 
-          name="zip_code" 
           value={formValues.zip_code}
           onChange={(event)=>setFormValues({...formValues, zip_code: event.target.value})}
         />
-
-        <label htmlFor="county">County:</label>
-        <input 
+        <Input 
+          label="County" 
           id="county" 
-          name="county" 
           value={formValues.county}
           onChange={(event)=>setFormValues({...formValues, county: event.target.value})}
         />
-
-        <label htmlFor="latitude">Latitude (&deg;N):</label>
-        <input 
+        <Input 
+          label="Latitude (&deg;N)" 
           id="latitude" 
-          name="latitude" 
           value={formValues.latitude}
-          onChange={(event)=>setFormValues({...formValues, latitude: +event.target.value})}
+          onChange={(event)=>setFormValues({...formValues, latitude: event.target.value})}
         />
-
-        <label htmlFor="longitude">Longitude (&deg;E):</label>
-        <input 
+        <Input 
+          label="Longitude (&deg;E)" 
           id="longitude" 
-          name="longitude" 
           value={formValues.longitude}
-          onChange={(event)=>setFormValues({...formValues, longitude: +event.target.value})}
+          onChange={(event)=>setFormValues({...formValues, longitude: event.target.value})}
         />
-
-        <label htmlFor="elevation_feet">Elevation (ft):</label>
-        <input 
+        <Input 
+          label="Elevation (ft)" 
           id="elevation_feet" 
-          name="elevation_feet" 
           value={formValues.elevation_feet}
-          onChange={(event)=>setFormValues({...formValues, elevation_feet: +event.target.value})}
+          onChange={(event)=>setFormValues({...formValues, elevation_feet: event.target.value})}
+        />
+        <Select
+          label="Structure Type"
+          id="structure_type_id"
+          value={formValues.structure_type_id}
+          items={uiState.structure_types}
+          onChange={(event)=>setFormValues({...formValues, structure_type_id: +event.target.value})}
+        />
+        <Select
+          label="Repair Priority"
+          id="repair_priority_id"
+          value={formValues.repair_priority_id}
+          items={uiState.repair_priorities}
+          onChange={(event)=>setFormValues({...formValues, repair_priority_id: +event.target.value})}
+        />
+        <Select
+          label="Timezone"
+          id="timezone_id"
+          value={formValues.timezone_id}
+          items={uiState.timezones}
+          onChange={(event)=>setFormValues({...formValues, timezone_id: +event.target.value})}
         />
 
-        <label htmlFor="structure_type_id">Structure Type:</label>
-        <select 
-          id="structure_type_id" 
-          name="structure_type_id" 
-          value={formValues.structure_type_id}
-          onChange={(event)=>setFormValues({...formValues, structure_type_id: +event.target.value})}
-        >
-          { uiState.structure_types.map(item => 
-            <option value={item.id} key={item.id}>{item.name}</option>
-          )}
-        </select>
-
-        <label htmlFor="repair_priority_id">Repair Priority:</label>
-        <select 
-          id="repair_priority_id" 
-          name="repair_priority_id" 
-          value={formValues.repair_priority_id}
-          onChange={(event)=>setFormValues({...formValues, repair_priority_id: +event.target.value})}
-        >
-          { uiState.repair_priorities.map(item => 
-            <option value={item.id} key={item.id}>{item.name}</option>
-          )}
-        </select>
-
-        <label htmlFor="timezone_id">Timezone:</label>
-        <select 
-          id="timezone_id" 
-          name="timezone_id" 
-          value={formValues.timezone_id}
-          onChange={(event)=>setFormValues({...formValues, timezone_id: +event.target.value})}
-        >
-          { uiState.timezones.map(item => 
-            <option value={item.id} key={item.id}>{item.name}</option>
-          )}
-        </select>
-
-
-
-        <label htmlFor="region_id">Region:</label>
-        <select 
-          id="region_id" 
-          name="region_id" 
+        <Select
+          label="Region"
+          id="region_id"
           value={formValues.region_id}
+          items={uiState.regions}
           onChange={(event)=>setFormValues({...formValues, region_id: +event.target.value, l4_market_id: undefined, l5_market_id: undefined, org_cluster_id: undefined})}
-        >
-          { uiState.regions.map(item => 
-            <option value={item.id} key={item.id}>{item.name}</option>
-          )}
-        </select>
-
-        <label htmlFor="l4_market_id">L4 Market:</label>
-        <select 
-          id="l4_market_id" 
-          name="l4_market_id" 
+        />
+        <Select
+          label="L4 Market"
+          id="l4_market_id"
           value={formValues.l4_market_id}
+          items={uiState.l4_markets.filter(val=> val.parent_id===formValues.region_id)}
           onChange={(event)=>setFormValues({...formValues, l4_market_id: +event.target.value, l5_market_id: undefined, org_cluster_id: undefined})}
-        >
-          <option key={0}></option>
-          { uiState.l4_markets.filter(val=> val.parent_id===formValues.region_id).map(item => 
-            <option value={item.id} key={item.id}>{item.name}</option>
-          )}
-        </select>
-
-        <label htmlFor="l5_market_id">L5 Market:</label>
-        <select 
-          id="l5_market_id" 
-          name="l5_market_id" 
+        />        
+        <Select
+          label="L5 Market"
+          id="l5_market_id"
+          items={uiState.l5_markets.filter(val=> val.parent_id===formValues.l4_market_id)}
           value={formValues.l5_market_id}
           onChange={(event)=>setFormValues({...formValues, l5_market_id: +event.target.value, org_cluster_id: undefined})}
-        >
-          <option key={0}></option>
-          { uiState.l5_markets.filter(val=> val.parent_id===formValues.l4_market_id).map(item => 
-            <option value={item.id} key={item.id}>{item.name}</option>
-          )}
-        </select>
-
-        <label htmlFor="org_cluster_id">Cluster:</label>
-        <select 
-          id="org_cluster_id" 
-          name="org_cluster_id" 
+        />
+        <Select
+          label="Cluster"
+          id="org_cluster_id"
           value={formValues.org_cluster_id}
+          items={uiState.clusters.filter(val=> val.parent_id===formValues.l5_market_id)}
           onChange={(event)=>setFormValues({...formValues, org_cluster_id: +event.target.value})}
-        >
-          <option key={0}></option>
-          { uiState.clusters.filter(val=> val.parent_id===formValues.l5_market_id).map(item => 
-            <option value={item.id} key={item.id}>{item.name}</option>
-          )}
-        </select>
-
+        />
       </form>
   
 
