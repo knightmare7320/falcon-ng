@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../../components/ui/Modal.js";
 import { useDispatch, useSelector } from 'react-redux';
 import { siteActions } from '../../store/site.slice';
@@ -12,12 +12,18 @@ export default function EditSiteDialog({openFg}: {openFg:boolean}) {
   const site = useSelector((state:RootState) => state.site.site);
   const uiState = useSelector((state:RootState) => state.ui);
 
+  const [ formValues, setFormValues ] = useState(site);
+
   useEffect(() => {
     dispatch(uiActions.fetchSiteTypes());
     dispatch(uiActions.fetchStructureTypes());
     dispatch(uiActions.fetchRepairPriorities());
     dispatch(uiActions.fetchTimezones());
   }, []);
+
+  useEffect(() => {
+    setFormValues(site);
+  }, [site])
   
   function handleClose() {
     dispatch(siteActions.closeEditSite());
@@ -30,11 +36,8 @@ export default function EditSiteDialog({openFg}: {openFg:boolean}) {
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-console.log('test');
-    const fd = new FormData(event.target);
-    const data = Object.fromEntries(fd.entries());
-    console.log(data);
 
+    console.log(formValues);
     // sendRequest(JSON.stringify({
     //   order: {
     //     items: cartCtx.items,
@@ -43,17 +46,28 @@ console.log('test');
     // }));
   }
 
+  function handleRegionId() {
+
+  }
+  function changeL4MarketId() {
+
+  }
+  function changeL5MarketId() {
+
+  }
+
   return (
     <Modal open={openFg} onClose={handleClose}>
         <header>Edit Site</header>
 
         <form onSubmit={handleSubmit} className={classes.form}>
-          
+
           <label htmlFor="site_name">Site Name:</label>
           <input 
             id="site_name" 
             name="site_name" 
-            defaultValue={site.site_name}
+            value={formValues.site_name}
+            onChange={(event)=>setFormValues({...formValues, site_name: event.target.value})}
             autoFocus
           />
           
@@ -61,7 +75,8 @@ console.log('test');
           <select 
             id="site_type_id" 
             name="site_type_id" 
-            defaultValue={site.site_type_id}
+            value={formValues.site_type_id}
+            onChange={(event)=>setFormValues({...formValues, site_type_id: +event.target.value})}
           >
             { uiState.site_types.map(item => 
               <option value={item.id} key={item.id}>{item.name}</option>
@@ -72,63 +87,72 @@ console.log('test');
           <input 
             id="address1" 
             name="address1" 
-            defaultValue={site.address1}
+            value={formValues.address1}
+            onChange={(event)=>setFormValues({...formValues, address1: event.target.value})}
           />
 
           <label htmlFor="city">City:</label>
           <input 
             id="city" 
             name="city" 
-            defaultValue={site.city}
+            value={formValues.city}
+            onChange={(event)=>setFormValues({...formValues, city: event.target.value})}
           />
 
           <label htmlFor="state">State:</label>
           <input 
             id="state" 
             name="state" 
-            defaultValue={site.state}
+            value={formValues.state}
+            onChange={(event)=>setFormValues({...formValues, state: event.target.value})}
           />
 
           <label htmlFor="zip_code">Zip:</label>
           <input 
             id="zip_code" 
             name="zip_code" 
-            defaultValue={site.zip_code}
+            value={formValues.zip_code}
+            onChange={(event)=>setFormValues({...formValues, zip_code: event.target.value})}
           />
 
           <label htmlFor="county">County:</label>
           <input 
             id="county" 
             name="county" 
-            defaultValue={site.county}
+            value={formValues.county}
+            onChange={(event)=>setFormValues({...formValues, county: event.target.value})}
           />
 
           <label htmlFor="latitude">Latitude (&deg;N):</label>
           <input 
             id="latitude" 
             name="latitude" 
-            defaultValue={site.latitude}
+            value={formValues.latitude}
+            onChange={(event)=>setFormValues({...formValues, latitude: +event.target.value})}
           />
 
           <label htmlFor="longitude">Longitude (&deg;E):</label>
           <input 
             id="longitude" 
             name="longitude" 
-            defaultValue={site.longitude}
+            value={formValues.longitude}
+            onChange={(event)=>setFormValues({...formValues, longitude: +event.target.value})}
           />
 
           <label htmlFor="elevation_feet">Elevation (ft):</label>
           <input 
             id="elevation_feet" 
             name="elevation_feet" 
-            defaultValue={site.elevation_feet}
+            value={formValues.elevation_feet}
+            onChange={(event)=>setFormValues({...formValues, elevation_feet: +event.target.value})}
           />
 
           <label htmlFor="structure_type_id">Structure Type:</label>
           <select 
             id="structure_type_id" 
             name="structure_type_id" 
-            defaultValue={site.structure_type_id}
+            value={formValues.structure_type_id}
+            onChange={(event)=>setFormValues({...formValues, structure_type_id: +event.target.value})}
           >
             { uiState.structure_types.map(item => 
               <option value={item.id} key={item.id}>{item.name}</option>
@@ -139,7 +163,8 @@ console.log('test');
           <select 
             id="repair_priority_id" 
             name="repair_priority_id" 
-            defaultValue={site.repair_priority_id}
+            value={formValues.repair_priority_id}
+            onChange={(event)=>setFormValues({...formValues, repair_priority_id: +event.target.value})}
           >
             { uiState.repair_priorities.map(item => 
               <option value={item.id} key={item.id}>{item.name}</option>
@@ -150,7 +175,8 @@ console.log('test');
           <select 
             id="timezone_id" 
             name="timezone_id" 
-            defaultValue={site.timezone_id}
+            value={formValues.timezone_id}
+            onChange={(event)=>setFormValues({...formValues, timezone_id: +event.target.value})}
           >
             { uiState.timezones.map(item => 
               <option value={item.id} key={item.id}>{item.name}</option>
@@ -163,7 +189,8 @@ console.log('test');
           <select 
             id="region_id" 
             name="region_id" 
-            defaultValue={site.region_id}
+            value={formValues.region_id}
+            onChange={(event)=>setFormValues({...formValues, region_id: +event.target.value, l4_market_id: undefined, l5_market_id: undefined, org_cluster_id: undefined})}
           >
             { uiState.regions.map(item => 
               <option value={item.id} key={item.id}>{item.name}</option>
@@ -174,9 +201,11 @@ console.log('test');
           <select 
             id="l4_market_id" 
             name="l4_market_id" 
-            defaultValue={site.l4_market_id}
+            value={formValues.l4_market_id}
+            onChange={(event)=>setFormValues({...formValues, l4_market_id: +event.target.value, l5_market_id: undefined, org_cluster_id: undefined})}
           >
-            { uiState.l4_markets.map(item => 
+            <option key={0}></option>
+            { uiState.l4_markets.filter(val=> val.parent_id===formValues.region_id).map(item => 
               <option value={item.id} key={item.id}>{item.name}</option>
             )}
           </select>
@@ -185,9 +214,11 @@ console.log('test');
           <select 
             id="l5_market_id" 
             name="l5_market_id" 
-            defaultValue={site.l5_market_id}
+            value={formValues.l5_market_id}
+            onChange={(event)=>setFormValues({...formValues, l5_market_id: +event.target.value, org_cluster_id: undefined})}
           >
-            { uiState.l5_markets.map(item => 
+            <option key={0}></option>
+            { uiState.l5_markets.filter(val=> val.parent_id===formValues.l4_market_id).map(item => 
               <option value={item.id} key={item.id}>{item.name}</option>
             )}
           </select>
@@ -196,9 +227,11 @@ console.log('test');
           <select 
             id="org_cluster_id" 
             name="org_cluster_id" 
-            defaultValue={site.org_cluster_id}
+            value={formValues.org_cluster_id}
+            onChange={(event)=>setFormValues({...formValues, org_cluster_id: +event.target.value})}
           >
-            { uiState.clusters.map(item => 
+            <option key={0}></option>
+            { uiState.clusters.filter(val=> val.parent_id===formValues.l5_market_id).map(item => 
               <option value={item.id} key={item.id}>{item.name}</option>
             )}
           </select>
