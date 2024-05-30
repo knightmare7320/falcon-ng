@@ -10,6 +10,8 @@ import siteReducer from './site.slice.ts';
 import siteEffects from './site.effects.ts';
 import mapsReducer from './maps.slice.ts';
 import mapsEffects from './maps.effects.ts';
+import searchReducer from './search.slice.ts';
+import searchEffects from './search.effect.ts';
 
 const store = configureStore({
   reducer: {
@@ -18,6 +20,7 @@ const store = configureStore({
     browse: browseReducer,
     site: siteReducer,
     maps: mapsReducer,
+    search: searchReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().prepend(
     authEffects.middleware,
@@ -25,6 +28,7 @@ const store = configureStore({
     browseEffects.middleware,
     siteEffects.middleware,
     mapsEffects.middleware,
+    searchEffects.middleware,
   ),
 });
 
