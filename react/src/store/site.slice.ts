@@ -4,7 +4,6 @@ import { Site, Bts, Sector, Carrier, Nearest } from "../util/site.model"
 export type SiteState = {
   status: string,
   cascade_code: string,
-  load_count: number,
   site: Site,
   btss: Bts[],
   sectors: Sector[],
@@ -16,7 +15,6 @@ export type SiteState = {
 const INITIAL_STATE = {
   status: 'init',
   cascade_code: '',
-  load_count: 0,
   site: {} as Site,
   btss: [] as Bts[],
   sectors: [] as Sector[],
