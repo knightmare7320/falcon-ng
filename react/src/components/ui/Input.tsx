@@ -1,4 +1,4 @@
-export default function Input({label, id, value, ...props}) {
+export default function Input({label, id, value, ...props}: {label:string, id:string, value?:number|string, props:{}}) {
   return (
     <>
       <label htmlFor={id}>{label}</label>
