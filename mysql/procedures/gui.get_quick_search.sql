@@ -15,6 +15,16 @@ BEGIN
 
    SET in_SEARCH_STR = lower(coalesce(trim(in_SEARCH_STR), ''));  
 
+
+   SELECT   count(distinct cascade_code) total_row_count 
+   FROM     locations.sites
+   WHERE    cascade_code                   LIKE concat('%', in_SEARCH_STR, '%')
+   OR       LOWER(site_name)               LIKE concat('%', in_SEARCH_STR, '%')
+   OR       LOWER(address1)                LIKE concat('%', in_SEARCH_STR, '%')
+   OR       LOWER(concat(city,', ',state)) LIKE concat('%', in_SEARCH_STR, '%')
+   OR       zip_code                       LIKE concat(     in_SEARCH_STR, '%');
+
+
    SELECT   cascade_code
           , site_name
           , address1
@@ -25,10 +35,10 @@ BEGIN
    OR       LOWER(site_name)               LIKE concat('%', in_SEARCH_STR, '%')
    OR       LOWER(address1)                LIKE concat('%', in_SEARCH_STR, '%')
    OR       LOWER(concat(city,', ',state)) LIKE concat('%', in_SEARCH_STR, '%')
-   OR       zip_code                       LIKE concat(     in_SEARCH_STR, '%')
-   
+   OR       zip_code                       LIKE concat(     in_SEARCH_STR, '%')   
    ORDER BY cascade_code
    LIMIT    in_PAGE_SIZE offset v_OFFSET;
+
 END
 $$
 DELIMITER ;
