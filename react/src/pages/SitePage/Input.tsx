@@ -1,8 +1,8 @@
-export default function Input({label, id, ...props}) {
+export default function Input({label, id, value, ...props}) {
   return (
     <>
       <label htmlFor={id}>{label}</label>
-      <input id={id} name={id} {...props} />
+      <input id={id} name={id} value={value || ""} {...props} />
     </>
   )
 }

@@ -39,6 +39,7 @@ export default function LoginForm() {
           name="username" 
           ref={usernameRef} 
           autoComplete="off"
+          placeholder="test@test.com"
           required 
         />
       </p>
@@ -50,6 +51,7 @@ export default function LoginForm() {
           name="password" 
           ref={passwordRef}  
           autoComplete="off"
+          placeholder="demo123$"
           required 
         />
       </p>
@@ -67,9 +69,6 @@ export default function LoginForm() {
         <button type="submit">
           Login &gt;
         </button>
-      </p>
-      <p>
-      test@test.com / demo123$
       </p>
     </Form>
   </>;

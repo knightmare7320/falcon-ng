@@ -35,6 +35,7 @@ export default function EditSiteDialog({openFg}: {openFg:boolean}) {
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
+    console.log('hi');
 
     console.log(formValues);
   }
@@ -156,17 +157,17 @@ export default function EditSiteDialog({openFg}: {openFg:boolean}) {
           items={uiState.clusters.filter(val=> val.parent_id===formValues.l5_market_id)}
           onChange={(event)=>setFormValues({...formValues, org_cluster_id: +event.target.value})}
         />
-      </form>
   
 
-      <footer className={classes.actions}>  
-        <button onClick={handleClose}> 
-          Cancel
-        </button>
-        <button onClick={handleClose}> 
-          Save
-        </button>
-      </footer>   
+        <footer className={classes.actions}>  
+          <button type="button" onClick={handleClose}> 
+            Cancel
+          </button>
+          <button type="submit"> 
+            Save
+          </button>
+        </footer>   
+      </form>
     </Modal>
   )
 }
