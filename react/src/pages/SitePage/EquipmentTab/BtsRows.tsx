@@ -1,5 +1,5 @@
 import { EquipmentTabProps } from ".";
-
+import moment from 'moment';
 
 export default function BtsRows({btss, sectors, carriers}:EquipmentTabProps) {
   const sectorCount = sectors.length;
@@ -63,7 +63,7 @@ export default function BtsRows({btss, sectors, carriers}:EquipmentTabProps) {
     <tr>
       <th>On-Air Date</th>
       { btss.map(bts => 
-        <td key={bts.bts_id} colSpan={sectorCount * (carrierCounts.get(bts.bts_id) || 1)}>{bts.on_air_date}</td>
+        <td key={bts.bts_id} colSpan={sectorCount * (carrierCounts.get(bts.bts_id) || 1)}>{moment(bts.on_air_date).format('M/D/YYYY')}</td>
       )}
     </tr>
   </>;

@@ -3,12 +3,8 @@ import { Site } from "../../util/site.model";
 
 import styles from "./SearchResults.module.css";
 
-export default function SearchResults({searchString, rows}: {searchString: string, rows: Site[]}) {
-  if (searchString !== '' && rows.length < 1) {
-    return <p>No Results!</p>;
-  }
-
-  return <>
+export default function SearchResults({rows}: {rows: Site[]}) {
+  return <>{rows.length > 0 &&
     <table className={styles.browseTable}>
       <thead>
         <tr>
@@ -31,5 +27,5 @@ export default function SearchResults({searchString, rows}: {searchString: strin
         )}
       </tbody>
     </table>
-  </>;
+  }</>;
 }

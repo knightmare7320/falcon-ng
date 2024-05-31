@@ -40,6 +40,10 @@ const searchSlice = createSlice({
     setSearchString(state:SearchState, action:PayloadAction<string>) {
       state.status = 'loading';
       state.search_string = action.payload;
+      state.row_count = 0;
+      state.rows = [];
+      state.page_count = 0;
+      state.page_number = 1;
     },
     setPageNumber(state:SearchState, action:PayloadAction<number>) {
       state.page_number = action.payload;

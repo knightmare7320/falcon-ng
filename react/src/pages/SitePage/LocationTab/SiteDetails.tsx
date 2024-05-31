@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 import { Site } from '../../../util/site.model';
 import { useDispatch } from 'react-redux';
@@ -111,13 +112,13 @@ export default function SiteDetails({site, authState}:SiteDetailsProps) {
         {(site.create_date || site.created_by_name) &&
           <tr className="edits">
             <th>Created by:</th>
-            <td>{ site.created_by_name } on { site.create_date }</td>
+            <td>{ site.created_by_name } on { moment(site.create_date).format('M/D/YYYY h:mm:ss a')}</td>
           </tr>
         }
         {(site.modified_date || site.modified_by_name) &&
           <tr className="edits">
             <th>Modified by:</th>
-            <td>{ site.modified_by_name } on { site.modified_date }</td>
+            <td>{ site.modified_by_name } on { moment(site.modified_date).format('M/D/YYYY h:mm:ss a') }</td>
           </tr>
         }
       </tbody>

@@ -8,6 +8,8 @@ import { searchActions } from "../../store/search.slice";
 import { RootState } from '../../store';
 import LoadingSpinner from "../../components/ui/LoadingSpinner";
 import SearchResults from "./SearchResults";
+import PageNumber from "../../components/ui/PageNumber";
+import PageSize from "../../components/ui/PageSize";
 
 export default function SearchPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -34,6 +36,14 @@ export default function SearchPage() {
     setSearchParams({q: searchBoxValue});
   }
 
+  function handlePageChange(pageNumber:number) {
+    dispatch(searchActions.setPageNumber(pageNumber));
+  }
+
+  function handlePageSizeChange(pageSize:number) {
+    dispatch(searchActions.setPageSize(pageSize));
+  }
+
   return <>
     {searchState.status==='loading' && <LoadingSpinner />}
 
@@ -51,9 +61,14 @@ export default function SearchPage() {
 
     <main className="main-content">
       <SearchResults 
-        searchString={searchState.search_string} 
         rows={searchState.rows} 
       />
+
+      {searchState.row_count > Math.min(...searchState.page_sizes) && <>
+        <PageNumber pageCount={searchState.page_count} pageNumber={searchState.page_number} onPageChange={handlePageChange} />
+        <PageSize pageSize={searchState.page_size} pageSizes={searchState.page_sizes} onPageSizeChange={handlePageSizeChange} />
+      </>
+      }
     </main>
   </>;
 }

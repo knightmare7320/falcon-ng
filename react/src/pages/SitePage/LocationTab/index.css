@@ -35,11 +35,16 @@
     }
   }
   & tr.edits th {
+    color: gray;
+    font-style: italic;
     font-size: smaller;
+    font-weight: normal;
+    background-color: transparent;
   }
   & tr.edits td {
     color: gray;
     font-style: italic;
     font-size: smaller;
+    background-color: transparent;
   }
 }

@@ -1,5 +1,5 @@
 import { EquipmentTabProps } from ".";
-
+import moment from 'moment';
 
 export default function CarrierRows({btss, sectors, carriers}:EquipmentTabProps) {
   if (!carriers) return <></>;
@@ -64,7 +64,7 @@ export default function CarrierRows({btss, sectors, carriers}:EquipmentTabProps)
           (_) => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
             carrier =>           
               <td key={carrier.carrier_id}>
-                {carrier.on_air_date}
+                {moment(carrier.on_air_date).format('M/D/YYYY')}
               </td>
           )
         )
