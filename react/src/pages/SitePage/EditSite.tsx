@@ -36,8 +36,7 @@ export default function EditSiteDialog({openFg}: {openFg:boolean}) {
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-    console.log('hi');
-
+    console.log('handleSubmit');
     console.log(formValues);
   }
 

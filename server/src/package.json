@@ -13,7 +13,7 @@
     "express": "*",
     "jsonwebtoken": "^9.0.2",
     "morgan": "*",
-    "mysql2": "^3.9.7"
+    "mysql2": "^3.10.0"
   },
   "devDependencies": {
     "nodemon": "*"
