@@ -13,8 +13,16 @@ app.use((req, res, next) => {
    next();
 }); 
 
-app.get('/:cascade_code', function(req, res) {
-  res.status(200).json({message: 'ok'});
+app.get('/pictures/:cascade_code', function(req, res) {
+  res.status(200).json({message: 'list - ' + req.params.cascade_code});
+})
+
+app.get('/pictures/:cascade_code/:selection', function(req, res) {
+  res.status(200).json({message: 'picture - ' + req.params.cascade_code + '-' + req.params.selection});
+})
+
+app.get('/comments/:cascade_code/:selection', function(req, res) {
+  res.status(200).json({message: 'comment - ' + req.params.cascade_code + '-' + req.params.selection});
 })
 
 app.get('/', (req, res) => res.send('Hello World!'));
