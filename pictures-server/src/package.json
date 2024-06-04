@@ -1,0 +1,17 @@
+{
+  "name": "pictures-server",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "type": "commonjs",
+  "private": true,
+  "dependencies": {
+    "express": "^4.19.2",
+    "morgan": "^1.10.0",
+    "sharp": "^0.33.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.3"
+  }
+}

@@ -6,5 +6,5 @@ COPY --chown=node:node src/package.json .
 # RUN npm install ci --only=production
 RUN npm install
 COPY --chown=node:node src .
-EXPOSE 80
+EXPOSE 8000
 CMD npm start

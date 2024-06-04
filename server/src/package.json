@@ -12,7 +12,7 @@
     "cors": "*",
     "express": "*",
     "jsonwebtoken": "^9.0.2",
-    "morgan": "*",
+    "morgan": "^1.10.0",
     "mysql2": "^3.10.0"
   },
   "devDependencies": {
