@@ -33,8 +33,6 @@ services:
     volumes:
       - falcon-server-node_modules:/app/node_modules
       - ./server/src:/app
-    ports:
-      - "8000:8000"
     env_file:
       - ./secrets/mysql.env
       - ./secrets/auth.env
@@ -50,8 +48,6 @@ services:
       - falcon-pictures-node_modules:/app/node_modules
       - falcon-pictures-data:/data
       - ./pictures-server/src:/app
-    ports: 
-      - "8080:8000"
     restart: unless-stopped
 
   react:
@@ -59,8 +55,6 @@ services:
     volumes:
       - ./react:/app
       - falcon-react-node_modules:/app/node_modules
-    ports:
-      - "5173:5173"
     depends_on:
       - server
     environment:
