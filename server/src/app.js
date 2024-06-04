@@ -48,19 +48,19 @@ app.use((req, res, next) => {
    next();
 }); 
 
-app.use("/api/auth", authRoutes);
-app.use("/api/site", siteRoutes);
-app.use("/api/sites", sitesRoutes);
-app.use("/api/regions", regionsRoutes);
-app.use("/api/l4_markets", l4MarketsRoutes);
-app.use("/api/l5_markets", l5MarketsRoutes);
-app.use("/api/clusters", orgClustersRoutes);
-app.use("/api/market99s", market99sRoutes);
-app.use("/api/mtas", mtasRoutes);
-app.use("/api/switches", switchesRoutes);
-app.use("/api/bscs", bscsRoutes);
-app.use("/api/geo", geoRoutes);
-app.use("/api/search", searchRoutes);
+app.use("/auth", authRoutes);
+app.use("/site", siteRoutes);
+app.use("/sites", sitesRoutes);
+app.use("/regions", regionsRoutes);
+app.use("/l4_markets", l4MarketsRoutes);
+app.use("/l5_markets", l5MarketsRoutes);
+app.use("/clusters", orgClustersRoutes);
+app.use("/market99s", market99sRoutes);
+app.use("/mtas", mtasRoutes);
+app.use("/switches", switchesRoutes);
+app.use("/bscs", bscsRoutes);
+app.use("/geo", geoRoutes);
+app.use("/search", searchRoutes);
 
 // app.use((req, res,next) => {
 //    res.sendFile(path.join(__dirname, "public", "index.html"));

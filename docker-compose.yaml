@@ -25,8 +25,8 @@ services:
   #   env_file:
   #     - ./secrets/cache.env
   #   command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81 
-      #--requirepass ${REDIS_PASSWORD}
-    # restart: unless-stopped
+  #     --requirepass ${REDIS_PASSWORD}
+  #   restart: unless-stopped
 
   server:
     build: server
@@ -34,7 +34,7 @@ services:
       - falcon-server-node_modules:/app/node_modules
       - ./server/src:/app
     ports:
-      - "80:8000"
+      - "8000:8000"
     env_file:
       - ./secrets/mysql.env
       - ./secrets/auth.env
@@ -51,7 +51,7 @@ services:
       - falcon-pictures-data:/data
       - ./pictures-server/src:/app
     ports: 
-      - "81:8000"
+      - "8080:8000"
     restart: unless-stopped
 
   react:
@@ -65,6 +65,37 @@ services:
       - server
     environment:
       VITE_REACT_APP_API_URL: http://localhost/api
+
+  nginx:
+    build: nginx
+    ports:
+      - "80:8000"
+    depends_on:
+      - server
+      - react
+      - pictures-server
+
+
+  ## Nginx Proxy Manager - Reverse Proxy with LetsEncrypt
+  # npm:
+  #   <<: *common-keys-core # See EXTENSION FIELDS at the top
+  #   container_name: nginx-proxy-manager
+  #   # Use the fully qualified name to pull including the docker.io portion
+  #   image: 'docker.io/jc21/nginx-proxy-manager:latest'
+  #   networks:
+  #     - npm_proxy
+  #   ports:
+  #     - '80:80' # Public HTTP Port. Port Forwarding on Router is ON.
+  #     - '443:443' # Public HTTPS Port. Port Forwarding on Router is ON.
+  #     - '81:81' # Admin Web Port. Port Forwarding on Router is OFF. Internal Home Network Access only.
+  #   volumes:
+  #     - $DOCKERDIR/appdata/npm/config:/config 
+  #     - $DOCKERDIR/appdata/npm/letsencrypt:/etc/letsencrypt
+  #     - $DOCKERDIR/appdata/npm/data:/data
+  #   environment:
+  #     DB_SQLITE_FILE: "/config/database.sqlite"
+  #     DISABLE_IPV6: 'true'
+
 
 volumes:
   falcon-mysqldb-data:
