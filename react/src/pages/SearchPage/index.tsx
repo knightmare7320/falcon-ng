@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import styles from "./index.module.css";
 import { useSelector, useDispatch } from "react-redux";
+import { Helmet } from "react-helmet-async";
 
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 
 import { searchActions } from "../../store/search.slice";
 import { RootState } from '../../store';
@@ -15,6 +16,10 @@ export default function SearchPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchBoxValue, setSearchBoxValue] = useState('');
   const searchString = searchParams.get('q') || '';
+
+  const dispatch = useDispatch();
+  const searchState = useSelector((state:RootState) => state.search);
+  const navigate = useNavigate();
   
   useEffect(() => {
     setSearchBoxValue(searchString);
@@ -24,8 +29,13 @@ export default function SearchPage() {
       dispatch(searchActions.clearSearch());
   }, [searchString]);
 
-  const dispatch = useDispatch();
-  const searchState = useSelector((state:RootState) => state.search);
+  useEffect(() => {
+    if (searchState.status === 'ok' && searchState.row_count === 1 && searchState.search_string.toLocaleUpperCase() === searchState.rows[0].cascade_code.toLocaleUpperCase()) {
+      // there is exactly one search result and it is for the cascade requested
+      navigate(`/site/${searchState.search_string.toLocaleUpperCase()}`);
+    }
+  }, [searchState.search_string, searchState.status])
+
 
   function handleSearchBoxChange(event: React.FormEvent<HTMLInputElement>) {
     setSearchBoxValue(event.currentTarget.value);
@@ -45,6 +55,10 @@ export default function SearchPage() {
   }
 
   return <>
+    <Helmet>
+      <title>Falcon - Search</title>
+    </Helmet>
+
     {searchState.status==='loading' && <LoadingSpinner />}
 
     <br />

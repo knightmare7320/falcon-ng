@@ -1,3 +1,11 @@
+import { Helmet } from "react-helmet-async";
+
 export default function SettingsPage() {
-  return <h3>TODO Settings Page</h3>;
+  return <>
+    <Helmet>
+      <title>Falcon - Settings</title>
+    </Helmet>
+
+    <h3>TODO Settings Page</h3>
+  </>;
 }

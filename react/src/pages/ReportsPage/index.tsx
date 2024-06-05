@@ -1,3 +1,11 @@
+import { Helmet } from "react-helmet-async";
+
 export default function ReportsPage() {
-  return <h3>TODO Reports Page</h3>;
+  return <>
+    <Helmet>
+      <title>Falcon - Reports</title>
+    </Helmet>
+
+    <h3>TODO Reports Page</h3>
+  </>;
 }

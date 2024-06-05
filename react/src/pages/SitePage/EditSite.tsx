@@ -42,7 +42,7 @@ export default function EditSiteDialog({openFg}: {openFg:boolean}) {
 
   return (
     <Modal open={openFg} onClose={handleClose}>
-      <header>Edit Site</header>
+      <header>Edit Site {site.cascade_code}</header>
 
       <form onSubmit={handleSubmit} className={classes.form}>
         <Input 

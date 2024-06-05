@@ -55,6 +55,8 @@ services:
     volumes:
       - ./react:/app
       - falcon-react-node_modules:/app/node_modules
+    ports:
+      - "5173:5173"
     depends_on:
       - server
     environment:
@@ -96,6 +98,6 @@ volumes:
   falcon-server-node_modules:
   falcon-pictures-node_modules:
   falcon-pictures-data:
-  # falcon-auth-node_modules:
   falcon-react-node_modules:
+  # falcon-auth-node_modules:
   # falcon-redis-cache:

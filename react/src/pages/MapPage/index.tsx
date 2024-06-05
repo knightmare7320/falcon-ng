@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useMap, useMapEvent, WMSTileLayer, MapContainer, TileLayer } from "react-leaflet";
 import { useDispatch } from "react-redux";
+import { Helmet } from "react-helmet-async";
 import "leaflet/dist/leaflet.css"
 
 import styles from "./index.module.css";
@@ -51,6 +52,10 @@ export default function MapPage() {
   }, [searchParams]);
 
   return <>
+    <Helmet>
+      <title>Falcon - Map</title>
+    </Helmet>
+
     {latitude && longitude &&
       <MapContainer className={ styles['leaflet-container'] } center={[parseFloat(latitude), parseFloat(longitude)]} zoom={15} scrollWheelZoom={true}>
         <TileLayer
