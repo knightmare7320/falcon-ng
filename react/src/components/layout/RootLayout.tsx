@@ -7,6 +7,7 @@ import LoginPage from "../../pages/LoginPage";
 import MenuBar from "./MenuBar";
 import SideBar from "./SideBar";
 import Content from "./Content";
+import Notifications from "../ui/Notifications";
 
 export default function RootLayout() {
   const showLoginState = useSelector((state: RootState) => state.auth.show_login);
@@ -25,7 +26,7 @@ export default function RootLayout() {
       <MenuBar />
       <SideBar />
       <Content>
-        {/* <Notifications /> */}
+        <Notifications />
         <Outlet />
       </Content>
     </>;

@@ -1,7 +1,7 @@
 export type MessageType = {
   type: string, 
   message: string,
-  timestamp: Date,
+  timestamp: string,
 };
 
 export type LookupType = {

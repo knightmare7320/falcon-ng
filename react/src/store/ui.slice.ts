@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import moment from "moment";
 import { GroupType } from "../util/browse.model";
 import { MessageType, LookupType } from "../util/ui.model";
 
@@ -40,12 +41,15 @@ const uiSlice = createSlice({
        const newMessage: MessageType = {
           type: action.payload.type,
           message: action.payload.message,
-          timestamp: new Date(),
+          timestamp: moment().format('M/D/YYYY h:mm:ssa'),
        };
        newMessages.unshift(newMessage);
 
        // this will have the affect of no duplicated messages but the most current timestamp being used
        state.messages = newMessages;
+    },
+    deleteMessage(state, action:PayloadAction<number>) {
+      state.messages.splice(action.payload, 1);
     },
     clearMessages(state) {
       state.messages = [];
