@@ -6,6 +6,7 @@ import { uiActions } from "./ui.slice";
 
 import { siteActions } from "./site.slice";
 import { fetchSite, fetchNearest, fetchBts, fetchSectors, fetchCarriers } from "../util/site.service";
+import { Site } from "../util/site.model";
 
 const siteListener = createListenerMiddleware();
 
@@ -89,6 +90,26 @@ siteStartListening({
 siteStartListening({
   actionCreator: siteActions.setCascade,
   effect: async (action:PayloadAction<string>, listenerApi) => {
+    let response;
+    try {
+      response = await fetchCarriers(action.payload);
+    } catch(error) {
+      let message = 'Unknown Error';
+      if (error instanceof Error) message = error.message;
+      listenerApi.dispatch(uiActions.showMessage({type: 'error', message}));
+      listenerApi.dispatch(siteActions.setError());
+    }
+    if (response) {
+      listenerApi.dispatch(siteActions.setCarrierData(response));
+    }
+  },
+});
+
+
+
+siteStartListening({
+  actionCreator: siteActions.saveEditSite,
+  effect: async (action:PayloadAction<Site>, listenerApi) => {
     let response;
     try {
       response = await fetchCarriers(action.payload);

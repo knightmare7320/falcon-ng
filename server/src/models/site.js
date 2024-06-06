@@ -14,6 +14,44 @@ class Site {
     );
   }
 
+  static update(db, params, result) {
+    const sqlStr = 'call update_site(?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?)';
+    const sqlParams = [
+      params.site_id,
+      params.cascade_code,
+      params.site_name,
+      params.site_type_id,
+      params.address1,
+      params.city,
+      params.state,
+      params.zip_code,
+      params.county,
+      params.latitude,
+      params.longitude,
+      params.elevation_feet,
+      params.structure_type_id,
+      params.repair_priority_id,
+      params.timezone_id,
+      params.region_id,
+      params.l4_market_id,
+      params.l5_market_id,
+      params.org_cluster_id,
+      params.user_id,
+    ];
+    db.query(
+      sqlStr,
+      sqlParams,
+      function(err, results) {
+        if (err) {
+          console.error(err);
+          result(err, null);
+          return;
+        }
+        result(null, results[0][0]);
+      }
+    );
+  }
+
   static getBts(db, params, result) {
     db.query(
       'call get_site_bts(?)',

@@ -71,6 +71,15 @@ const siteSlice = createSlice({
     closeEditSite(state:SiteState) {
       state.editSiteOpenFg = false;
     },
+    saveEditSite(state:SiteState, action: PayloadAction<Site>) {
+      
+    },
+    saveEditSiteError(state:SiteState, action: PayloadAction<{message: string}>) {
+
+    },
+    saveEditSiteSuccess(state:SiteState) {
+      state.editSiteOpenFg = false;
+    },
   },
 });
 
