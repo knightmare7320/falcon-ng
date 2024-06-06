@@ -51,6 +51,13 @@ export default function Header() {
             className={`${classes.reports} ${hoverButton === 'reports' && classes.sidebarMenubar__hover}`}
           >reports</NavLink>
         </li>
+        <li title="Admin">
+          <NavLink 
+            to="admin" 
+            onMouseEnter={()=>handleHover("admin")} 
+            className={`${classes.admin} ${hoverButton === 'admin' && classes.sidebarMenubar__hover}`}
+          >admin</NavLink>
+        </li>
         <li title="Search network elements">
           <NavLink 
             to="search" 
@@ -88,6 +95,13 @@ export default function Header() {
             onMouseEnter={()=>handleHover("reports")}
             className={`${hoverButton === 'reports' && classes.sidebarMenubar__hover}`}
           >Reports</NavLink>
+        </li>
+        <li>
+          <NavLink 
+            to="admin" 
+            onMouseEnter={()=>handleHover("admin")}
+            className={`${hoverButton === 'admin' && classes.sidebarMenubar__hover}`}
+          >Admin</NavLink>
         </li>
         <li>
           <NavLink 

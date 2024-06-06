@@ -46,7 +46,8 @@ services:
     build: pictures-server
     volumes: 
       - falcon-pictures-node_modules:/app/node_modules
-      - falcon-pictures-data:/data
+      - ./pictures-server/pictures:/data/pictures
+      # - falcon-pictures-data:/data
       - ./pictures-server/src:/app
     restart: unless-stopped
 
@@ -97,7 +98,7 @@ volumes:
   falcon-mysqldb-data:
   falcon-server-node_modules:
   falcon-pictures-node_modules:
-  falcon-pictures-data:
+  # falcon-pictures-data:
   falcon-react-node_modules:
   # falcon-auth-node_modules:
   # falcon-redis-cache:

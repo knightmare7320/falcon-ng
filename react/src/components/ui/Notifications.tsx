@@ -25,14 +25,18 @@ export default function Notifications() {
   return <>
     {messages.map((message:MessageType, index:number) => 
       <div key={index} className={styles.error}>
-        {
-          message.type !== 'error' ? <FontAwesomeIcon icon={faBug} /> : <FontAwesomeIcon icon={faExclamationTriangle} />
-        }
-        {message.timestamp} 
-        {message.message}
-        <button onClick={() => handleDeleteMessage(index)}>
-          <FontAwesomeIcon icon={faXmarkCircle} />
-        </button>
+        <span className={styles.icon}>
+          {
+            message.type === 'error' ? <FontAwesomeIcon icon={faBug} /> : <FontAwesomeIcon icon={faExclamationTriangle} />
+          }
+        </span>
+        <span className={styles.timestamp}>{message.timestamp}</span>
+        <span className={styles.message}>{message.message}</span>
+        <span className={styles.closeButton}>
+          <button onClick={() => handleDeleteMessage(index)}>
+            <FontAwesomeIcon icon={faXmarkCircle} />
+          </button>
+        </span>
       </div>
     )}
   </>;

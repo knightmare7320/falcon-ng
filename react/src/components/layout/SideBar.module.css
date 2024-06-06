@@ -48,6 +48,9 @@
 .sidebarMenu li a.pencil:before {
   content: "\f040";
 }
+.sidebarMenu li a.admin:before {
+  content: "\f7d9";
+}
 .sidebarMenu li a.contact:before {
   content: "\f003";
 }

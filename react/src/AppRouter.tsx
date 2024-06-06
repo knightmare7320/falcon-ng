@@ -11,6 +11,7 @@ const SitePage = loadable(() => import('./pages/SitePage'));
 import ReportsPage from './pages/ReportsPage/index.tsx';
 import SearchPage from './pages/SearchPage/index.tsx';
 import SettingsPage from './pages/SettingsPage/index.tsx';
+import AdminPage from './pages/AdminPage/index.tsx';
 
 export const AppRouter = createBrowserRouter([
   {
@@ -72,6 +73,11 @@ export const AppRouter = createBrowserRouter([
       { 
         path: "settings",
         element: <SettingsPage />,
+        // loader: checkAuthLoader,
+      },
+      { 
+        path: "admin",
+        element: <AdminPage />,
         // loader: checkAuthLoader,
       },
       {

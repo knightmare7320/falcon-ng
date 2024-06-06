@@ -6,6 +6,8 @@ export default function SettingsPage() {
       <title>Falcon - Settings</title>
     </Helmet>
 
-    <h3>TODO Settings Page</h3>
+    <h3>TODO: User Settings Page</h3>
+    Edit personal info<br/>
+    Change password<br/>
   </>;
 }

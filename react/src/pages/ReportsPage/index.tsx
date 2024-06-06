@@ -6,6 +6,6 @@ export default function ReportsPage() {
       <title>Falcon - Reports</title>
     </Helmet>
 
-    <h3>TODO Reports Page</h3>
+    <h3>TODO: Reports Page</h3>
   </>;
 }
