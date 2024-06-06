@@ -32,7 +32,7 @@ app.get('/list/:cascade_code', async function(req, res) {
     });
     res.status(200).json(fileNames);
   } catch (error) {
-    res.status(204).send();
+    res.status(200).send([]);
   }
 });
 
@@ -71,7 +71,7 @@ app.get('/text/:cascade_code/:selection', async function(req, res) {
     res.set('Content-Type', 'text/plain');
     stream.pipe(res);
   } catch (error) {
-    res.status(204).send();
+    res.status(200).send('');
   }
 })
 

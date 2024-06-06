@@ -5,7 +5,7 @@ import {RootState, AppDispatch} from ".";
 import { uiActions } from "./ui.slice";
 
 import { siteActions } from "./site.slice";
-import { fetchSite, fetchNearest, fetchBts, fetchSectors, fetchCarriers } from "../util/site.service";
+import { fetchSite, fetchNearest, fetchBts, fetchSectors, fetchCarriers, fetchPictureList } from "../util/site.service";
 import { Site } from "../util/site.model";
 
 const siteListener = createListenerMiddleware();
@@ -106,6 +106,24 @@ siteStartListening({
 });
 
 
+
+siteStartListening({
+  actionCreator: siteActions.setCascade,
+  effect: async (action:PayloadAction<string>, listenerApi) => {
+    let response;
+    try {
+      response = await fetchPictureList(action.payload);
+    } catch(error) {
+      let message = 'Unknown Error';
+      if (error instanceof Error) message = error.message;
+      listenerApi.dispatch(uiActions.showMessage({type: 'error', message}));
+      listenerApi.dispatch(siteActions.setError());
+    }
+    if (response) {
+      listenerApi.dispatch(siteActions.setPictureList(response));
+    }
+  },
+});
 
 siteStartListening({
   actionCreator: siteActions.saveEditSite,

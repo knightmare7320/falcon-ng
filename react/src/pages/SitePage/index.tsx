@@ -52,7 +52,7 @@ export default function SitePage() {
       tabContent = <ParamsTab btss={siteState.btss} sectors={siteState.sectors} carriers={siteState.carriers} />;
       break
     case 'pictures':
-      tabContent = <PicturesTab />;
+      tabContent = <PicturesTab cascadeCode={cascadeCode} pictures={siteState.pictures}/>;
   }
 
 

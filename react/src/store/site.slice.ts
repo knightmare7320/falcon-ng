@@ -9,6 +9,7 @@ export type SiteState = {
   sectors: Sector[],
   carriers: Carrier[],
   nearest: Nearest[],
+  pictures: string[],
   editSiteOpenFg: boolean,
 }
 
@@ -20,6 +21,7 @@ const INITIAL_STATE = {
   sectors: [] as Sector[],
   carriers: [] as Carrier[],
   nearest: [] as Nearest[],
+  pictures: [],
   editSiteOpenFg: false,
 }
 
@@ -34,31 +36,33 @@ const siteSlice = createSlice({
       state.status = 'error';
     },
     setCascade(state:SiteState, action:PayloadAction<string>) {
+      state.status = 'init';
       state.cascade_code = action.payload;
-      // state.load_count ++;
       // state.site = {} as Site;
-      // state.bts = [];
-      // state.sectors = [];
-      // state.carriers = [];
-      // state.nearest = [];
+      // state.btss = [] as Bts[];
+      // state.sectors = [] as Sector[];
+      // state.carriers = [] as Carrier[];
+      // state.nearest = [] as Nearest[];
+      state.pictures = [];
+      state.editSiteOpenFg = false;
     },
-    setSiteData(state:SiteState, action: PayloadAction<Site>) {
+    setSiteData(state:SiteState, action:PayloadAction<Site>) {
       state.site = action.payload;
       state.status = 'ok';
     },
-    setNearest(state:SiteState, action: PayloadAction<Nearest[]>) {
+    setNearest(state:SiteState, action:PayloadAction<Nearest[]>) {
       state.nearest = action.payload;
     },
-    setBtsData(state:SiteState, action: PayloadAction<Bts[]>) {
+    setBtsData(state:SiteState, action:PayloadAction<Bts[]>) {
       const sorted = action.payload.sort((a:Bts, b:Bts) => a.bts_number > b.bts_number ? 1 : -1);
       state.btss = sorted;
     },
-    setSectorData(state:SiteState, action: PayloadAction<Sector[]>) {
+    setSectorData(state:SiteState, action:PayloadAction<Sector[]>) {
       const sorted = action.payload.sort(
         (a:Sector, b:Sector) => a.sector_id > b.sector_id ? 1 : -1);
       state.sectors = sorted;
     },
-    setCarrierData(state:SiteState, action: PayloadAction<Carrier[]>) {
+    setCarrierData(state:SiteState, action:PayloadAction<Carrier[]>) {
       const sorted = action.payload.sort(
         (a:Carrier, b:Carrier) => 
           a.bts_id > b.bts_id || a.carrier_designation_name > b.carrier_designation_name ? 1 : -1
@@ -71,15 +75,18 @@ const siteSlice = createSlice({
     closeEditSite(state:SiteState) {
       state.editSiteOpenFg = false;
     },
-    saveEditSite(state:SiteState, action: PayloadAction<Site>) {
+    saveEditSite(state:SiteState, action:PayloadAction<Site>) {
       
     },
-    saveEditSiteError(state:SiteState, action: PayloadAction<{message: string}>) {
+    saveEditSiteError(state:SiteState, action:PayloadAction<{message:string}>) {
 
     },
     saveEditSiteSuccess(state:SiteState) {
       state.editSiteOpenFg = false;
     },
+    setPictureList(state:SiteState, action:PayloadAction<string[]>) {
+      state.pictures = action.payload;
+    }
   },
 });
 
