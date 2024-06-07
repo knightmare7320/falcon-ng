@@ -27,7 +27,9 @@ export default function Notifications() {
       <div key={index} className={styles.error}>
         <span className={styles.icon}>
           {
-            message.type === 'error' ? <FontAwesomeIcon icon={faBug} /> : <FontAwesomeIcon icon={faExclamationTriangle} />
+            message.type === 'error' ? 
+              <FontAwesomeIcon icon={faBug} /> : 
+              <FontAwesomeIcon icon={faExclamationTriangle} />
           }
         </span>
         <span className={styles.timestamp}>{message.timestamp}</span>
