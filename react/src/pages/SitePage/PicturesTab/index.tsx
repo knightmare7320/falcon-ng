@@ -1,6 +1,6 @@
 export default function PicturesTab({cascadeCode, pictures}:{cascadeCode:string, pictures:string[]}) {
   return <>
-    <h2>Site Pictures Tab</h2>
+    <h2>Site Pictures</h2>
     {pictures.map(
       (picture, index) => {
         if (index === 0) {
