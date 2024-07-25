@@ -21,6 +21,8 @@ export default function Notifications() {
 
   if (messages.length < 1) {
     return <></>;
+
+    
   }
   return <>
     {messages.map((message:MessageType, index:number) => 
