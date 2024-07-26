@@ -7,9 +7,9 @@ services:
       - "3306:3306"
     # environment:
     #   - MYSQL_ROOT_PASSWORD=
+    command: --pid-file /var/lib/mysql/mysqld.pid
     env_file:
       - secrets/mysql.env
-    command: --mysql-native-password=ON
     restart: unless-stopped
 
   # cache:
@@ -71,6 +71,7 @@ services:
       - server
       - react
       - pictures-server
+    restart: unless-stopped
 
 
   ## Nginx Proxy Manager - Reverse Proxy with LetsEncrypt
