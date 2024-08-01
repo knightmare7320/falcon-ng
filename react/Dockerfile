@@ -1,5 +1,5 @@
 FROM node:22.5.1-bullseye-slim AS build
-# USER node
+USER node
 WORKDIR /app
 COPY --chown=node:node package.json .
 RUN npm install

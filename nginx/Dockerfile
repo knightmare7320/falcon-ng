@@ -5,9 +5,22 @@
 # COPY ../react .
 # CMD npm run build
 
-FROM nginx:stable-alpine
+FROM nginx:1.27.0-bookworm
 EXPOSE 8000
-WORKDIR /etc/nginx/conf.d
-COPY nginx.conf .
-RUN mv nginx.conf default.conf
+
+RUN apt-get update && apt-get upgrade -y
+
+WORKDIR /app
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+RUN chown -R nginx:nginx /app && \
+    chmod -R 755 /app && \
+    chown -R nginx:nginx /var/cache/nginx && \
+    chown -R nginx:nginx /var/log/nginx && \
+    chown -R nginx:nginx /etc/nginx/conf.d
+RUN touch /var/run/nginx.pid && \
+    chown -R nginx:nginx /var/run/nginx.pid
+
+USER nginx
+
 # COPY --from=build /app/dist /var/www/html
