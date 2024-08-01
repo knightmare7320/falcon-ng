@@ -105,7 +105,23 @@ siteStartListening({
   },
 });
 
-
+siteStartListening({
+  actionCreator: siteActions.saveEditSite,
+  effect: async (action:PayloadAction<Site>, listenerApi) => {
+    let response;
+    // try {
+    //   response = await fetchCarriers(action.payload);
+    // } catch(error) {
+    //   let message = 'Unknown Error';
+    //   if (error instanceof Error) message = error.message;
+    //   listenerApi.dispatch(uiActions.showMessage({type: 'error', message}));
+    //   listenerApi.dispatch(siteActions.setError());
+    // }
+    // if (response) {
+    //   listenerApi.dispatch(siteActions.setCarrierData(response));
+    // }
+  },
+});
 
 siteStartListening({
   actionCreator: siteActions.setCascade,
@@ -121,24 +137,6 @@ siteStartListening({
     }
     if (response) {
       listenerApi.dispatch(siteActions.setPictureList(response));
-    }
-  },
-});
-
-siteStartListening({
-  actionCreator: siteActions.saveEditSite,
-  effect: async (action:PayloadAction<Site>, listenerApi) => {
-    let response;
-    try {
-      response = await fetchCarriers(action.payload);
-    } catch(error) {
-      let message = 'Unknown Error';
-      if (error instanceof Error) message = error.message;
-      listenerApi.dispatch(uiActions.showMessage({type: 'error', message}));
-      listenerApi.dispatch(siteActions.setError());
-    }
-    if (response) {
-      listenerApi.dispatch(siteActions.setCarrierData(response));
     }
   },
 });
