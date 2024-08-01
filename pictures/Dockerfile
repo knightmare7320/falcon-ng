@@ -1,4 +1,6 @@
 FROM node:22.5.1-bullseye-slim
+RUN apt-get update && apt-get upgrade -y
+
 # ENV NODE_ENV production
 USER node
 WORKDIR /app
