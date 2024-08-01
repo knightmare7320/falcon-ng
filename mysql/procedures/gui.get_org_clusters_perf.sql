@@ -61,3 +61,5 @@ BEGIN
 END 
 $$
 DELIMITER ;
+
+GRANT EXECUTE ON PROCEDURE gui.get_org_clusters_perf TO falcon;

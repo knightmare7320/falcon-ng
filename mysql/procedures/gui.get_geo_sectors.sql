@@ -34,3 +34,5 @@ BEGIN
 END
 $$
 DELIMITER ;
+
+GRANT EXECUTE ON PROCEDURE gui.get_geo_sectors TO falcon;

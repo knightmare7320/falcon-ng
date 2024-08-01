@@ -42,3 +42,5 @@ BEGIN
 END
 $$
 DELIMITER ;
+
+GRANT EXECUTE ON PROCEDURE gui.get_quick_search TO falcon;

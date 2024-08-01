@@ -24,3 +24,5 @@ BEGIN
 END
 $$
 DELIMITER ;
+
+GRANT EXECUTE ON PROCEDURE gui.get_bscs TO falcon;

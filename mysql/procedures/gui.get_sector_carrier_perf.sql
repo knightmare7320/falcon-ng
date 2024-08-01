@@ -47,3 +47,5 @@ BEGIN
 END
 $$
 DELIMITER ;
+
+GRANT EXECUTE ON PROCEDURE gui.get_sector_carrier_perf TO falcon;

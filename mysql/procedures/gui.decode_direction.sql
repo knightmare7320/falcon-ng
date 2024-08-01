@@ -31,5 +31,6 @@ BEGIN
    return '';
 END
 $$
-
 DELIMITER ;
+
+GRANT EXECUTE ON FUNCTION gui.decode_direction TO falcon;

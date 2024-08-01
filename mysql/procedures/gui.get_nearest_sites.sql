@@ -33,3 +33,5 @@ END
 $$
 
 DELIMITER ;
+
+GRANT EXECUTE ON PROCEDURE gui.get_nearest_sites TO falcon;

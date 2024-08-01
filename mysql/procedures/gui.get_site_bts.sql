@@ -44,3 +44,5 @@ BEGIN
 END
 $$
 DELIMITER ;
+
+GRANT EXECUTE ON PROCEDURE gui.get_site_bts TO falcon;

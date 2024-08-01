@@ -21,5 +21,6 @@ CREATE FUNCTION gui.get_azimuth(
      ) % 360.0;
 END
 $$
-
 DELIMITER ;
+
+GRANT EXECUTE ON FUNCTION gui.get_azimuth TO falcon;
