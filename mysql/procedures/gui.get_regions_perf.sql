@@ -44,3 +44,5 @@ BEGIN
 END 
 $$
 DELIMITER ;
+
+GRANT EXECUTE ON PROCEDURE gui.get_regions_perf TO falcon;

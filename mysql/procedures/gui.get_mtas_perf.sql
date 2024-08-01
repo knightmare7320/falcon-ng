@@ -49,3 +49,5 @@ BEGIN
 END 
 $$
 DELIMITER ;
+
+GRANT EXECUTE ON PROCEDURE gui.get_mtas_perf TO falcon;

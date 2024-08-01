@@ -2,7 +2,7 @@ DROP PROCEDURE IF EXISTS gui.get_sites_perf;
 
 DELIMITER $$
 $$
-CREATE DEFINER=`root`@`%` PROCEDURE `gui`.`get_sites_perf`(
+CREATE PROCEDURE gui.get_sites_perf(
    IN in_FILTER_ON   VARCHAR(50),
    IN in_FILTER_ID   INT,
    IN in_FILTER_STR   VARCHAR(50),
@@ -76,3 +76,5 @@ BEGIN
 END
 $$
 DELIMITER ;
+
+GRANT EXECUTE ON PROCEDURE gui.get_sites_perf TO falcon;

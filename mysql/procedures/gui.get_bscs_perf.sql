@@ -60,3 +60,5 @@ BEGIN
 END 
 $$
 DELIMITER ;
+
+GRANT EXECUTE ON PROCEDURE gui.get_bscs_perf TO falcon;

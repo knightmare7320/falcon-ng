@@ -1,4 +1,4 @@
-FROM node:current-alpine
+FROM node:22.5.1-bullseye-slim
 # ENV NODE_ENV production
 USER node
 WORKDIR /app

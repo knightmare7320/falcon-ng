@@ -56,3 +56,5 @@ BEGIN
 END 
 $$
 DELIMITER ;
+
+GRANT EXECUTE ON PROCEDURE gui.get_market99s_perf TO falcon;

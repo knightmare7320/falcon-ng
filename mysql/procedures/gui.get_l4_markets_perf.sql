@@ -52,3 +52,5 @@ BEGIN
 END 
 $$
 DELIMITER ;
+
+GRANT EXECUTE ON PROCEDURE gui.get_l4_markets_perf TO falcon;

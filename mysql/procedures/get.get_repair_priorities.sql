@@ -13,3 +13,5 @@ BEGIN
 END
 $$
 DELIMITER ;
+
+GRANT EXECUTE ON PROCEDURE gui.get_repair_priorities TO falcon;
