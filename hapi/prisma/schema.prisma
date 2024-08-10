@@ -1,0 +1,287 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int @id @default(autoincrement())
+  firstName String
+  lastName  String
+  userName  String?
+  password  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sitesCreated   Site[] @relation(name: "siteCreatedBy")
+  sitesUpdated   Site[] @relation(name: "siteUpdatedBy")
+  btssCreated    Bts[] @relation(name: "btsCreatedBy")
+  btssUpdated    Bts[] @relation(name: "btsUpdatedBy")
+  sectorsCreated Sector[] @relation(name: "sectorCreatedBy")
+  sectorsUpdated Sector[] @relation(name: "sectorUpdatedBy")
+  carriersCreated Carrier[] @relation(name: "carrierCreatedBy")
+  carriersUpdated Carrier[] @relation(name: "carrierUpdatedBy")
+}
+
+model Region {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  // Relation fields
+  l4Markets L4Market[]
+}
+
+model L4Market {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  // Relation fields
+  regionId  Int
+  region    Region @relation(fields: [regionId], references: [id])
+  l5Markets L5Market[]
+
+  @@unique([regionId, name])
+}
+
+model L5Market {
+  id   Int @id @default(autoincrement())
+  name String
+
+  // Relation fields
+  l4MarketId  Int
+  l4Market    L4Market @relation(fields: [l4MarketId], references: [id])
+  orgClusters OrgCluster[]
+
+  @@unique([l4MarketId, name])
+}
+
+model OrgCluster {
+  id   Int @id @default(autoincrement())
+  name String
+
+  // Relation fields
+  l5MarketId Int
+  L5Market   L5Market @relation(fields: [l5MarketId], references: [id])
+  sites      Site[]
+
+  @@unique([l5MarketId, name])
+}
+
+model SiteType {
+  id      Int    @id
+  name    String @unique
+  sortKey Int?
+
+  sites   Site[]
+}
+
+model RepairPriority {
+  id      Int    @id
+  name    String @unique
+  sortKey Int?
+
+  sites   Site[]
+}
+
+model StructureType {
+  id      Int    @id 
+  name    String @unique
+  sortKey Int?
+
+  sites   Site[]
+}
+
+model TimeZone {
+  id      Int    @id
+  name    String @unique
+  sortKey Int?
+
+  sites   Site[]
+}
+
+model Site {
+  id               Int    @id @default(autoincrement())
+  cascadeCode      String @unique
+  name             String
+  siteTypeId       Int
+  siteType         SiteType @relation(fields: [siteTypeId], references: [id]) 
+  address          String
+  city             String
+  state            String
+  zipCode          String
+  county           String
+  latitude         Float
+  longitude        Float
+  elevation        Float
+  structureTypeId  Int
+  structureType    StructureType @relation(fields: [structureTypeId], references: [id])
+  repairPriorityId Int
+  repairPriority   RepairPriority @relation(fields: [repairPriorityId], references: [id])
+  timezoneId       Int
+  timezone         TimeZone @relation(fields: [timezoneId], references: [id])
+  orgClusterId     Int
+  orgCluster       OrgCluster @relation(fields: [orgClusterId], references: [id])
+  createdAt        DateTime @default(now())
+  createdById      Int?
+  createdBy        User? @relation(name: "siteCreatedBy", fields: [createdById], references: [id])
+  updatedAt        DateTime @updatedAt
+  updatedById      Int?
+  updatedBy        User? @relation(name: "siteUpdatedBy", fields: [updatedById], references: [id])
+
+  btss    Bts[]
+  sectors Sector[]
+}
+
+model Technology {
+  id      Int    @id @default(autoincrement())
+  name    String @unique
+  sortKey Int?
+}
+
+model EquipmentVendor {
+  id       Int    @id @default(autoincrement())
+  name     String @unique
+
+  equipmentModels EquipmentModel[]
+  mscs            Msc[]
+  bscs            Bsc[]
+  btss            Bts[]
+  antennas        AntennaModel[]
+}
+
+model EquipmentModel {
+  id                 Int    @id @default(autoincrement())
+  name               String @unique
+  equipmentVendorId  Int
+  equipmentVendor    EquipmentVendor @relation(fields: [equipmentVendorId], references: [id])
+
+  btss               Bts[]
+}
+
+model Msc {
+  id                Int    @id @default(autoincrement())
+  name              String @unique
+  clliCode          String @unique
+  equipmentVendorId Int
+  equipmentVendor   EquipmentVendor @relation(fields: [equipmentVendorId], references: [id])
+
+  bscs              Bsc[]
+}
+
+model Bsc {
+  id                Int @id @default(autoincrement())
+  name              String @unique
+  mscId             Int
+  msc               Msc @relation(fields: [mscId], references: [id])
+  equipmentVendorId Int
+  equipmentVendor   EquipmentVendor @relation(fields: [equipmentVendorId], references: [id])
+
+  btss              Bts[]
+}
+
+model Bts {
+  id                Int @id @default(autoincrement())
+  siteId            Int
+  site              Site @relation(fields: [siteId], references: [id])
+  bscId             Int
+  bsc               Bsc @relation(fields: [bscId], references: [id])
+  number            Int
+  equipmentVendorId Int
+  equipmentVendor   EquipmentVendor @relation(fields: [equipmentVendorId], references: [id])
+  equipmentModelId  Int
+  equipmentModel    EquipmentModel @relation(fields: [equipmentModelId], references: [id])
+  onAirDate         DateTime
+  createdAt         DateTime @default(now())
+  createdById       Int?
+  createdBy         User? @relation(name: "btsCreatedBy", fields: [createdById], references: [id])
+  updatedAt         DateTime @updatedAt
+  updatedById       Int?
+  updatedBy         User? @relation(name: "btsUpdatedBy", fields: [updatedById], references: [id])
+
+  @@unique([bscId, number])
+}
+
+model AntennaModel {
+  id                 Int @id @default(autoincrement())
+  name               String
+  equipmentVendorId  Int
+  equipmentVendor    EquipmentVendor @relation(fields: [equipmentVendorId], references: [id])
+  horizontalBw       Float
+  verticalBw         Float
+  gainDbi            Float
+  frontToBackRatio   Float
+  electricalTilt     Float
+
+  sectors Sector[]
+
+  @@unique([equipmentVendorId, name])
+}
+
+model Sector {
+  id             Int @id @default(autoincrement())
+  siteId         Int
+  site           Site @relation(fields: [siteId], references: [id])
+  number         Int
+  azimuth        Float
+  heightAgl      Float
+  mechanicalTilt Float
+  antennaModelId Int
+  antennaModel   AntennaModel @relation(fields: [antennaModelId], references: [id])
+  sectorCoverageTypeId Int
+  sectorCoverageType   SectorCoverageType @relation(fields: [sectorCoverageTypeId], references: [id])
+  createdAt      DateTime @default(now())
+  createdById    Int?
+  createdBy      User? @relation(name: "sectorCreatedBy", fields: [createdById], references: [id])
+  updatedAt      DateTime @updatedAt
+  updatedById    Int?
+  updatedBy      User? @relation(name: "sectorUpdatedBy", fields: [updatedById], references: [id])
+
+  @@unique([siteId, number])
+}
+
+model SectorCoverageType {
+  id      Int    @id @default(autoincrement())
+  name    String @unique
+  sortKey Int?
+
+  sectors Sector[]
+}
+
+model CarrierType {
+  id      Int    @id @default(autoincrement())
+  name    String @unique
+  sortKey Int?
+}
+
+model CarrierDesignation {
+  id      Int    @id @default(autoincrement())
+  name    String @unique
+  sortKey Int?
+}
+
+model Channel {
+  id      Int @id @default(autoincrement())
+  number  Int @unique
+}
+
+model Carrier {
+  id      Int    @id @default(autoincrement())
+  btsId Int
+  channelId Int
+  number Int
+  carrierDesignationId Int
+  carrierTypeId Int
+  statusId Int
+  onAirDate DateTime
+  createdAt      DateTime @default(now())
+  createdById    Int?
+  createdBy      User? @relation(name: "carrierCreatedBy", fields: [createdById], references: [id])
+  updatedAt      DateTime @updatedAt
+  updatedById    Int?
+  updatedBy      User? @relation(name: "carrierUpdatedBy", fields: [updatedById], references: [id])
+
+  @@unique([btsId, number])
+}

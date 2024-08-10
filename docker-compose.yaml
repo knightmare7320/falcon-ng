@@ -1,18 +1,31 @@
 services:
-  mysqldb:
-    build: mysql
-    volumes:
-      - falcon-mysqldb-data:/var/lib/mysql
-    ports:
-      - "3306:3306"
+  postgres:
+    image: postgres:16.3-bookworm
     # environment:
-    #   - MYSQL_ROOT_PASSWORD=
-    #   - MYSQL_USER=
-    #   - MYSQL_PASSWORD=
+    #   - POSTGRES_USER=
+    #   - POSTGRESS_PASSWORD=
     env_file:
-      - secrets/mysql.env
-    command: --pid-file /app/mysqld.pid
+      - ./secrets/pgsql.env
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports: 
+      - "5432:5432"
     restart: unless-stopped
+
+  # mysqldb:
+  #   build: mysql
+  #   volumes:
+  #     - falcon-mysqldb-data:/var/lib/mysql
+  #   ports:
+  #     - "3306:3306"
+  #   # environment:
+  #   #   - MYSQL_ROOT_PASSWORD=
+  #   #   - MYSQL_USER=
+  #   #   - MYSQL_PASSWORD=
+  #   env_file:
+  #     - secrets/mysql.env
+  #   command: --pid-file /app/mysqld.pid
+  #   restart: unless-stopped
 
   # cache:
   #   image: redis:alpine
@@ -39,15 +52,6 @@ services:
     depends_on:
       - mysqldb
       # - cache
-    restart: unless-stopped
-
-  auth:
-    build: auth
-    volumes: 
-      - falcon-auth-node_modules:/app/node_modules
-    env_file:
-      - ./secrets/mysql.env
-      - ./secrets/auth.env
     restart: unless-stopped
 
   pictures:
@@ -86,5 +90,6 @@ volumes:
   falcon-pictures-node_modules:
   # falcon-pictures-data:
   falcon-react-node_modules:
-  falcon-auth-node_modules:
-  falcon-redis-cache:
+  # falcon-auth-node_modules:
+  # falcon-redis-cache:
+  postgres:
