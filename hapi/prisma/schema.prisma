@@ -26,6 +26,7 @@ model User {
   carriersCreated Carrier[] @relation(name: "carrierCreatedBy")
   carriersUpdated Carrier[] @relation(name: "carrierUpdatedBy")
 
+  @@unique([firstName,lastName])
   userUpdated     User[] @relation(name: "userUpdatedBy")
 }
 
@@ -109,7 +110,7 @@ model StructureType {
   sites   Site[]
 }
 
-model TimeZone {
+model Timezone {
   id      Int    @id
   name    String @unique
   sortKey Int?
@@ -136,7 +137,7 @@ model Site {
   repairPriorityId Int
   repairPriority   RepairPriority @relation(fields: [repairPriorityId], references: [id])
   timezoneId       Int
-  timezone         TimeZone @relation(fields: [timezoneId], references: [id])
+  timezone         Timezone @relation(fields: [timezoneId], references: [id])
   orgClusterId     Int
   orgCluster       OrgCluster @relation(fields: [orgClusterId], references: [id])
   createdAt        DateTime @default(now())
@@ -157,8 +158,10 @@ model Technology {
 }
 
 model EquipmentVendor {
-  id       Int    @id @default(autoincrement())
-  name     String @unique
+  id                   Int     @id @default(autoincrement())
+  name                 String  @unique
+  antennaVendor        Boolean @default(false)
+  infrastructureVendor Boolean @default(false)
 
   equipmentModels EquipmentModel[]
   mscs            Msc[]

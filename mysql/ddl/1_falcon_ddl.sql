@@ -1,4 +1,5 @@
-
+CREATE DATABASE falcon;
+USE falcon;
 
 CREATE TABLE `TimeZone` (
   `id`      int          NOT NULL,
@@ -79,6 +80,7 @@ CREATE TABLE `User` (
   `updatedById` int          DEFAULT NULL,
   `updatedAt`   datetime(3)  DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `User_firstName_lastName_key` (`firstName`,`lastName`),
   KEY `User_updatedById_fkey` (`updatedById`),
   CONSTRAINT `User_updatedById_fkey` FOREIGN KEY (`updatedById`) REFERENCES `User` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 );
@@ -90,8 +92,8 @@ CREATE TABLE `UserLogin` (
   `lastLoginSuccess`      datetime(3)  DEFAULT NULL,
   `lastLoginAttempt`      datetime(3)  DEFAULT NULL,
   `lastPasswordChange`    datetime(3)  DEFAULT NULL,
-  `failedLoginCount`      int          NOT NULL DEFAULT '0',
-  `requirePasswordChange` tinyint(1)   NOT NULL DEFAULT '0',
+  `failedLoginCount`      int          NOT NULL DEFAULT 0,
+  `requirePasswordChange` tinyint(1)   NOT NULL DEFAULT 0,
   PRIMARY KEY (`userId`),
   CONSTRAINT `UserLogin_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
 );
@@ -170,8 +172,10 @@ CREATE TABLE `Site` (
 );
 
 CREATE TABLE `EquipmentVendor` (
-  `id`   int          NOT NULL AUTO_INCREMENT,
-  `name` varchar(191) NOT NULL,
+  `id`                   int          NOT NULL AUTO_INCREMENT,
+  `name`                 varchar(191) NOT NULL,
+  `antennaVendor`        tinyint(1)   NOT NULL DEFAULT 0,
+  `infrastructureVendor` tinyint(1)   NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `EquipmentVendor_name_key` (`name`)
 );
