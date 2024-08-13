@@ -3,27 +3,42 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id        Int @id @default(autoincrement())
-  firstName String
-  lastName  String
-  userName  String?
-  password  String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                    Int @id @default(autoincrement())
+  firstName             String?
+  lastName              String
+  createdAt             DateTime @default(now())
+  updatedById           Int?
+  updatedBy             User? @relation(name: "userUpdatedBy", fields: [updatedById], references: [id])
+  updatedAt             DateTime? @updatedAt
 
-  sitesCreated   Site[] @relation(name: "siteCreatedBy")
-  sitesUpdated   Site[] @relation(name: "siteUpdatedBy")
-  btssCreated    Bts[] @relation(name: "btsCreatedBy")
-  btssUpdated    Bts[] @relation(name: "btsUpdatedBy")
-  sectorsCreated Sector[] @relation(name: "sectorCreatedBy")
-  sectorsUpdated Sector[] @relation(name: "sectorUpdatedBy")
+  userLogin       UserLogin?
+  sitesCreated    Site[] @relation(name: "siteCreatedBy")
+  sitesUpdated    Site[] @relation(name: "siteUpdatedBy")
+  btssCreated     Bts[] @relation(name: "btsCreatedBy")
+  btssUpdated     Bts[] @relation(name: "btsUpdatedBy")
+  sectorsCreated  Sector[] @relation(name: "sectorCreatedBy")
+  sectorsUpdated  Sector[] @relation(name: "sectorUpdatedBy")
   carriersCreated Carrier[] @relation(name: "carrierCreatedBy")
   carriersUpdated Carrier[] @relation(name: "carrierUpdatedBy")
+
+  userUpdated     User[] @relation(name: "userUpdatedBy")
+}
+
+model UserLogin {
+  userId                Int  @id
+  user                  User @relation(fields: [userId], references: [id])
+  userName              String
+  password              String
+  lastLoginSuccess      DateTime?
+  lastLoginAttempt      DateTime?
+  lastPasswordChange    DateTime?
+  failedLoginCount      Int     @default(0)
+  requirePasswordChange Boolean @default(false)
 }
 
 model Region {
@@ -127,7 +142,7 @@ model Site {
   createdAt        DateTime @default(now())
   createdById      Int?
   createdBy        User? @relation(name: "siteCreatedBy", fields: [createdById], references: [id])
-  updatedAt        DateTime @updatedAt
+  updatedAt        DateTime? @updatedAt
   updatedById      Int?
   updatedBy        User? @relation(name: "siteUpdatedBy", fields: [updatedById], references: [id])
 
@@ -197,7 +212,7 @@ model Bts {
   createdAt         DateTime @default(now())
   createdById       Int?
   createdBy         User? @relation(name: "btsCreatedBy", fields: [createdById], references: [id])
-  updatedAt         DateTime @updatedAt
+  updatedAt         DateTime? @updatedAt
   updatedById       Int?
   updatedBy         User? @relation(name: "btsUpdatedBy", fields: [updatedById], references: [id])
 
@@ -235,7 +250,7 @@ model Sector {
   createdAt      DateTime @default(now())
   createdById    Int?
   createdBy      User? @relation(name: "sectorCreatedBy", fields: [createdById], references: [id])
-  updatedAt      DateTime @updatedAt
+  updatedAt      DateTime? @updatedAt
   updatedById    Int?
   updatedBy      User? @relation(name: "sectorUpdatedBy", fields: [updatedById], references: [id])
 
@@ -279,7 +294,7 @@ model Carrier {
   createdAt      DateTime @default(now())
   createdById    Int?
   createdBy      User? @relation(name: "carrierCreatedBy", fields: [createdById], references: [id])
-  updatedAt      DateTime @updatedAt
+  updatedAt      DateTime? @updatedAt
   updatedById    Int?
   updatedBy      User? @relation(name: "carrierUpdatedBy", fields: [updatedById], references: [id])
 

@@ -1,31 +1,18 @@
 services:
-  postgres:
-    image: postgres:16.3-bookworm
-    # environment:
-    #   - POSTGRES_USER=
-    #   - POSTGRESS_PASSWORD=
-    env_file:
-      - ./secrets/pgsql.env
+  mysqldb:
+    build: mysql
     volumes:
-      - postgres:/var/lib/postgresql/data
-    ports: 
-      - "5432:5432"
+      - falcon-mysqldb-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    # environment:
+    #   - MYSQL_ROOT_PASSWORD=
+    #   - MYSQL_USER=
+    #   - MYSQL_PASSWORD=
+    env_file:
+      - secrets/mysql.env
+    command: --pid-file /app/mysqld.pid
     restart: unless-stopped
-
-  # mysqldb:
-  #   build: mysql
-  #   volumes:
-  #     - falcon-mysqldb-data:/var/lib/mysql
-  #   ports:
-  #     - "3306:3306"
-  #   # environment:
-  #   #   - MYSQL_ROOT_PASSWORD=
-  #   #   - MYSQL_USER=
-  #   #   - MYSQL_PASSWORD=
-  #   env_file:
-  #     - secrets/mysql.env
-  #   command: --pid-file /app/mysqld.pid
-  #   restart: unless-stopped
 
   # cache:
   #   image: redis:alpine
