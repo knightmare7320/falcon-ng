@@ -131,18 +131,18 @@ model Site {
   county           String
   latitude         Float
   longitude        Float
-  elevation        Float
+  elevation        Float?
   structureTypeId  Int
   structureType    StructureType @relation(fields: [structureTypeId], references: [id])
   repairPriorityId Int
   repairPriority   RepairPriority @relation(fields: [repairPriorityId], references: [id])
-  timezoneId       Int
-  timezone         Timezone @relation(fields: [timezoneId], references: [id])
+  timezoneId       Int?
+  timezone         Timezone? @relation(fields: [timezoneId], references: [id])
   orgClusterId     Int
   orgCluster       OrgCluster @relation(fields: [orgClusterId], references: [id])
   createdAt        DateTime @default(now())
-  createdById      Int?
-  createdBy        User? @relation(name: "siteCreatedBy", fields: [createdById], references: [id])
+  createdById      Int
+  createdBy        User @relation(name: "siteCreatedBy", fields: [createdById], references: [id])
   updatedAt        DateTime? @updatedAt
   updatedById      Int?
   updatedBy        User? @relation(name: "siteUpdatedBy", fields: [updatedById], references: [id])
@@ -172,11 +172,22 @@ model EquipmentVendor {
 
 model EquipmentModel {
   id                 Int    @id @default(autoincrement())
-  name               String @unique
   equipmentVendorId  Int
+  name               String
   equipmentVendor    EquipmentVendor @relation(fields: [equipmentVendorId], references: [id])
 
   btss               Bts[]
+
+  @@unique([equipmentVendorId,name])
+}
+
+model EquipmentStatus {
+  id      Int    @id @default(autoincrement())
+  name    String
+  sortKey Int?
+
+  btss     Bts[]
+  carriers Carrier[]
 }
 
 model Msc {
@@ -211,6 +222,8 @@ model Bts {
   equipmentVendor   EquipmentVendor @relation(fields: [equipmentVendorId], references: [id])
   equipmentModelId  Int
   equipmentModel    EquipmentModel @relation(fields: [equipmentModelId], references: [id])
+  equipmentStatusId Int
+  equipmentStatus   EquipmentStatus @relation(fields: [equipmentStatusId], references: [id])
   onAirDate         DateTime
   createdAt         DateTime @default(now())
   createdById       Int?
@@ -227,11 +240,11 @@ model AntennaModel {
   name               String
   equipmentVendorId  Int
   equipmentVendor    EquipmentVendor @relation(fields: [equipmentVendorId], references: [id])
-  horizontalBw       Float
-  verticalBw         Float
-  gainDbi            Float
-  frontToBackRatio   Float
-  electricalTilt     Float
+  horizontalBw       Float?
+  verticalBw         Float?
+  gainDbi            Float?
+  frontToBackRatio   Float?
+  electricalTilt     Float?
 
   sectors Sector[]
 
@@ -272,12 +285,16 @@ model CarrierType {
   id      Int    @id @default(autoincrement())
   name    String @unique
   sortKey Int?
+
+  carriers Carrier[]
 }
 
 model CarrierDesignation {
   id      Int    @id @default(autoincrement())
   name    String @unique
   sortKey Int?
+
+  carriers Carrier[]
 }
 
 model Channel {
@@ -286,20 +303,20 @@ model Channel {
 }
 
 model Carrier {
-  id      Int    @id @default(autoincrement())
-  btsId Int
-  channelId Int
-  number Int
+  id                   Int    @id @default(autoincrement())
+  btsId                Int
+  channelId            Int
   carrierDesignationId Int
-  carrierTypeId Int
-  statusId Int
-  onAirDate DateTime
-  createdAt      DateTime @default(now())
-  createdById    Int?
-  createdBy      User? @relation(name: "carrierCreatedBy", fields: [createdById], references: [id])
-  updatedAt      DateTime? @updatedAt
-  updatedById    Int?
-  updatedBy      User? @relation(name: "carrierUpdatedBy", fields: [updatedById], references: [id])
-
-  @@unique([btsId, number])
+  carrierDesignation   CarrierDesignation @relation(fields: [carrierDesignationId], references: [id])
+  carrierTypeId        Int
+  carrierType          CarrierType @relation(fields: [carrierTypeId], references: [id])
+  equipmentStatusId    Int
+  equipmentStatus      EquipmentStatus @relation(fields: [equipmentStatusId], references: [id])
+  onAirDate            DateTime?
+  createdAt            DateTime @default(now())
+  createdById          Int?
+  createdBy            User? @relation(name: "carrierCreatedBy", fields: [createdById], references: [id])
+  updatedAt            DateTime? @updatedAt
+  updatedById          Int?
+  updatedBy            User? @relation(name: "carrierUpdatedBy", fields: [updatedById], references: [id])
 }

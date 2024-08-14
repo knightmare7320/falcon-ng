@@ -144,13 +144,13 @@ CREATE TABLE `Site` (
   `county`           varchar(191) NOT NULL,
   `latitude`         double       NOT NULL,
   `longitude`        double       NOT NULL,
-  `elevation`        double       NOT NULL,
+  `elevation`        double       DEFAULT NULL,
   `structureTypeId`  int          NOT NULL,
   `repairPriorityId` int          NOT NULL,
-  `timezoneId`       int          NOT NULL,
+  `timezoneId`       int          DEFAULT NULL,
   `orgClusterId`     int          NOT NULL,
   `createdAt`        datetime(3)  NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-  `createdById`      int          DEFAULT NULL,
+  `createdById`      int          NOT NULL,
   `updatedAt`        datetime(3)  DEFAULT NULL,
   `updatedById`      int          DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -182,23 +182,30 @@ CREATE TABLE `EquipmentVendor` (
 
 CREATE TABLE `EquipmentModel` (
   `id`                int          NOT NULL AUTO_INCREMENT,
-  `name`              varchar(191) NOT NULL,
   `equipmentVendorId` int          NOT NULL,
+  `name`              varchar(191) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `EquipmentModel_name_key` (`name`),
+  UNIQUE KEY `EquipmentModel_equipmentVendorId_name_key` (`equipmentVendorId`,`name`),
   KEY `EquipmentModel_equipmentVendorId_fkey` (`equipmentVendorId`),
   CONSTRAINT `EquipmentModel_equipmentVendorId_fkey` FOREIGN KEY (`equipmentVendorId`) REFERENCES `EquipmentVendor` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+CREATE TABLE `EquipmentStatus` (
+  `id`      int          NOT NULL AUTO_INCREMENT,
+  `name`    varchar(191) NOT NULL,
+  `sortKey` int          DEFAULT NULL,
+  PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `AntennaModel` (
   `id`                int          NOT NULL AUTO_INCREMENT,
   `name`              varchar(191) NOT NULL,
   `equipmentVendorId` int          NOT NULL,
-  `horizontalBw`      double       NOT NULL,
-  `verticalBw`        double       NOT NULL,
-  `gainDbi`           double       NOT NULL,
-  `frontToBackRatio`  double       NOT NULL,
-  `electricalTilt`    double       NOT NULL,
+  `horizontalBw`      double       DEFAULT NULL,
+  `verticalBw`        double       DEFAULT NULL,
+  `gainDbi`           double       DEFAULT NULL,
+  `frontToBackRatio`  double       DEFAULT NULL,
+  `electricalTilt`    double       DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `AntennaModel_equipmentVendorId_name_key` (`equipmentVendorId`,`name`),
   CONSTRAINT `AntennaModel_equipmentVendorId_fkey` FOREIGN KEY (`equipmentVendorId`) REFERENCES `EquipmentVendor` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
@@ -236,6 +243,7 @@ CREATE TABLE `Bts` (
   `number`            int         NOT NULL,
   `equipmentVendorId` int         NOT NULL,
   `equipmentModelId`  int         NOT NULL,
+  `equipmentStatusId` int         NOT NULL,
   `onAirDate`         datetime(3) NOT NULL,
   `createdAt`         datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
   `createdById`       int         DEFAULT NULL,
@@ -246,12 +254,14 @@ CREATE TABLE `Bts` (
   KEY `Bts_siteId_fkey` (`siteId`),
   KEY `Bts_equipmentVendorId_fkey` (`equipmentVendorId`),
   KEY `Bts_equipmentModelId_fkey` (`equipmentModelId`),
+  KEY `Bts_equipmentStatusId_fkey` (`equipmentStatusId`),
   KEY `Bts_createdById_fkey` (`createdById`),
   KEY `Bts_updatedById_fkey` (`updatedById`),
   CONSTRAINT `Bts_bscId_fkey` FOREIGN KEY (`bscId`) REFERENCES `Bsc` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Bts_createdById_fkey` FOREIGN KEY (`createdById`) REFERENCES `User` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `Bts_equipmentModelId_fkey` FOREIGN KEY (`equipmentModelId`) REFERENCES `EquipmentModel` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Bts_equipmentVendorId_fkey` FOREIGN KEY (`equipmentVendorId`) REFERENCES `EquipmentVendor` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `Bts_equipmentStatusId_fkey` FOREIGN KEY (`equipmentStatusId`) REFERENCES `EquipmentStatus` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Bts_siteId_fkey` FOREIGN KEY (`siteId`) REFERENCES `Site` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Bts_updatedById_fkey` FOREIGN KEY (`updatedById`) REFERENCES `User` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 );
@@ -286,19 +296,23 @@ CREATE TABLE `Carrier` (
   `id`                   int         NOT NULL AUTO_INCREMENT,
   `btsId`                int         NOT NULL,
   `channelId`            int         NOT NULL,
-  `number`               int         NOT NULL,
   `carrierDesignationId` int         NOT NULL,
   `carrierTypeId`        int         NOT NULL,
-  `statusId`             int         NOT NULL,
-  `onAirDate`            datetime(3) NOT NULL,
+  `equipmentStatusId`    int         NOT NULL,
+  `onAirDate`            datetime(3) DEFAULT NULL,
   `createdAt`            datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
   `createdById`          int         DEFAULT NULL,
   `updatedAt`            datetime(3) DEFAULT NULL,
   `updatedById`          int         DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `Carrier_btsId_number_key` (`btsId`,`number`),
   KEY `Carrier_createdById_fkey` (`createdById`),
   KEY `Carrier_updatedById_fkey` (`updatedById`),
+  KEY `Carrier_carrierDesignationId_fkey` (`carrierDesignationId`),
+  KEY `Carrier_carrierTypeId_fkey` (`carrierTypeId`),
+  KEY `Carrier_equipmentStatusId_fkey` (`equipmentStatusId`),
+  CONSTRAINT `Carrier_carrierDesignationId_fkey` FOREIGN KEY (`carrierDesignationId`) REFERENCES `CarrierDesignation` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `Carrier_carrierTypeId_fkey` FOREIGN KEY (`carrierTypeId`) REFERENCES `CarrierType` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Carrier_createdById_fkey` FOREIGN KEY (`createdById`) REFERENCES `User` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `Carrier_equipmentStatusId_fkey` FOREIGN KEY (`equipmentStatusId`) REFERENCES `EquipmentStatus` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Carrier_updatedById_fkey` FOREIGN KEY (`updatedById`) REFERENCES `User` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-);
+)
