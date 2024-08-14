@@ -10,12 +10,29 @@ const regionsPlugin = {
       {
         method: 'GET',
         path: '/regions',
-        handler: getRegionsHandler,        
+        handler: getRegionsHandler, 
+      }
+    ])
+
+    server.route([
+      {
+        method: 'GET',
+        path: '/region/{regionId}',
+        handler: getRegionsDetailHandler,   
+        options: {
+          validate: {
+            params: Joi.object({
+              regionId: Joi.number().integer(),
+            }),
+            failAction: (request, h, err) => {
+              return Boom.badRequest('request requires regionId')
+            }
+          }
+        }            
       }
     ])
   }
 }
-
 export default regionsPlugin
 
 
@@ -28,5 +45,29 @@ async function getRegionsHandler(request: Hapi.Request, h: Hapi.ResponseToolkit)
   } catch (err) {
     console.log(err)
     return Boom.badImplementation('Failed to get regions')
+  }
+}
+
+async function getRegionsDetailHandler(request: Hapi.Request, h: Hapi.ResponseToolkit) {
+  const { prisma } = request.server.app
+  const regionId = parseInt(request.params.regionId, 10)
+
+  try {
+    const region = await prisma.region.findUnique({
+      where: {
+        id: regionId,
+      },
+      include: {
+        l4Markets: true,
+      },
+    })
+    if (!region) {
+      return h.response().code(404)
+    } else {
+      return h.response(region).code(200)
+    }
+  } catch (err) {
+    console.log(err)
+    return Boom.badImplementation('Failed to get region')
   }
 }
