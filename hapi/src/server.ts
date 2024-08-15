@@ -4,6 +4,7 @@ import statusPlugin from './plugins/status'
 import prismaPlugin from './plugins/prisma'
 import regionsPlugin from './plugins/regions'
 import l4MarketsPlugin from './plugins/l4Markets'
+import l5MarketsPlugin from './plugins/l5Markets'
 
 const server: Hapi.Server = Hapi.server({
   port: process.env.PORT || 8000,
@@ -16,6 +17,7 @@ export async function createServer(): Promise<Hapi.Server> {
     prismaPlugin,
     regionsPlugin,
     l4MarketsPlugin,
+    l5MarketsPlugin,
   ])
   await server.initialize()
 
