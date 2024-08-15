@@ -6,7 +6,7 @@ import regionsPlugin from './plugins/regions'
 import l4MarketsPlugin from './plugins/l4Markets'
 
 const server: Hapi.Server = Hapi.server({
-  port: process.env.PORT || 3000,
+  port: process.env.PORT || 8000,
   host: process.env.HOST || 'localhost',
 })
 

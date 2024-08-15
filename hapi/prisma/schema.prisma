@@ -224,10 +224,10 @@ model Bts {
   equipmentModel    EquipmentModel @relation(fields: [equipmentModelId], references: [id])
   equipmentStatusId Int
   equipmentStatus   EquipmentStatus @relation(fields: [equipmentStatusId], references: [id])
-  onAirDate         DateTime
+  onAirDate         DateTime?
   createdAt         DateTime @default(now())
-  createdById       Int?
-  createdBy         User? @relation(name: "btsCreatedBy", fields: [createdById], references: [id])
+  createdById       Int
+  createdBy         User @relation(name: "btsCreatedBy", fields: [createdById], references: [id])
   updatedAt         DateTime? @updatedAt
   updatedById       Int?
   updatedBy         User? @relation(name: "btsUpdatedBy", fields: [updatedById], references: [id])
@@ -264,8 +264,8 @@ model Sector {
   sectorCoverageTypeId Int
   sectorCoverageType   SectorCoverageType @relation(fields: [sectorCoverageTypeId], references: [id])
   createdAt      DateTime @default(now())
-  createdById    Int?
-  createdBy      User? @relation(name: "sectorCreatedBy", fields: [createdById], references: [id])
+  createdById    Int
+  createdBy      User @relation(name: "sectorCreatedBy", fields: [createdById], references: [id])
   updatedAt      DateTime? @updatedAt
   updatedById    Int?
   updatedBy      User? @relation(name: "sectorUpdatedBy", fields: [updatedById], references: [id])
@@ -314,8 +314,8 @@ model Carrier {
   equipmentStatus      EquipmentStatus @relation(fields: [equipmentStatusId], references: [id])
   onAirDate            DateTime?
   createdAt            DateTime @default(now())
-  createdById          Int?
-  createdBy            User? @relation(name: "carrierCreatedBy", fields: [createdById], references: [id])
+  createdById          Int
+  createdBy            User @relation(name: "carrierCreatedBy", fields: [createdById], references: [id])
   updatedAt            DateTime? @updatedAt
   updatedById          Int?
   updatedBy            User? @relation(name: "carrierUpdatedBy", fields: [updatedById], references: [id])
