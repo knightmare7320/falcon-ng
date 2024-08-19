@@ -1,10 +1,11 @@
 import Hapi from '@hapi/hapi'
 
-import statusPlugin from './plugins/status'
-import prismaPlugin from './plugins/prisma'
-import regionsPlugin from './plugins/regions'
-import l4MarketsPlugin from './plugins/l4Markets'
-import l5MarketsPlugin from './plugins/l5Markets'
+import statusRoutes from './routes/status'
+import prismaPlugin from './handlers/prisma'
+import regionsRoutes from './routes/regions'
+import l4MarketsRoutes from './routes/l4Markets'
+import l5MarketsRoutes from './routes/l5Markets'
+import orgClustersRoutes from './routes/orgClusters'
 
 const server: Hapi.Server = Hapi.server({
   port: process.env.PORT || 8000,
@@ -13,11 +14,12 @@ const server: Hapi.Server = Hapi.server({
 
 export async function createServer(): Promise<Hapi.Server> {
   await server.register([
-    statusPlugin,
     prismaPlugin,
-    regionsPlugin,
-    l4MarketsPlugin,
-    l5MarketsPlugin,
+    statusRoutes,
+    regionsRoutes,
+    l4MarketsRoutes,
+    l5MarketsRoutes,
+    orgClustersRoutes,
   ])
   await server.initialize()
 

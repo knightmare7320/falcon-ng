@@ -167,7 +167,7 @@ CREATE TABLE `Site` (
   CONSTRAINT `Site_repairPriorityId_fkey` FOREIGN KEY (`repairPriorityId`) REFERENCES `RepairPriority` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Site_siteTypeId_fkey` FOREIGN KEY (`siteTypeId`) REFERENCES `SiteType` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Site_structureTypeId_fkey` FOREIGN KEY (`structureTypeId`) REFERENCES `StructureType` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `Site_timezoneId_fkey` FOREIGN KEY (`timezoneId`) REFERENCES `Timezone` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `Site_timezoneId_fkey` FOREIGN KEY (`timezoneId`) REFERENCES `Timezone` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `Site_updatedById_fkey` FOREIGN KEY (`updatedById`) REFERENCES `User` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
@@ -186,7 +186,6 @@ CREATE TABLE `EquipmentModel` (
   `name`              varchar(191) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `EquipmentModel_equipmentVendorId_name_key` (`equipmentVendorId`,`name`),
-  KEY `EquipmentModel_equipmentVendorId_fkey` (`equipmentVendorId`),
   CONSTRAINT `EquipmentModel_equipmentVendorId_fkey` FOREIGN KEY (`equipmentVendorId`) REFERENCES `EquipmentVendor` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
@@ -315,4 +314,16 @@ CREATE TABLE `Carrier` (
   CONSTRAINT `Carrier_createdById_fkey` FOREIGN KEY (`createdById`) REFERENCES `User` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Carrier_equipmentStatusId_fkey` FOREIGN KEY (`equipmentStatusId`) REFERENCES `EquipmentStatus` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Carrier_updatedById_fkey` FOREIGN KEY (`updatedById`) REFERENCES `User` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-)
+);
+
+CREATE TABLE `_prisma_migrations` (
+  `id`                  varchar(36)  NOT NULL,
+  `checksum`            varchar(64)  NOT NULL,
+  `finished_at`         datetime(3)  DEFAULT NULL,
+  `migration_name`      varchar(255) NOT NULL,
+  `logs`                text,
+  `rolled_back_at`      datetime(3)  DEFAULT NULL,
+  `started_at`          datetime(3)  NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  `applied_steps_count` int unsigned NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+);
