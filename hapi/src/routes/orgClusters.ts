@@ -6,7 +6,7 @@ import { getOrgClusterHandler, getOrgClustersHandler } from '../handlers/orgClus
 
 const pagingSchema = Joi.object({
   orderBy: Joi.string().default('name'),
-  orderDir: Joi.string().uppercase().valid('ASC','DESC').default('ASC'),
+  orderDir: Joi.string().lowercase().valid('asc','desc').default('asc'),
   pageSize: Joi.number().integer().min(1).default(10),
   pageNumber: Joi.number().integer().min(1).default(1),
   filterString: Joi.string().default(null),

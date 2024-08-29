@@ -1,5 +1,6 @@
 CREATE DATABASE falcon;
-USE falcon;
+CREATE DATABASE falcon_owner;
+USE falcon_owner;
 
 CREATE TABLE `Timezone` (
   `id`      int          NOT NULL,
@@ -8,6 +9,7 @@ CREATE TABLE `Timezone` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `Timezone_name_key` (`name`)
 );
+GRANT SELECT ON `Timezone` TO falcon;
 
 CREATE TABLE `Technology` (
   `id`      int          NOT NULL AUTO_INCREMENT,
