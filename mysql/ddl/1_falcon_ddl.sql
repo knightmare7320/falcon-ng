@@ -1,6 +1,7 @@
-CREATE DATABASE falcon;
-CREATE DATABASE falcon_owner;
-USE falcon_owner;
+CREATE DATABASE FalconCode;
+CREATE DATABASE FalconData;
+
+USE FalconData;
 
 CREATE TABLE `Timezone` (
   `id`      int          NOT NULL,
