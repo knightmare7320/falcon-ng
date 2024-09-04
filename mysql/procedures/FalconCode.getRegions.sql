@@ -4,10 +4,10 @@ DELIMITER $$
 $$
 CREATE PROCEDURE FalconCode.getRegions()
 BEGIN
-   select   `id` 
-          , `name`
+   select   id 
+          , name
    from     FalconData.Region
-   order by `name`;
+   order by name;
 END
 $$
 DELIMITER ;

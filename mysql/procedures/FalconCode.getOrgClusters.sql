@@ -8,12 +8,12 @@ CREATE PROCEDURE FalconCode.getOrgClusters (
 BEGIN
    SET in_L5_MARKET_ID = IFNULL(in_L5_MARKET_ID, -1);
 
-   select   `id`
-          , `name`
-          , `l5MarketId`
+   select   id
+          , name
+          , l5MarketId
    from     FalconData.OrgCluster 
    where    in_L5_MARKET_ID = -1 OR l5MarketId = in_L5_MARKET_ID
-   order by `name`;
+   order by name;
 END
 $$
 DELIMITER ;

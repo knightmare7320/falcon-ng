@@ -8,12 +8,12 @@ CREATE PROCEDURE FalconCode.getL4Markets(
 BEGIN
    SET in_REGION_ID = IFNULL(in_REGION_ID, -1);
 
-   select   `id` 
-          , `name`
-          , `regionId`
+   select   id
+          , name
+          , regionId
    from     FalconData.L4Market 
    where    in_REGION_ID = -1 OR regionId = in_REGION_ID
-   order by `name`;
+   order by name;
 END
 $$
 DELIMITER ;

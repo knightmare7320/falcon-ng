@@ -1,8 +1,8 @@
-DROP PROCEDURE IF EXISTS gui.get_l4_markets_perf;
+DROP PROCEDURE IF EXISTS FalconCode.getL4MarketsPerf;
 
 DELIMITER $$
 $$
-CREATE PROCEDURE gui.get_l4_markets_perf (
+CREATE PROCEDURE FalconCode.getL4MarketsPerf (
    IN in_REGION_ID   INT,
    IN in_FILTER_STR  VARCHAR(50),
    IN in_ORDER_BY    VARCHAR(50),
@@ -22,35 +22,34 @@ BEGIN
    SET in_FILTER_STR = lower(coalesce(trim(in_FILTER_STR), ''));
 
    
-   SELECT   a.region_id   group_id
-          , a.region_name group_name
-          , count(b.l4_market_id) total_row_count
-   FROM     locations.regions a 
-            LEFT JOIN locations.l4_markets b 
-                   ON a.region_id = b.region_id
-   WHERE    a.REGION_ID = in_REGION_ID
-   AND      lower(b.l4_market_name) like CONCAT('%', in_FILTER_STR, '%')
-   GROUP BY a.region_id
-          , a.region_name;
+   SELECT   a.id   regionId
+          , a.name regionName
+          , count(b.id) totalRowCount
+   FROM     FalconData.Region a 
+            LEFT JOIN FalconData.L4Market b ON a.id = b.regionId
+   WHERE    a.id = in_REGION_ID
+   AND      lower(b.name) like CONCAT('%', in_FILTER_STR, '%')
+   GROUP BY a.id
+          , a.name;
      
-   SELECT   l4_market_id
-          , l4_market_name 
+   SELECT   id
+          , name 
           , null setup_attempts
           , null primary_blocks
           , null access_failures
           , null successul_calls
           , null primary_drops
           , null primary_erlangs
-   FROM     locations.l4_markets 
-   WHERE    region_id = in_REGION_ID
-   AND      lower(l4_market_name) like CONCAT('%', in_FILTER_STR, '%')
+   FROM     FalconData.L4Market 
+   WHERE    regionId = in_REGION_ID
+   AND      lower(name) like CONCAT('%', in_FILTER_STR, '%')
 
-   ORDER BY case when in_ORDER_BY = 'name' and in_ORDER_DIR = 'asc'  then l4_market_name end asc 
-          , case when in_ORDER_BY = 'name' and in_ORDER_DIR = 'desc' then l4_market_name end desc
-          , l4_market_name ASC
+   ORDER BY case when in_ORDER_BY = 'name' and in_ORDER_DIR = 'asc'  then name end asc 
+          , case when in_ORDER_BY = 'name' and in_ORDER_DIR = 'desc' then name end desc
+          , name ASC
    LIMIT    in_PAGE_SIZE offset v_OFFSET;
 END 
 $$
 DELIMITER ;
 
-GRANT EXECUTE ON PROCEDURE gui.get_l4_markets_perf TO falcon;
+GRANT EXECUTE ON PROCEDURE FalconCode.getL4MarketsPerf TO falcon;

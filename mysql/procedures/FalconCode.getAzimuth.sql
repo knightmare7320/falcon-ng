@@ -11,7 +11,7 @@ CREATE FUNCTION FalconCode.getAzimuth(
     COMMENT 'Returns the initial bearing, in degrees, to follow the great circle route
              from point (lat1,lon1), to point (lat2,lon2)'
     BEGIN
-
+  
     RETURN (360.0 + 
       DEGREES(ATAN2(
        SIN(RADIANS(lon2-lon1))*COS(RADIANS(lat2)),
