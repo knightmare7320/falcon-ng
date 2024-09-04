@@ -16,7 +16,7 @@ BEGIN
    SET in_SEARCH_STR = lower(coalesce(trim(in_SEARCH_STR), ''));  
 
 
-   SELECT   count(distinct cascadeCode) total_row_count 
+   SELECT   count(distinct cascadeCode) totalRowCount 
    FROM     FalconData.Site
    WHERE    cascadeCode                    LIKE concat('%', in_SEARCH_STR, '%')
    OR       LOWER(name)                    LIKE concat('%', in_SEARCH_STR, '%')

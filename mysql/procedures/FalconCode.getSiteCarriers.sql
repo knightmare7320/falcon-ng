@@ -6,7 +6,7 @@ CREATE PROCEDURE FalconCode.getSiteCarriers(
    IN in_CASCADE_CODE VARCHAR(20)
 )
 BEGIN
-   select c.id 
+   select c.id carrierId
         , c.btsId 
         , c.channelId 
         , ch.number channelNumber

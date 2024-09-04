@@ -6,7 +6,7 @@ CREATE PROCEDURE FalconCode.getOrgClusterSites(
    IN in_ORG_CLUSTER_ID   INT
 )
 BEGIN 
-   SELECT   id
+   SELECT   id  siteId
           , cascadeCode  
    FROM     FalconData.Site
    where    orgClusterId = in_ORG_CLUSTER_ID

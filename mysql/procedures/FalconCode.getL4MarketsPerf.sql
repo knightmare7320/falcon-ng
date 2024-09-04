@@ -1,8 +1,9 @@
-DROP PROCEDURE IF EXISTS FalconCode.getRegionsPerf;
+DROP PROCEDURE IF EXISTS FalconCode.getL4MarketsPerf;
 
 DELIMITER $$
 $$
-CREATE PROCEDURE FalconCode.getRegionsPerf (
+CREATE PROCEDURE FalconCode.getL4MarketsPerf (
+   IN in_REGION_ID   INT,
    IN in_FILTER_STR  VARCHAR(50),
    IN in_ORDER_BY    VARCHAR(50),
    IN in_ORDER_DIR   VARCHAR(10),
@@ -20,23 +21,28 @@ BEGIN
 
    SET in_FILTER_STR = lower(coalesce(trim(in_FILTER_STR), ''));
 
-
-   SELECT   count(id) totalRowCount
-   FROM     FalconData.Region
-   WHERE    lower(name) like CONCAT('%', in_FILTER_STR, '%');
-  
    
-   SELECT   id
-          , name 
+   SELECT   a.id   regionId
+          , a.name regionName
+          , count(b.id) totalRowCount
+   FROM     FalconData.Region a 
+            LEFT JOIN FalconData.L4Market b ON a.id = b.regionId
+   WHERE    a.id = in_REGION_ID
+   AND      lower(b.name) like CONCAT('%', in_FILTER_STR, '%')
+   GROUP BY a.id
+          , a.name;
+     
+   SELECT   id   mscId
+          , name mscName
           , null setupAttempts
           , null primaryBlocks
           , null accessFailures
           , null successulCalls
           , null primaryDrops
           , null primaryErlangs
-   FROM     FalconData.Region 
-   WHERE    lower(name) like CONCAT('%', in_FILTER_STR, '%')
-
+   FROM     FalconData.L4Market 
+   WHERE    regionId = in_REGION_ID
+   AND      lower(name) like CONCAT('%', in_FILTER_STR, '%')
    ORDER BY case when in_ORDER_BY = 'name' and in_ORDER_DIR = 'asc'  then name end asc 
           , case when in_ORDER_BY = 'name' and in_ORDER_DIR = 'desc' then name end desc
           , name ASC
@@ -45,4 +51,4 @@ END
 $$
 DELIMITER ;
 
-GRANT EXECUTE ON PROCEDURE FalconCode.getRegionsPerf TO falcon;
+GRANT EXECUTE ON PROCEDURE FalconCode.getL4MarketsPerf TO falcon;

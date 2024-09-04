@@ -4,8 +4,8 @@ DELIMITER $$
 $$
 CREATE PROCEDURE FalconCode.getRepairPriorities()
 BEGIN
-   SELECT   id
-          , name
+   SELECT   id   repairPriorityId
+          , name repairPriorityName
    FROM     FalconData.RepairPriority
    ORDER BY sortKey
           , name ;

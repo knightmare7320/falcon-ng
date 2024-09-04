@@ -8,8 +8,8 @@ CREATE PROCEDURE FalconCode.getL5Markets(
 BEGIN
    SET in_L4_MARKET_ID = IFNULL(in_L4_MARKET_ID, -1);
    
-   select   id
-          , name
+   select   id         l5MarketId
+          , name       l5MarketName
           , l4MarketId
    from     FalconData.L5Market 
    where    in_L4_MARKET_ID = -1 OR l4MarketId = in_L4_MARKET_ID

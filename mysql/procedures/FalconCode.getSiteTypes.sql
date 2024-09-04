@@ -4,8 +4,8 @@ DELIMITER $$
 $$
 CREATE PROCEDURE FalconCode.getSiteTypes()
 BEGIN
-   SELECT   id
-          , name
+   SELECT   id siteTypeId
+          , name siteTypeName
    FROM     FalconData.SiteType 
    ORDER BY sortKey
           , name;

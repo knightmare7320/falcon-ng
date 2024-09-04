@@ -6,7 +6,7 @@ CREATE PROCEDURE FalconCode.getSiteBts(
    IN in_CASCADE_CODE VARCHAR(20)
 )
 BEGIN   
-   select b.id
+   select b.id btsId
         , bs.mscId
         , ms.name switchName 
         , ms.clliCode 

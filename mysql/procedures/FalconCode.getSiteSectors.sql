@@ -6,7 +6,7 @@ CREATE PROCEDURE FalconCode.getSiteSectors(
    IN in_CASCADE_CODE VARCHAR(20)
 )
 BEGIN
-   select se.id
+   select se.id sectorId
         , se.number 
         , se.azimuth 
         , se.heightAgl 

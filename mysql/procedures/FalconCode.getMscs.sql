@@ -8,8 +8,8 @@ CREATE PROCEDURE FalconCode.getMscs(
 BEGIN
    SET in_EQUIPMENT_VENDOR_ID = IFNULL(in_EQUIPMENT_VENDOR_ID, -1);
 
-   select   sw.id
-          , sw.name 
+   select   sw.id   mscId
+          , sw.name mscName
           , sw.equipmentVendorId
           , v.name equipmentVendorName
    from     FalconData.Msc sw

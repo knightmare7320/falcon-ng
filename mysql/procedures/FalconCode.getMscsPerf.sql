@@ -23,22 +23,22 @@ BEGIN
    SET in_FILTER_STR = lower(coalesce(trim(in_FILTER_STR), ''));  
 
 
-   SELECT   count(*) total_row_count
+   SELECT   count(*) totalRowCount
    FROM     FalconData.Msc
    WHERE    (in_EQUIPMENT_VENDOR_ID = -1 OR equipmentVendorId  = in_EQUIPMENT_VENDOR_ID)
    AND      lower(name) like CONCAT('%', in_FILTER_STR, '%');
   
    
-   SELECT   sw.id
-          , sw.name 
-          , v.id equipmentVendorId
-          , v.name equipmentVendorName
-          , null setup_attempts
-          , null primary_blocks
-          , null access_failures
-          , null successul_calls
-          , null primary_drops
-          , null primary_erlangs
+   SELECT   sw.id   mscId
+          , sw.name mscName
+          , v.id    equipmentVendorId
+          , v.name  equipmentVendorName
+          , null    setupAttempts
+          , null    primaryBlocks
+          , null    accessFailures
+          , null    successulCalls
+          , null    primaryDrops
+          , null    primaryErlangs
    FROM     FalconData.Msc sw
           , FalconData.EquipmentVendor v
    WHERE    sw.equipmentVendorId = v.id

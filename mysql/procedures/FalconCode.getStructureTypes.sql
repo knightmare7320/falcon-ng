@@ -4,8 +4,8 @@ DELIMITER $$
 $$
 CREATE PROCEDURE FalconCode.getStructureTypes()
 BEGIN
-   SELECT   id
-          , name
+   SELECT   id structureTypeId
+          , name structureTypeName
    FROM     FalconData.StructureType
    ORDER BY sortKey
           , name ;

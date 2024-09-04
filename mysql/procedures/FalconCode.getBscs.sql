@@ -11,8 +11,8 @@ BEGIN
    SET in_MSC_ID = IFNULL(in_MSC_ID, -1);
 
    select   b.mscId
-          , b.id
-          , b.name 
+          , b.id bscId
+          , b.name bscName
           , b.equipmentVendorId
           , v.name equipmentVendorName
    from     FalconData.Bsc b

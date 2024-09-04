@@ -8,8 +8,8 @@ CREATE PROCEDURE FalconCode.getOrgClusters (
 BEGIN
    SET in_L5_MARKET_ID = IFNULL(in_L5_MARKET_ID, -1);
 
-   select   id
-          , name
+   select   id   orgClusterId
+          , name orgClusterName
           , l5MarketId
    from     FalconData.OrgCluster 
    where    in_L5_MARKET_ID = -1 OR l5MarketId = in_L5_MARKET_ID

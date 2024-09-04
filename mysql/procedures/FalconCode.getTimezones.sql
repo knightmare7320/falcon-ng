@@ -4,8 +4,8 @@ DELIMITER $$
 $$
 CREATE PROCEDURE FalconCode.getTimezones()
 BEGIN
-   SELECT   id
-          , name
+   SELECT   id timezoneId
+          , name timezoneName
    FROM     FalconData.Timezone
    ORDER BY sortKey
           , name ;

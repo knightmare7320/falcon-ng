@@ -6,9 +6,9 @@ CREATE PROCEDURE FalconCode.getSite(
    IN in_CASCADE_CODE VARCHAR(20)
 )
 BEGIN
-   select s.id
+   select s.id siteId
         , s.cascadeCode 
-        , s.name 
+        , s.name siteName
         , s.siteTypeId
         , st.name            siteTypeName 
         , s.address

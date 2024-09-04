@@ -25,7 +25,8 @@ BEGIN
    SET in_FILTER_STR = lower(coalesce(trim(in_FILTER_STR), ''));  
 
 
-   SELECT   a.name
+   SELECT   a.id        mscId
+          , a.name      mscName
           , count(b.id) totalRowCount
    FROM     FalconData.Msc a 
             LEFT JOIN FalconData.Bsc b ON a.id = b.mscId
@@ -34,21 +35,20 @@ BEGIN
    AND      (in_EQUIPMENT_VENDOR_ID = -1 OR b.equipmentVendorId  = in_EQUIPMENT_VENDOR_ID)
    GROUP BY a.name;  
    
-   SELECT   b.mscId
-          , b.id
-          , b.name 
-          , v.id equipmentVendorId
+   SELECT   b.id   bscId
+          , b.name bscName
+          , v.id   equipmentVendorId
           , v.name equipmentVendorName
-          , null setupAttempts
-          , null primaryBlocks
-          , null accessFailures
-          , null successulCalls
-          , null primaryDrops
-          , null primaryErlangs
+          , null   setupAttempts
+          , null   primaryBlocks
+          , null   accessFailures
+          , null   successulCalls
+          , null   primaryDrops
+          , null   primaryErlangs
    FROM     FalconData.Bsc b
           , FalconData.EquipmentVendor v
    WHERE    b.equipmentVendorId = v.id
-   AND      (in_MSC_ID = -1           OR b.id            = in_MSC_ID)
+   AND      (in_MSC_ID = -1              OR b.mscId  = in_MSC_ID)
    AND      (in_EQUIPMENT_VENDOR_ID = -1 OR v.id  = in_EQUIPMENT_VENDOR_ID)
    AND      lower(b.name) like CONCAT('%', in_FILTER_STR, '%')
 

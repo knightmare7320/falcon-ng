@@ -8,8 +8,8 @@ CREATE PROCEDURE FalconCode.getL4Markets(
 BEGIN
    SET in_REGION_ID = IFNULL(in_REGION_ID, -1);
 
-   select   id
-          , name
+   select   id   l4MarketId
+          , name l4MarketName
           , regionId
    from     FalconData.L4Market 
    where    in_REGION_ID = -1 OR regionId = in_REGION_ID
