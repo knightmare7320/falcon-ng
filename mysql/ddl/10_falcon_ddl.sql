@@ -243,7 +243,6 @@ CREATE TABLE `Bts` (
   `siteId`            int         NOT NULL,
   `bscId`             int         NOT NULL,
   `number`            int         NOT NULL,
-  `equipmentVendorId` int         NOT NULL,
   `equipmentModelId`  int         NOT NULL,
   `equipmentStatusId` int         NOT NULL,
   `onAirDate`         datetime(3) DEFAULT NULL,
@@ -254,7 +253,6 @@ CREATE TABLE `Bts` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `Bts_bscId_number_key` (`bscId`,`number`),
   KEY `Bts_siteId_fkey` (`siteId`),
-  KEY `Bts_equipmentVendorId_fkey` (`equipmentVendorId`),
   KEY `Bts_equipmentModelId_fkey` (`equipmentModelId`),
   KEY `Bts_equipmentStatusId_fkey` (`equipmentStatusId`),
   KEY `Bts_createdById_fkey` (`createdById`),
@@ -262,7 +260,6 @@ CREATE TABLE `Bts` (
   CONSTRAINT `Bts_bscId_fkey` FOREIGN KEY (`bscId`) REFERENCES `Bsc` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Bts_createdById_fkey` FOREIGN KEY (`createdById`) REFERENCES `User` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Bts_equipmentModelId_fkey` FOREIGN KEY (`equipmentModelId`) REFERENCES `EquipmentModel` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `Bts_equipmentVendorId_fkey` FOREIGN KEY (`equipmentVendorId`) REFERENCES `EquipmentVendor` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Bts_equipmentStatusId_fkey` FOREIGN KEY (`equipmentStatusId`) REFERENCES `EquipmentStatus` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Bts_siteId_fkey` FOREIGN KEY (`siteId`) REFERENCES `Site` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Bts_updatedById_fkey` FOREIGN KEY (`updatedById`) REFERENCES `User` (`id`) ON DELETE SET NULL ON UPDATE CASCADE

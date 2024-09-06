@@ -24,7 +24,7 @@ describe('l4Markets endpoints', () => {
     expect(l4Markets[0]?.id).toBeTruthy()
   })
 
-  test('get l4Markets fails with inavlid id', async () => {
+  test('get l4Markets fails with invalid id', async () => {
     const response = await server.inject({
       method: 'GET',
       url: '/l4Markets/dog',

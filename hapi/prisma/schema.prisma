@@ -166,7 +166,6 @@ model EquipmentVendor {
   equipmentModels EquipmentModel[]
   mscs            Msc[]
   bscs            Bsc[]
-  btss            Bts[]
   antennas        AntennaModel[]
 }
 
@@ -218,8 +217,6 @@ model Bts {
   bscId             Int
   bsc               Bsc @relation(fields: [bscId], references: [id])
   number            Int
-  equipmentVendorId Int
-  equipmentVendor   EquipmentVendor @relation(fields: [equipmentVendorId], references: [id])
   equipmentModelId  Int
   equipmentModel    EquipmentModel @relation(fields: [equipmentModelId], references: [id])
   equipmentStatusId Int
