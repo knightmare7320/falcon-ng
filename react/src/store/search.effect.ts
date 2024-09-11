@@ -25,9 +25,9 @@ searchStartListening({
     let response;
     try {
       response = await fetchSearchData({
-        search_string: state.search_string,
-        page_number: state.page_number, 
-        page_size: state.page_size, 
+        searchString: state.searchString,
+        pageNumber: state.pageNumber, 
+        pageSize: state.pageSize, 
       });
     } catch(error) {
       let message = 'Unknown Error';

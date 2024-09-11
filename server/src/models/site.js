@@ -1,8 +1,8 @@
 class Site {
   static get(db, params, result) {
     db.query(
-      'call get_site(?)',
-      [params.cascade_code],
+      'call FalconCode.getSite(?)',
+      [params.cascadeCode],
       function(err, results) {
         if (err) {
           console.error(err);
@@ -15,28 +15,25 @@ class Site {
   }
 
   static update(db, params, result) {
-    const sqlStr = 'call update_site(?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?)';
+    const sqlStr = 'call FalconCode.updateSite(?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?)';
     const sqlParams = [
-      params.site_id,
-      params.cascade_code,
-      params.site_name,
-      params.site_type_id,
-      params.address1,
+      params.siteId,
+      params.cascadeCode,
+      params.siteName,
+      params.siteTypeId,
+      params.address,
       params.city,
       params.state,
-      params.zip_code,
+      params.zipCode,
       params.county,
       params.latitude,
       params.longitude,
-      params.elevation_feet,
-      params.structure_type_id,
-      params.repair_priority_id,
-      params.timezone_id,
-      params.region_id,
-      params.l4_market_id,
-      params.l5_market_id,
-      params.org_cluster_id,
-      params.user_id,
+      params.elevationFeet,
+      params.structureTypeId,
+      params.repairPriorityId,
+      params.timezoneId,
+      params.orgClusterId,
+      params.userId,
     ];
     db.query(
       sqlStr,
@@ -54,8 +51,8 @@ class Site {
 
   static getBts(db, params, result) {
     db.query(
-      'call get_site_bts(?)',
-      [params.cascade_code],
+      'call FalconCode.getSiteBts(?)',
+      [params.cascadeCode],
       function(err, results) {
         if (err) {
           console.error(err);
@@ -69,8 +66,8 @@ class Site {
 
   static getSectors(db, params, result) {
     db.query(
-      'call get_site_sectors(?)',
-      [params.cascade_code],
+      'call FalconCode.getSiteSectors(?)',
+      [params.cascadeCode],
       function(err, results) {
         if (err) {
           console.error(err);
@@ -84,8 +81,8 @@ class Site {
 
   static getCarriers(db, params, result) {
     db.query(
-      'call get_site_carriers(?)',
-      [params.cascade_code],
+      'call FalconCode.getSiteCarriers(?)',
+      [params.cascadeCode],
       function(err, results) {
         if (err) {
           console.error(err);
@@ -99,8 +96,8 @@ class Site {
 
   static getNearest(db, params, result) {
     db.query(
-      'call get_nearest_sites(?)',
-      [params.cascade_code],
+      'call FalconCode.getNearestSites(?)',
+      [params.cascadeCode],
       function(err, results) {
         if (err) {
           console.error(err);
@@ -114,7 +111,7 @@ class Site {
 
    static getSiteTypes(db, result) {
       db.query(
-         'call get_site_types()',
+         'call FalconCode.getSiteTypes()',
          function(err, results) {
             if (err) {
                console.error(err);
@@ -127,7 +124,7 @@ class Site {
    }
    static getStructureTypes(db, result) {
       db.query(
-         'call get_structure_types()',
+         'call FalconCode.getStructureTypes()',
          function(err, results) {
             if (err) {
                console.error(err);
@@ -140,7 +137,7 @@ class Site {
    }
    static getRepairPriorities(db, result) {
       db.query(
-        'call get_repair_priorities()',
+        'call FalconCode.getRepairPriorities()',
         function(err, results) {
           if (err) {
             console.error(err);
@@ -153,7 +150,7 @@ class Site {
    }
    static getTimezones(db, result) {
       db.query(
-         'call get_timezones()',
+         'call FalconCode.getTimezones()',
          function(err, results) {
             if (err) {
                console.error(err);

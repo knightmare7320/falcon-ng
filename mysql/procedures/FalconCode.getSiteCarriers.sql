@@ -19,9 +19,9 @@ BEGIN
         , es.name equipmentStatusName
         , c.onAirDate 
         , TRIM(CONCAT(coalesce(uc.firstName,''), ' ', uc.lastName)) createdBy
-        , c.createdAt 
-        , TRIM(CONCAT(coalesce(uu.firstName,''), ' ', uu.lastName)) updateBy
-        , c.updatedAt 
+        , c.createDate 
+        , TRIM(CONCAT(coalesce(uu.firstName,''), ' ', uu.lastName)) modifiedBy
+        , c.modifiedDate 
    from   FalconData.Carrier c
           join FalconData.Bts                b  on b.id  = c.btsId 
           join FalconData.CarrierType        ct on ct.id = c.carrierTypeId 
@@ -30,7 +30,7 @@ BEGIN
           join FalconData.Channel            ch on ch.id = c.channelId
           join FalconData.Site               s  on s.id  = b.siteId 
           join FalconData.User               uc on uc.id = c.createdById 
-          join FalconData.User               uu on uu.id = c.updatedById 
+          join FalconData.User               uu on uu.id = c.modifiedById 
    where  s.cascadeCode            = trim(upper(in_CASCADE_CODE))
    order by c.btsId, cd.sortKey;
 END

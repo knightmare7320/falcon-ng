@@ -37,25 +37,21 @@ export const AppRouter = createBrowserRouter([
             element: <BrowsePage type="region" />,
           },
           {
-            path: "l4_market/:id",
-            element: <BrowsePage type="l4_market" />,
+            path: "l4Market/:id",
+            element: <BrowsePage type="l4Market" />,
           },
           {
-            path: "l5_market/:id",
-            element: <BrowsePage type="l5_market" />,
+            path: "l5Market/:id",
+            element: <BrowsePage type="l5Market" />,
           },
           {
-            path: "cluster/:id",
-            element: <BrowsePage type="cluster" />,
-          },
-          {
-            path: "market99/:id",
-            element: <BrowsePage type="market99" />,
+            path: "orgCluster/:id",
+            element: <BrowsePage type="orgCluster" />,
           },
         ]
       },
       {
-        path: "site/:cascade_code/:tab_name?",
+        path: "site/:cascadeCode/:tabName?",
         element: <SitePage />,
       },
       { 

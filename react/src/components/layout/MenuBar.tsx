@@ -46,7 +46,7 @@ export default function MenuBar() {
           <li>
             { authState.status !== 'ok' ? 
               <button className="loginButton" onClick={handleLogin}>Login</button> :
-              <button className="loginButton" onClick={handleLogout} title={`Logged in as ${authState.full_name}`}>Logout</button>
+              <button className="loginButton" onClick={handleLogout} title={`Logged in as ${authState.fullName}`}>Logout</button>
             }
           </li>
           <li>

@@ -7,7 +7,7 @@ CREATE PROCEDURE FalconCode.getSiteSectors(
 )
 BEGIN
    select se.id sectorId
-        , se.number 
+        , se.number sectorNumber
         , se.azimuth 
         , se.heightAgl 
         , se.mechanicalTilt 
@@ -23,16 +23,16 @@ BEGIN
         , se.sectorCoverageTypeId 
         , sct.name sectorCoverageTypeName 
         , TRIM(CONCAT(coalesce(uc.firstName,''), ' ', uc.lastName)) createdBy
-        , se.createdAt 
-        , TRIM(CONCAT(coalesce(uu.firstName,''), ' ', uu.lastName)) updateBy
-        , se.updatedAt 
+        , se.createDate 
+        , TRIM(CONCAT(coalesce(uu.firstName,''), ' ', uu.lastName)) modifiedBy
+        , se.modifiedDate 
    from   FalconData.Sector se 
           join FalconData.AntennaModel a         on a.id   = se.antennaModelId 
           join FalconData.EquipmentVendor ev     on ev.id  = a.equipmentVendorId
           join FalconData.SectorCoverageType sct on sct.id = se.sectorCoverageTypeId 
           join FalconData.Site s                 on s.id   = se.siteId 
           join FalconData.User uc                on uc.id  = se.createdById 
-          join FalconData.User uu                on uu.id  = se.updatedById 
+          join FalconData.User uu                on uu.id  = se.modifiedById 
    where  s.cascadeCode = upper(trim(in_CASCADE_CODE))
    order by se.number;
 END

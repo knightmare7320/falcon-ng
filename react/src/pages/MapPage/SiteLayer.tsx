@@ -11,10 +11,10 @@ export default function SiteLayer() {
 
   return <LayerGroup>{
     sites.map(site => 
-      <CircleMarker key={site.cascade_code} center={[site.latitude, site.longitude]} radius={4} pathOptions={{color:'white', fillColor: 'green', weight: 1, fillOpacity: 0.9}} eventHandlers={{
-        click: () => {navigate(`/site/${site.cascade_code}`)}
+      <CircleMarker key={site.cascadeCode} center={[site.latitude, site.longitude]} radius={4} pathOptions={{color:'white', fillColor: 'green', weight: 1, fillOpacity: 0.9}} eventHandlers={{
+        click: () => {navigate(`/site/${site.cascadeCode}`)}
       }}>
-        <Tooltip>{site.cascade_code}</Tooltip>
+        <Tooltip>{site.cascadeCode}</Tooltip>
       </CircleMarker>
     )
   }

@@ -34,9 +34,9 @@ BEGIN
         , oc.name            orgClusterName
         , s.createdById 
         , TRIM(CONCAT(coalesce(uc.firstName,''), ' ', uc.lastName)) createdBy
-        , s.createdAt 
-        , TRIM(CONCAT(coalesce(uu.firstName,''), ' ', uu.lastName)) updateBy
-        , s.updatedAt
+        , s.createDate
+        , TRIM(CONCAT(coalesce(uu.firstName,''), ' ', uu.lastName)) modifiedBy
+        , s.modifiedDate
    from   FalconData.Site s
         , FalconData.SiteType st 
         , FalconData.StructureType str
@@ -57,7 +57,7 @@ BEGIN
    and    l5.id         = oc.l5MarketId 
    and    oc.id         = s.orgClusterId
    and    uc.id         = s.createdById
-   and    uu.id         = s.updatedById
+   and    uu.id         = s.modifiedById
    and    s.cascadeCode = upper(trim(in_CASCADE_CODE));
 END
 $$

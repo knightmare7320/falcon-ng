@@ -6,8 +6,8 @@ export default function SectorParamRows({btss=[], sectors=[], carriers=[]}:Param
 
   let carrierCounts:Map<number, number> = new Map();
   btss.map(bts => {
-    const carrierCount = carriers.filter(carrier => carrier.bts_id === bts.bts_id).length;
-    carrierCounts.set(bts.bts_id, carrierCount);
+    const carrierCount = carriers.filter(carrier => carrier.btsId === bts.btsId).length;
+    carrierCounts.set(bts.btsId, carrierCount);
   });
 
   return <>
@@ -16,8 +16,8 @@ export default function SectorParamRows({btss=[], sectors=[], carriers=[]}:Param
       {btss.map(
         bts => sectors.map(
           sector => 
-            <td  className="column-head top" key={sector.sector_id} colSpan={carrierCounts.get(bts.bts_id) || 1}>
-              <strong>{sector.sector_number}</strong>
+            <td  className="column-head top" key={sector.sectorId} colSpan={carrierCounts.get(bts.btsId) || 1}>
+              <strong>{sector.sectorNumber}</strong>
             </td> 
         )
       )}

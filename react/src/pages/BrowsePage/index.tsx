@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { HelmetProvider, Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet-async";
 
 import { browseActions } from "../../store/browse.slice";
 import { RootState } from "../../store";
@@ -47,19 +47,19 @@ export default function BrowsePage({type}: {type: string}) {
     {browseState.status === 'loading' && <LoadingSpinner />}
 
     <Breadcrumbs 
-      region_id={browseState.type === 'region' ? id : undefined}
-      l4_market_id={browseState.type === 'l4_market' ? id : undefined}
-      l5_market_id={browseState.type === 'l5_market' ? id : undefined}
-      cluster_id={browseState.type === 'cluster' ? id : undefined}
+      regionId={browseState.type === 'region' ? id : undefined}
+      l4MarketId={browseState.type === 'l4Market' ? id : undefined}
+      l5MarketId={browseState.type === 'l5Market' ? id : undefined}
+      orgClusterId={browseState.type === 'orgCluster' ? id : undefined}
     />
     
     <main className="main-content">
       <h1>{getTitle(type, browseState.name)} Performance</h1>
       <BrowseTable type={browseState.type} rows={browseState.rows} />
 
-      {browseState.row_count > Math.min(...browseState.page_sizes) && <>
-        <PageNumber pageCount={browseState.page_count} pageNumber={browseState.page_number} onPageChange={handlePageChange} />
-        <PageSize pageSize={browseState.page_size} pageSizes={browseState.page_sizes} onPageSizeChange={handlePageSizeChange} />
+      {browseState.totalRowCount > Math.min(...browseState.pageSizes) && <>
+        <PageNumber pageCount={browseState.pageCount} pageNumber={browseState.pageNumber} onPageChange={handlePageChange} />
+        <PageSize pageSize={browseState.pageSize} pageSizes={browseState.pageSizes} onPageSizeChange={handlePageSizeChange} />
       </>}
 
     </main>

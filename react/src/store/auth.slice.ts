@@ -1,17 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type AuthState = {
-  show_login: boolean,
+  showLogin: boolean,
   status: string,
   message?: string,
-  user_id: string,
-  full_name?: string,
+  userId: string,
+  fullName?: string,
 };
 
 const INITIAL_STATE: AuthState = {
-  show_login: false,
+  showLogin: false,
   status: 'none',
-  user_id: '',
+  userId: '',
 };
 
 const authSlice = createSlice({
@@ -19,10 +19,10 @@ const authSlice = createSlice({
   initialState: INITIAL_STATE,
   reducers: {
     showLogin(state) {
-      state.show_login = true;
+      state.showLogin = true;
     },
     cancelLogin(state) {
-      state.show_login = false;
+      state.showLogin = false;
     },
     // @ts-ignore
     tryLogin(state, action:PayloadAction<{username:string, password:string}>) {
@@ -30,11 +30,11 @@ const authSlice = createSlice({
       state.message = '';
     },
     tryLoadLocal() {},
-    loginSuccess(state, action:PayloadAction<{user_id:string, full_name:string}>) {
+    loginSuccess(state, action:PayloadAction<{userId:string, fullName:string}>) {
       state.status = 'ok';
-      state.user_id = action.payload.user_id;
-      state.full_name = action.payload.full_name;
-      state.show_login = false;
+      state.userId = action.payload.userId;
+      state.fullName = action.payload.fullName;
+      state.showLogin = false;
     },
     loginFailure(state, action:PayloadAction<{message:string}>) {
       state.status = 'error';
@@ -42,8 +42,8 @@ const authSlice = createSlice({
     },
     setLogout(state) {
       state.status = 'none';
-      state.user_id = '';
-      state.full_name = undefined;
+      state.userId = '';
+      state.fullName = undefined;
     },
   }
 });

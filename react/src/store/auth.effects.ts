@@ -1,7 +1,7 @@
 import { createListenerMiddleware } from "@reduxjs/toolkit";
 import type { TypedStartListening } from '@reduxjs/toolkit'
 
-import {RootState, AppDispatch} from ".";
+import { RootState, AppDispatch } from ".";
 import { authActions } from "./auth.slice";
 import { fetchLogin } from "../util/auth.service";
 
@@ -27,18 +27,18 @@ authStartListening({
     }
     if (response) {
       const token = response.token;
-      const user_id = response.user_id;
-      const full_name = response.full_name;
+      const userId = response.userId;
+      const fullName = response.fullName;
 
-      if(user_id && full_name && token) {
-        localStorage.setItem('user_id', user_id);
-        localStorage.setItem('full_name', full_name);
+      if(userId && fullName && token) {
+        localStorage.setItem('userId', userId);
+        localStorage.setItem('fullName', fullName);
         localStorage.setItem('token', token);
         const expiration = new Date();
         expiration.setHours(expiration.getHours() + 1);
         localStorage.setItem('expiration', expiration.toISOString());
 
-        listenerApi.dispatch(authActions.loginSuccess({user_id, full_name}));
+        listenerApi.dispatch(authActions.loginSuccess({userId, fullName}));
 
         loginTimer = setTimeout(
           () => {
@@ -53,8 +53,8 @@ authStartListening({
 authStartListening({
   actionCreator: authActions.tryLoadLocal,
   effect: (_, listenerApi) => {
-    const user_id = localStorage.getItem('user_id');
-    const full_name = localStorage.getItem('full_name');
+    const userId = localStorage.getItem('userId');
+    const fullName = localStorage.getItem('fullName');
     const token = localStorage.getItem('token');
 
     const storedExpirationDate = localStorage.getItem('expiration');
@@ -62,16 +62,16 @@ authStartListening({
     const now = new Date();
     const duration = expirationDate.getTime() - now.getTime();
     
-    if (duration && user_id && full_name && token && duration > 0) {
-      listenerApi.dispatch(authActions.loginSuccess({user_id, full_name}));
+    if (duration && userId && fullName && token && duration > 0) {
+      listenerApi.dispatch(authActions.loginSuccess({userId, fullName}));
       loginTimer = setTimeout(
         () => {
           listenerApi.dispatch(authActions.setLogout());
         }, duration
       );
     } else {
-      localStorage.removeItem('user_id');
-      localStorage.removeItem('full_name');
+      localStorage.removeItem('userId');
+      localStorage.removeItem('fullName');
       localStorage.removeItem('token');
       localStorage.removeItem('expiration');
     }
@@ -83,8 +83,8 @@ authStartListening({
   actionCreator: authActions.setLogout,
   effect: () => {
     clearTimeout(loginTimer);
-    localStorage.removeItem('user_id');
-    localStorage.removeItem('full_name');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('fullName');
     localStorage.removeItem('token');
     localStorage.removeItem('expiration');
   }

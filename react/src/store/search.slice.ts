@@ -4,24 +4,24 @@ import { Site } from "../util/site.model";
 
 export type SearchState = {
   status: string,
-  search_string: string,
-  row_count: number,
+  searchString: string,
+  totalRowCount: number,
   rows: Site[],
-  page_size: number,
-  page_number: number,
-  page_count: number,
-  page_sizes: Array<number>,
+  pageSize: number,
+  pageNumber: number,
+  pageCount: number,
+  pageSizes: Array<number>,
 }
 
 const INITIAL_STATE = {
   status: 'ok',
-  search_string: '',
-  row_count: 0,
+  searchString: '',
+  totalRowCount: 0,
   rows: [] as Site[],
-  page_size: 7,
-  page_number: 1,
-  page_count: 0,
-  page_sizes: [7, 15, 30],
+  pageSize: 7,
+  pageNumber: 1,
+  pageCount: 0,
+  pageSizes: [7, 15, 30],
 }
 
 
@@ -31,38 +31,38 @@ const searchSlice = createSlice({
   reducers: {
     clearSearch(state:SearchState) {
       state.status = 'ok';
-      state.search_string = '';
-      state.row_count = 0;
+      state.searchString = '';
+      state.totalRowCount = 0;
       state.rows = [];
-      state.page_count = 0;
-      state.page_number = 1;
+      state.pageCount = 0;
+      state.pageNumber = 1;
     },
     setSearchString(state:SearchState, action:PayloadAction<string>) {
       state.status = 'loading';
-      state.search_string = action.payload;
-      state.row_count = 0;
+      state.searchString = action.payload;
+      state.totalRowCount = 0;
       state.rows = [];
-      state.page_count = 0;
-      state.page_number = 1;
+      state.pageCount = 0;
+      state.pageNumber = 1;
     },
     setPageNumber(state:SearchState, action:PayloadAction<number>) {
-      state.page_number = action.payload;
+      state.pageNumber = action.payload;
     },
     setPageSize(state:SearchState, action:PayloadAction<number>) {
-      const page_size = action.payload;
-      const page_count = Math.ceil(state.row_count / page_size)
+      const pageSize = action.payload;
+      const pageCount = Math.ceil(state.totalRowCount / pageSize)
 
-      state.page_size = page_size;
-      state.page_count = page_count;
-      if (state.page_number > page_count) {
-        state.page_number = page_count;
+      state.pageSize = pageSize;
+      state.pageCount = pageCount;
+      if (state.pageNumber > pageCount) {
+        state.pageNumber = pageCount;
       }
     },
     setSearchResults(state:SearchState, action:PayloadAction<SearchResultsType>) {
       state.status = 'ok';
-      state.row_count = action.payload.row_count;
+      state.totalRowCount = action.payload.totalRowCount;
       state.rows = action.payload.rows;
-      state.page_count = Math.ceil(action.payload.row_count / state.page_size);
+      state.pageCount = Math.ceil(action.payload.totalRowCount / state.pageSize);
     },
   }
 });

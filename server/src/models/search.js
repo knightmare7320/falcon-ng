@@ -1,10 +1,10 @@
 class Search {
   static get(db, params, result) {
-    const sqlStr = 'CALL gui.get_quick_search(?,?,?)';
+    const sqlStr = 'CALL FalconCode.getQuickSearch(?,?,?)';
     const sqlParams = [
-      params.search_string,
-      params.page_number,
-      params.page_size,
+      params.searchString,
+      params.pageNumber,
+      params.pageSize,
     ];
     db.query(
       sqlStr,
@@ -16,7 +16,7 @@ class Search {
            return;
         }
         result(null, {
-           "row_count": results[0][0].total_row_count,
+           "totalRowCount": results[0][0].totalRowCount,
            "rows": results[1],
         });
       }

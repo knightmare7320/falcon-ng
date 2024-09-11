@@ -10,7 +10,7 @@ import Content from "./Content";
 import Notifications from "../ui/Notifications";
 
 export default function RootLayout() {
-  const showLoginState = useSelector((state: RootState) => state.auth.show_login);
+  const showLoginState = useSelector((state: RootState) => state.auth.showLogin);
   // const dispatch = useDispatch();
   // const notifications = useSelector((state) => state.ui.notifications);
 

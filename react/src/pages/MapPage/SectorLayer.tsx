@@ -11,17 +11,19 @@ export default function SectorLayer() {
 
   return <LayerGroup>{
     sectors.map(sector => {
-      const poly = getPoly(zoom, sector.latitude, sector.longitude, sector.azimuth, sector.horizontal_bw);
-      return <Polygon 
-        key={sector.cascade_code + '-' + sector.sector_number} 
-        positions={poly} 
-        weight={1} 
-        color={'#666666'} 
-        opacity={0.6} 
-        fillOpacity={0.5} 
-        fillColor={'#ffffff'} 
-        interactive={false} 
-      />
+      if (sector.latitude && sector.longitude && sector.azimuth){
+        const poly = getPoly(zoom, sector.latitude, sector.longitude, sector.azimuth, sector.horizontalBw);
+        return <Polygon 
+          key={sector.cascadeCode + '-' + sector.sectorNumber} 
+          positions={poly} 
+          weight={1} 
+          color={'#666666'} 
+          opacity={0.6} 
+          fillOpacity={0.5} 
+          fillColor={'#ffffff'} 
+          interactive={false} 
+        />
+      }
     })
   }
   </LayerGroup>;

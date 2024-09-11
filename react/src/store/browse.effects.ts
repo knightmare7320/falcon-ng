@@ -1,7 +1,7 @@
 import { createListenerMiddleware, isAnyOf } from "@reduxjs/toolkit";
 import type { TypedStartListening } from '@reduxjs/toolkit'
 
-import {RootState, AppDispatch} from ".";
+import { RootState, AppDispatch } from ".";
 import { browseActions } from "./browse.slice";
 import { fetchBrowsePerfData } from "../util/browse.service";
 import { uiActions } from "./ui.slice";
@@ -28,10 +28,10 @@ browseStartListening({
     if (state.status === 'init' || 
         state.type !== originalState.type ||
         (state.id && originalState.id || state.id != originalState.id) || 
-        state.page_number !== originalState.page_number || 
-        state.page_size !== originalState.page_size || 
-        state.order_by !== originalState.order_by || 
-        state.order_dir !== originalState.order_dir
+        state.pageNumber !== originalState.pageNumber || 
+        state.pageSize !== originalState.pageSize || 
+        state.orderBy !== originalState.orderBy || 
+        state.orderDir !== originalState.orderDir
     ) {
       listenerApi.dispatch(browseActions.setLoading());
       let response;
@@ -39,11 +39,11 @@ browseStartListening({
         response = await fetchBrowsePerfData({ 
           type: state.type,
           id: state.id,
-          page_number: state.page_number, 
-          page_size: state.page_size, 
-          order_by: state.order_by, 
-          order_dir: state.order_dir, 
-          filter_string: state.filter_string,
+          pageNumber: state.pageNumber, 
+          pageSize: state.pageSize, 
+          orderBy: state.orderBy, 
+          orderDir: state.orderDir, 
+          filterString: state.filterString,
         });
       } catch(error) {
         let message = 'Unknown Error';

@@ -7,5 +7,5 @@ export type MessageType = {
 export type LookupType = {
   id: number,
   name: string,
-  sort_key: number,
+  sortKey: number,
 }

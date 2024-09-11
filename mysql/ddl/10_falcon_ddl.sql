@@ -76,16 +76,16 @@ CREATE TABLE `StructureType` (
 );
 
 CREATE TABLE `User` (
-  `id`          int          NOT NULL AUTO_INCREMENT,
-  `firstName`   varchar(191) DEFAULT NULL,
-  `lastName`    varchar(191) NOT NULL,
-  `createdAt`   datetime(3)  NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-  `updatedById` int          DEFAULT NULL,
-  `updatedAt`   datetime(3)  DEFAULT NULL,
+  `id`           int          NOT NULL AUTO_INCREMENT,
+  `firstName`    varchar(191) DEFAULT NULL,
+  `lastName`     varchar(191) NOT NULL,
+  `createDate`   datetime(3)  NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  `modifiedById` int          DEFAULT NULL,
+  `ModifiedDate` datetime(3)  DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `User_firstName_lastName_key` (`firstName`,`lastName`),
-  KEY `User_updatedById_fkey` (`updatedById`),
-  CONSTRAINT `User_updatedById_fkey` FOREIGN KEY (`updatedById`) REFERENCES `User` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+  KEY `User_modifiedById_fkey` (`modifiedById`),
+  CONSTRAINT `User_modifiedById_fkey` FOREIGN KEY (`modifiedById`) REFERENCES `User` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 CREATE TABLE `UserLogin` (
@@ -152,10 +152,10 @@ CREATE TABLE `Site` (
   `repairPriorityId` int          NOT NULL,
   `timezoneId`       int          DEFAULT NULL,
   `orgClusterId`     int          NOT NULL,
-  `createdAt`        datetime(3)  NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  `createDate`       datetime(3)  NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
   `createdById`      int          NOT NULL,
-  `updatedAt`        datetime(3)  DEFAULT NULL,
-  `updatedById`      int          DEFAULT NULL,
+  `modifiedDate`     datetime(3)  DEFAULT NULL,
+  `modifiedById`     int          DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `Site_cascadeCode_key` (`cascadeCode`),
   KEY `Site_siteTypeId_fkey` (`siteTypeId`),
@@ -164,14 +164,14 @@ CREATE TABLE `Site` (
   KEY `Site_timezoneId_fkey` (`timezoneId`),
   KEY `Site_orgClusterId_fkey` (`orgClusterId`),
   KEY `Site_createdById_fkey` (`createdById`),
-  KEY `Site_updatedById_fkey` (`updatedById`),
+  KEY `Site_modifiedById_fkey` (`modifiedById`),
   CONSTRAINT `Site_createdById_fkey` FOREIGN KEY (`createdById`) REFERENCES `User` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Site_orgClusterId_fkey` FOREIGN KEY (`orgClusterId`) REFERENCES `OrgCluster` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Site_repairPriorityId_fkey` FOREIGN KEY (`repairPriorityId`) REFERENCES `RepairPriority` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Site_siteTypeId_fkey` FOREIGN KEY (`siteTypeId`) REFERENCES `SiteType` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Site_structureTypeId_fkey` FOREIGN KEY (`structureTypeId`) REFERENCES `StructureType` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Site_timezoneId_fkey` FOREIGN KEY (`timezoneId`) REFERENCES `Timezone` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `Site_updatedById_fkey` FOREIGN KEY (`updatedById`) REFERENCES `User` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+  CONSTRAINT `Site_modifiedById_fkey` FOREIGN KEY (`modifiedById`) REFERENCES `User` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 CREATE TABLE `EquipmentVendor` (
@@ -246,23 +246,23 @@ CREATE TABLE `Bts` (
   `equipmentModelId`  int         NOT NULL,
   `equipmentStatusId` int         NOT NULL,
   `onAirDate`         datetime(3) DEFAULT NULL,
-  `createdAt`         datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  `createDate`        datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
   `createdById`       int         NOT NULL,
-  `updatedAt`         datetime(3) DEFAULT NULL,
-  `updatedById`       int         DEFAULT NULL,
+  `modifiedDate`      datetime(3) DEFAULT NULL,
+  `modifiedById`      int         DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `Bts_bscId_number_key` (`bscId`,`number`),
   KEY `Bts_siteId_fkey` (`siteId`),
   KEY `Bts_equipmentModelId_fkey` (`equipmentModelId`),
   KEY `Bts_equipmentStatusId_fkey` (`equipmentStatusId`),
   KEY `Bts_createdById_fkey` (`createdById`),
-  KEY `Bts_updatedById_fkey` (`updatedById`),
+  KEY `Bts_modifiedById_fkey` (`modifiedById`),
   CONSTRAINT `Bts_bscId_fkey` FOREIGN KEY (`bscId`) REFERENCES `Bsc` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Bts_createdById_fkey` FOREIGN KEY (`createdById`) REFERENCES `User` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Bts_equipmentModelId_fkey` FOREIGN KEY (`equipmentModelId`) REFERENCES `EquipmentModel` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Bts_equipmentStatusId_fkey` FOREIGN KEY (`equipmentStatusId`) REFERENCES `EquipmentStatus` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Bts_siteId_fkey` FOREIGN KEY (`siteId`) REFERENCES `Site` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `Bts_updatedById_fkey` FOREIGN KEY (`updatedById`) REFERENCES `User` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+  CONSTRAINT `Bts_modifiedById_fkey` FOREIGN KEY (`modifiedById`) REFERENCES `User` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 CREATE TABLE `Sector` (
@@ -274,21 +274,21 @@ CREATE TABLE `Sector` (
   `mechanicalTilt`       double      NOT NULL,
   `antennaModelId`       int         NOT NULL,
   `sectorCoverageTypeId` int         NOT NULL,
-  `createdAt`            datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  `createDate`           datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
   `createdById`          int         NOT NULL,
-  `updatedAt`            datetime(3) DEFAULT NULL,
-  `updatedById`          int         DEFAULT NULL,
+  `modifiedDate`         datetime(3) DEFAULT NULL,
+  `modifiedById`         int         DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `Sector_siteId_number_key` (`siteId`,`number`),
   KEY `Sector_antennaModelId_fkey` (`antennaModelId`),
   KEY `Sector_sectorCoverageTypeId_fkey` (`sectorCoverageTypeId`),
   KEY `Sector_createdById_fkey` (`createdById`),
-  KEY `Sector_updatedById_fkey` (`updatedById`),
+  KEY `Sector_modifiedById_fkey` (`modifiedById`),
   CONSTRAINT `Sector_antennaModelId_fkey` FOREIGN KEY (`antennaModelId`) REFERENCES `AntennaModel` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Sector_createdById_fkey` FOREIGN KEY (`createdById`) REFERENCES `User` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Sector_sectorCoverageTypeId_fkey` FOREIGN KEY (`sectorCoverageTypeId`) REFERENCES `SectorCoverageType` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Sector_siteId_fkey` FOREIGN KEY (`siteId`) REFERENCES `Site` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `Sector_updatedById_fkey` FOREIGN KEY (`updatedById`) REFERENCES `User` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+  CONSTRAINT `Sector_modifiedById_fkey` FOREIGN KEY (`modifiedById`) REFERENCES `User` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 CREATE TABLE `Carrier` (
@@ -299,13 +299,13 @@ CREATE TABLE `Carrier` (
   `carrierTypeId`        int         NOT NULL,
   `equipmentStatusId`    int         NOT NULL,
   `onAirDate`            datetime(3) DEFAULT NULL,
-  `createdAt`            datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  `createDate`           datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
   `createdById`          int         NOT NULL,
-  `updatedAt`            datetime(3) DEFAULT NULL,
-  `updatedById`          int         DEFAULT NULL,
+  `modifiedDate`         datetime(3) DEFAULT NULL,
+  `modifiedById`         int         DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Carrier_createdById_fkey` (`createdById`),
-  KEY `Carrier_updatedById_fkey` (`updatedById`),
+  KEY `Carrier_modifiedById_fkey` (`modifiedById`),
   KEY `Carrier_carrierDesignationId_fkey` (`carrierDesignationId`),
   KEY `Carrier_carrierTypeId_fkey` (`carrierTypeId`),
   KEY `Carrier_equipmentStatusId_fkey` (`equipmentStatusId`),
@@ -313,7 +313,7 @@ CREATE TABLE `Carrier` (
   CONSTRAINT `Carrier_carrierTypeId_fkey` FOREIGN KEY (`carrierTypeId`) REFERENCES `CarrierType` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Carrier_createdById_fkey` FOREIGN KEY (`createdById`) REFERENCES `User` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `Carrier_equipmentStatusId_fkey` FOREIGN KEY (`equipmentStatusId`) REFERENCES `EquipmentStatus` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `Carrier_updatedById_fkey` FOREIGN KEY (`updatedById`) REFERENCES `User` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+  CONSTRAINT `Carrier_modifiedById_fkey` FOREIGN KEY (`modifiedById`) REFERENCES `User` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 CREATE TABLE `_prisma_migrations` (

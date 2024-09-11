@@ -20,25 +20,25 @@ export default function SiteDetails({site, authState}:SiteDetailsProps) {
   return <>
     <table className="site-table">
       <tbody>
-        {site.site_name &&
+        {site.siteName &&
           <tr>
             <th style={{width:'120px'}}>Site Name</th>
-            <td>{ site.site_name }</td>
+            <td>{ site.siteName }</td>
           </tr>
         }
-        {site.site_type_name &&
+        {site.siteTypeName &&
           <tr>
             <th>Site Type:</th>
-            <td>{ site.site_type_name }</td>
+            <td>{ site.siteTypeName }</td>
           </tr>
         }
-        {(site.address1 || site.city || site.state || site.zip_code) &&
+        {(site.address || site.city || site.state || site.zipCode) &&
           <tr>
             <th>Address:</th>
             <td>
               <address>
-                { site.address1 } <br/>
-                { site.city }, { site.state }  { site.zip_code }
+                { site.address } <br/>
+                { site.city }, { site.state }  { site.zipCode }
               </address>
             </td>
           </tr>
@@ -61,64 +61,64 @@ export default function SiteDetails({site, authState}:SiteDetailsProps) {
             <td>{ site.longitude }&deg; E</td>
           </tr>
         }
-        {site.elevation_feet &&
+        {site.elevation &&
           <tr>
             <th>Elevation:</th>
-            <td>{ site.elevation_feet } ft</td>
+            <td>{ site.elevation } ft</td>
           </tr>
         }
-        {site.structure_type_name &&
+        {site.structureTypeName &&
           <tr>
             <th>Structure Type:</th>
-            <td>{ site.structure_type_name }</td>
+            <td>{ site.structureTypeName }</td>
           </tr>
         }
-        {site.repair_priority_name &&
+        {site.repairPriorityName &&
           <tr>
             <th>Repair Priority:</th>
-            <td>{ site.repair_priority_name }</td>
+            <td>{ site.repairPriorityName }</td>
           </tr>
         }
-        {site.timezone_name &&
+        {site.timezoneName &&
           <tr>
             <th>Timezone:</th>
-            <td>{ site.timezone_name }</td>
+            <td>{ site.timezoneName }</td>
           </tr>
         }
-        {site.region_name &&
+        {site.regionName &&
           <tr>
             <th>Region:</th>
-            <td><Link to={`/browse/region/${site.region_id}`} >{ site.region_name }</Link></td>
+            <td><Link to={`/browse/region/${site.regionId}`} >{ site.regionName }</Link></td>
           </tr>
         }
-        {site.l4_market_name &&
+        {site.l4MarketName &&
           <tr>
             <th>L4 Market:</th>
-            <td><Link to={`/browse/l4_market/${site.l4_market_id}`} >{ site.l4_market_name }</Link></td>
+            <td><Link to={`/browse/l4Market/${site.l4MarketId}`} >{ site.l4MarketName }</Link></td>
           </tr>
         }
-        {site.l5_market_name &&
+        {site.l5MarketName &&
           <tr>
             <th>L5 Market:</th>
-            <td><Link to={`/browse/l5_market/${site.l5_market_id}`} >{ site.l5_market_name }</Link></td>
+            <td><Link to={`/browse/l5Market/${site.l5MarketId}`} >{ site.l5MarketName }</Link></td>
           </tr>
         }
-        {site.org_cluster_name &&
+        {site.orgClusterName &&
           <tr>
             <th>Cluster:</th>
-            <td><Link to={`/browse/cluster/${site.org_cluster_id}`} >{ site.org_cluster_name }</Link></td>
+            <td><Link to={`/browse/orgCluster/${site.orgClusterId}`} >{ site.orgClusterName }</Link></td>
           </tr>
         }
-        {(site.create_date || site.created_by_name) &&
+        {(site.createDate || site.createdByName) &&
           <tr className="edits">
             <th>Created by:</th>
-            <td>{ site.created_by_name } on { moment(site.create_date).format('M/D/YYYY h:mm:ss a')}</td>
+            <td>{ site.createdByName } on { moment(site.createDate).format('M/D/YYYY h:mm:ss a')}</td>
           </tr>
         }
-        {(site.modified_date || site.modified_by_name) &&
+        {(site.modifiedDate || site.modifiedByName) &&
           <tr className="edits">
             <th>Modified by:</th>
-            <td>{ site.modified_by_name } on { moment(site.modified_date).format('M/D/YYYY h:mm:ss a') }</td>
+            <td>{ site.modifiedByName } on { moment(site.modifiedDate).format('M/D/YYYY h:mm:ss a') }</td>
           </tr>
         }
       </tbody>

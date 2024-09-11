@@ -40,9 +40,9 @@ export default function NearestSites({data}:NearestSitesProps) {
     <ol className={styles.list}>
       {
         data.map(site => 
-          <li key={site.cascade_code}>
-            <Link to={`/site/${site.cascade_code}`} title={site.site_name}>
-              <strong>{site.cascade_code}</strong> <span>({site.distance_mi}mi {bearingArrow(site.bearing)}) - {site.address1}, {site.city} {site.state} </span>
+          <li key={site.cascadeCode}>
+            <Link to={`/site/${site.cascadeCode}`} title={site.siteName}>
+              <strong>{site.cascadeCode}</strong> <span>({site.distanceMi}mi {bearingArrow(site.bearing)}) - {site.address}, {site.city} {site.state} </span>
             </Link>
           </li>  
         )

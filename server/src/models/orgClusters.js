@@ -1,8 +1,8 @@
 class org_clusters {
    static get(db, params, result) {
-      const sqlStr = 'CALL gui.get_org_clusters(?)';
+      const sqlStr = 'CALL FalconCode.getOrgClusters(?)';
       const sqlParams = [
-         params.l5_market_id
+         params.l5MarketId
       ]
       db.query(
          sqlStr,
@@ -19,14 +19,14 @@ class org_clusters {
    }
 
    static getPerf(db, params, result) {
-      const sqlStr = 'CALL gui.get_org_clusters_perf(?, ?, ?, ?, ?, ?)';
+      const sqlStr = 'CALL FalconCode.getOrgClustersPerf(?, ?, ?, ?, ?, ?)';
       const sqlParams = [
-         params.l5_market_id,
-         params.filter_string,
-         params.order_by,
-         params.order_dir,
-         params.page_number,
-         params.page_size,
+         params.l5MarketId,
+         params.filterString,
+         params.orderBy,
+         params.orderDir,
+         params.pageNumber,
+         params.pageSize,
       ];
       db.query(
          sqlStr,
@@ -38,14 +38,13 @@ class org_clusters {
                return;
             }
             result(null, {
-               "parent_id": results[0][0].parent_id,
-               "parent_name": results[0][0].parent_name,
-               "id": results[0][0].group_id,
-               "name": results[0][0].group_name,
+               "parentId": results[0][0].parentId,
+               "parentName": results[0][0].parentName,
+               "id": results[0][0].groupId,
+               "name": results[0][0].groupName,
                "totalRowCount": results[0][0].totalRowCount,
-               "rows": results[1].map(({org_cluster_id, org_cluster_name, ...row}) => {return {id: org_cluster_id, name: org_cluster_name, ...row}})
-
-              });
+               "rows": results[1].map(({orgClusterId, orgClusterName, ...row}) => {return {id: orgClusterId, name: orgClusterName, ...row}})
+            });
          }
       );   
    }

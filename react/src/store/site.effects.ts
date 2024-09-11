@@ -1,7 +1,7 @@
 import { createListenerMiddleware } from "@reduxjs/toolkit";
 import type { PayloadAction, TypedStartListening } from '@reduxjs/toolkit'
 
-import {RootState, AppDispatch} from ".";
+import { RootState, AppDispatch } from ".";
 import { uiActions } from "./ui.slice";
 
 import { siteActions } from "./site.slice";

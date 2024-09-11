@@ -6,31 +6,31 @@ export async function fetchBrowsePerfData({
   // signal, 
   id = undefined,
   type,
-  page_number = 1, 
-  page_size= 10, 
-  order_by = 'name', 
-  order_dir = 'asc', 
-  filter_string=''
+  pageNumber = 1, 
+  pageSize= 10, 
+  orderBy = 'name', 
+  orderDir = 'asc', 
+  filterString=''
 }: tableRequestType):Promise<kpiTableType> {
 
   let url = API_URL;
   if (type === "national") {
     url += '/regions/perf?';
   } else if (type === "region") {
-    url += '/l4_markets/perf/' + id + '?';
-  } else if (type === "l4_market") {
-    url += '/l5_markets/perf/' + id + '?';
-  } else if (type === "l5_market") {
-    url += '/clusters/perf/' + id + '?';
-  } else if (type === "cluster") {
-    url += '/sites/perf/?type=org_cluster_id&id=' + id + '&';
+    url += '/l4Markets/perf/' + id + '?';
+  } else if (type === "l4Market") {
+    url += '/l5Markets/perf/' + id + '?';
+  } else if (type === "l5Market") {
+    url += '/orgClusters/perf/' + id + '?';
+  } else if (type === "orgCluster") {
+    url += '/sites/perf/?type=orgClusterId&id=' + id + '&';
   }
   let params = {
-    page_number: page_number.toString(),
-    page_size: page_size.toString(),
-    order_by,
-    order_dir,
-    filter_string,
+    pageNumber: pageNumber.toString(),
+    pageSize: pageSize.toString(),
+    orderBy,
+    orderDir,
+    filterString,
   };
 
   const response = await fetch(url + new URLSearchParams(params));

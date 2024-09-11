@@ -23,7 +23,7 @@ class Bscs {
    }
 
    static getPerf(db, params, result) {
-      const sqlStr = 'CALL Fa;conCode.getBscsPerf(?, ?, ?, ?, ?, ?, ?)';
+      const sqlStr = 'CALL FalconCode.getBscsPerf(?, ?, ?, ?, ?, ?, ?)';
       const sqlParams = [
          params.mscId,
          params.equipmentVendorId,

@@ -35,9 +35,9 @@ BEGIN
         , oc.name            orgClusterName
         , s.createdById 
         , TRIM(CONCAT(coalesce(uc.firstName,''), ' ', uc.lastName)) createdBy
-        , s.createdAt 
-        , TRIM(CONCAT(coalesce(uu.firstName,''), ' ', uu.lastName)) updateBy
-        , s.updatedAt
+        , s.createDate
+        , TRIM(CONCAT(coalesce(uu.firstName,''), ' ', uu.lastName)) modifiedBy
+        , s.modifiedDate
    from   FalconData.Site s
         , FalconData.SiteType st 
         , FalconData.StructureType str
@@ -58,7 +58,7 @@ BEGIN
    and    l5.id         = oc.l5MarketId 
    and    oc.id         = s.orgClusterId
    and    uc.id         = s.createdById
-   and    uu.id         = s.updatedById
+   and    uu.id         = s.modifiedById
    and    s.cascadeCode = upper(trim(in_CASCADE_CODE));
    
    select b.id
@@ -76,9 +76,9 @@ BEGIN
         , em.name equipmentModelName 
         , b.onAirDate
         , TRIM(CONCAT(coalesce(uc.firstName,''), ' ', uc.lastName)) createdBy
-        , b.createdAt 
-        , TRIM(CONCAT(coalesce(uu.firstName,''), ' ', uu.lastName)) updateBy
-        , b.updatedAt 
+        , b.createDate 
+        , TRIM(CONCAT(coalesce(uu.firstName,''), ' ', uu.lastName)) modifiedBy
+        , b.modifiedDate 
    from   FalconData.Bts b
           join FalconData.Bsc bs             on bs.id = b.bscId 
           join FalconData.Msc ms             on ms.id = bs.mscId 
@@ -87,7 +87,7 @@ BEGIN
           join FalconData.EquipmentVendor ev on ev.id = em.equipmentVendorId 
           join FalconData.Site s             on s.id  = b.siteId 
           join FalconData.User uc            on uc.id = b.createdById 
-          join FalconData.User uu            on uu.id = b.updatedById 
+          join FalconData.User uu            on uu.id = b.modifiedById 
    where   s.cascadeCode         = upper(trim(in_CASCADE_CODE));
    
    select se.id
@@ -107,16 +107,16 @@ BEGIN
         , se.sectorCoverageTypeId 
         , sct.name sectorCoverageTypeName 
         , TRIM(CONCAT(coalesce(uc.firstName,''), ' ', uc.lastName)) createdBy
-        , se.createdAt 
-        , TRIM(CONCAT(coalesce(uu.firstName,''), ' ', uu.lastName)) updateBy
-        , se.updatedAt 
+        , se.createDate 
+        , TRIM(CONCAT(coalesce(uu.firstName,''), ' ', uu.lastName)) modifiedBy
+        , se.modifiedDate 
    from   FalconData.Sector se 
           join FalconData.AntennaModel a         on a.id   = se.antennaModelId 
           join FalconData.EquipmentVendor ev     on ev.id  = a.equipmentVendorId
           join FalconData.SectorCoverageType sct on sct.id = se.sectorCoverageTypeId 
           join FalconData.Site s                 on s.id   = se.siteId 
           join FalconData.User uc                on uc.id  = se.createdById 
-          join FalconData.User uu                on uu.id  = se.updatedById 
+          join FalconData.User uu                on uu.id  = se.modifiedById 
    where  s.cascadeCode = upper(trim(in_CASCADE_CODE))
    order by se.number;
 
@@ -133,9 +133,9 @@ BEGIN
         , es.name equipmentStatusName
         , c.onAirDate 
         , TRIM(CONCAT(coalesce(uc.firstName,''), ' ', uc.lastName)) createdBy
-        , c.createdAt 
-        , TRIM(CONCAT(coalesce(uu.firstName,''), ' ', uu.lastName)) updateBy
-        , c.updatedAt 
+        , c.createDate 
+        , TRIM(CONCAT(coalesce(uu.firstName,''), ' ', uu.lastName)) modifiedBy
+        , c.modifiedDate 
    from   FalconData.Carrier c
           join FalconData.Bts                b  on b.id  = c.btsId 
           join FalconData.CarrierType        ct on ct.id = c.carrierTypeId 
@@ -144,7 +144,7 @@ BEGIN
           join FalconData.Channel            ch on ch.id = c.channelId
           join FalconData.Site               s  on s.id  = b.siteId 
           join FalconData.User               uc on uc.id = c.createdById 
-          join FalconData.User               uu on uu.id = c.updatedById 
+          join FalconData.User               uu on uu.id = c.modifiedById 
    where  s.cascadeCode            = trim(upper(in_CASCADE_CODE))
    order by c.btsId, cd.sortKey;
 

@@ -11,23 +11,24 @@ model User {
   id                    Int @id @default(autoincrement())
   firstName             String?
   lastName              String
-  createdAt             DateTime @default(now())
-  updatedById           Int?
-  updatedBy             User? @relation(name: "userUpdatedBy", fields: [updatedById], references: [id])
-  updatedAt             DateTime? @updatedAt
 
-  userLogin       UserLogin?
-  sitesCreated    Site[] @relation(name: "siteCreatedBy")
-  sitesUpdated    Site[] @relation(name: "siteUpdatedBy")
-  btssCreated     Bts[] @relation(name: "btsCreatedBy")
-  btssUpdated     Bts[] @relation(name: "btsUpdatedBy")
-  sectorsCreated  Sector[] @relation(name: "sectorCreatedBy")
-  sectorsUpdated  Sector[] @relation(name: "sectorUpdatedBy")
-  carriersCreated Carrier[] @relation(name: "carrierCreatedBy")
-  carriersUpdated Carrier[] @relation(name: "carrierUpdatedBy")
+  createDate       DateTime @default(now())
+  modifiedDate     DateTime? @updatedAt
+  modifiedById     Int?
+  modifiedBy       User? @relation(name: "userModifiedBy", fields: [modifiedById], references: [id])
+
+  userLogin        UserLogin?
+  sitesCreated     Site[] @relation(name: "siteCreatedBy")
+  sitesModified    Site[] @relation(name: "siteModifiedBy")
+  btssCreated      Bts[] @relation(name: "btsCreatedBy")
+  btssModified     Bts[] @relation(name: "btsModifiedBy")
+  sectorsCreated   Sector[] @relation(name: "sectorCreatedBy")
+  sectorsModified  Sector[] @relation(name: "sectorModifiedBy")
+  carriersCreated  Carrier[] @relation(name: "carrierCreatedBy")
+  carriersModified Carrier[] @relation(name: "carrierModifiedBy")
 
   @@unique([firstName,lastName])
-  userUpdated     User[] @relation(name: "userUpdatedBy")
+  userModified     User[] @relation(name: "userModifiedBy")
 }
 
 model UserLogin {
@@ -140,12 +141,12 @@ model Site {
   timezone         Timezone? @relation(fields: [timezoneId], references: [id])
   orgClusterId     Int
   orgCluster       OrgCluster @relation(fields: [orgClusterId], references: [id])
-  createdAt        DateTime @default(now())
+  createDate       DateTime @default(now())
   createdById      Int
   createdBy        User @relation(name: "siteCreatedBy", fields: [createdById], references: [id])
-  updatedAt        DateTime? @updatedAt
-  updatedById      Int?
-  updatedBy        User? @relation(name: "siteUpdatedBy", fields: [updatedById], references: [id])
+  modifiedDate     DateTime? @updatedAt
+  modifiedById     Int?
+  modifiedBy       User? @relation(name: "siteModifiedBy", fields: [modifiedById], references: [id])
 
   btss    Bts[]
   sectors Sector[]
@@ -222,12 +223,12 @@ model Bts {
   equipmentStatusId Int
   equipmentStatus   EquipmentStatus @relation(fields: [equipmentStatusId], references: [id])
   onAirDate         DateTime?
-  createdAt         DateTime @default(now())
+  createDate        DateTime @default(now())
   createdById       Int
   createdBy         User @relation(name: "btsCreatedBy", fields: [createdById], references: [id])
-  updatedAt         DateTime? @updatedAt
-  updatedById       Int?
-  updatedBy         User? @relation(name: "btsUpdatedBy", fields: [updatedById], references: [id])
+  modifiedDate      DateTime? @updatedAt
+  modifiedById      Int?
+  modifiedBy        User? @relation(name: "btsModifiedBy", fields: [modifiedById], references: [id])
 
   @@unique([bscId, number])
 }
@@ -260,12 +261,12 @@ model Sector {
   antennaModel   AntennaModel @relation(fields: [antennaModelId], references: [id])
   sectorCoverageTypeId Int
   sectorCoverageType   SectorCoverageType @relation(fields: [sectorCoverageTypeId], references: [id])
-  createdAt      DateTime @default(now())
+  createDate     DateTime @default(now())
   createdById    Int
   createdBy      User @relation(name: "sectorCreatedBy", fields: [createdById], references: [id])
-  updatedAt      DateTime? @updatedAt
-  updatedById    Int?
-  updatedBy      User? @relation(name: "sectorUpdatedBy", fields: [updatedById], references: [id])
+  modifiedDate   DateTime? @updatedAt
+  modifiedById   Int?
+  modifiedBy     User? @relation(name: "sectorModifiedBy", fields: [modifiedById], references: [id])
 
   @@unique([siteId, number])
 }
@@ -310,10 +311,10 @@ model Carrier {
   equipmentStatusId    Int
   equipmentStatus      EquipmentStatus @relation(fields: [equipmentStatusId], references: [id])
   onAirDate            DateTime?
-  createdAt            DateTime @default(now())
+  createDate           DateTime @default(now())
   createdById          Int
   createdBy            User @relation(name: "carrierCreatedBy", fields: [createdById], references: [id])
-  updatedAt            DateTime? @updatedAt
-  updatedById          Int?
-  updatedBy            User? @relation(name: "carrierUpdatedBy", fields: [updatedById], references: [id])
+  modifiedDate         DateTime? @updatedAt
+  modifiedById         Int?
+  modifiedBy           User? @relation(name: "carrierModifiedBy", fields: [modifiedById], references: [id])
 }

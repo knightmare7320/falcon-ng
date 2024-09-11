@@ -8,11 +8,11 @@ CREATE PROCEDURE FalconCode.getSiteBts(
 BEGIN   
    select b.id btsId
         , bs.mscId
-        , ms.name switchName 
+        , ms.name mscName 
         , ms.clliCode 
         , b.bscId
         , bs.name bscName 
-        , b.number 
+        , b.number btsNumber
         , b.equipmentStatusId
         , es.name equipmentStatusName 
         , em.equipmentVendorId
@@ -21,9 +21,9 @@ BEGIN
         , em.name equipmentModelName 
         , b.onAirDate
         , TRIM(CONCAT(coalesce(uc.firstName,''), ' ', uc.lastName)) createdBy
-        , b.createdAt 
-        , TRIM(CONCAT(coalesce(uu.firstName,''), ' ', uu.lastName)) updateBy
-        , b.updatedAt 
+        , b.createDate 
+        , TRIM(CONCAT(coalesce(uu.firstName,''), ' ', uu.lastName)) modifiedBy
+        , b.modifiedDate 
    from   FalconData.Bts b
           join FalconData.Bsc bs             on bs.id = b.bscId 
           join FalconData.Msc ms             on ms.id = bs.mscId 
@@ -32,7 +32,7 @@ BEGIN
           join FalconData.EquipmentVendor ev on ev.id = em.equipmentVendorId 
           join FalconData.Site s             on s.id  = b.siteId 
           join FalconData.User uc            on uc.id = b.createdById 
-          join FalconData.User uu            on uu.id = b.updatedById 
+          join FalconData.User uu            on uu.id = b.modifiedById 
    where   s.cascadeCode         = upper(trim(in_CASCADE_CODE));
 END
 $$

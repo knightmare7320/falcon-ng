@@ -33,7 +33,7 @@ uiStartListening({
   effect: async (_, listenerApi) => {
     let response;
     try {
-      response = await fetchGroup('l4_markets');
+      response = await fetchGroup('l4Markets');
     } catch(error) {
       let message = 'Unknown Error';
       if (error instanceof Error) message = error.message;
@@ -50,7 +50,7 @@ uiStartListening({
   effect: async (_, listenerApi) => {
     let response;
     try {
-      response = await fetchGroup('l5_markets');
+      response = await fetchGroup('l5Markets');
     } catch(error) {
       let message = 'Unknown Error';
       if (error instanceof Error) message = error.message;
@@ -67,7 +67,7 @@ uiStartListening({
   effect: async (_, listenerApi) => {
     let response;
     try {
-      response = await fetchGroup('clusters');
+      response = await fetchGroup('orgClusters');
     } catch(error) {
       let message = 'Unknown Error';
       if (error instanceof Error) message = error.message;

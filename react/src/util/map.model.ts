@@ -1,15 +1,15 @@
 export type GeoSite = {
-  cascade_code:string,
+  cascadeCode:string,
   latitude:number,
   longitude:number, 
   sectors?: GeoSector[],
 };
 
 export type GeoSector = {
-  cascade_code?:string,
+  cascadeCode?:string,
   latitude?:number,
   longitude?:number, 
-  sector_number:number,
+  sectorNumber:number,
   azimuth:number,
-  horizontal_bw:number,
+  horizontalBw:number,
 };
