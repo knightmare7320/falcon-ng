@@ -3,8 +3,6 @@ import Boom from '@hapi/boom'
 
 export async function getRegionsHandler(request: Hapi.Request, h: Hapi.ResponseToolkit) {
   const { prisma } = request.server.app
-  console.log('pop')
-  request.log('hi')
 
   try {
     const regions = await prisma.region.findMany()
@@ -26,7 +24,7 @@ export async function getRegionHandler(request: Hapi.Request, h: Hapi.ResponseTo
       },
       include: {
         l4Markets: true,
-      },
+      }, 
     })
     if (!region) {
       return h.response().code(404)

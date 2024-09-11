@@ -27,11 +27,25 @@ services:
   #   command: redis-server --save 20 1 --loglevel warning --requirepass ${REDIS_PASSWORD}
   #   restart: unless-stopped
 
+  # server:
+  #   build: hapi
+  #   volumes:
+  #     - falcon-hapi-node_modules:/app/node_modules
+  #     - ./hapi:/app
+  #   env_file:
+  #     - ./secrets/mysql.env
+  #     - ./secrets/auth.env
+  #     # - ./secrets/cache.env
+  #   depends_on:
+  #     - mysqldb
+  #     # - cache
+  #   restart: unless-stopped
+
   server:
-    build: hapi
+    build: server
     volumes:
-      - falcon-hapi-node_modules:/app/node_modules
-      - ./hapi:/app
+      - falcon-server-node_modules:/app/node_modules
+      - ./server/src:/app
     env_file:
       - ./secrets/mysql.env
       - ./secrets/auth.env
@@ -73,7 +87,8 @@ services:
 
 volumes:
   falcon-mysqldb-data:
-  falcon-hapi-node_modules:
+  # falcon-hapi-node_modules:
+  falcon-server-node_modules:
   falcon-pictures-node_modules:
   # falcon-pictures-data:
   falcon-react-node_modules:

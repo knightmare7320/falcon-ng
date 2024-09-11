@@ -2,7 +2,7 @@ import Hapi from '@hapi/hapi'
 import Boom from '@hapi/boom'
 import Joi from 'joi'
 
-import { getOrgClusterHandler, getOrgClustersHandler } from '../handlers/orgClusters'
+import { getOrgClusterHandler, getOrgClustersHandler, getOrgClustersHandler2 } from '../handlers/orgClusters'
 
 const pagingSchema = Joi.object({
   orderBy: Joi.string().default('name'),
@@ -47,7 +47,28 @@ const orgClustersRoutes = {
             }),
             query: pagingSchema,
             failAction: (request, h, err) => {
-              return Boom.badRequest('Invalid options - /orgClusters/{l5MarketId}?orderBy={string}&orderDir={asc|desc}&pageSize={integer}&pageNumber={integer}&filterString={string}')
+              return Boom.badRequest('Invalid options - /orgClusters/{orgClusterId}?orderBy={string}&orderDir={asc|desc}&pageSize={integer}&pageNumber={integer}&filterString={string}')
+            }
+          }
+        }
+      }
+    ])
+
+
+
+    server.route([
+      {
+        method: 'GET',
+        path: '/orgClusters2/{orgClusterId}',
+        handler: getOrgClustersHandler2,
+        options: {
+          validate: {
+            params: Joi.object({
+              orgClusterId: Joi.number().integer(),
+            }),
+            query: pagingSchema,
+            failAction: (request, h, err) => {
+              return Boom.badRequest('Invalid options - /orgClusters2/{orgClusterId}?orderBy={}&orderDir={}&pageSize={}&pageNumber={}&filterString={}')
             }
           }
         }

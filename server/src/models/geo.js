@@ -1,11 +1,11 @@
 class Geo {
    static getSites(db, params, result) {
-      const sqlStr = 'CALL gui.get_geo_sites(?, ?, ?, ?)';
+      const sqlStr = 'CALL FalconCode.getGeoSites(?, ?, ?, ?)';
       const sqlParams = [
-         params.min_latitude,
-         params.max_latitude,
-         params.min_longitude,
-         params.max_longitude,
+         params.minLatitude,
+         params.maxLatitude,
+         params.minLongitude,
+         params.maxLongitude,
       ];
       db.query(
          sqlStr,
@@ -21,12 +21,12 @@ class Geo {
       );      
    }
    static getSectors(db, params, result) {
-      const sqlStr = 'CALL gui.get_geo_sectors(?, ?, ?, ?)';
+      const sqlStr = 'CALL FalconCode.getGeoSectors(?, ?, ?, ?)';
       const sqlParams = [
-         params.min_latitude,
-         params.max_latitude,
-         params.min_longitude,
-         params.max_longitude,
+         params.minLatitude,
+         params.maxLatitude,
+         params.minLongitude,
+         params.maxLongitude,
       ];
       db.query(
          sqlStr,

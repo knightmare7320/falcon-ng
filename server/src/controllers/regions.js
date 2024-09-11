@@ -14,11 +14,11 @@ exports.get = (req, res, next) => {
 
 exports.getPerf = (req, res, next) => {
    const params = {
-      filter_string   : req.query.filter_string,
-      order_by    : req.query.order_by    ? req.query.order_by     : null,
-      order_dir   : req.query.order_dir   ? req.query.order_dir    : null,
-      page_number : req.query.page_number ? +req.query.page_number : null,
-      page_size   : req.query.page_size   ? +req.query.page_size   : null,
+    filterString: req.query.filterString,
+    orderBy     : req.query.orderBy      ? req.query.orderBy     : null,
+    orderDir    : req.query.orderDir     ? req.query.orderDir    : null,
+    pageNumber  : req.query.pageNumber   ? +req.query.pageNumber : null,
+    pageSize    : req.query.pageSize     ? +req.query.pageSize   : null,
    };
    model.getPerf(
       req.app.locals.db,

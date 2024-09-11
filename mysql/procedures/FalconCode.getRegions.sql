@@ -4,7 +4,7 @@ DELIMITER $$
 $$
 CREATE PROCEDURE FalconCode.getRegions()
 BEGIN
-   select   id  regionId
+   select   id   regionId
           , name regionName
    from     FalconData.Region
    order by name;

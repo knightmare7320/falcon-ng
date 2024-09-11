@@ -2,12 +2,11 @@ const model = require("../models/sites.js");
 
 exports.getPerf = (req, res, next) => {
    const params = {
-      group_type  : req.query.type,
-      group_id    : req.query.id          ? +req.query.id          : null,
-      order_by    : req.query.order_by    ? req.query.order_by     : null,
-      order_dir   : req.query.order_dir   ? req.query.order_dir    : null,
-      page_number : req.query.page_number ? +req.query.page_number : null,
-      page_size   : req.query.page_size   ? +req.query.page_size   : null,
+      groupType  : req.query.type,
+      groupId    : req.query.id         ? +req.query.id          : null,
+      orderDir   : req.query.orderDir   ? req.query.orderDir    : null,
+      pageNumber : req.query.pageNumber ? +req.query.pageNumber : null,
+      pageSize   : req.query.pageSize   ? +req.query.pageSize   : null,
    };
    model.getPerf(
       req.app.locals.db,

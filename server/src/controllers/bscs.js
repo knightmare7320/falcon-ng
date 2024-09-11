@@ -2,8 +2,8 @@ const model = require("../models/bscs.js");
 
 exports.get = (req, res, next) => {
    const params = {
-      switch_id: req.params.switch_id ? +req.params.switch_id: null,
-      equipment_vendor_id: req.query.equipment_vendor_id ? +req.query.equipment_vendor_id: null,
+      switch_id: req.params.mscId ? +req.params.mscId: null,
+      equipment_vendor_id: req.query.equipmentVendorId ? +req.query.equipmentVendorId: null,
    }
    model.get(
       req.app.locals.db,
@@ -19,13 +19,13 @@ exports.get = (req, res, next) => {
 
 exports.getPerf = (req, res, next) => {
    const params = {
-      switch_id   : req.params.switch_id     ? +req.params.switch_id   : null,
-      equipment_vendor_id: req.query.equipment_vendor_id ? +req.query.equipment_vendor_id : null,
-      filter_string  : req.query.filter_string,
-      order_by    : req.query.order_by      ? req.query.order_by     : null,
-      order_dir   : req.query.order_dir     ? req.query.order_dir    : null,
-      page_number : req.query.page_number   ? +req.query.page_number : null,
-      page_size   : req.query.page_size     ? +req.query.page_size   : null,
+      mscId       : req.params.mscId       ? +req.params.mscId     : null,
+      equipmentVendorId: req.query.equipmentVendorId ? +req.query.equipmentVendorId : null,
+      filterString: req.query.filterString,
+      orderBy     : req.query.orderBy      ? req.query.orderBy     : null,
+      orderDir    : req.query.orderDir     ? req.query.orderDir    : null,
+      pageNumber  : req.query.pageNumber   ? +req.query.pageNumber : null,
+      pageSize    : req.query.pageSize     ? +req.query.pageSize   : null,
    };
    model.getPerf(
       req.app.locals.db,

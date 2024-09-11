@@ -1,9 +1,9 @@
 class Bscs {
    static get(db, params, result) {
-      const sqlStr = 'CALL gui.get_bscs(?, ?)';
+      const sqlStr = 'CALL FalconCode.getBscs(?, ?)';
       const sqlParams = [
-         params.switch_id,
-         params.equipment_vendor_id,
+         params.mscId,
+         params.equipmentVendorId,
       ]
       console.log(sqlStr, sqlParams);
       db.query(
@@ -23,15 +23,15 @@ class Bscs {
    }
 
    static getPerf(db, params, result) {
-      const sqlStr = 'CALL gui.get_bscs_perf(?, ?, ?, ?, ?, ?, ?)';
+      const sqlStr = 'CALL Fa;conCode.getBscsPerf(?, ?, ?, ?, ?, ?, ?)';
       const sqlParams = [
-         params.switch_id,
-         params.equipment_vendor_id,
-         params.filter_string,
-         params.order_by,
-         params.order_dir,
-         params.page_number,
-         params.page_size,
+         params.mscId,
+         params.equipmentVendorId,
+         params.filterString,
+         params.orderBy,
+         params.orderDir,
+         params.pageNumber,
+         params.pageSize,
       ];
       console.log(sqlStr, sqlParams);
       db.query(
@@ -44,8 +44,8 @@ class Bscs {
                return;
             }
             result(null, {
-               "switch_name": results[0][0].switch_name,
-               "total_row_count": results[0][0].total_row_count,
+               "mscName": results[0][0].mscName,
+               "totalRowCount": results[0][0].totalRowCount,
                "rows": results[1]
             });
          }

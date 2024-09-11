@@ -32,8 +32,8 @@ BEGIN
    GROUP BY a.id
           , a.name;
      
-   SELECT   id   mscId
-          , name mscName
+   SELECT   id   l4MarketId
+          , name l4MarketName
           , null setupAttempts
           , null primaryBlocks
           , null accessFailures

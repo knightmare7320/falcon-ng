@@ -26,8 +26,8 @@ BEGIN
    WHERE    lower(name) like CONCAT('%', in_FILTER_STR, '%');
   
    
-   SELECT   id
-          , name 
+   SELECT   id   regionId
+          , name regionName
           , null setupAttempts
           , null primaryBlocks
           , null accessFailures

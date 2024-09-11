@@ -11,12 +11,12 @@ const l5MarketsRoutes = {
     server.route([
       {
         method: 'GET',
-        path: '/l5Markets/{l4marketId}',
+        path: '/l5Markets/{l4MarketId}',
         handler: getL5MarketsHandler,
         options: {
           validate: {
             params: Joi.object({
-              regionId: Joi.number().integer(),
+              l4MarketId: Joi.number().integer(),
             }),
             failAction: (request, h, err) => {
               return Boom.badRequest('request requires l4MarketId')

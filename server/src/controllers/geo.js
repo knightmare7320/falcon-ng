@@ -13,27 +13,27 @@ http:/api/geo/sites/12/1048/1522
 */
 const xToLongitude = (zoom, xTile) => {
   const n = Math.pow(2, zoom);
-  const longitude_degrees = (xTile / n) * 360.0 - 180.0
+  const longitudeDegrees = (xTile / n) * 360.0 - 180.0
 
-  return longitude_degrees;
+  return longitudeDegrees;
 }
 const yToLatitude = (zoom, yTile) => {
   const n = Math.pow(2, zoom);
-  const latitude_radians = Math.atan(Math.sinh(Math.PI * (1 - 2 * yTile / n)));
-  const latitude_degrees = latitude_radians * 180.0 / Math.PI;
+  const latitudeRadians = Math.atan(Math.sinh(Math.PI * (1 - 2 * yTile / n)));
+  const latitudeDegrees = latitudeRadians * 180.0 / Math.PI;
 
-  return latitude_degrees;
+  return latitudeDegrees;
 }
 
 exports.getSiteBounds = (req, res) => {
   const params = {
-    min_latitude: +req.query.minLat,
-    max_latitude: +req.query.maxLat,
-    min_longitude: +req.query.minLng,
-    max_longitude: +req.query.maxLng,
+    minLatitude: +req.query.minLat,
+    maxLatitude: +req.query.maxLat,
+    minLongitude: +req.query.minLng,
+    maxLongitude: +req.query.maxLng,
   };
 
-  if (isNaN(params.min_latitude) || isNaN(params.max_latitude) || isNaN(params.min_longitude) || isNaN(params.max_longitude)) {
+  if (isNaN(params.minLatitude) || isNaN(params.maxLatitude) || isNaN(params.minLongitude) || isNaN(params.maxLongitude)) {
     res.status(500).json({message: 'Invalid geo bounds.'});
     return;
   }
@@ -52,13 +52,13 @@ exports.getSiteBounds = (req, res) => {
 
 exports.getSectorBounds = (req, res) => {
   const params = {
-    min_latitude: +req.query.minLat,
-    max_latitude: +req.query.maxLat,
-    min_longitude: +req.query.minLng,
-    max_longitude: +req.query.maxLng,
+    minLatitude: +req.query.minLat,
+    maxLatitude: +req.query.maxLat,
+    minLongitude: +req.query.minLng,
+    maxLongitude: +req.query.maxLng,
   };
 
-  if (isNaN(params.min_latitude) || isNaN(params.max_latitude) || isNaN(params.min_longitude) || isNaN(params.max_longitude)) {
+  if (isNaN(params.minLatitude) || isNaN(params.maxLatitude) || isNaN(params.minLongitude) || isNaN(params.maxLongitude)) {
     res.status(500).json({message: 'Invalid geo bounds.'});
     return;
   }

@@ -1,6 +1,6 @@
 class Regions {
    static get(db, result) {
-      const sqlStr = 'CALL gui.get_regions()';
+      const sqlStr = 'CALL FalconCode.getRegions()';
       db.query(
          sqlStr,
          function(err, results) {
@@ -15,7 +15,7 @@ class Regions {
    }
 
    static getPerf(db, params, result) {
-      const sqlStr = 'CALL gui.get_regions_perf(?, ?, ?, ?, ?)';
+      const sqlStr = 'CALL FalconCode.getRegionsPerf(?, ?, ?, ?, ?)';
       const sqlParams = [
          params.filter_string,
          params.order_by,
@@ -34,8 +34,8 @@ class Regions {
                return;
             }
             result(null, {
-               "row_count": results[0][0].total_row_count,
-               "rows": results[1].map(({region_id, region_name, ...row}) => {return {id: region_id, name: region_name, ...row}})
+               "totalRowCount": results[0][0].totalRowCount,
+               "rows": results[1].map(({regionId, regionName, ...row}) => {return {id: regionId, name: regionName, ...row}})
             });
          }
       );      

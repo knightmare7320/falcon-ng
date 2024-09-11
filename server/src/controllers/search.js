@@ -2,9 +2,9 @@ const model = require("../models/search.js");
 
 exports.get = (req, res, next) => {
   const params = {
-    search_string: req.query.q,
-    page_number  : req.query.page_number ? +req.query.page_number : null,
-    page_size    : req.query.page_size   ? +req.query.page_size   : null,
+    searchString: req.query.q,
+    pageNumber  : req.query.pageNumber ? +req.query.pageNumber : null,
+    pageSize    : req.query.pageSize   ? +req.query.pageSize   : null,
  };   model.get(
       req.app.locals.db,
       params,
