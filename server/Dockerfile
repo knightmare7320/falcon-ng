@@ -1,4 +1,4 @@
-FROM node:22.5.1-bullseye-slim
+FROM node:bookworm
 RUN apt-get update && apt-get upgrade -y
 
 # ENV NODE_ENV production

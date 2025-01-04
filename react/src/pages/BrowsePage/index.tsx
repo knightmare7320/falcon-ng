@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { Helmet } from "react-helmet-async";
 
 import { browseActions } from "../../store/browse.slice";
 import { RootState } from "../../store";
@@ -40,9 +39,7 @@ export default function BrowsePage({type}: {type: string}) {
   }
 
   return <>
-    <Helmet>
-      <title>Falcon - {getTitle(browseState.type, browseState.name)}</title>
-    </Helmet>
+    <title>Falcon - {getTitle(browseState.type, browseState.name)}</title>
 
     {browseState.status === 'loading' && <LoadingSpinner />}
 

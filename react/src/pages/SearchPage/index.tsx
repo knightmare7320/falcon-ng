@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./index.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { Helmet } from "react-helmet-async";
 
 import { useSearchParams, useNavigate } from "react-router-dom";
 
@@ -55,9 +54,7 @@ export default function SearchPage() {
   }
 
   return <>
-    <Helmet>
-      <title>Falcon - Search</title>
-    </Helmet>
+    <title>Falcon - Search</title>
 
     {searchState.status==='loading' && <LoadingSpinner />}
 

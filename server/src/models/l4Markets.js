@@ -38,7 +38,7 @@ class l4Markets {
                return;
             }
             result(null, {
-              "id": results[0][0].groupId,
+              "id": results[0][0].groupId ,
               "name": results[0][0].groupName,
               "totalRowCount": results[0][0].totalRowCount,
               "rows": results[1].map(({l4MarketId, l4MarketName, ...row}) => {return {id: l4MarketId, name: l4MarketName, ...row}})

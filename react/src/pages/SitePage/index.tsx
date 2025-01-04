@@ -1,4 +1,3 @@
-import { Helmet } from 'react-helmet-async';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -65,9 +64,7 @@ export default function SitePage() {
   }
 
   return <>
-    <Helmet>
-      <title>Falcon - {cascadeCode} </title>
-    </Helmet>
+    <title>Falcon - {cascadeCode} </title>
 
     {siteState.status === 'loading' && <LoadingSpinner />}
 

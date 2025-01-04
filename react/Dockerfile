@@ -1,4 +1,4 @@
-FROM node:22.5.1-bullseye-slim AS build
+FROM node:bookworm AS build
 USER node
 WORKDIR /app
 COPY --chown=node:node package.json .

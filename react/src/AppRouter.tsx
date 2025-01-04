@@ -1,13 +1,13 @@
-import loadable from '@loadable/component';
+import { lazy, Suspense } from 'react'
 import { createBrowserRouter } from "react-router-dom";
 
 import RootLayout from "./components/layout/RootLayout.tsx";
 import ErrorPage from "./pages/ErrorPage";
 import LoginPage from "./pages/LoginPage";
 // import { checkAuthLoader } from './util/auth.service.ts';
-const BrowsePage = loadable(() => import('./pages/BrowsePage'));
-const MapPage = loadable(() => import('./pages/MapPage'));
-const SitePage = loadable(() => import('./pages/SitePage'));
+const BrowsePage = lazy(() => import('./pages/BrowsePage'));
+const MapPage = lazy(() => import('./pages/MapPage'));
+const SitePage = lazy(() => import('./pages/SitePage'));
 import ReportsPage from './pages/ReportsPage/index.tsx';
 import SearchPage from './pages/SearchPage/index.tsx';
 import SettingsPage from './pages/SettingsPage/index.tsx';
@@ -30,33 +30,33 @@ export const AppRouter = createBrowserRouter([
         children: [
           {
             path: "",
-            element: <BrowsePage type="national" />,
+            element: <Suspense fallback={<div>Loading...</div>}><BrowsePage type="national" /></Suspense>,
           }, 
           {
             path: "region/:id",
-            element: <BrowsePage type="region" />,
+            element: <Suspense fallback={<div>Loading...</div>}><BrowsePage type="region" /></Suspense>,
           },
           {
             path: "l4Market/:id",
-            element: <BrowsePage type="l4Market" />,
+            element: <Suspense fallback={<div>Loading...</div>}><BrowsePage type="l4Market" /></Suspense>,
           },
           {
             path: "l5Market/:id",
-            element: <BrowsePage type="l5Market" />,
+            element: <Suspense fallback={<div>Loading...</div>}><BrowsePage type="l5Market" /></Suspense>,
           },
           {
             path: "orgCluster/:id",
-            element: <BrowsePage type="orgCluster" />,
+            element: <Suspense fallback={<div>Loading...</div>}><BrowsePage type="orgCluster" /></Suspense>,
           },
         ]
       },
       {
         path: "site/:cascadeCode/:tabName?",
-        element: <SitePage />,
+        element: <Suspense fallback={<div>Loading...</div>}><SitePage /></Suspense>,
       },
       { 
         path: "map",
-        element: <MapPage />,
+        element: <Suspense fallback={<div>Loading...</div>}><MapPage /></Suspense>,
       },
       { 
         path: "search",
