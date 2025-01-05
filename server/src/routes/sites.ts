@@ -1,8 +1,8 @@
 import { Router } from "express";
 const router = Router();
 
-import { get } from "../controllers/search.js";
+import { getPerf } from "../controllers/sites.ts";
 
-router.get("/", get);
+router.get("/perf", getPerf);
 
 export default router;

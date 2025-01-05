@@ -1,4 +1,4 @@
-import Search from "../models/search.js";
+import Search from "../models/search.ts";
 
 export function get(req, res, next) {
   const params = {

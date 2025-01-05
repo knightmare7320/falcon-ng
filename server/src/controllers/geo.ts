@@ -1,4 +1,4 @@
-import Geo from "../models/geo.js";
+import Geo from "../models/geo.ts";
 /*
 Pseudocode - Tile numbers to lon./lat.
 This returns the NW-corner of the square. Use the function with xtile+1 and/or ytile+1 to get the other corners

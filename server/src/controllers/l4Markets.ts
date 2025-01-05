@@ -1,4 +1,4 @@
-import L4Markets from "../models/l4Markets.js";
+import L4Markets from "../models/l4Markets.ts";
 
 export function get(req, res, next) {
   const params = {

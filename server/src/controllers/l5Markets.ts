@@ -1,4 +1,4 @@
-import L5Markets from "../models/l5Markets.js";
+import L5Markets from "../models/l5Markets.ts";
 
 export function get(req, res, next) {
   const params = {

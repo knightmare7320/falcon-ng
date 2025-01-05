@@ -1,4 +1,4 @@
-import Mscs from "../models/mscs.js";
+import Mscs from "../models/mscs.ts";
 
 export function get(req, res, next) {
   const params = {

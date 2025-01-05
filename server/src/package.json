@@ -2,7 +2,7 @@
   "name": "falcon-server",
   "version": "1.0.0",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.ts"
   },
   "type": "module",
   "private": true,
@@ -16,6 +16,7 @@
     "mysql2": "^3.12.0"
   },
   "devDependencies": {
-    "nodemon": "*"
+    "nodemon": "*",
+    "tsx": "^4.19.2"
   }
 }
