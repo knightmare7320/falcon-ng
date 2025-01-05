@@ -1,9 +1,9 @@
-const express = require("express");
-const router = express.Router();
+import { Router } from "express";
+const router = Router();
 
-const controller = require("../controllers/l4Markets");
+import { getPerf, get } from "../controllers/l4Markets.js";
 
-router.get("/perf/:regionId", controller.getPerf);
-router.get("/:regionId?", controller.get);
+router.get("/perf/:regionId", getPerf);
+router.get("/:regionId?", get);
 
-module.exports = router;
+export default router;

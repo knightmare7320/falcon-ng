@@ -1,9 +1,9 @@
-const express = require("express");
-const router = express.Router();
+import { Router } from "express";
+const router = Router();
 
-const controller = require("../controllers/orgClusters");
+import { getPerf, get } from "../controllers/orgClusters.js";
 
-router.get("/perf/:l5MarketId", controller.getPerf);
-router.get("/:l5MarketId?", controller.get);
+router.get("/perf/:l5MarketId", getPerf);
+router.get("/:l5MarketId?", get);
 
-module.exports = router;
+export default router;

@@ -1,7 +1,7 @@
-const jwt = require("jsonwebtoken");
+import pkg from "jsonwebtoken";
+const { sign, verify } = pkg;
 
-
-exports.login = (req, res) => {
+export function login(req, res) {
   const username = req.body.username;
   const password = req.body.password;
   
@@ -9,7 +9,7 @@ exports.login = (req, res) => {
   //       and obviously having the username/pw plaintext here is really bad
   //       but this is just sample dev stub
   if (username === "test@test.com" && password === "demo123$") {
-    jwt.sign(
+    sign(
       { user_id: 1, full_name: 'Demo User' }, process.env.JWT_SECRET, { expiresIn: '1h' }, 
       (err, token) => {
         if (err) {
@@ -24,22 +24,22 @@ exports.login = (req, res) => {
     res.status(401).json({message: 'Invalid Login.'}); 
     console.log(`Invalid login - ${username}`);
   }
-};
+}
 
-exports.verifyToken = (req, res) => {
+export function verifyToken(req, res) {
   // don't need this right now, but keeping for when it goes back into its own container
   const token = req.params.token;
 
-  jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
+  verify(token, process.env.JWT_SECRET, function(err, decoded) {
     if (err) {
       res.status(401).json({ message: "Invalid token." });
     }
     return res.status(200).json({ message: "Success", uid: decoded.uid});
   });
-};
+}
 
-exports.logout = (req, res) => {
+export function logout(req, res) {
   const username = req.body.username;
   // TODO: record logout in db/logs, remove session info etc etc
   return res.status(200).send();
-};
+}

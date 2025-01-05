@@ -1,4 +1,4 @@
-const model = require("../models/geo.js");
+import Geo from "../models/geo.js";
 /*
 Pseudocode - Tile numbers to lon./lat.
 This returns the NW-corner of the square. Use the function with xtile+1 and/or ytile+1 to get the other corners
@@ -25,7 +25,7 @@ const yToLatitude = (zoom, yTile) => {
   return latitudeDegrees;
 }
 
-exports.getSiteBounds = (req, res) => {
+export function getSiteBounds(req, res) {
   const params = {
     minLatitude: +req.query.minLat,
     maxLatitude: +req.query.maxLat,
@@ -38,7 +38,7 @@ exports.getSiteBounds = (req, res) => {
     return;
   }
 
-  model.getSites(
+  Geo.getSites(
     req.app.locals.db,
     params,
     (err, result) => {
@@ -48,9 +48,9 @@ exports.getSiteBounds = (req, res) => {
         res.status(200).json(result);
     }
   );
-};
+}
 
-exports.getSectorBounds = (req, res) => {
+export function getSectorBounds(req, res) {
   const params = {
     minLatitude: +req.query.minLat,
     maxLatitude: +req.query.maxLat,
@@ -63,7 +63,7 @@ exports.getSectorBounds = (req, res) => {
     return;
   }
 
-  model.getSectors(
+  Geo.getSectors(
     req.app.locals.db,
     params,
     (err, result) => {
@@ -73,11 +73,11 @@ exports.getSectorBounds = (req, res) => {
         res.status(200).json(result);
     }
   );
-};
+}
 
 
 
-exports.getSiteTiles = (req, res) => {
+export function getSiteTiles(req, res) {
   const xTile = +req.params.X;
   const yTile = +req.params.Y;
   const zoom = +req.params.Z;
@@ -93,7 +93,7 @@ exports.getSiteTiles = (req, res) => {
     min_longitude: xToLongitude(zoom, xTile),
     max_longitude: xToLongitude(zoom, xTile+1)
   };
-  model.getSites(
+  Geo.getSites(
     req.app.locals.db,
     params,
     (err, result) => {
@@ -103,9 +103,9 @@ exports.getSiteTiles = (req, res) => {
         res.status(200).json(result);
     }
   );
-};
+}
 
-exports.getSectorTiles = (req, res) => {
+export function getSectorTiles(req, res) {
   const xTile = +req.params.X;
   const yTile = +req.params.Y;
   const zoom = +req.params.Z;
@@ -121,7 +121,7 @@ exports.getSectorTiles = (req, res) => {
     min_longitude: xToLongitude(zoom, xTile),
     max_longitude: xToLongitude(zoom, xTile+1)
   };
-  model.getSectors(
+  Geo.getSectors(
     req.app.locals.db,
     params,
     (err, result) => {
@@ -156,11 +156,11 @@ exports.getSectorTiles = (req, res) => {
       }
     }
   );
-};
+}
 
 
 
-exports.getSiteJson = (req, res) => {
+export function getSiteJson(req, res) {
   const xTile = +req.params.X;
   const yTile = +req.params.Y;
   const zoom = +req.params.Z;
@@ -176,7 +176,7 @@ exports.getSiteJson = (req, res) => {
     min_longitude: xToLongitude(zoom, xTile),
     max_longitude: xToLongitude(zoom, xTile+1)
   };
-  model.getSites(
+  Geo.getSites(
     req.app.locals.db,
     params,
     (err, result) => {
@@ -186,7 +186,7 @@ exports.getSiteJson = (req, res) => {
         res.status(200).json(formatSiteJson(result));
     }
   );
-};
+}
 
 function formatSiteJson(sites) {
   let json = {

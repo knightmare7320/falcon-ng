@@ -1,9 +1,9 @@
-const express = require("express");
-const router = express.Router();
+import { Router } from "express";
+const router = Router();
 
-const controller = require("../controllers/regions");
+import { getPerf, get } from "../controllers/regions.js";
 
-router.get("/perf", controller.getPerf);
-router.get("/", controller.get);
+router.get("/perf", getPerf);
+router.get("/", get);
 
-module.exports = router;
+export default router;

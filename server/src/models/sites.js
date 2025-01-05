@@ -1,4 +1,4 @@
-class Sites {
+export default class Sites {
   static getPerf(db, params, result) {
     const sqlStr = 'CALL FalconCode.getSitesPerf(?, ?, ?, ?, ?, ?, ?)';
     const sqlParams = [ 
@@ -48,5 +48,3 @@ class Sites {
     }
   }
 }
-
-module.exports = Sites;

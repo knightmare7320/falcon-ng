@@ -1,19 +1,19 @@
-const express = require("express");
-const router = express.Router();
+import { Router } from "express";
+const router = Router();
 
-const controller = require("../controllers/site");
+import { getSiteTypes, getRepairPriorities, getStructureTypes, getTimezones, getCarriers, getSectors, getBts, getNearest, get, updateSite } from "../controllers/site.js";
 
-router.get("/siteTypes"            , controller.getSiteTypes);
-router.get("/repairPriorities"     , controller.getRepairPriorities);
-router.get("/structureTypes"       , controller.getStructureTypes);
-router.get("/timezones"             , controller.getTimezones);
+router.get("/siteTypes"            , getSiteTypes);
+router.get("/repairPriorities"     , getRepairPriorities);
+router.get("/structureTypes"       , getStructureTypes);
+router.get("/timezones"             , getTimezones);
 
-router.get("/:cascadeCode/carriers", controller.getCarriers);
-router.get("/:cascadeCode/sectors" , controller.getSectors);
-router.get("/:cascadeCode/bts"     , controller.getBts);
-router.get("/:cascadeCode/nearest" , controller.getNearest);
-router.get("/:cascadeCode"         , controller.get);
+router.get("/:cascadeCode/carriers", getCarriers);
+router.get("/:cascadeCode/sectors" , getSectors);
+router.get("/:cascadeCode/bts"     , getBts);
+router.get("/:cascadeCode/nearest" , getNearest);
+router.get("/:cascadeCode"         , get);
 
-router.put("/:siteId", controller.updateSite);
+router.put("/:siteId", updateSite);
 
-module.exports = router;
+export default router;

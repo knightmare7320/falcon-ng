@@ -1,13 +1,13 @@
-const express = require("express");
-const router = express.Router();
+import { Router } from "express";
+const router = Router();
 
-const controller = require("../controllers/geo");
+import { getSiteTiles, getSiteBounds, getSectorTiles, getSectorBounds, getSiteJson } from "../controllers/geo.js";
 
-router.get("/tile/sites/:Z/:X/:Y", controller.getSiteTiles);
-router.get("/bounds/sites", controller.getSiteBounds);
-router.get("/tile/sectors/:Z/:X/:Y", controller.getSectorTiles);
-router.get("/bounds/sectors", controller.getSectorBounds);
+router.get("/tile/sites/:Z/:X/:Y", getSiteTiles);
+router.get("/bounds/sites", getSiteBounds);
+router.get("/tile/sectors/:Z/:X/:Y", getSectorTiles);
+router.get("/bounds/sectors", getSectorBounds);
 
-router.get("/json/sites/:Z/:X/:Y", controller.getSiteJson);
+router.get("/json/sites/:Z/:X/:Y", getSiteJson);
 
-module.exports = router;
+export default router;

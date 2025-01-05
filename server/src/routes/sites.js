@@ -1,8 +1,8 @@
-const express = require("express");
-const router = express.Router();
+import { Router } from "express";
+const router = Router();
 
-const controller = require("../controllers/sites");
+import { getPerf } from "../controllers/sites.js";
 
-router.get("/perf", controller.getPerf);
+router.get("/perf", getPerf);
 
-module.exports = router;
+export default router;

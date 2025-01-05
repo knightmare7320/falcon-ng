@@ -1,4 +1,4 @@
-class l5Markets {
+export default class l5Markets {
   static get(db, params, result) {
     const sqlStr = 'CALL FalconCode.getL5Markets(?)';
     const sqlParams = [
@@ -49,5 +49,3 @@ class l5Markets {
     );   
   }
 }
-
-module.exports = l5Markets;

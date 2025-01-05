@@ -1,24 +1,30 @@
-const path = require("path");
-const express = require("express");
+import { join } from "path";
+import express, { json, urlencoded } from "express";
 const app = express();
-const morgan = require("morgan");
-const compression = require("compression");
-const mysql = require("mysql2");
+import morgan from "morgan";
+import compression from "compression";
+import { createPool } from "mysql2";
 
-const authRoutes = require("./routes/auth");
-const siteRoutes = require("./routes/site");
-const sitesRoutes = require("./routes/sites");
-const regionsRoutes = require("./routes/regions");
-const l4MarketsRoutes = require("./routes/l4Markets");
-const l5MarketsRoutes = require("./routes/l5Markets");
-const orgClustersRoutes = require("./routes/orgClusters");
-const mscsRoutes = require("./routes/mscs");
-const bscsRoutes = require("./routes/bscs");
-const geoRoutes = require("./routes/geo");
-const searchRoutes = require("./routes/search");
+import authRoutes from "./routes/auth.js";
+import siteRoutes from "./routes/site.js";
+import sitesRoutes from "./routes/sites.js";
+import regionsRoutes from "./routes/regions.js";
+import l4MarketsRoutes from "./routes/l4Markets.js";
+import l5MarketsRoutes from "./routes/l5Markets.js";
+import orgClustersRoutes from "./routes/orgClusters.js";
+import mscsRoutes from "./routes/mscs.js";
+import bscsRoutes from "./routes/bscs.js";
+import geoRoutes from "./routes/geo.js";
+import searchRoutes from "./routes/search.js";
+
+
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
+const __dirname  = path.dirname(__filename);       // get the name of the directory
 
 //connect to db and stuff the object into the app
-const dbPool = mysql.createPool({
+const dbPool = createPool({
    host: 'mysqldb',
    user: process.env.MYSQL_USER,
    password: process.env.MYSQL_PASSWORD,
@@ -33,11 +39,11 @@ const dbPool = mysql.createPool({
 });
 app.locals.db = dbPool;
 
-app.use(express.json());
+app.use(json());
 app.use(compression());
-app.use(express.urlencoded({extended: false}));
+app.use(urlencoded({extended: false}));
 app.use(morgan('combined'));
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(join(__dirname, "public")));
 
 app.use((req, res, next) => {
    res.setHeader("Access-Control-Allow-Origin", "*");
@@ -65,4 +71,4 @@ app.get('*', function(req, res){
   res.status(404).json({message: 'Server Error - 404'});
 });
 
-module.exports = app;
+export default app;

@@ -1,9 +1,9 @@
-const express = require("express");
-const router = express.Router();
+import { Router } from "express";
+const router = Router();
 
-const controller = require("../controllers/bscs");
+import { getPerf, get } from "../controllers/bscs.js";
 
-router.get("/perf/:mscId?", controller.getPerf);
-router.get("/:mscId?", controller.get);
+router.get("/perf/:mscId?", getPerf);
+router.get("/:mscId?", get);
 
-module.exports = router;
+export default router;

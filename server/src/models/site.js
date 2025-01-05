@@ -1,4 +1,4 @@
-class Site {
+export default class Site {
   static get(db, params, result) {
     db.query(
       'call FalconCode.getSite(?)',
@@ -109,58 +109,56 @@ class Site {
     );
   }
 
-   static getSiteTypes(db, result) {
-      db.query(
-         'call FalconCode.getSiteTypes()',
-         function(err, results) {
-            if (err) {
-               console.error(err);
-               result(err, null);
-               return;
-            }
-            result(null, results[0]);
-         }
-      );
-   }
-   static getStructureTypes(db, result) {
-      db.query(
-         'call FalconCode.getStructureTypes()',
-         function(err, results) {
-            if (err) {
-               console.error(err);
-               result(err, null);
-               return;
-            }
-            result(null, results[0]);
-         }
-      );
-   }
-   static getRepairPriorities(db, result) {
-      db.query(
-        'call FalconCode.getRepairPriorities()',
-        function(err, results) {
-          if (err) {
-            console.error(err);
-            result(err, null);
-            return;
-          }
-          result(null, results[0]);
+  static getSiteTypes(db, result) {
+    db.query(
+      'call FalconCode.getSiteTypes()',
+      function(err, results) {
+        if (err) {
+          console.error(err);
+          result(err, null);
+          return;
         }
-      );
-   }
-   static getTimezones(db, result) {
-      db.query(
-         'call FalconCode.getTimezones()',
-         function(err, results) {
-            if (err) {
-               console.error(err);
-               result(err, null);
-               return;
-            }
-            result(null, results[0]);
-         }
-      );
-   }
+        result(null, results[0]);
+      }
+    );
+  }
+  static getStructureTypes(db, result) {
+    db.query(
+      'call FalconCode.getStructureTypes()',
+      function(err, results) {
+        if (err) {
+          console.error(err);
+          result(err, null);
+          return;
+        }
+        result(null, results[0]);
+      }
+    );
+  }
+  static getRepairPriorities(db, result) {
+    db.query(
+      'call FalconCode.getRepairPriorities()',
+      function(err, results) {
+        if (err) {
+          console.error(err);
+          result(err, null);
+          return;
+        }
+        result(null, results[0]);
+      }
+    );
+  }
+  static getTimezones(db, result) {
+    db.query(
+      'call FalconCode.getTimezones()',
+      function(err, results) {
+        if (err) {
+          console.error(err);
+          result(err, null);
+          return;
+        }
+        result(null, results[0]);
+      }
+    );
+  }
 }
-
-module.exports = Site;

@@ -1,4 +1,4 @@
-class Search {
+export default class Search {
   static get(db, params, result) {
     const sqlStr = 'CALL FalconCode.getQuickSearch(?,?,?)';
     const sqlParams = [
@@ -11,17 +11,15 @@ class Search {
       sqlParams,
       function(err, results) {
         if (err) {
-           console.error(err);
-           result(err, null);
-           return;
+          console.error(err);
+          result(err, null);
+          return;
         }
         result(null, {
-           "totalRowCount": results[0][0].totalRowCount,
-           "rows": results[1],
+          "totalRowCount": results[0][0].totalRowCount,
+          "rows": results[1],
         });
       }
     );      
   }
 }
-
-module.exports = Search;

@@ -1,9 +1,9 @@
-const express = require("express");
-const router = express.Router();
+import { Router } from "express";
+const router = Router();
 
-const controller = require("../controllers/l5Markets");
+import { getPerf, get } from "../controllers/l5Markets.js";
 
-router.get("/perf/:l4MarketId", controller.getPerf);
-router.get("/:l4MarketId?", controller.get);
+router.get("/perf/:l4MarketId", getPerf);
+router.get("/:l4MarketId?", get);
 
-module.exports = router;
+export default router;

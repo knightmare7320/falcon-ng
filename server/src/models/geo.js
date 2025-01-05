@@ -1,46 +1,46 @@
-class Geo {
-   static getSites(db, params, result) {
-      const sqlStr = 'CALL FalconCode.getGeoSites(?, ?, ?, ?)';
-      const sqlParams = [
-         params.minLatitude,
-         params.maxLatitude,
-         params.minLongitude,
-         params.maxLongitude,
-      ];
-      db.query(
-         sqlStr,
-         sqlParams,
-         function(err, results) {
-            if (err) {
-               console.error(err);
-               result(err, null);
-               return;
-            }
-            result(null, results[0]);
-         }
-      );      
-   }
-   static getSectors(db, params, result) {
-      const sqlStr = 'CALL FalconCode.getGeoSectors(?, ?, ?, ?)';
-      const sqlParams = [
-         params.minLatitude,
-         params.maxLatitude,
-         params.minLongitude,
-         params.maxLongitude,
-      ];
-      db.query(
-         sqlStr,
-         sqlParams,
-         function(err, results) {
-            if (err) {
-               console.error(err);
-               result(err, null);
-               return;
-            }
-            result(null, results[0]);
-         }
-      );      
-   }
+export default class Geo {
+  static getSites(db, params, result) {
+    const sqlStr = 'CALL FalconCode.getGeoSites(?, ?, ?, ?)';
+    const sqlParams = [
+      params.minLatitude,
+      params.maxLatitude,
+      params.minLongitude,
+      params.maxLongitude,
+    ];
+    db.query(
+      sqlStr,
+      sqlParams,
+      function(err, results) {
+        if (err) {
+          console.error(err);
+          result(err, null);
+          return;
+        }
+        result(null, results[0]);
+      }
+    );      
+  }
+  static getSectors(db, params, result) {
+    const sqlStr = 'CALL FalconCode.getGeoSectors(?, ?, ?, ?)';
+    const sqlParams = [
+      params.minLatitude,
+      params.maxLatitude,
+      params.minLongitude,
+      params.maxLongitude,
+    ];
+    db.query(
+      sqlStr,
+      sqlParams,
+      function(err, results) {
+        if (err) {
+          console.error(err);
+          result(err, null);
+          return;
+        }
+        result(null, results[0]);
+      }
+    );      
+  }
  
 //  // TODO: had some trouble getting this working with the split DB's, and so fell back to old style js, need to clean this back up again
 //  export const getGeoSectors = async (ctx:any, xtile: number, ytile: number, zoom: number) => {
@@ -95,5 +95,3 @@ class Geo {
 //    }
 //    return geoCarriers;
 }
-
-module.exports = Geo;
