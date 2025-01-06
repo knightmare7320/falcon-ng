@@ -1,6 +1,7 @@
-import Search from "../models/search.ts";
+import Express from "express"
+import Search from "../models/search.ts"
 
-export function get(req, res, next) {
+export function get(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
   const params = {
     searchString: req.query.q,
     pageNumber  : req.query.pageNumber ? +req.query.pageNumber : null,

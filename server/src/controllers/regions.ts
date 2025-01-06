@@ -1,6 +1,7 @@
-import Regions from "../models/regions.js";
+import Express from "express"
+import Regions from "../models/regions.js"
 
-export function get(req, res, next) {
+export function get(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
   Regions.get(
     req.app.locals.db,
     (err, result) => {
@@ -12,7 +13,7 @@ export function get(req, res, next) {
   );
 }
 
-export function getPerf(req, res, next) {
+export function getPerf(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
   const params = {
     filterString: req.query.filterString,
     orderBy     : req.query.orderBy      ? req.query.orderBy     : null,

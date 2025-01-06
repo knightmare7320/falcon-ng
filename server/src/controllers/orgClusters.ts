@@ -1,6 +1,7 @@
-import OrgClusters from "../models/orgClusters.ts";
+import Express from "express"
+import OrgClusters from "../models/orgClusters.ts"
 
-export function get(req, res, next) {
+export function get(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
   const params = {
     l5MarketId: req.params.l5MarketId ? +req.params.l5MarketId: null,
   }
@@ -16,7 +17,7 @@ export function get(req, res, next) {
   );
 }
 
-export function getPerf(req, res, next) {
+export function getPerf(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
   const params = {
     l5MarketId  : req.params.l5MarketId  ? +req.params.l5MarketId: null,
     filterString: req.query.filterString,

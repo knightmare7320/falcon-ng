@@ -64,8 +64,6 @@ export default function SitePage() {
   }
 
   return <>
-    <title>Falcon - {cascadeCode} </title>
-
     {siteState.status === 'loading' && <LoadingSpinner />}
 
     <Breadcrumbs 
@@ -76,6 +74,8 @@ export default function SitePage() {
       cascadeCode={siteState.site.cascadeCode}
     />
 
+    <title>{"Falcon - " + cascadeCode}</title>
+    
     <main className="main-content">
       <h2 className={styles.cascadeTitle}>
         <FontAwesomeIcon icon={faTowerCell} />
@@ -92,7 +92,6 @@ export default function SitePage() {
         <div className="tab__content">
           {tabContent}
         </div>  
-
       </div>
 
       <EditSiteDialog openFg={siteState.editSiteOpenFg} />

@@ -1,6 +1,7 @@
-import Bscs from "../models/bscs.ts";
+import Express from "express"
+import Bscs from "../models/bscs.ts"
 
-export function get(req, res, next) {
+export function get(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
   const params = {
     switch_id: req.params.mscId ? +req.params.mscId: null,
     equipment_vendor_id: req.query.equipmentVendorId ? +req.query.equipmentVendorId: null,
@@ -17,7 +18,7 @@ export function get(req, res, next) {
   );
 }
 
-export function getPerf(req, res, next) {
+export function getPerf(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
   const params = {
     mscId       : req.params.mscId       ? +req.params.mscId     : null,
     equipmentVendorId: req.query.equipmentVendorId ? +req.query.equipmentVendorId : null,

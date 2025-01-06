@@ -1,6 +1,7 @@
-import Sites from "../models/sites.ts";
+import Express from "express"
+import Sites from "../models/sites.ts"
 
-export function getPerf(req, res, next) {
+export function getPerf(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
   const params = {
     groupType  : req.query.type,
     groupId    : req.query.id         ? +req.query.id          : null,

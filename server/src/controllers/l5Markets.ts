@@ -1,6 +1,7 @@
-import L5Markets from "../models/l5Markets.ts";
+import Express from "express"
+import L5Markets from "../models/l5Markets.ts"
 
-export function get(req, res, next) {
+export function get(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
   const params = {
     l4MarketId: req.params.l4MarketId ? +req.params.l4MarketId: null,
   }
@@ -16,7 +17,7 @@ export function get(req, res, next) {
   );
 }
 
-export function getPerf(req, res, next) {
+export function getPerf(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
   const params = {
     l4MarketId: req.params.l4MarketId ? +req.params.l4MarketId: null,
     filterString  : req.query.filterString,

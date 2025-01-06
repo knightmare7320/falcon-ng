@@ -1,6 +1,7 @@
-import Site from "../models/site.ts";
+import Express from "express"
+import Site from "../models/site.ts"
 
-export function get(req, res, next) {
+export function get(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
   const params = {
     cascadeCode: req.params.cascadeCode,
   };
@@ -16,7 +17,7 @@ export function get(req, res, next) {
   );
 }
 
-export function updateSite(req, res, next) {
+export function updateSite(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
   const params = {
     siteId          : req.params.siteId,
     cascadeCode     : req.body.cascadeCode,
@@ -48,7 +49,7 @@ export function updateSite(req, res, next) {
   );
 }
 
-export function getBts(req, res, next) {
+export function getBts(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
   const params = {
     cascadeCode: req.params.cascadeCode,
   };
@@ -64,7 +65,7 @@ export function getBts(req, res, next) {
   );
 }
 
-export function getSectors(req, res, next) {
+export function getSectors(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
   const params = {
     cascadeCode: req.params.cascadeCode,
   };
@@ -80,7 +81,7 @@ export function getSectors(req, res, next) {
   );
 }
 
-export function getCarriers(req, res, next) {
+export function getCarriers(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
   const params = {
     cascadeCode: req.params.cascadeCode,
   };
@@ -96,7 +97,7 @@ export function getCarriers(req, res, next) {
   );
 }
 
-export function getNearest(req, res) {
+export function getNearest(req: Express.Request, res: Express.Response) {
   const params = {
     cascadeCode: req.params.cascadeCode,
   };
@@ -112,7 +113,7 @@ export function getNearest(req, res) {
   );
 }
 
-export function getSiteTypes(req, res) {
+export function getSiteTypes(req: Express.Request, res: Express.Response) {
   Site.getSiteTypes(
     req.app.locals.db,
     (err, result) => {
@@ -123,7 +124,7 @@ export function getSiteTypes(req, res) {
     }
   );
 }
-export function getRepairPriorities(req, res) {
+export function getRepairPriorities(req: Express.Request, res: Express.Response) {
   Site.getRepairPriorities(
     req.app.locals.db,
     (err, result) => {
@@ -134,7 +135,7 @@ export function getRepairPriorities(req, res) {
     }
   );
 }
-export function getStructureTypes(req, res) {
+export function getStructureTypes(req: Express.Request, res: Express.Response) {
   Site.getStructureTypes(
     req.app.locals.db,
     (err, result) => {
@@ -145,7 +146,7 @@ export function getStructureTypes(req, res) {
     }
   );
 }
-export function getTimezones(req, res) {
+export function getTimezones(req: Express.Request, res: Express.Response) {
   Site.getTimezones(
     req.app.locals.db,
     (err, result) => {

@@ -1,6 +1,7 @@
-import L4Markets from "../models/l4Markets.ts";
+import Express from "express"
+import L4Markets from "../models/l4Markets.ts"
 
-export function get(req, res, next) {
+export function get(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
   const params = {
     regionId: req.params.regionId ? +req.params.regionId: null,
   }
@@ -16,7 +17,7 @@ export function get(req, res, next) {
   );
 }
 
-export function getPerf(req, res, next) {
+export function getPerf(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
   const params = {
     regionId  : req.params.regionId  ? +req.params.regionId: null,
     filterString : req.query.filterString,

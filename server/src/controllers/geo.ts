@@ -1,4 +1,5 @@
-import Geo from "../models/geo.ts";
+import Express from "express"
+import Geo from "../models/geo.ts"
 /*
 Pseudocode - Tile numbers to lon./lat.
 This returns the NW-corner of the square. Use the function with xtile+1 and/or ytile+1 to get the other corners
@@ -11,7 +12,7 @@ lat_deg = lat_rad * 180.0 / π
 example tile:
 http:/api/geo/sites/12/1048/1522
 */
-const xToLongitude = (zoom, xTile) => {
+const xToLongitude = (zoom: number, xTile: number) => {
   const n = Math.pow(2, zoom);
   const longitudeDegrees = (xTile / n) * 360.0 - 180.0
 
@@ -25,7 +26,7 @@ const yToLatitude = (zoom, yTile) => {
   return latitudeDegrees;
 }
 
-export function getSiteBounds(req, res) {
+export function getSiteBounds(req: Express.Request, res: Express.Response) {
   const params = {
     minLatitude: +req.query.minLat,
     maxLatitude: +req.query.maxLat,
@@ -50,7 +51,7 @@ export function getSiteBounds(req, res) {
   );
 }
 
-export function getSectorBounds(req, res) {
+export function getSectorBounds(req: Express.Request, res: Express.Response) {
   const params = {
     minLatitude: +req.query.minLat,
     maxLatitude: +req.query.maxLat,
@@ -77,7 +78,7 @@ export function getSectorBounds(req, res) {
 
 
 
-export function getSiteTiles(req, res) {
+export function getSiteTiles(req: Express.Request, res: Express.Response) {
   const xTile = +req.params.X;
   const yTile = +req.params.Y;
   const zoom = +req.params.Z;
@@ -105,7 +106,7 @@ export function getSiteTiles(req, res) {
   );
 }
 
-export function getSectorTiles(req, res) {
+export function getSectorTiles(req: Express.Request, res: Express.Response) {
   const xTile = +req.params.X;
   const yTile = +req.params.Y;
   const zoom = +req.params.Z;
@@ -160,7 +161,7 @@ export function getSectorTiles(req, res) {
 
 
 
-export function getSiteJson(req, res) {
+export function getSiteJson(req: Express.Request, res: Express.Response) {
   const xTile = +req.params.X;
   const yTile = +req.params.Y;
   const zoom = +req.params.Z;

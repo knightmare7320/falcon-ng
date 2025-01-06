@@ -22,7 +22,7 @@ app.get('/list/:cascade_code', async function(req, res) {
   try {
     await promises.access(`/data/pictures/${cascade_code}`);
     const files = await promises.readdir(`/data/pictures/${cascade_code}`);
-    const fileNames = [];
+    const fileNames: String[] = [];
     files.map(fileName => {
       const splitFile = fileName.split('.');
       if(splitFile[2]==='jpg') {

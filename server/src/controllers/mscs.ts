@@ -1,6 +1,7 @@
-import Mscs from "../models/mscs.ts";
+import Express from "express"
+import Mscs from "../models/mscs.ts"
 
-export function get(req, res, next) {
+export function get(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
   const params = {
     equipmentVendorId: req.query.equipmentVendorId ? +req.query.equipmentVendorId: null,
   }
@@ -16,7 +17,7 @@ export function get(req, res, next) {
   );
 }
 
-export function getPerf(req, res, next) {
+export function getPerf(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
   const params = {
     equipmentVendorId: req.query.equipmentVendorId ? req.query.equipmentVendorId : null,
     filterString  : req.query.filterString,
