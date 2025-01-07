@@ -86,7 +86,6 @@ export default function SitePage() {
         <Tab title="Location"    faIcon={faLocationDot} tabName="location"    selectedTab={selectedTab} onChange={handleTabChange} />
         <Tab title="Equipment"   faIcon={faRadio}       tabName="equipment"   selectedTab={selectedTab} onChange={handleTabChange} />
         <Tab title="Performance" faIcon={faChartLine}   tabName="performance" selectedTab={selectedTab} onChange={handleTabChange} />
-        <Tab title="Params"      faIcon={faSliders}     tabName="params"      selectedTab={selectedTab} onChange={handleTabChange} />
         <Tab title="Pictures"    faIcon={faImage}       tabName="pictures"    selectedTab={selectedTab} onChange={handleTabChange} />
 
         <div className="tab__content">
