@@ -5,7 +5,7 @@
 # COPY ../react .
 # CMD npm run build
 
-FROM nginx:1.27.0-bookworm
+FROM nginx:bookworm
 EXPOSE 8000
 
 RUN apt-get update && apt-get upgrade -y

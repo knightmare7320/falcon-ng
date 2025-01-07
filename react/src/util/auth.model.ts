@@ -1,7 +1,7 @@
 export type AuthResponse = {
   message?: string,
-  user_id?: string,
-  full_name?: string,
+  userId?: string,
+  fullName?: string,
   token?: string,
   expiration?: number,
 };

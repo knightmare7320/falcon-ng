@@ -9,10 +9,10 @@ export default function CarrierPerfRows({btss, sectors, carriers}:PerformanceTab
       <th className="column-head top" style={{width:'140px'}}>Carrier</th>
       {btss.map(
         bts => sectors.map(
-          (_) => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+          (_) => carriers.filter(carrier => carrier.btsId === bts.btsId).map(
             carrier =>
-              <td key={carrier.carrier_id} className="column-head top">
-                <strong>{carrier.carrier_designation_name}</strong>
+              <td key={carrier.carrierId} className="column-head top">
+                <strong>{carrier.carrierDesignationName}</strong>
               </td>
           )
         )
@@ -22,9 +22,9 @@ export default function CarrierPerfRows({btss, sectors, carriers}:PerformanceTab
       <th>Setup Attempts</th>
       {btss.map(
         bts => sectors.map(
-          (_) => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+          (_) => carriers.filter(carrier => carrier.btsId === bts.btsId).map(
             carrier =>           
-              <td key={carrier.carrier_id}>
+              <td key={carrier.carrierId}>
                 &nbsp;
               </td>
           )
@@ -35,9 +35,9 @@ export default function CarrierPerfRows({btss, sectors, carriers}:PerformanceTab
       <th>Equipment Blocks</th>
       {btss.map(
         bts => sectors.map(
-          (_) => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+          (_) => carriers.filter(carrier => carrier.btsId === bts.btsId).map(
             carrier =>           
-              <td key={carrier.carrier_id}>
+              <td key={carrier.carrierId}>
                 &nbsp;
               </td>
           )
@@ -48,9 +48,9 @@ export default function CarrierPerfRows({btss, sectors, carriers}:PerformanceTab
       <th>Access Failures</th>
       {btss.map(
         bts => sectors.map(
-          (_) => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+          (_) => carriers.filter(carrier => carrier.btsId === bts.btsId).map(
             carrier =>           
-              <td key={carrier.carrier_id}>
+              <td key={carrier.carrierId}>
                 &nbsp;
               </td>
           )
@@ -61,9 +61,9 @@ export default function CarrierPerfRows({btss, sectors, carriers}:PerformanceTab
       <th>Block %</th>
       {btss.map(
         bts => sectors.map(
-          (_) => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+          (_) => carriers.filter(carrier => carrier.btsId === bts.btsId).map(
             carrier =>           
-              <td key={carrier.carrier_id}>
+              <td key={carrier.carrierId}>
                 &nbsp;
               </td>
           )
@@ -74,9 +74,9 @@ export default function CarrierPerfRows({btss, sectors, carriers}:PerformanceTab
       <th>Successful Calls</th>
       {btss.map(
         bts => sectors.map(
-          (_) => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+          (_) => carriers.filter(carrier => carrier.btsId === bts.btsId).map(
             carrier =>           
-              <td key={carrier.carrier_id}>
+              <td key={carrier.carrierId}>
                 &nbsp;
               </td>
           )
@@ -87,9 +87,9 @@ export default function CarrierPerfRows({btss, sectors, carriers}:PerformanceTab
       <th>Primary Drops</th>
       {btss.map(
         bts => sectors.map(
-          (_) => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+          (_) => carriers.filter(carrier => carrier.btsId === bts.btsId).map(
             carrier =>           
-              <td key={carrier.carrier_id}>
+              <td key={carrier.carrierId}>
                 &nbsp;
               </td>
           )
@@ -100,9 +100,9 @@ export default function CarrierPerfRows({btss, sectors, carriers}:PerformanceTab
       <th>Drop %</th>
       {btss.map(
         bts => sectors.map(
-          (_) => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+          (_) => carriers.filter(carrier => carrier.btsId === bts.btsId).map(
             carrier =>           
-              <td key={carrier.carrier_id}>
+              <td key={carrier.carrierId}>
                 &nbsp;
               </td>
           )
@@ -113,9 +113,9 @@ export default function CarrierPerfRows({btss, sectors, carriers}:PerformanceTab
       <th>Primary Erlangs</th>
       {btss.map(
         bts => sectors.map(
-          (_) => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+          (_) => carriers.filter(carrier => carrier.btsId === bts.btsId).map(
             carrier =>           
-              <td key={carrier.carrier_id}>
+              <td key={carrier.carrierId}>
                 &nbsp;
               </td>
           )
@@ -126,9 +126,9 @@ export default function CarrierPerfRows({btss, sectors, carriers}:PerformanceTab
       <th>MOUs</th>
       {btss.map(
         bts => sectors.map(
-          (_) => carriers.filter(carrier => carrier.bts_id === bts.bts_id).map(
+          (_) => carriers.filter(carrier => carrier.btsId === bts.btsId).map(
             carrier =>           
-              <td key={carrier.carrier_id}>
+              <td key={carrier.carrierId}>
                 &nbsp;
               </td>
           )

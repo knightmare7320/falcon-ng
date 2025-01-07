@@ -6,30 +6,30 @@ export type BrowseState = {
   type: string,
   id?: number,
   name: string,
-  row_count: number,
+  totalRowCount: number,
   rows: Array<kpiRowType>,
-  page_size: number,
-  page_number: number,
-  page_count: number,
-  order_by: string,
-  order_dir: string,
-  page_sizes: Array<number>,
-  filter_string: string,
+  pageSize: number,
+  pageNumber: number,
+  pageCount: number,
+  orderBy: string,
+  orderDir: string,
+  pageSizes: Array<number>,
+  filterString: string,
 }
 
 const INITIAL_STATE: BrowseState = {
   status: 'init',
   type: 'national',
   name: '',
-  row_count: 0,
+  totalRowCount: 0,
   rows: [] as kpiRowType[],
-  page_size: 7,
-  page_number: 1,
-  page_count: 0,
-  order_by: 'name',
-  order_dir: 'ASC',
-  page_sizes: [7, 15, 30],
-  filter_string: '',
+  pageSize: 7,
+  pageNumber: 1,
+  pageCount: 0,
+  orderBy: 'name',
+  orderDir: 'ASC',
+  pageSizes: [7, 15, 30],
+  filterString: '',
 }
 
 
@@ -45,41 +45,41 @@ const browseSlice = createSlice({
     },
     setPageType(state:BrowseState, action:PayloadAction<{type: string, id?: number}>) {
       if (state.type !== action.payload.type) {
-        state.page_number = 1;
+        state.pageNumber = 1;
       }
       state.type = action.payload.type;
       state.id = action.payload.id;
     },
     setPageNumber(state:BrowseState, action:PayloadAction<number>) {
-      state.page_number = action.payload;
+      state.pageNumber = action.payload;
     },
     setPageSize(state:BrowseState, action:PayloadAction<number>) {
-      const page_size = action.payload;
-      const page_count = Math.ceil(state.row_count / page_size)
+      const pageSize = action.payload;
+      const pageCount = Math.ceil(state.totalRowCount / pageSize)
 
-      state.page_size = page_size;
-      state.page_count = page_count;
+      state.pageSize = pageSize;
+      state.pageCount = pageCount;
       // TODO: this just makes sure we have a valid page, 
       //       would rather recalculate to stay near the current data
       //       calculated using previous and current page size
-      if (state.page_number > page_count) {
-        state.page_number = page_count;
+      if (state.pageNumber > pageCount) {
+        state.pageNumber = pageCount;
       }
     },
-    setOrderBy(state:BrowseState, action:PayloadAction<{order_by: string, order_dir: string}>) {
-      state.order_by = action.payload.order_by;
-      state.order_dir = action.payload.order_dir;
+    setOrderBy(state:BrowseState, action:PayloadAction<{orderBy: string, orderDir: string}>) {
+      state.orderBy = action.payload.orderBy;
+      state.orderDir = action.payload.orderDir;
     },
     setFilterString(state:BrowseState, action:PayloadAction<string>) {
-      state.filter_string = action.payload;
+      state.filterString = action.payload;
     },
     setData(state:BrowseState, action:PayloadAction<kpiTableType>) {
       state.status = 'ok';
-      state.row_count = action.payload.row_count;
+      state.totalRowCount = action.payload.totalRowCount;
       state.rows = action.payload.rows;
       state.id = action.payload.id || undefined;
       state.name = action.payload.name || '';
-      state.page_count = Math.ceil(action.payload.row_count / state.page_size);
+      state.pageCount = Math.ceil(action.payload.totalRowCount / state.pageSize);
     },
   }
 });

@@ -2,9 +2,9 @@
   "name": "falcon-server",
   "version": "1.0.0",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.ts"
   },
-  "type": "commonjs",
+  "type": "module",
   "private": true,
   "dependencies": {
     "body-parser": "*",
@@ -13,9 +13,13 @@
     "express": "*",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
-    "mysql2": "^3.11.0"
+    "mysql2": "^3.12.0"
   },
   "devDependencies": {
-    "nodemon": "*"
+    "@types/compression": "^1.7.5",
+    "@types/express": "^5.0.0",
+    "@types/morgan": "^1.9.9",
+    "nodemon": "*",
+    "tsx": "^4.19.2"
   }
 }

@@ -3,17 +3,17 @@ import { SearchResultsType } from "./search.model";
 const API_URL = import.meta.env.VITE_REACT_APP_API_URL;
 
 export async function fetchSearchData({ 
-  search_string = '',
-  page_number   = 1, 
-  page_size     = 10, 
+  searchString = '',
+  pageNumber   = 1, 
+  pageSize     = 10, 
 }):Promise<SearchResultsType> {
 
   let url = API_URL + '/search?';
 
   let params = {
-    q: search_string,
-    page_number: page_number.toString(),
-    page_size: page_size.toString(),
+    q: searchString,
+    page_number: pageNumber.toString(),
+    page_size: pageSize.toString(),
   };
 
   const response = await fetch(url + new URLSearchParams(params));

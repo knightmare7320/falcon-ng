@@ -2,16 +2,19 @@
   "name": "pictures-server",
   "version": "1.0.0",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.ts"
   },
-  "type": "commonjs",
+  "type": "module",
   "private": true,
   "dependencies": {
-    "express": "^4.19.2",
+    "express": "^4.21.2",
     "morgan": "^1.10.0",
-    "sharp": "^0.33.4"
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
-    "nodemon": "^3.1.3"
+    "@types/express": "^5.0.0",
+    "@types/morgan": "^1.9.9",
+    "nodemon": "^3.1.9",
+    "tsx": "^4.19.2"
   }
 }

@@ -2,6 +2,9 @@ secrets
 node_modules
 .angular
 package-lock.json
+*.env*
+hapi/prisma/migrations
+dist/
 
 # Node
 npm-debug.log

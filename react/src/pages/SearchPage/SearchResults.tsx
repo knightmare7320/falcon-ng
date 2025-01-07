@@ -17,10 +17,10 @@ export default function SearchResults({rows}: {rows: Site[]}) {
       </thead>
       <tbody>
         {rows.map(row => 
-          <tr key={row.cascade_code}>
-            <td><Link to={`/site/${row.cascade_code}`} title={row.cascade_code}>{row.cascade_code}</Link></td>
-            <td>{row.site_name}</td>
-            <td>{row.address1}</td>
+          <tr key={row.cascadeCode}>
+            <td><Link to={`/site/${row.cascadeCode}`} title={row.cascadeCode}>{row.cascadeCode}</Link></td>
+            <td>{row.siteName}</td>
+            <td>{row.address}</td>
             <td>{row.city}</td>
             <td className="center">{row.state}</td>
           </tr>

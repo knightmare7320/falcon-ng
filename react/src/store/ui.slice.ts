@@ -6,24 +6,24 @@ import { MessageType, LookupType } from "../util/ui.model";
 type UiState = {
   messages:MessageType[],
   regions:GroupType[],
-  l4_markets:GroupType[],
-  l5_markets:GroupType[],
-  clusters:GroupType[],
-  site_types:LookupType[],
-  structure_types:LookupType[],
-  repair_priorities:LookupType[],
+  l4Markets:GroupType[],
+  l5Markets:GroupType[],
+  orgClusters:GroupType[],
+  siteTypes:LookupType[],
+  structureTypes:LookupType[],
+  repairPriorities:LookupType[],
   timezones:LookupType[],
 };
 
 const INITIAL_STATE: UiState = {
   messages: [] as MessageType[],
   regions: [] as GroupType[],
-  l4_markets: [] as GroupType[],
-  l5_markets: [] as GroupType[],
-  clusters: [] as GroupType[],
-  site_types: [] as LookupType[],
-  structure_types: [] as LookupType[],
-  repair_priorities: [] as LookupType[],
+  l4Markets: [] as GroupType[],
+  l5Markets: [] as GroupType[],
+  orgClusters: [] as GroupType[],
+  siteTypes: [] as LookupType[],
+  structureTypes: [] as LookupType[],
+  repairPriorities: [] as LookupType[],
   timezones: [] as LookupType[],
 };
 
@@ -60,26 +60,26 @@ const uiSlice = createSlice({
     },
     fetchL4Markets() {},
     setL4Markets(state, action:PayloadAction<GroupType[]>) {
-      state.l4_markets = action.payload;
+      state.l4Markets = action.payload;
     },
     fetchL5Markets() {},
     setL5Markets(state, action:PayloadAction<GroupType[]>) {
-      state.l5_markets = action.payload;
+      state.l5Markets = action.payload;
     },
     fetchClusters() {},
     setClusters(state, action:PayloadAction<GroupType[]>) {
-      state.clusters = action.payload;
+      state.orgClusters = action.payload;
     },    fetchSiteTypes() {},
     setSiteTypes(state, action:PayloadAction<LookupType[]>) {
-      state.site_types = action.payload;
+      state.siteTypes = action.payload;
     },
     fetchStructureTypes() {},
     setStructureTypes(state, action:PayloadAction<LookupType[]>) {
-      state.structure_types = action.payload;
+      state.structureTypes = action.payload;
     },
     fetchRepairPriorities() {},
     setRepairPriorities(state, action:PayloadAction<LookupType[]>) {
-      state.repair_priorities = action.payload;
+      state.repairPriorities = action.payload;
     },
     fetchTimezones() {},
     setTimezonesTypes(state, action:PayloadAction<LookupType[]>) {

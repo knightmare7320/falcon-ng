@@ -41,28 +41,28 @@ export default function EditSiteDialog({openFg}: {openFg:boolean}) {
 
   return (
     <Modal open={openFg} onClose={handleClose}>
-      <header>Edit Site {site.cascade_code}</header>
+      <header>Edit Site {site.cascadeCode}</header>
 
       <form onSubmit={handleSubmit} className={classes.form}>
         <Input 
           label="Site Name" 
-          id="site_name" 
-          value={formValues.site_name}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>)=>setFormValues({...formValues, site_name: event.target.value})}
+          id="siteName" 
+          value={formValues.siteName}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>)=>setFormValues({...formValues, siteName: event.target.value})}
           autoFocus
         />
         <Select
           label="Site Type"
-          id="site_type_id"
-          value={formValues.site_type_id}
-          items={uiState.site_types}
-          onChange={(event: React.ChangeEvent<HTMLSelectElement>)=>setFormValues({...formValues, site_type_id: +event.target.value})}
+          id="siteTypeId"
+          value={formValues.siteTypeId}
+          items={uiState.siteTypes}
+          onChange={(event: React.ChangeEvent<HTMLSelectElement>)=>setFormValues({...formValues, siteTypeId: +event.target.value})}
         />
         <Input 
           label="Address" 
-          id="address1" 
-          value={formValues.address1}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>)=>setFormValues({...formValues, address1: event.target.value})}
+          id="address" 
+          value={formValues.address}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>)=>setFormValues({...formValues, address: event.target.value})}
         />
         <Input 
           label="City" 
@@ -78,9 +78,9 @@ export default function EditSiteDialog({openFg}: {openFg:boolean}) {
         />
         <Input 
           label="Zip Code" 
-          id="zip_code" 
-          value={formValues.zip_code}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>)=>setFormValues({...formValues, zip_code: event.target.value})}
+          id="zipCode" 
+          value={formValues.zipCode}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>)=>setFormValues({...formValues, zipCode: event.target.value})}
         />
         <Input 
           label="County" 
@@ -102,59 +102,59 @@ export default function EditSiteDialog({openFg}: {openFg:boolean}) {
         />
         <Input 
           label="Elevation (ft)" 
-          id="elevation_feet" 
-          value={formValues.elevation_feet}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>)=>setFormValues({...formValues, elevation_feet: +event.target.value})}
+          id="elevation" 
+          value={formValues.elevation}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>)=>setFormValues({...formValues, elevation: +event.target.value})}
         />
         <Select
           label="Structure Type"
-          id="structure_type_id"
-          value={formValues.structure_type_id}
-          items={uiState.structure_types}
-          onChange={(event: React.ChangeEvent<HTMLSelectElement>)=>setFormValues({...formValues, structure_type_id: +event.target.value})}
+          id="structureTypeId"
+          value={formValues.structureTypeId}
+          items={uiState.structureTypes}
+          onChange={(event: React.ChangeEvent<HTMLSelectElement>)=>setFormValues({...formValues, structureTypeId: +event.target.value})}
         />
         <Select
           label="Repair Priority"
-          id="repair_priority_id"
-          value={formValues.repair_priority_id}
-          items={uiState.repair_priorities}
-          onChange={(event: React.ChangeEvent<HTMLSelectElement>)=>setFormValues({...formValues, repair_priority_id: +event.target.value})}
+          id="repairPriorityId"
+          value={formValues.repairPriorityId}
+          items={uiState.repairPriorities}
+          onChange={(event: React.ChangeEvent<HTMLSelectElement>)=>setFormValues({...formValues, repairPriorityId: +event.target.value})}
         />
         <Select
           label="Timezone"
-          id="timezone_id"
-          value={formValues.timezone_id}
+          id="timezoneId"
+          value={formValues.timezoneId}
           items={uiState.timezones}
-          onChange={(event: React.ChangeEvent<HTMLSelectElement>)=>setFormValues({...formValues, timezone_id: +event.target.value})}
+          onChange={(event: React.ChangeEvent<HTMLSelectElement>)=>setFormValues({...formValues, timezoneId: +event.target.value})}
         />
 
         <Select
           label="Region"
-          id="region_id"
-          value={formValues.region_id}
+          id="regionId"
+          value={formValues.regionId}
           items={uiState.regions}
-          onChange={(event: React.ChangeEvent<HTMLSelectElement>)=>setFormValues({...formValues, region_id: +event.target.value, l4_market_id: undefined, l5_market_id: undefined, org_cluster_id: undefined})}
+          onChange={(event: React.ChangeEvent<HTMLSelectElement>)=>setFormValues({...formValues, regionId: +event.target.value, l4MarketId: undefined, l5MarketId: undefined, orgClusterId: undefined})}
         />
         <Select
           label="L4 Market"
-          id="l4_market_id"
-          value={formValues.l4_market_id}
-          items={uiState.l4_markets.filter(val=> val.parent_id===formValues.region_id)}
-          onChange={(event: React.ChangeEvent<HTMLSelectElement>)=>setFormValues({...formValues, l4_market_id: +event.target.value, l5_market_id: undefined, org_cluster_id: undefined})}
+          id="l4MarketId"
+          value={formValues.l4MarketId}
+          items={uiState.l4Markets.filter(val=> val.parentId===formValues.regionId)}
+          onChange={(event: React.ChangeEvent<HTMLSelectElement>)=>setFormValues({...formValues, l4MarketId: +event.target.value, l5MarketId: undefined, orgClusterId: undefined})}
         />        
         <Select
           label="L5 Market"
-          id="l5_market_id"
-          items={uiState.l5_markets.filter(val=> val.parent_id===formValues.l4_market_id)}
-          value={formValues.l5_market_id}
-          onChange={(event: React.ChangeEvent<HTMLSelectElement>)=>setFormValues({...formValues, l5_market_id: +event.target.value, org_cluster_id: undefined})}
+          id="l5MarketId"
+          items={uiState.l5Markets.filter(val=> val.parentId===formValues.l4MarketId)}
+          value={formValues.l5MarketId}
+          onChange={(event: React.ChangeEvent<HTMLSelectElement>)=>setFormValues({...formValues, l5MarketId: +event.target.value, orgClusterId: undefined})}
         />
         <Select
           label="Cluster"
-          id="org_cluster_id"
-          value={formValues.org_cluster_id}
-          items={uiState.clusters.filter(val=> val.parent_id===formValues.l5_market_id)}
-          onChange={(event: React.ChangeEvent<HTMLSelectElement>)=>setFormValues({...formValues, org_cluster_id: +event.target.value})}
+          id="orgClusterId"
+          value={formValues.orgClusterId}
+          items={uiState.orgClusters.filter(val=> val.parentId===formValues.l5MarketId)}
+          onChange={(event: React.ChangeEvent<HTMLSelectElement>)=>setFormValues({...formValues, orgClusterId: +event.target.value})}
         />
   
         <footer className={classes.actions}>  

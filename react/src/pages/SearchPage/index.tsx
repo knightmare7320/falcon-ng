@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./index.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { Helmet } from "react-helmet-async";
 
 import { useSearchParams, useNavigate } from "react-router-dom";
 
@@ -30,11 +29,11 @@ export default function SearchPage() {
   }, [searchString]);
 
   useEffect(() => {
-    if (searchState.status === 'ok' && searchState.row_count === 1 && searchState.search_string.toLocaleUpperCase() === searchState.rows[0].cascade_code.toLocaleUpperCase()) {
+    if (searchState.status === 'ok' && searchState.totalRowCount === 1 && searchState.searchString.toLocaleUpperCase() === searchState.rows[0].cascadeCode.toLocaleUpperCase()) {
       // there is exactly one search result and it is for the cascade requested
-      navigate(`/site/${searchState.search_string.toLocaleUpperCase()}`);
+      navigate(`/site/${searchState.searchString.toLocaleUpperCase()}`);
     }
-  }, [searchState.search_string, searchState.status])
+  }, [searchState.searchString, searchState.status])
 
 
   function handleSearchBoxChange(event: React.FormEvent<HTMLInputElement>) {
@@ -55,9 +54,7 @@ export default function SearchPage() {
   }
 
   return <>
-    <Helmet>
-      <title>Falcon - Search</title>
-    </Helmet>
+    <title>Falcon - Search</title>
 
     {searchState.status==='loading' && <LoadingSpinner />}
 
@@ -78,9 +75,9 @@ export default function SearchPage() {
         rows={searchState.rows} 
       />
 
-      {searchState.row_count > Math.min(...searchState.page_sizes) && <>
-        <PageNumber pageCount={searchState.page_count} pageNumber={searchState.page_number} onPageChange={handlePageChange} />
-        <PageSize pageSize={searchState.page_size} pageSizes={searchState.page_sizes} onPageSizeChange={handlePageSizeChange} />
+      {searchState.totalRowCount > Math.min(...searchState.pageSizes) && <>
+        <PageNumber pageCount={searchState.pageCount} pageNumber={searchState.pageNumber} onPageChange={handlePageChange} />
+        <PageSize pageSize={searchState.pageSize} pageSizes={searchState.pageSizes} onPageSizeChange={handlePageSizeChange} />
       </>
       }
     </main>

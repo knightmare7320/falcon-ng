@@ -7,69 +7,69 @@ import { faHome, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./Breadcrumbs.module.css";
 
-export default function Breadcrumbs({region_id, l4_market_id, l5_market_id, cluster_id, cascade_code}: 
-  { region_id?:number,
-    l4_market_id?:number,
-    l5_market_id?:number,
-    cluster_id?:number,
-    cascade_code?:string,
+export default function Breadcrumbs({regionId, l4MarketId, l5MarketId, orgClusterId, cascadeCode}: 
+  { regionId?:number,
+    l4MarketId?:number,
+    l5MarketId?:number,
+    orgClusterId?:number,
+    cascadeCode?:string,
   }) {
   const uiState = useSelector((state: RootState) => state.ui);
 
   let content = [];
   
-  if (cascade_code) {
-    content.unshift(<li key={"breadcrumb-x"}><FontAwesomeIcon icon={faCaretRight} /> {cascade_code}</li>);
+  if (cascadeCode) {
+    content.unshift(<li key={"breadcrumb-x"}><FontAwesomeIcon icon={faCaretRight} /> {cascadeCode}</li>);
   }
   
-  if (cluster_id) {
-    const item = uiState.clusters.find(cluster => cluster_id === cluster.id);
+  if (orgClusterId) {
+    const item = uiState.orgClusters.find(orgCluster => orgClusterId === orgCluster.id);
     if (item) {
-      if (cascade_code) {
-        content.unshift(<li key={"breadcrumb-0"}> <FontAwesomeIcon icon={faCaretRight} /> <Link to={`/browse/cluster/${cluster_id}`}>{item.name}</Link></li>);
+      if (cascadeCode) {
+        content.unshift(<li key={"breadcrumb-0"}> <FontAwesomeIcon icon={faCaretRight} /> <Link to={`/browse/orgCluster/${orgClusterId}`}>{item.name}</Link></li>);
       } else {
         content.unshift(<li key={"breadcrumb-0"}> <FontAwesomeIcon icon={faCaretRight} /> {item.name} </li>);
       }
-      l5_market_id = l5_market_id || item.parent_id;
+      l5MarketId = l5MarketId || item.parentId;
     }
   }
   
-  if (l5_market_id) {
-    const item = uiState.l5_markets.find(l5_market => l5_market_id === l5_market.id);
+  if (l5MarketId) {
+    const item = uiState.l5Markets.find(l5Market => l5MarketId === l5Market.id);
     if (item) {
-      if (cluster_id) {
-        content.unshift(<li key={"breadcrumb-1"}> <FontAwesomeIcon icon={faCaretRight} /> <Link to={`/browse/l5_market/${l5_market_id}`}>{item.name}</Link></li>);
+      if (orgClusterId) {
+        content.unshift(<li key={"breadcrumb-1"}> <FontAwesomeIcon icon={faCaretRight} /> <Link to={`/browse/l5Market/${l5MarketId}`}>{item.name}</Link></li>);
       } else {
         content.unshift(<li key={"breadcrumb-1"}> <FontAwesomeIcon icon={faCaretRight} /> {item.name} </li>);
       }
-      l4_market_id = l4_market_id || item.parent_id;
+      l4MarketId = l4MarketId || item.parentId;
     }
   }
   
-  if (l4_market_id) {
-    const item = uiState.l4_markets.find(l4_market => l4_market_id === l4_market.id);
+  if (l4MarketId) {
+    const item = uiState.l4Markets.find(l4Market => l4MarketId === l4Market.id);
     if (item) {
-      if (l5_market_id) {
-        content.unshift(<li key={"breadcrumb-2"}> <FontAwesomeIcon icon={faCaretRight} /> <Link to={`/browse/l4_market/${l4_market_id}`}>{item.name}</Link></li>);
+      if (l5MarketId) {
+        content.unshift(<li key={"breadcrumb-2"}> <FontAwesomeIcon icon={faCaretRight} /> <Link to={`/browse/l4Market/${l4MarketId}`}>{item.name}</Link></li>);
       } else {
         content.unshift(<li key={"breadcrumb-2"}> <FontAwesomeIcon icon={faCaretRight} /> {item.name} </li>);
       }
-      region_id = region_id || item.parent_id;
+      regionId = regionId || item.parentId;
     }
   }
   
-  if (region_id) {
-    const item = uiState.regions.find(region => region_id === region.id);
+  if (regionId) {
+    const item = uiState.regions.find(region => regionId === region.id);
     if (item) {
-      if (l4_market_id) {
-        content.unshift(<li key={"breadcrumb-3"}> <FontAwesomeIcon icon={faCaretRight} /> <Link to={`/browse/region/${region_id}`}>{item.name}</Link></li>);
+      if (l4MarketId) {
+        content.unshift(<li key={"breadcrumb-3"}> <FontAwesomeIcon icon={faCaretRight} /> <Link to={`/browse/region/${regionId}`}>{item.name}</Link></li>);
       } else {
         content.unshift(<li key={"breadcrumb-3"}> <FontAwesomeIcon icon={faCaretRight} /> {item.name} </li>);
       }
     }
   }
   
-  if (region_id) {
+  if (regionId) {
     content.unshift(<li key={"breadcrumb-4"}><Link to="/browse"><FontAwesomeIcon icon={faHome} /></Link></li>);
   } else {
     content.unshift(<li key={"breadcrumb-4"}><FontAwesomeIcon  key={"breadcrumb-4"} icon={faHome} /></li>);

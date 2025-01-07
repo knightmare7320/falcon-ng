@@ -1,4 +1,3 @@
-import { Helmet } from 'react-helmet-async';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,14 +28,14 @@ export default function SitePage() {
   const authState = useSelector((state:RootState) => state.auth.status);
 
   
-  const cascadeCode = params.cascade_code || '';
+  const cascadeCode = params.cascadeCode || '';
   useEffect(() => {
     if (siteState.status === 'init' || siteState.cascade_code !== cascadeCode) {
       dispatch(siteActions.setCascade(cascadeCode));
     }
   }, [cascadeCode]);
 
-  const selectedTab = params.tab_name || 'location';
+  const selectedTab = params.tabName || 'location';
   let tabContent = <></>;
   switch(selectedTab) {
     case 'location':
@@ -65,20 +64,18 @@ export default function SitePage() {
   }
 
   return <>
-    <Helmet>
-      <title>Falcon - {cascadeCode} </title>
-    </Helmet>
-
     {siteState.status === 'loading' && <LoadingSpinner />}
 
     <Breadcrumbs 
-      region_id={siteState.site.region_id} 
-      l4_market_id={siteState.site.l4_market_id}
-      l5_market_id={siteState.site.l5_market_id}
-      cluster_id={siteState.site.org_cluster_id}
-      cascade_code={siteState.site.cascade_code}
+      regionId={siteState.site.regionId} 
+      l4MarketId={siteState.site.l4MarketId}
+      l5MarketId={siteState.site.l5MarketId}
+      orgClusterId={siteState.site.orgClusterId}
+      cascadeCode={siteState.site.cascadeCode}
     />
 
+    <title>{"Falcon - " + cascadeCode}</title>
+    
     <main className="main-content">
       <h2 className={styles.cascadeTitle}>
         <FontAwesomeIcon icon={faTowerCell} />
@@ -95,7 +92,6 @@ export default function SitePage() {
         <div className="tab__content">
           {tabContent}
         </div>  
-
       </div>
 
       <EditSiteDialog openFg={siteState.editSiteOpenFg} />

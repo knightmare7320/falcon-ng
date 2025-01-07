@@ -54,18 +54,18 @@ const siteSlice = createSlice({
       state.nearest = action.payload;
     },
     setBtsData(state:SiteState, action:PayloadAction<Bts[]>) {
-      const sorted = action.payload.sort((a:Bts, b:Bts) => a.bts_number > b.bts_number ? 1 : -1);
+      const sorted = action.payload.sort((a:Bts, b:Bts) => a.btsNumber > b.btsNumber ? 1 : -1);
       state.btss = sorted;
     },
     setSectorData(state:SiteState, action:PayloadAction<Sector[]>) {
       const sorted = action.payload.sort(
-        (a:Sector, b:Sector) => a.sector_id > b.sector_id ? 1 : -1);
+        (a:Sector, b:Sector) => a.sectorId > b.sectorId ? 1 : -1);
       state.sectors = sorted;
     },
     setCarrierData(state:SiteState, action:PayloadAction<Carrier[]>) {
       const sorted = action.payload.sort(
         (a:Carrier, b:Carrier) => 
-          a.bts_id > b.bts_id || a.carrier_designation_name > b.carrier_designation_name ? 1 : -1
+          a.btsId > b.btsId || a.carrierDesignationName > b.carrierDesignationName ? 1 : -1
       );
       state.carriers = sorted;
     },

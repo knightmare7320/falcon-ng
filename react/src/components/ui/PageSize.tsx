@@ -1,4 +1,4 @@
-import "./PageNumber.css";
+import "./PageSize.css";
 
 export default function PageSize(
   { pageSize, 

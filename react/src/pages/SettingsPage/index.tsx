@@ -1,10 +1,6 @@
-import { Helmet } from "react-helmet-async";
-
 export default function SettingsPage() {
   return <>
-    <Helmet>
-      <title>Falcon - Settings</title>
-    </Helmet>
+    <title>Falcon - Settings</title>
 
     <h3>TODO: User Settings Page</h3>
     Edit personal info<br/>

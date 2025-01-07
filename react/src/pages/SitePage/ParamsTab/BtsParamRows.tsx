@@ -5,32 +5,32 @@ export default function BtsParamRows({btss=[], sectors=[], carriers=[]}:ParamsTa
   const sectorCount = sectors.length;
   let carrierCounts:Map<number, number> = new Map();
   btss.map(bts => {
-    const carrierCount = carriers.filter(carrier => carrier.bts_id === bts.bts_id).length;
-    carrierCounts.set(bts.bts_id, carrierCount);
+    const carrierCount = carriers.filter(carrier => carrier.btsId === bts.btsId).length;
+    carrierCounts.set(bts.btsId, carrierCount);
   });
 
   return <>
     <tr>
       <th className="column-head top">Switch</th>
       { btss.map(bts => 
-        <td className="column-head top" key={bts.bts_id} colSpan={sectorCount * (carrierCounts.get(bts.bts_id) || 1)}>
-          <strong>{bts.switch_name}</strong>
+        <td className="column-head top" key={bts.btsId} colSpan={sectorCount * (carrierCounts.get(bts.btsId) || 1)}>
+          <strong>{bts.mscName}</strong>
         </td>
       )}
     </tr>
     <tr>
       <th className="column-head">BSC</th>
       { btss.map(bts => 
-        <td className="column-head" key={bts.bts_id} colSpan={sectorCount * (carrierCounts.get(bts.bts_id) || 1)}>
-          <strong>{bts.bsc_name}</strong>
+        <td className="column-head" key={bts.btsId} colSpan={sectorCount * (carrierCounts.get(bts.btsId) || 1)}>
+          <strong>{bts.bscName}</strong>
         </td>
       )}
     </tr>
     <tr>
       <th className="column-head">BTS</th>
       { btss.map(bts => 
-        <td className="column-head" key={bts.bts_id} colSpan={sectorCount * (carrierCounts.get(bts.bts_id) || 1)}>
-          <strong>{bts.bts_number}</strong>
+        <td className="column-head" key={bts.btsId} colSpan={sectorCount * (carrierCounts.get(bts.btsId) || 1)}>
+          <strong>{bts.btsNumber}</strong>
         </td>
       )}
     </tr>
