@@ -1,4 +1,5 @@
 FROM node:bookworm AS build
+RUN mkdir /app && chown node:node /app
 USER node
 WORKDIR /app
 COPY --chown=node:node package.json .

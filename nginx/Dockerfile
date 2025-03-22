@@ -10,6 +10,7 @@ EXPOSE 8000
 
 RUN apt-get update && apt-get upgrade -y
 
+RUN mkdir /app && chown nginx:nginx /app
 WORKDIR /app
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 

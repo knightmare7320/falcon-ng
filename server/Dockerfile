@@ -2,8 +2,9 @@ FROM node:bookworm
 RUN apt-get update && apt-get upgrade -y
 
 # ENV NODE_ENV production
-USER node
+RUN mkdir /app && chown node:node /app
 WORKDIR /app
+USER node
 COPY --chown=node:node src/package.json .
 # RUN npm install ci --only=production
 RUN npm install

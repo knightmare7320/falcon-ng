@@ -2,6 +2,7 @@ FROM node:bookworm
 RUN apt-get update && apt-get upgrade -y
 
 # ENV NODE_ENV production
+RUN mkdir /app && chown node:node /app
 USER node
 WORKDIR /app
 COPY --chown=node:node src/package.json .
