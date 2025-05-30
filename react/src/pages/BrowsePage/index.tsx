@@ -28,7 +28,7 @@ export default function BrowsePage({type}: {type: string}) {
     if(browseState.status === 'init' || type !== browseState.type || id !== browseState.id) {
       dispatch(browseActions.setPageType({type, id}));
     }
-  });
+  }, [type, id]);
 
   function handlePageChange(pageNumber:number) {
     dispatch(browseActions.setPageNumber(pageNumber));

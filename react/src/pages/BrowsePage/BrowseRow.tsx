@@ -1,7 +1,7 @@
 import { getLink } from "./lookups"
 import { kpiRowType } from "../../util/browse.model"
 
-export default function RegionRow({type, row}: {type: string, row: kpiRowType}) {
+export default function BrowseRow({type, row}: {type: string, row: kpiRowType}) {
   return (
     <tr>
       <td>{getLink(type, row.id, row.name, row.description)}</td>

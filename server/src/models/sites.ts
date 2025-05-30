@@ -1,8 +1,7 @@
 export default class Sites {
   static getPerf(db, params, result) {
-    const sqlStr = 'CALL FalconCode.getSitesPerf(?, ?, ?, ?, ?, ?, ?)';
+    const sqlStr = 'CALL FalconCode.getOrgClusterSitesPerf(?, ?, ?, ?, ?, ?)';
     const sqlParams = [ 
-        params.groupType,
         params.groupId,
         params.filterString,
         params.orderBy,
@@ -25,7 +24,6 @@ export default class Sites {
           }
           try {
             result(null, {
-              "type": results[0][0].groupType,
               "parentId": results[0][0].parentId,
               "parentName": results[0][0].parentName,
               "id": results[0][0].groupId,

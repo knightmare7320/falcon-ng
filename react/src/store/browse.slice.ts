@@ -77,7 +77,6 @@ const browseSlice = createSlice({
       state.status = 'ok';
       state.totalRowCount = action.payload.totalRowCount;
       state.rows = action.payload.rows;
-      state.id = action.payload.id || undefined;
       state.name = action.payload.name || '';
       state.pageCount = Math.ceil(action.payload.totalRowCount / state.pageSize);
     },

@@ -48,13 +48,13 @@ export function getLink(type: string, id: string|number|null, name: string, desc
     case "region":
       return <Link to={`/browse/l4Market/${id}`}>{name}</Link>;
 
-    case "l4_market":
+    case "l4Market":
       return <Link to={`/browse/l5Market/${id}`}>{name}</Link>;
 
-    case "l5_market":
+    case "l5Market":
       return <Link to={`/browse/orgCluster/${id}`}>{name}</Link>;
 
-    case "cluster":
+    case "orgCluster":
       return <Link to={`/site/${name}`} title={description}>{name}</Link>;
       
   }

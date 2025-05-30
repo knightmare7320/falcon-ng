@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTowerCell, faLocationDot, faImage, faSliders, faRadio, faChartLine } from '@fortawesome/free-solid-svg-icons'
+import { faTowerCell, faLocationDot, faImage, faRadio, faChartLine } from '@fortawesome/free-solid-svg-icons'
 
 import { siteActions } from '../../store/site.slice';
 import { RootState } from '../../store';
@@ -12,7 +12,6 @@ import styles from "./index.module.css";
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import Tab from '../../components/ui/Tab';
 import LocationTab from './LocationTab';
-import ParamsTab from './ParamsTab';
 import PerformanceTab from './PerformanceTab';
 import EquipmentTab from './EquipmentTab';
 import PicturesTab from './PicturesTab';
@@ -47,9 +46,6 @@ export default function SitePage() {
     case 'performance':
       tabContent = <PerformanceTab btss={siteState.btss} sectors={siteState.sectors} carriers={siteState.carriers} />;
       break;
-    case 'params':
-      tabContent = <ParamsTab btss={siteState.btss} sectors={siteState.sectors} carriers={siteState.carriers} />;
-      break
     case 'pictures':
       tabContent = <PicturesTab cascadeCode={cascadeCode} pictures={siteState.pictures}/>;
   }
