@@ -1,4 +1,4 @@
-import { tableRequestType, kpiTableType, GroupType } from "./browse.model";
+import { tableRequestType, kpiTableType, GroupType, RegionGroupType, L4MarketGroupType, L5MarketGroupType, OrgClusterGroupType } from "./browse.model";
 
 const API_URL = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -44,7 +44,7 @@ export async function fetchBrowsePerfData({
   return await response.json();
 }
 
-export async function fetchGroup(type:string):Promise<GroupType[]> {
+export async function fetchGroup(type:string):Promise<GroupType[]|RegionGroupType[]|L4MarketGroupType[]|L5MarketGroupType[]|OrgClusterGroupType[]> {
   let url = API_URL + '/' + type;
   const response = await fetch(url);
   

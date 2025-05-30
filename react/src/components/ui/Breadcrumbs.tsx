@@ -23,48 +23,48 @@ export default function Breadcrumbs({regionId, l4MarketId, l5MarketId, orgCluste
   }
   
   if (orgClusterId) {
-    const item = uiState.orgClusters.find(orgCluster => orgClusterId === orgCluster.id);
+    const item = uiState.orgClusters.find(orgCluster => orgClusterId === orgCluster.orgClusterId);
     if (item) {
       if (cascadeCode) {
-        content.unshift(<li key={"breadcrumb-0"}> <FontAwesomeIcon icon={faCaretRight} /> <Link to={`/browse/orgCluster/${orgClusterId}`}>{item.name}</Link></li>);
+        content.unshift(<li key={"breadcrumb-0"}> <FontAwesomeIcon icon={faCaretRight} /> <Link to={`/browse/orgCluster/${orgClusterId}`}>{item.orgClusterName}</Link></li>);
       } else {
-        content.unshift(<li key={"breadcrumb-0"}> <FontAwesomeIcon icon={faCaretRight} /> {item.name} </li>);
+        content.unshift(<li key={"breadcrumb-0"}> <FontAwesomeIcon icon={faCaretRight} /> {item.orgClusterName} </li>);
       }
-      l5MarketId = l5MarketId || item.parentId;
+      l5MarketId = l5MarketId || item.l5MarketId;
     }
   }
   
   if (l5MarketId) {
-    const item = uiState.l5Markets.find(l5Market => l5MarketId === l5Market.id);
+    const item = uiState.l5Markets.find(l5Market => l5MarketId === l5Market.l5MarketId);
     if (item) {
       if (orgClusterId) {
-        content.unshift(<li key={"breadcrumb-1"}> <FontAwesomeIcon icon={faCaretRight} /> <Link to={`/browse/l5Market/${l5MarketId}`}>{item.name}</Link></li>);
+        content.unshift(<li key={"breadcrumb-1"}> <FontAwesomeIcon icon={faCaretRight} /> <Link to={`/browse/l5Market/${l5MarketId}`}>{item.l5MarketName}</Link></li>);
       } else {
-        content.unshift(<li key={"breadcrumb-1"}> <FontAwesomeIcon icon={faCaretRight} /> {item.name} </li>);
+        content.unshift(<li key={"breadcrumb-1"}> <FontAwesomeIcon icon={faCaretRight} /> {item.l5MarketName} </li>);
       }
-      l4MarketId = l4MarketId || item.parentId;
+      l4MarketId = l4MarketId || item.l4MarketId;
     }
   }
   
   if (l4MarketId) {
-    const item = uiState.l4Markets.find(l4Market => l4MarketId === l4Market.id);
+    const item = uiState.l4Markets.find(l4Market => l4MarketId === l4Market.l4MarketId);
     if (item) {
       if (l5MarketId) {
-        content.unshift(<li key={"breadcrumb-2"}> <FontAwesomeIcon icon={faCaretRight} /> <Link to={`/browse/l4Market/${l4MarketId}`}>{item.name}</Link></li>);
+        content.unshift(<li key={"breadcrumb-2"}> <FontAwesomeIcon icon={faCaretRight} /> <Link to={`/browse/l4Market/${l4MarketId}`}>{item.l4MarketName}</Link></li>);
       } else {
-        content.unshift(<li key={"breadcrumb-2"}> <FontAwesomeIcon icon={faCaretRight} /> {item.name} </li>);
+        content.unshift(<li key={"breadcrumb-2"}> <FontAwesomeIcon icon={faCaretRight} /> {item.l4MarketName} </li>);
       }
-      regionId = regionId || item.parentId;
+      regionId = regionId || item.regionId;
     }
   }
   
   if (regionId) {
-    const item = uiState.regions.find(region => regionId === region.id);
+    const item = uiState.regions.find(region => regionId === region.regionId);
     if (item) {
       if (l4MarketId) {
-        content.unshift(<li key={"breadcrumb-3"}> <FontAwesomeIcon icon={faCaretRight} /> <Link to={`/browse/region/${regionId}`}>{item.name}</Link></li>);
+        content.unshift(<li key={"breadcrumb-3"}> <FontAwesomeIcon icon={faCaretRight} /> <Link to={`/browse/region/${regionId}`}>{item.regionName}</Link></li>);
       } else {
-        content.unshift(<li key={"breadcrumb-3"}> <FontAwesomeIcon icon={faCaretRight} /> {item.name} </li>);
+        content.unshift(<li key={"breadcrumb-3"}> <FontAwesomeIcon icon={faCaretRight} /> {item.regionName} </li>);
       }
     }
   }

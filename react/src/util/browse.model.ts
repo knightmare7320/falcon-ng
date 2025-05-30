@@ -35,3 +35,22 @@ export type GroupType = {
   name: string,
   parentId?: number,
 }
+export type RegionGroupType = {
+  regionId: number,
+  regionName: string,
+}
+export type L4MarketGroupType = {
+  l4MarketId: number,
+  l4MarketName: string,
+  regionId?: number,
+}
+export type L5MarketGroupType = {
+  l5MarketId: number,
+  l5MarketName: string,
+  l4MarketId?: number,
+}
+export type OrgClusterGroupType = {
+  orgClusterId: number,
+  orgClusterName: string,
+  l5MarketId?: number,
+}

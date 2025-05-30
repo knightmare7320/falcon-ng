@@ -14,7 +14,7 @@ export default function App() {
     dispatch(uiActions.fetchRegions());
     dispatch(uiActions.fetchL4Markets());
     dispatch(uiActions.fetchL5Markets());
-    dispatch(uiActions.fetchClusters());
+    dispatch(uiActions.fetchOrgClusters());
   }, []);
 
   return (

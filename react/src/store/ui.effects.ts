@@ -63,7 +63,7 @@ uiStartListening({
 });
 
 uiStartListening({
-  actionCreator: uiActions.fetchClusters,
+  actionCreator: uiActions.fetchOrgClusters,
   effect: async (_, listenerApi) => {
     let response;
     try {
@@ -74,7 +74,7 @@ uiStartListening({
       listenerApi.dispatch(uiActions.showMessage({type: 'error', message}));
     }
     if (response) {
-      listenerApi.dispatch(uiActions.setClusters(response));
+      listenerApi.dispatch(uiActions.setOrgClusters(response));
     }
   },
 });

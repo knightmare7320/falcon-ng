@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import moment from "moment";
-import { GroupType } from "../util/browse.model";
+import { GroupType, RegionGroupType, L4MarketGroupType, L5MarketGroupType, OrgClusterGroupType } from "../util/browse.model";
 import { MessageType, LookupType } from "../util/ui.model";
 
 type UiState = {
   messages:MessageType[],
-  regions:GroupType[],
-  l4Markets:GroupType[],
-  l5Markets:GroupType[],
-  orgClusters:GroupType[],
+  regions:RegionGroupType[],
+  l4Markets:L4MarketGroupType[],
+  l5Markets:L5MarketGroupType[],
+  orgClusters:OrgClusterGroupType[],
   siteTypes:LookupType[],
   structureTypes:LookupType[],
   repairPriorities:LookupType[],
@@ -17,10 +17,10 @@ type UiState = {
 
 const INITIAL_STATE: UiState = {
   messages: [] as MessageType[],
-  regions: [] as GroupType[],
-  l4Markets: [] as GroupType[],
-  l5Markets: [] as GroupType[],
-  orgClusters: [] as GroupType[],
+  regions: [] as RegionGroupType[],
+  l4Markets: [] as L4MarketGroupType[],
+  l5Markets: [] as L5MarketGroupType[],
+  orgClusters: [] as OrgClusterGroupType[],
   siteTypes: [] as LookupType[],
   structureTypes: [] as LookupType[],
   repairPriorities: [] as LookupType[],
@@ -55,19 +55,19 @@ const uiSlice = createSlice({
       state.messages = [];
     },
     fetchRegions() {},
-    setRegions(state, action:PayloadAction<GroupType[]>) {
+    setRegions(state, action:PayloadAction<RegionGroupType[]>) {
       state.regions = action.payload;
     },
     fetchL4Markets() {},
-    setL4Markets(state, action:PayloadAction<GroupType[]>) {
+    setL4Markets(state, action:PayloadAction<L4MarketGroupType[]>) {
       state.l4Markets = action.payload;
     },
     fetchL5Markets() {},
-    setL5Markets(state, action:PayloadAction<GroupType[]>) {
+    setL5Markets(state, action:PayloadAction<L5MarketGroupType[]>) {
       state.l5Markets = action.payload;
     },
-    fetchClusters() {},
-    setClusters(state, action:PayloadAction<GroupType[]>) {
+    fetchOrgClusters() {},
+    setOrgClusters(state, action:PayloadAction<OrgClusterGroupType[]>) {
       state.orgClusters = action.payload;
     },    fetchSiteTypes() {},
     setSiteTypes(state, action:PayloadAction<LookupType[]>) {
